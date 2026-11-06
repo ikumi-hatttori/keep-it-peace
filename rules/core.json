@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "ruleset_version": "2026.11.0",
+  "rules": [
+    {
+      "id": "php.eval",
+      "type": "regex",
+      "severity": "high",
+      "category": "dangerous_function",
+      "pattern": "(?<![\\w$>:\\\\])eval\\s*\\("
+    },
+    {
+      "id": "php.assert_dynamic",
+      "type": "regex",
+      "severity": "high",
+      "category": "dangerous_function",
+      "pattern": "(?<![\\w$>:\\\\])assert\\s*\\(\\s*(\\$|base64_decode|str_rot13|gzinflate)",
+      "flags": "i"
+    },
+    {
+      "id": "php.create_function",
+      "type": "regex",
+      "severity": "high",
+      "category": "dangerous_function",
+      "pattern": "(?<![\\w$>:\\\\])create_function\\s*\\(",
+      "flags": "i"
+    },
+    {
+      "id": "php.preg_replace_e",
+      "type": "regex",
+      "severity": "critical",
+      "category": "dangerous_function",
+      "pattern": "preg_replace\\s*\\(\\s*(['\\\"])([^\\w\\s\\\\])(?:(?!\\1).)*?\\2[a-zA-Z]*e[a-zA-Z]*\\1"
+    },
+    {
+      "id": "php.shell_exec",
+      "type": "regex",
+      "severity": "high",
+      "category": "dangerous_function",
+      "pattern": "(?<![\\w$>:\\\\])(shell_exec|system|passthru|exec|popen|proc_open|pcntl_exec)\\s*\\(",
+      "flags": "i"
+    },
+    {
+      "id": "php.decode_chain",
+      "type": "regex",
+      "severity": "critical",
+      "category": "obfuscation",
+      "pattern": "(base64_decode|gzinflate|gzuncompress|gzdecode|str_rot13|strrev|hex2bin|convert_uudecode)\\s*\\(\\s*(base64_decode|gzinflate|gzuncompress|gzdecode|str_rot13|strrev|hex2bin|convert_uudecode)\\s*\\(",
+      "flags": "i"
+    },
+    {
+      "id": "php.base64_decode",
+      "type": "regex",
+      "severity": "low",
+      "category": "obfuscation",
+      "pattern": "(?<![\\w$>:\\\\])base64_decode\\s*\\(",
+      "flags": "i"
+    },
+    {
+      "id": "php.remote_include",
+      "type": "regex",
+      "severity": "critical",
+      "category": "remote_code",
+      "pattern": "\\b(include|require)(_once)?\\b\\s*\\(?\\s*['\\\"](https?|ftp|php|data|expect)://",
+      "flags": "i"
+    },
+    {
+      "id": "php.remote_fetch",
+      "type": "regex",
+      "severity": "info",
+      "category": "remote_code",
+      "pattern": "(?<![\\w$>:\\\\])(file_get_contents|fopen|curl_init|fsockopen|wp_remote_get|wp_remote_post|wp_safe_remote_get|wp_remote_request|simplexml_load_file)\\s*\\(\\s*['\\\"](https?|ftp)://",
+      "flags": "i"
+    },
+    {
+      "id": "php.unserialize_input",
+      "type": "regex",
+      "severity": "critical",
+      "category": "input_handling",
+      "pattern": "(?<![\\w$>:\\\\])unserialize\\s*\\(\\s*(wp_unslash\\s*\\(\\s*|stripslashes\\s*\\(\\s*|base64_decode\\s*\\(\\s*)*\\$_(GET|POST|REQUEST|COOKIE)",
+      "flags": "i"
+    },
+    {
+      "id": "php.extract_input",
+      "type": "regex",
+      "severity": "high",
+      "category": "input_handling",
+      "pattern": "(?<![\\w$>:\\\\])extract\\s*\\(\\s*\\$_(GET|POST|REQUEST|COOKIE)",
+      "flags": "i"
+    },
+    {
+      "id": "php.error_reporting_off",
+      "type": "regex",
+      "severity": "low",
+      "category": "obfuscation",
+      "pattern": "(?<![\\w$>:\\\\])error_reporting\\s*\\(\\s*0\\s*\\)"
+    },
+    {
+      "id": "php.webshell_marker",
+      "type": "regex",
+      "severity": "critical",
+      "category": "malware",
+      "target": "raw",
+      "pattern": "(FilesMan|c99shell|r57shell|WSOsetcookie|b374k|IndoXploit|AnonymousFox|wso_version)",
+      "flags": "i"
+    },
+    {
+      "id": "html.external_script",
+      "type": "regex",
+      "severity": "info",
+      "category": "remote_code",
+      "target": "raw",
+      "file_types": [
+        "php",
+        "html"
+      ],
+      "pattern": "<script[^>]+src\\s*=\\s*[\\\"']?(https?:)?//",
+      "flags": "i"
+    },
+    {
+      "id": "php.variable_function",
+      "type": "detector",
+      "detector": "variable_function",
+      "severity": "low",
+      "category": "dangerous_function"
+    },
+    {
+      "id": "php.backtick_exec",
+      "type": "detector",
+      "detector": "variable_function",
+      "severity": "high",
+      "category": "dangerous_function"
+    },
+    {
+      "id": "php.input_output",
+      "type": "detector",
+      "detector": "superglobal_unsanitized",
+      "severity": "high",
+      "category": "input_handling"
+    },
+    {
+      "id": "php.input_sql",
+      "type": "detector",
+      "detector": "superglobal_unsanitized",
+      "severity": "critical",
+      "category": "input_handling"
+    },
+    {
+      "id": "php.input_include",
+      "type": "detector",
+      "detector": "superglobal_unsanitized",
+      "severity": "critical",
+      "category": "input_handling"
+    },
+    {
+      "id": "php.input_file",
+      "type": "detector",
+      "detector": "superglobal_unsanitized",
+      "severity": "high",
+      "category": "input_handling"
+    },
+    {
+      "id": "php.wpdb_unprepared",
+      "type": "detector",
+      "detector": "wpdb_unprepared",
+      "severity": "high",
+      "category": "sql"
+    },
+    {
+      "id": "php.ajax_missing_nonce",
+      "type": "detector",
+      "detector": "request_guard",
+      "severity": "high",
+      "category": "access_control"
+    },
+    {
+      "id": "php.ajax_missing_capability",
+      "type": "detector",
+      "detector": "request_guard",
+      "severity": "medium",
+      "category": "access_control"
+    },
+    {
+      "id": "php.rest_missing_permission",
+      "type": "detector",
+      "detector": "request_guard",
+      "severity": "high",
+      "category": "access_control"
+    },
+    {
+      "id": "php.rest_public_endpoint",
+      "type": "detector",
+      "detector": "request_guard",
+      "severity": "low",
+      "category": "access_control"
+    },
+    {
+      "id": "php.form_missing_nonce",
+      "type": "detector",
+      "detector": "request_guard",
+      "severity": "medium",
+      "category": "access_control"
+    },
+    {
+      "id": "php.obfuscated_string",
+      "type": "detector",
+      "detector": "obfuscation",
+      "severity": "high",
+      "category": "obfuscation"
+    }
+  ]
+}

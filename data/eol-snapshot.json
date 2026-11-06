@@ -1,0 +1,36 @@
+{
+  "_comment": "Fallback used when external APIs are disabled. Same shape as https://endoflife.date/api/<product>.json. Patch versions may be outdated.",
+  "snapshot_date": "2025-07-31",
+  "php": [
+    { "cycle": "8.5", "support": "2027-12-31", "eol": "2029-12-31", "latest": "8.5.0" },
+    { "cycle": "8.4", "support": "2026-12-31", "eol": "2028-12-31", "latest": "8.4.10" },
+    { "cycle": "8.3", "support": "2025-12-31", "eol": "2027-12-31", "latest": "8.3.23" },
+    { "cycle": "8.2", "support": "2024-12-31", "eol": "2026-12-31", "latest": "8.2.29" },
+    { "cycle": "8.1", "support": "2023-11-25", "eol": "2025-12-31", "latest": "8.1.33" },
+    { "cycle": "8.0", "support": "2022-11-26", "eol": "2023-11-26", "latest": "8.0.30" },
+    { "cycle": "7.4", "support": "2021-11-28", "eol": "2022-11-28", "latest": "7.4.33" },
+    { "cycle": "7.3", "support": "2020-12-06", "eol": "2021-12-06", "latest": "7.3.33" },
+    { "cycle": "7.2", "support": "2019-11-30", "eol": "2020-11-30", "latest": "7.2.34" },
+    { "cycle": "7.1", "support": "2018-12-01", "eol": "2019-12-01", "latest": "7.1.33" },
+    { "cycle": "7.0", "support": "2018-01-04", "eol": "2019-01-10", "latest": "7.0.33" },
+    { "cycle": "5.6", "support": "2017-01-19", "eol": "2018-12-31", "latest": "5.6.40" }
+  ],
+  "mysql": [
+    { "cycle": "8.4", "eol": "2032-04-30" },
+    { "cycle": "8.0", "eol": "2026-04-30" },
+    { "cycle": "5.7", "eol": "2023-10-31" },
+    { "cycle": "5.6", "eol": "2021-02-28" },
+    { "cycle": "5.5", "eol": "2018-12-31" }
+  ],
+  "mariadb": [
+    { "cycle": "11.8", "eol": "2030-06-04" },
+    { "cycle": "11.4", "eol": "2029-05-29" },
+    { "cycle": "10.11", "eol": "2028-02-16" },
+    { "cycle": "10.6", "eol": "2026-07-06" },
+    { "cycle": "10.5", "eol": "2025-06-24" },
+    { "cycle": "10.4", "eol": "2024-06-18" },
+    { "cycle": "10.3", "eol": "2023-05-25" },
+    { "cycle": "10.2", "eol": "2022-05-23" },
+    { "cycle": "10.1", "eol": "2020-10-17" }
+  ]
+}
