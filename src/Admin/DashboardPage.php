@@ -69,7 +69,7 @@ class DashboardPage {
 						<?php foreach ( Severity::all() as $level ) : ?>
 							<li>
 								<a href="<?php echo esc_url( Admin::url( Admin::FINDINGS_SLUG, array( 'severity' => $level ) ) ); ?>">
-									<?php echo Ui::severity_badge( $level ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in Ui. ?>
+									<?php echo wp_kses_post( Ui::severity_badge( $level ) ); ?>
 									<strong><?php echo esc_html( number_format_i18n( $counts[ Severity::slug( $level ) ] ?? 0 ) ); ?></strong>
 								</a>
 							</li>
@@ -212,7 +212,7 @@ class DashboardPage {
 					<tbody>
 					<?php foreach ( $result['items'] as $finding ) : ?>
 						<tr>
-							<td style="width:90px"><?php echo Ui::severity_badge( $finding->severity ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in Ui. ?></td>
+							<td style="width:90px"><?php echo wp_kses_post( Ui::severity_badge( $finding->severity ) ); ?></td>
 							<td><a href="<?php echo esc_url( Admin::url( Admin::FINDINGS_SLUG, array( 'finding' => $finding->id ) ) ); ?>"><?php echo esc_html( $finding->title ); ?></a></td>
 							<td class="kip-mono"><?php echo esc_html( Ui::location( $finding ) ); ?></td>
 						</tr>
@@ -237,7 +237,7 @@ class DashboardPage {
 			printf(
 				'<li><a href="%1$s">%2$s <strong>%3$s</strong></a></li>',
 				esc_url( Admin::url( Admin::FINDINGS_SLUG, array( 'severity' => $level ) ) ),
-				Ui::severity_badge( $level ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in Ui.
+				wp_kses_post( Ui::severity_badge( $level ) ),
 				esc_html( number_format_i18n( $counts[ Severity::slug( $level ) ] ?? 0 ) )
 			);
 		}

@@ -128,14 +128,14 @@ class FindingsPage {
 		<div class="wrap kip-wrap">
 			<p><a href="<?php echo esc_url( Admin::url( Admin::FINDINGS_SLUG ) ); ?>">&larr; <?php esc_html_e( 'Back to findings', 'keep-it-peace' ); ?></a></p>
 			<h1 class="kip-detail-title">
-				<?php echo Ui::severity_badge( $finding->severity ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in Ui. ?>
+				<?php echo wp_kses_post( Ui::severity_badge( $finding->severity ) ); ?>
 				<?php echo esc_html( $finding->title ); ?>
 			</h1>
 
 			<div class="kip-detail">
 				<div class="kip-detail-main">
 					<table class="kip-kv kip-kv-wide">
-						<tr><th><?php esc_html_e( 'Status', 'keep-it-peace' ); ?></th><td><?php echo Ui::status_badge( $finding->status ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in Ui. ?></td></tr>
+						<tr><th><?php esc_html_e( 'Status', 'keep-it-peace' ); ?></th><td><?php echo wp_kses_post( Ui::status_badge( $finding->status ) ); ?></td></tr>
 						<tr><th><?php esc_html_e( 'Category', 'keep-it-peace' ); ?></th><td><?php echo esc_html( Ui::category_label( $finding->category ) ); ?></td></tr>
 						<tr><th><?php esc_html_e( 'Location', 'keep-it-peace' ); ?></th><td class="kip-mono"><?php echo esc_html( Ui::location( $finding ) ); ?></td></tr>
 						<tr><th><?php esc_html_e( 'Check / rule', 'keep-it-peace' ); ?></th><td class="kip-mono"><?php echo esc_html( $finding->check_id . ( '' !== $finding->rule_id ? ' / ' . $finding->rule_id : '' ) ); ?></td></tr>

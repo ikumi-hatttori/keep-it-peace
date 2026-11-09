@@ -21,3 +21,4 @@
 /README.md
 /languages/*.po~
 .DS_Store
+/.wordpress-org

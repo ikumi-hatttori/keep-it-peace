@@ -1,10 +1,10 @@
 === Keep It Peace ===
-Contributors: mackarel
+Contributors: ikumackarel
 Tags: security, scanner, malware, monitoring, vulnerability
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.3.0
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -89,21 +89,14 @@ Keep It Peace is complete on its own. A separate Pro add-on (multi-site dashboar
 
 == Changelog ==
 
-= 0.3.0 =
-* WP-CLI commands: findings, export, checks, targets, baseline approve; scan options --checks, --no-notify and --format.
-* Japanese translation.
-* Developer documentation and a sample add-on.
-
-= 0.2.0 =
-* Directories outside WordPress as scan targets.
+= 1.0.0 =
+* First public release.
+* Checks: PHP and database support status, php.ini, wp-config.php, PHP files in uploads.
+* Custom themes and directories outside WordPress: file integrity against a baseline, dangerous code patterns, suspicious files, permissions, vulnerable Composer/npm dependencies (OSV.dev).
 * External checks: SSL/TLS, security headers, exposed files, directory listings.
-* Dependency vulnerabilities via OSV.dev.
-* JSON export and PHP API for add-ons.
-
-= 0.1.0 =
-* First version: PHP and database checks, theme integrity and code scan, e-mail notifications, admin screens.
+* E-mail summaries, findings history, JSON export, WP-CLI commands and Japanese translation.
 
 == Upgrade Notice ==
 
-= 0.3.0 =
-Adds WP-CLI commands and the Japanese translation.
+= 1.0.0 =
+First public release.
