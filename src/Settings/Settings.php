@@ -47,6 +47,8 @@ class Settings {
 			'schedule'          => 'daily',
 			'retention_days'    => 30,
 			'themes'            => array(),
+			'paths'             => array(),
+			'urls'              => array(),
 			'checks'            => array(),
 			'exclude_patterns'  => array( 'node_modules', 'vendor', '.git', '.svn', 'cache' ),
 			'max_file_size_kb'  => 2048,

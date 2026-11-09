@@ -55,6 +55,13 @@ class ScanContext {
 	 * @var float
 	 */
 	public $deadline;
+	/**
+	 * Check/rule pairs whose open findings must not be resolved by this scan
+	 * (e.g. a remote lookup failed). Merged into the scan state by the scanner.
+	 *
+	 * @var array<int,array{0:string,1:string}>
+	 */
+	public $keep = array();
 
 	/**
 	 * Constructor.
@@ -82,6 +89,16 @@ class ScanContext {
 	 */
 	public function has_time(): bool {
 		return microtime( true ) < $this->deadline;
+	}
+
+	/**
+	 * Keeps the open findings of a check (or one rule) when the check could not evaluate them.
+	 *
+	 * @param string $check_id Check ID.
+	 * @param string $rule_id  Rule ID or '*'.
+	 */
+	public function keep( string $check_id, string $rule_id = '*' ): void {
+		$this->keep[] = array( $check_id, $rule_id );
 	}
 
 	/**

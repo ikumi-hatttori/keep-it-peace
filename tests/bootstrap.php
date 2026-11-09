@@ -48,3 +48,12 @@ function wp_json_encode( $data, $options = 0 ) {
 function get_option( $name, $default = false ) {
 	return $default;
 }
+function wp_parse_url( $url, $component = -1 ) {
+	return parse_url( $url, $component );
+}
+function trailingslashit( $value ) {
+	return rtrim( $value, '/\\' ) . '/';
+}
+function untrailingslashit( $value ) {
+	return rtrim( $value, '/\\' );
+}

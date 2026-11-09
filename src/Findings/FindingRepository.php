@@ -428,6 +428,36 @@ class FindingRepository {
 	}
 
 	/**
+	 * Findings reported by a scan: those seen in it and those it resolved.
+	 *
+	 * @param int $scan_id Scan.
+	 * @return array{seen:Finding[],resolved_ids:int[]}
+	 */
+	public function for_scan( int $scan_id ): array {
+		global $wpdb;
+		$resolved_ids = array_map(
+			'intval',
+			(array) $wpdb->get_col( $wpdb->prepare( "SELECT DISTINCT finding_id FROM {$this->events_table()} WHERE scan_id = %d AND event = %s", $scan_id, 'resolved' ) )
+		);
+		$rows         = (array) $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$this->table()} WHERE last_scan_id = %d ORDER BY severity DESC, id ASC", $scan_id ) );
+		if ( $resolved_ids ) {
+			$rows = array_merge(
+				$rows,
+				(array) $wpdb->get_results(
+					$wpdb->prepare( // phpcs:ignore WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare -- Placeholders are generated.
+						"SELECT * FROM {$this->table()} WHERE last_scan_id <> %d AND id IN (" . implode( ',', array_fill( 0, count( $resolved_ids ), '%d' ) ) . ') ORDER BY severity DESC, id ASC',
+						array_merge( array( $scan_id ), $resolved_ids )
+					)
+				)
+			);
+		}
+		return array(
+			'seen'         => array_map( array( Finding::class, 'from_row' ), $rows ),
+			'resolved_ids' => $resolved_ids,
+		);
+	}
+
+	/**
 	 * Deletes resolved findings and events older than the cutoff.
 	 *
 	 * @param string $cutoff UTC datetime.

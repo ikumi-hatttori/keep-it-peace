@@ -7,6 +7,7 @@
 
 namespace KeepItPeace\Admin;
 
+use KeepItPeace\Export\ReportExporter;
 use KeepItPeace\Baseline\BaselineActions;
 use KeepItPeace\Findings\FindingActions;
 use KeepItPeace\Findings\FindingStatus;
@@ -63,6 +64,7 @@ class Admin {
 		add_action( 'admin_post_keepitpeace_approve_baseline', array( $this, 'handle_approve_baseline' ) );
 		add_action( 'admin_post_keepitpeace_test_notification', array( $this, 'handle_test_notification' ) );
 		add_action( 'admin_post_keepitpeace_dismiss_pro', array( $this, 'handle_dismiss_pro' ) );
+		add_action( 'admin_post_keepitpeace_export', array( $this, 'handle_export' ) );
 		add_filter(
 			'set_screen_option_keepitpeace_findings_per_page',
 			static function ( $keep, $option, $value ) {
@@ -159,13 +161,15 @@ class Admin {
 		$text = isset( $_GET['keepitpeace_text'] ) ? sanitize_text_field( wp_unslash( $_GET['keepitpeace_text'] ) ) : '';
 		// phpcs:enable
 		$messages = array(
-			'saved'       => array( 'success', __( 'Settings saved.', 'keep-it-peace' ) ),
-			'status'      => array( 'success', __( 'Status updated.', 'keep-it-peace' ) ),
-			'bulk'        => array( 'success', __( 'Selected findings were updated.', 'keep-it-peace' ) ),
-			'baseline'    => array( 'success', __( 'The baseline was approved.', 'keep-it-peace' ) ),
-			'test_sent'   => array( 'success', __( 'Test notification sent.', 'keep-it-peace' ) ),
-			'test_failed' => array( 'error', __( 'Test notification failed.', 'keep-it-peace' ) ),
-			'not_found'   => array( 'error', __( 'Item not found.', 'keep-it-peace' ) ),
+			'saved'        => array( 'success', __( 'Settings saved.', 'keep-it-peace' ) ),
+			'saved_errors' => array( 'warning', __( 'Settings saved, but some values were not accepted:', 'keep-it-peace' ) ),
+			'no_report'    => array( 'error', __( 'There is no completed scan to export yet.', 'keep-it-peace' ) ),
+			'status'       => array( 'success', __( 'Status updated.', 'keep-it-peace' ) ),
+			'bulk'         => array( 'success', __( 'Selected findings were updated.', 'keep-it-peace' ) ),
+			'baseline'     => array( 'success', __( 'The baseline was approved.', 'keep-it-peace' ) ),
+			'test_sent'    => array( 'success', __( 'Test notification sent.', 'keep-it-peace' ) ),
+			'test_failed'  => array( 'error', __( 'Test notification failed.', 'keep-it-peace' ) ),
+			'not_found'    => array( 'error', __( 'Item not found.', 'keep-it-peace' ) ),
 		);
 		if ( ! isset( $messages[ $code ] ) ) {
 			return;
@@ -245,15 +249,19 @@ class Admin {
 	 */
 	public function handle_save_settings(): void {
 		$this->guard( 'keepitpeace_save_settings' );
-		$tab      = isset( $_POST['tab'] ) ? sanitize_key( wp_unslash( $_POST['tab'] ) ) : 'general';
-		$input    = isset( $_POST['keepitpeace'] ) && is_array( $_POST['keepitpeace'] ) ? wp_unslash( $_POST['keepitpeace'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized per field in SettingsSanitizer.
-		$settings = $this->plugin->settings();
-		$old      = $settings->get( 'schedule' );
-		$values   = ( new SettingsSanitizer( $this->plugin ) )->sanitize_tab( $tab, $input, $settings->all() );
+		$tab       = isset( $_POST['tab'] ) ? sanitize_key( wp_unslash( $_POST['tab'] ) ) : 'general';
+		$input     = isset( $_POST['keepitpeace'] ) && is_array( $_POST['keepitpeace'] ) ? wp_unslash( $_POST['keepitpeace'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized per field in SettingsSanitizer.
+		$settings  = $this->plugin->settings();
+		$old       = $settings->get( 'schedule' );
+		$sanitizer = new SettingsSanitizer( $this->plugin );
+		$values    = $sanitizer->sanitize_tab( $tab, $input, $settings->all() );
 		$settings->save( $values );
 		$this->plugin->reset_settings();
 		if ( $old !== $this->plugin->settings()->get( 'schedule' ) ) {
 			Scheduler::schedule( $this->plugin->settings() );
+		}
+		if ( $sanitizer->errors ) {
+			$this->redirect( self::url( self::SETTINGS_SLUG, array( 'tab' => $tab ) ), 'saved_errors', implode( ' / ', $sanitizer->errors ) );
 		}
 		$this->redirect( self::url( self::SETTINGS_SLUG, array( 'tab' => $tab ) ), 'saved' );
 	}
@@ -315,6 +323,24 @@ class Admin {
 		$this->guard( 'keepitpeace_dismiss_pro' );
 		update_user_meta( get_current_user_id(), 'keepitpeace_hide_pro_notice', 1 );
 		wp_safe_redirect( self::url( self::SETTINGS_SLUG ) );
+		exit;
+	}
+
+	/**
+	 * Downloads the latest report as JSON.
+	 */
+	public function handle_export(): void {
+		$this->guard( 'keepitpeace_export' );
+		$scan = $this->plugin->scans()->latest_completed();
+		$json = $scan ? ( new ReportExporter( $this->plugin ) )->export_json( $scan->id, JSON_PRETTY_PRINT ) : null;
+		if ( null === $json ) {
+			$this->redirect( self::url( self::SETTINGS_SLUG, array( 'tab' => 'tools' ) ), 'no_report' );
+		}
+		nocache_headers();
+		header( 'Content-Type: application/json; charset=utf-8' );
+		header( 'Content-Disposition: attachment; filename="keep-it-peace-report-' . (int) $scan->id . '.json"' );
+		header( 'X-Content-Type-Options: nosniff' );
+		echo $json; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON download, not HTML.
 		exit;
 	}
 

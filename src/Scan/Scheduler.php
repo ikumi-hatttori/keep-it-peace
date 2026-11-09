@@ -157,8 +157,19 @@ class Scheduler {
 	 */
 	public function on_continue(): void {
 		$status = $this->plugin->scanner()->run_slice( Scanner::time_budget( 'cron' ) );
-		if ( in_array( $status['status'], array( Scan::RUNNING, 'busy' ), true ) && ! wp_next_scheduled( self::CONTINUE_HOOK ) ) {
-			wp_schedule_single_event( time() + self::CONTINUE_DELAY, self::CONTINUE_HOOK );
+		if ( in_array( $status['status'], array( Scan::RUNNING, 'busy' ), true ) ) {
+			self::schedule_continuation();
+		}
+	}
+
+	/**
+	 * Schedules the next slice of the running scan.
+	 *
+	 * @param int $delay Seconds from now.
+	 */
+	public static function schedule_continuation( int $delay = self::CONTINUE_DELAY ): void {
+		if ( ! wp_next_scheduled( self::CONTINUE_HOOK ) ) {
+			wp_schedule_single_event( time() + $delay, self::CONTINUE_HOOK );
 		}
 	}
 }

@@ -522,6 +522,12 @@ Api::get_settings(): Settings
 - `deps.osv`（テーマ内・WP 外のパスの lock ファイル）
 - `Api` と JSON エクスポート、`docs/export-schema.json`、エクスポートのテスト
 
+**フェーズ 2 の実装メモ（設計からの変更点）**
+- `deps.osv` は `end_target` ではなく `analyze_file` で lock ファイルごとに照会する（スキャンが複数回のリクエストに分かれても、収集した内容を持ち越す必要がないため）。開発用パッケージは `vendor/` / `node_modules/` に実際に存在する場合のみ対象にする
+- 外部 API や自サイトへの接続に失敗したとき、既存の検出を解決済みにしないよう `ScanContext::keep( $check_id, $rule_id )` を追加した
+- TLS の確認は 2 段階：証明書の読み取り（検証なし・`security_level` 0）と、WP 同梱の CA バンドルでの検証
+- 登録パスの ID はパスのハッシュ。パスを変えると別の対象として扱い、初回スキャンでベースラインを取り直す
+
 ### フェーズ 3
 - WP-CLI
 - i18n：`.pot` 生成、日本語訳（`.po`/`.mo`、JS 用 JSON）

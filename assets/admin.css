@@ -46,3 +46,20 @@
 .kip-pre { background: #f6f7f7; border: 1px solid #dcdcde; padding: 8px 12px; overflow-x: auto; }
 .kip-list li { margin-bottom: 4px; }
 #keepitpeace_summary .kip-counts li a { padding: 2px 0; }
+
+.kip-path-row {
+	border: 1px solid #dcdcde;
+	background: #fff;
+	padding: 8px 12px;
+	margin: 0 0 12px;
+	max-width: 900px;
+}
+.kip-path-row legend {
+	font-weight: 600;
+	padding: 0 4px;
+}
+.kip-path-cols {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}

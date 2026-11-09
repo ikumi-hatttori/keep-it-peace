@@ -7,6 +7,7 @@
 
 namespace KeepItPeace\Admin;
 
+use KeepItPeace\Contracts\FileCheckInterface;
 use KeepItPeace\Findings\Severity;
 use KeepItPeace\Notifications\NotificationPolicy;
 use KeepItPeace\Plugin;
@@ -202,8 +203,86 @@ class SettingsPage {
 				</p>
 			</td>
 		</tr>
+		<tr>
+			<th scope="row"><?php esc_html_e( 'Directories outside WordPress', 'keep-it-peace' ); ?></th>
+			<td>
+				<p class="description"><?php esc_html_e( 'Other programs on this server, such as a landing page, a form mailer or a legacy application. Enter the absolute server path. The directory must be readable by PHP and inside open_basedir; WordPress itself cannot be registered.', 'keep-it-peace' ); ?></p>
+				<?php
+				$rows   = (array) $settings->get( 'paths', array() );
+				$rows[] = array();
+				foreach ( $rows as $index => $row ) {
+					$this->path_row( (int) $index, (array) $row );
+				}
+				?>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row"><label for="kip-urls"><?php esc_html_e( 'Additional URLs for external checks', 'keep-it-peace' ); ?></label></th>
+			<td>
+				<textarea id="kip-urls" name="keepitpeace[urls]" rows="3" class="large-text code" placeholder="https://shop.example.com/"><?php echo esc_textarea( implode( "\n", (array) $settings->get( 'urls', array() ) ) ); ?></textarea>
+				<p class="description">
+					<?php
+					/* translators: %s: site address. */
+					echo esc_html( sprintf( __( 'One URL per line. %s is always checked. Only URLs on your own domain (including subdomains) are accepted.', 'keep-it-peace' ), home_url( '/' ) ) );
+					?>
+				</p>
+			</td>
+		</tr>
 		<?php
 		$this->form_end( 'targets', $settings );
+	}
+
+	/**
+	 * One registered directory (an empty row adds a new one).
+	 *
+	 * @param int   $index Row index.
+	 * @param array $row   Entry.
+	 */
+	private function path_row( int $index, array $row ): void {
+		$is_new = empty( $row['path'] );
+		$name   = 'keepitpeace[paths][' . $index . ']';
+		$prefix = 'kip-path-' . $index;
+		?>
+		<fieldset class="kip-path-row">
+			<legend><?php echo $is_new ? esc_html__( 'Add a directory', 'keep-it-peace' ) : esc_html( (string) $row['label'] ); ?></legend>
+			<input type="hidden" name="<?php echo esc_attr( $name ); ?>[id]" value="<?php echo esc_attr( (string) ( $row['id'] ?? '' ) ); ?>">
+			<p>
+				<label for="<?php echo esc_attr( $prefix ); ?>-path"><?php esc_html_e( 'Path', 'keep-it-peace' ); ?></label><br>
+				<input type="text" id="<?php echo esc_attr( $prefix ); ?>-path" name="<?php echo esc_attr( $name ); ?>[path]" value="<?php echo esc_attr( (string) ( $row['path'] ?? '' ) ); ?>" class="large-text code" placeholder="/home/example/public_html/form">
+			</p>
+			<p class="kip-path-cols">
+				<span>
+					<label for="<?php echo esc_attr( $prefix ); ?>-label"><?php esc_html_e( 'Label', 'keep-it-peace' ); ?></label><br>
+					<input type="text" id="<?php echo esc_attr( $prefix ); ?>-label" name="<?php echo esc_attr( $name ); ?>[label]" value="<?php echo esc_attr( (string) ( $row['label'] ?? '' ) ); ?>" class="regular-text">
+				</span>
+				<span>
+					<label for="<?php echo esc_attr( $prefix ); ?>-url"><?php esc_html_e( 'Public URL (optional)', 'keep-it-peace' ); ?></label><br>
+					<input type="url" id="<?php echo esc_attr( $prefix ); ?>-url" name="<?php echo esc_attr( $name ); ?>[url]" value="<?php echo esc_attr( (string) ( $row['url'] ?? '' ) ); ?>" class="regular-text code" placeholder="https://example.com/form/">
+				</span>
+			</p>
+			<details>
+				<summary><?php esc_html_e( 'Checks and exclusions', 'keep-it-peace' ); ?></summary>
+				<p>
+					<?php foreach ( $this->plugin->checks()->all() as $id => $check ) : ?>
+						<?php
+						if ( ! $check instanceof FileCheckInterface ) {
+							continue;
+						}
+						$enabled = $is_new || ! isset( $row['checks'][ $id ] ) || ! empty( $row['checks'][ $id ] );
+						?>
+						<label style="display:block"><input type="checkbox" name="<?php echo esc_attr( $name ); ?>[checks][<?php echo esc_attr( $id ); ?>]" value="1" <?php checked( $enabled ); ?>> <?php echo esc_html( $check->get_name() ); ?></label>
+					<?php endforeach; ?>
+				</p>
+				<p>
+					<label for="<?php echo esc_attr( $prefix ); ?>-excludes"><?php esc_html_e( 'Additional exclude patterns (one per line)', 'keep-it-peace' ); ?></label><br>
+					<textarea id="<?php echo esc_attr( $prefix ); ?>-excludes" name="<?php echo esc_attr( $name ); ?>[excludes]" rows="3" class="large-text code"><?php echo esc_textarea( implode( "\n", (array) ( $row['excludes'] ?? array() ) ) ); ?></textarea>
+				</p>
+			</details>
+			<?php if ( ! $is_new ) : ?>
+				<p><label><input type="checkbox" name="<?php echo esc_attr( $name ); ?>[remove]" value="1"> <?php esc_html_e( 'Remove this directory', 'keep-it-peace' ); ?></label></p>
+			<?php endif; ?>
+		</fieldset>
+		<?php
 	}
 
 	/**
@@ -385,6 +464,14 @@ class SettingsPage {
 			</tbody>
 		</table>
 		<p><?php $this->approve_button( '__all__', __( 'Approve all targets', 'keep-it-peace' ), empty( $scopes ) ); ?></p>
+
+		<h2><?php esc_html_e( 'Export', 'keep-it-peace' ); ?></h2>
+		<p><?php esc_html_e( 'Download the results of the last completed scan as JSON (the format is documented for add-ons and external tools). The file contains file paths and URLs of this site; store it safely.', 'keep-it-peace' ); ?></p>
+		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+			<input type="hidden" name="action" value="keepitpeace_export">
+			<?php wp_nonce_field( 'keepitpeace_export' ); ?>
+			<?php submit_button( __( 'Download JSON report', 'keep-it-peace' ), 'secondary', 'submit', false, $latest ? array() : array( 'disabled' => 'disabled' ) ); ?>
+		</form>
 
 		<h2><?php esc_html_e( 'Running scans from the server cron', 'keep-it-peace' ); ?></h2>
 		<p><?php esc_html_e( 'WP-Cron only runs when someone visits the site. For reliable monitoring, run the scan from the server cron with WP-CLI:', 'keep-it-peace' ); ?></p>

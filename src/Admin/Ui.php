@@ -83,6 +83,28 @@ final class Ui {
 	}
 
 	/**
+	 * Readable name of a finding scope (registered directories show their label).
+	 *
+	 * @param string $scope Scope.
+	 * @return string
+	 */
+	public static function scope_label( string $scope ): string {
+		static $labels = null;
+		if ( 0 !== strpos( $scope, 'path:' ) ) {
+			return $scope;
+		}
+		if ( null === $labels ) {
+			$labels = array();
+			foreach ( (array) \KeepItPeace\Plugin::instance()->settings()->get( 'paths', array() ) as $entry ) {
+				if ( is_array( $entry ) && ! empty( $entry['id'] ) ) {
+					$labels[ 'path:' . $entry['id'] ] = (string) ( $entry['label'] ?? $entry['path'] ?? '' );
+				}
+			}
+		}
+		return isset( $labels[ $scope ] ) && '' !== $labels[ $scope ] ? $labels[ $scope ] : $scope;
+	}
+
+	/**
 	 * Human-readable location of a finding (scope + target + line).
 	 *
 	 * @param \KeepItPeace\Findings\Finding $finding Finding.
@@ -91,7 +113,7 @@ final class Ui {
 	public static function location( $finding ): string {
 		$text = $finding->target;
 		if ( 'file' === $finding->target_type && '' !== $finding->target_scope ) {
-			$text = $finding->target_scope . ': ' . $finding->target;
+			$text = self::scope_label( $finding->target_scope ) . ': ' . $finding->target;
 		}
 		if ( null !== $finding->line ) {
 			$text .= ':' . $finding->line;

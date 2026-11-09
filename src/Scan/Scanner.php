@@ -218,6 +218,9 @@ class Scanner {
 			}
 		}
 
+		if ( $context->keep ) {
+			$state['keep'] = array_merge( (array) $state['keep'], $context->keep );
+		}
 		$progress = (int) floor( ( $state['step'] + (float) $state['step_progress'] ) / max( 1, $total ) * 100 );
 
 		if ( $state['step'] >= $total ) {

@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://keep-it-peace.com/schemas/scan-report/1.0.0.json",
+  "title": "Keep It Peace scan report",
+  "description": "Export of one finished scan (KeepItPeace\\Api::export_scan()). schema_version follows semver: minor versions only add optional fields.",
+  "type": "object",
+  "required": ["schema", "schema_version", "generated_at", "site", "scan", "summary", "findings", "extensions"],
+  "properties": {
+    "schema": { "const": "keepitpeace.scan-report" },
+    "schema_version": { "type": "string", "pattern": "^1\\.\\d+\\.\\d+$" },
+    "generated_at": { "$ref": "#/$defs/datetime" },
+    "site": {
+      "type": "object",
+      "required": ["uuid", "name", "url", "wp_version", "php_version", "plugin_version", "api_version"],
+      "properties": {
+        "uuid": { "type": "string", "description": "Random ID generated on activation." },
+        "name": { "type": "string" },
+        "url": { "type": "string", "format": "uri" },
+        "wp_version": { "type": "string" },
+        "php_version": { "type": "string", "description": "PHP version of the web server (as evaluated by the php.version check)." },
+        "plugin_version": { "type": "string" },
+        "api_version": { "type": "string" }
+      }
+    },
+    "scan": {
+      "type": "object",
+      "required": ["id", "status", "trigger", "started_at", "finished_at", "duration_seconds", "ruleset_version", "plugin_version", "checks"],
+      "properties": {
+        "id": { "type": "integer" },
+        "status": { "enum": ["completed", "failed", "aborted"] },
+        "trigger": { "type": "string", "description": "cron, manual, cli, api or a value set by an add-on." },
+        "started_at": { "$ref": "#/$defs/datetime" },
+        "finished_at": { "$ref": "#/$defs/nullable_datetime" },
+        "duration_seconds": { "type": ["integer", "null"] },
+        "ruleset_version": { "type": "string" },
+        "plugin_version": { "type": "string" },
+        "checks": { "type": "array", "items": { "type": "string" }, "description": "IDs of checks that completed in this scan." }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["by_severity", "new", "resolved", "ongoing", "php", "database", "tls", "files"],
+      "properties": {
+        "by_severity": {
+          "type": "object",
+          "description": "Open findings by severity when the scan finished.",
+          "required": ["critical", "high", "medium", "low", "info"],
+          "additionalProperties": { "type": "integer" }
+        },
+        "new": { "type": "integer" },
+        "resolved": { "type": "integer" },
+        "ongoing": { "type": "integer" },
+        "php": {
+          "type": ["object", "null"],
+          "properties": {
+            "version": { "type": "string" },
+            "eol": { "type": "boolean" },
+            "security_support_until": { "type": ["string", "null"], "format": "date" },
+            "latest_patch": { "type": ["string", "null"] },
+            "cve_count": { "type": ["integer", "null"] }
+          }
+        },
+        "database": {
+          "type": ["object", "null"],
+          "properties": {
+            "product": { "enum": ["mysql", "mariadb", ""] },
+            "version": { "type": "string" },
+            "eol": { "type": "boolean" }
+          }
+        },
+        "tls": {
+          "type": ["object", "null"],
+          "properties": {
+            "host": { "type": "string" },
+            "days_remaining": { "type": "integer" },
+            "valid_to": { "type": ["string", "null"], "format": "date" },
+            "protocol": { "type": "string" }
+          }
+        },
+        "files": {
+          "type": "object",
+          "description": "Open file integrity findings reported by this scan.",
+          "required": ["added", "modified", "deleted"],
+          "additionalProperties": { "type": "integer" }
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "description": "Findings seen in the scan plus findings the scan resolved. status is the current status, diff is relative to this scan.",
+      "items": { "$ref": "#/$defs/finding" }
+    },
+    "extensions": {
+      "type": "object",
+      "description": "Data added by add-ons through the keepitpeace_export_data filter, keyed by add-on slug."
+    }
+  },
+  "$defs": {
+    "datetime": { "type": "string", "format": "date-time", "description": "UTC, e.g. 2026-11-06T09:00:00Z" },
+    "nullable_datetime": { "type": ["string", "null"], "format": "date-time" },
+    "finding": {
+      "type": "object",
+      "required": ["id", "fingerprint", "check_id", "rule_id", "category", "severity", "status", "target_type", "target_scope", "target", "line", "title", "message", "recommendation", "meta", "first_seen_at", "last_seen_at", "resolved_at", "diff"],
+      "properties": {
+        "id": { "type": "integer" },
+        "fingerprint": { "type": "string", "pattern": "^[0-9a-f]{64}$", "description": "Stable identity across scans (independent of line numbers)." },
+        "check_id": { "type": "string" },
+        "rule_id": { "type": "string" },
+        "category": { "type": "string", "description": "php, environment, theme, external_path, external, dependency, files or an add-on value." },
+        "severity": { "enum": ["critical", "high", "medium", "low", "info"] },
+        "status": { "enum": ["new", "acknowledged", "ignored", "resolved"] },
+        "target_type": { "enum": ["env", "file", "url"] },
+        "target_scope": { "type": "string", "description": "site, uploads, content, external, theme:<slug>, path:<id>, ..." },
+        "target": { "type": "string", "description": "File path relative to the scope, URL, host or setting name." },
+        "line": { "type": ["integer", "null"] },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "recommendation": { "type": "string" },
+        "meta": { "type": "object" },
+        "first_seen_at": { "$ref": "#/$defs/datetime" },
+        "last_seen_at": { "$ref": "#/$defs/datetime" },
+        "resolved_at": { "$ref": "#/$defs/nullable_datetime" },
+        "diff": { "enum": ["new", "ongoing", "resolved"] }
+      }
+    }
+  }
+}

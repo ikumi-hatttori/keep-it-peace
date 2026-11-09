@@ -9,8 +9,13 @@ namespace KeepItPeace;
 
 use KeepItPeace\Admin\Admin;
 use KeepItPeace\Baseline\FileIndexRepository;
+use KeepItPeace\Checks\Dependencies\DependencyCheck;
 use KeepItPeace\Checks\Environment\UploadsPhpCheck;
 use KeepItPeace\Checks\Environment\WpConfigCheck;
+use KeepItPeace\Checks\External\DirectoryListingCheck;
+use KeepItPeace\Checks\External\ExposedFilesCheck;
+use KeepItPeace\Checks\External\SecurityHeadersCheck;
+use KeepItPeace\Checks\External\TlsCheck;
 use KeepItPeace\Checks\Files\CodePatternCheck;
 use KeepItPeace\Checks\Files\IntegrityCheck;
 use KeepItPeace\Checks\Files\PermissionCheck;
@@ -34,6 +39,7 @@ use KeepItPeace\Rules\Detectors\WpdbDetector;
 use KeepItPeace\Rules\RuleRepository;
 use KeepItPeace\Scan\CheckRegistry;
 use KeepItPeace\Scan\Maintenance;
+use KeepItPeace\Scan\PathTargetProvider;
 use KeepItPeace\Scan\RuntimeEnvironment;
 use KeepItPeace\Scan\ScanRepository;
 use KeepItPeace\Scan\Scanner;
@@ -260,10 +266,15 @@ final class Plugin {
 							new DatabaseVersionCheck(),
 							new WpConfigCheck(),
 							new UploadsPhpCheck(),
+							new TlsCheck(),
+							new SecurityHeadersCheck(),
+							new ExposedFilesCheck(),
+							new DirectoryListingCheck(),
 							new IntegrityCheck(),
 							new CodePatternCheck(),
 							new SuspiciousFileCheck(),
 							new PermissionCheck(),
+							new DependencyCheck(),
 						);
 					}
 				);
@@ -280,7 +291,7 @@ final class Plugin {
 		return $this->service(
 			'targets',
 			static function () {
-				return new TargetRegistry( array( new ThemeTargetProvider() ) );
+				return new TargetRegistry( array( new ThemeTargetProvider(), new PathTargetProvider() ) );
 			}
 		);
 	}
