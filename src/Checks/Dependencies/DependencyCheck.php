@@ -110,9 +110,10 @@ class DependencyCheck extends AbstractFileCheck {
 		$result = $osv->query( $packages );
 		if ( '' !== $result['error'] && ! $result['ids'] ) {
 			$context->keep( $this->get_id(), 'osv.vulnerable' );
+			/* translators: %s: error message. */
+			$message = sprintf( __( 'OSV.dev could not be reached: %s. Previous results are kept.', 'keep-it-peace' ), $result['error'] );
 			return array(
-				/* translators: %s: error message. */
-				$this->notice( $file, $target, 'osv.unavailable', __( 'Dependencies could not be checked', 'keep-it-peace' ), sprintf( __( 'OSV.dev could not be reached: %s. Previous results are kept.', 'keep-it-peace' ), $result['error'] ) ),
+				$this->notice( $file, $target, 'osv.unavailable', __( 'Dependencies could not be checked', 'keep-it-peace' ), $message ),
 			);
 		}
 

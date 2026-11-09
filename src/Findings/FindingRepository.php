@@ -9,6 +9,8 @@ namespace KeepItPeace\Findings;
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table names come from $wpdb->prefix and fixed suffixes; WHERE/ORDER clauses use placeholders or allowlists.
+
 // phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom tables; table names come from \$wpdb->prefix.
 
 /**

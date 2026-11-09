@@ -175,16 +175,19 @@ class SecurityHeadersCheck extends AbstractExternalCheck {
 		$server = (string) ( $headers['server'] ?? '' );
 		if ( '' !== $server && preg_match( '#/\s*\d#', $server ) ) {
 			/* translators: %s: header value. */
-			$add( 'headers.server_version', Severity::LOW, __( 'The web server version is revealed', 'keep-it-peace' ), sprintf( __( 'The Server header is "%s". Attackers use versions to pick known exploits.', 'keep-it-peace' ), $server ), __( 'Hide the version (e.g. ServerTokens Prod for Apache, server_tokens off for nginx) or ask your host.', 'keep-it-peace' ), $server );
+			$message = sprintf( __( 'The Server header is "%s". Attackers use versions to pick known exploits.', 'keep-it-peace' ), $server );
+			$add( 'headers.server_version', Severity::LOW, __( 'The web server version is revealed', 'keep-it-peace' ), $message, __( 'Hide the version (e.g. ServerTokens Prod for Apache, server_tokens off for nginx) or ask your host.', 'keep-it-peace' ), $server );
 		}
 		$powered = (string) ( $headers['x-powered-by'] ?? '' );
 		if ( '' !== $powered ) {
 			/* translators: %s: header value. */
-			$add( 'headers.powered_by', Severity::LOW, __( 'X-Powered-By reveals the PHP version', 'keep-it-peace' ), sprintf( __( 'The X-Powered-By header is "%s".', 'keep-it-peace' ), $powered ), __( 'Set expose_php = Off in php.ini (or .user.ini), or remove the header in the server configuration.', 'keep-it-peace' ), $powered );
+			$message = sprintf( __( 'The X-Powered-By header is "%s".', 'keep-it-peace' ), $powered );
+			$add( 'headers.powered_by', Severity::LOW, __( 'X-Powered-By reveals the PHP version', 'keep-it-peace' ), $message, __( 'Set expose_php = Off in php.ini (or .user.ini), or remove the header in the server configuration.', 'keep-it-peace' ), $powered );
 		}
 		if ( preg_match( '#<meta[^>]+name=["\']generator["\'][^>]+content=["\']WordPress\s*([\d.]+)#i', $body, $m ) ) {
-			/* translators: %s: version. */
-			$add( 'headers.wp_generator', Severity::INFO, __( 'The WordPress version is shown in the page source', 'keep-it-peace' ), sprintf( __( 'The generator meta tag reveals WordPress %s.', 'keep-it-peace' ), $m[1] ), __( 'Keep WordPress up to date. You can remove the tag with remove_action( \'wp_head\', \'wp_generator\' ).', 'keep-it-peace' ), $m[1] );
+			/* translators: %s: WordPress version. */
+			$message = sprintf( __( 'The generator meta tag reveals WordPress %s.', 'keep-it-peace' ), $m[1] );
+			$add( 'headers.wp_generator', Severity::INFO, __( 'The WordPress version is shown in the page source', 'keep-it-peace' ), $message, __( 'Keep WordPress up to date. You can remove the tag with remove_action( \'wp_head\', \'wp_generator\' ).', 'keep-it-peace' ), $m[1] );
 		}
 		return $issues;
 	}

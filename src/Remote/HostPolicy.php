@@ -71,7 +71,6 @@ class HostPolicy {
 		'netlify.app',
 		'vercel.app',
 		'pages.dev',
-		'herokuapp.com',
 		'wpengine.com',
 		'wpenginepowered.com',
 		'kinsta.cloud',

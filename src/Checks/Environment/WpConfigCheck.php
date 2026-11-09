@@ -127,10 +127,16 @@ class WpConfigCheck extends AbstractCheck {
 			$perms = fileperms( $config );
 			if ( false !== $perms ) {
 				$perms = $perms & 0777;
+				$octal = sprintf( '%03o', $perms );
+				$fix   = __( 'Set the permissions to 400 or 440 (600/640 if your host requires write access).', 'keep-it-peace' );
 				if ( $perms & 0002 ) {
-					$findings[] = $this->config_finding( 'wp_config.permissions_writable', Severity::CRITICAL, 'wp-config.php', __( 'wp-config.php is world-writable', 'keep-it-peace' ), sprintf( /* translators: %s: permissions. */ __( 'wp-config.php has permissions %s. Anyone on the server can change it.', 'keep-it-peace' ), sprintf( '%03o', $perms ) ), __( 'Set the permissions to 400 or 440 (600/640 if your host requires write access).', 'keep-it-peace' ) );
+					/* translators: %s: permissions such as 666. */
+					$message    = sprintf( __( 'wp-config.php has permissions %s. Anyone on the server can change it.', 'keep-it-peace' ), $octal );
+					$findings[] = $this->config_finding( 'wp_config.permissions_writable', Severity::CRITICAL, 'wp-config.php', __( 'wp-config.php is world-writable', 'keep-it-peace' ), $message, $fix );
 				} elseif ( $perms & 0004 ) {
-					$findings[] = $this->config_finding( 'wp_config.permissions_readable', Severity::LOW, 'wp-config.php', __( 'wp-config.php is readable by everyone on the server', 'keep-it-peace' ), sprintf( /* translators: %s: permissions. */ __( 'wp-config.php has permissions %s. On shared servers other accounts may be able to read your database password.', 'keep-it-peace' ), sprintf( '%03o', $perms ) ), __( 'Set the permissions to 400 or 440 (600/640 if your host requires write access).', 'keep-it-peace' ) );
+					/* translators: %s: permissions such as 644. */
+					$message    = sprintf( __( 'wp-config.php has permissions %s. On shared servers other accounts may be able to read your database password.', 'keep-it-peace' ), $octal );
+					$findings[] = $this->config_finding( 'wp_config.permissions_readable', Severity::LOW, 'wp-config.php', __( 'wp-config.php is readable by everyone on the server', 'keep-it-peace' ), $message, $fix );
 				}
 			}
 		}

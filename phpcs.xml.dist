@@ -7,6 +7,9 @@
 	<exclude-pattern>/node_modules/*</exclude-pattern>
 	<exclude-pattern>/build/*</exclude-pattern>
 	<exclude-pattern>/tests/*</exclude-pattern>
+	<exclude-pattern>/dist/*</exclude-pattern>
+	<!-- The sample add-on uses its own text domain: vendor/bin/phpcs runtime-set text_domain kip-sample-addon dev -->
+	<exclude-pattern>/dev/*</exclude-pattern>
 
 	<arg name="extensions" value="php"/>
 	<arg name="colors"/>

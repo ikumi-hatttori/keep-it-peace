@@ -45,16 +45,17 @@ class Scanner {
 	 *
 	 * @param string $trigger cron|manual|cli|api.
 	 * @param int    $user_id User.
+	 * @param array  $options checks (string[] limit to these check IDs), notify (bool, default true).
 	 * @return Scan
 	 */
-	public function start( string $trigger, int $user_id = 0 ): Scan {
+	public function start( string $trigger, int $user_id = 0, array $options = array() ): Scan {
 		$scans   = $this->plugin->scans();
 		$running = $scans->get_running();
 		if ( $running ) {
 			return $running;
 		}
 		$settings = $this->plugin->settings();
-		$id       = $scans->create( $trigger, $user_id, $this->build_plan( $settings ), $this->plugin->rules()->get_version() );
+		$id       = $scans->create( $trigger, $user_id, $this->build_plan( $settings, $options ), $this->plugin->rules()->get_version() );
 		$scan     = $scans->get( $id );
 
 		/**
@@ -70,11 +71,17 @@ class Scanner {
 	 * Builds the step list.
 	 *
 	 * @param Settings $settings Settings.
+	 * @param array    $options checks, notify (see start()).
 	 * @return array
 	 */
-	public function build_plan( Settings $settings ): array {
+	public function build_plan( Settings $settings, array $options = array() ): array {
 		$enabled = $this->plugin->checks()->enabled( $settings );
-		$steps   = array();
+		if ( ! empty( $options['checks'] ) ) {
+			$only                  = array_flip( array_map( 'strval', (array) $options['checks'] ) );
+			$enabled['standalone'] = array_intersect_key( $enabled['standalone'], $only );
+			$enabled['file']       = array_intersect_key( $enabled['file'], $only );
+		}
+		$steps = array();
 		foreach ( array_keys( $enabled['standalone'] ) as $id ) {
 			$steps[] = array(
 				'type' => 'check',
@@ -97,6 +104,7 @@ class Scanner {
 			'keep'             => array(),
 			'keep_scopes'      => array(),
 			'data'             => array(),
+			'notify'           => ! isset( $options['notify'] ) || (bool) $options['notify'],
 		);
 	}
 
@@ -515,7 +523,9 @@ class Scanner {
 		 */
 		do_action( 'keepitpeace_scan_completed', $report );
 
-		$this->plugin->notifier()->notify( $report );
+		if ( ! isset( $state['notify'] ) || $state['notify'] ) {
+			$this->plugin->notifier()->notify( $report );
+		}
 	}
 
 	/**

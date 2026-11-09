@@ -14,7 +14,7 @@ function keepitpeace_uninstall_site() {
 	global $wpdb;
 
 	foreach ( array( 'keepitpeace_scans', 'keepitpeace_findings', 'keepitpeace_finding_events', 'keepitpeace_files' ) as $table ) {
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table names are fixed.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table names are fixed.
 		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}{$table}" );
 	}
 

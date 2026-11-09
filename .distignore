@@ -1,0 +1,23 @@
+# Files excluded from the distribution ZIP (bin/build-zip.sh, wp dist-archive).
+/.git
+/.github
+/.gitignore
+/.distignore
+/.editorconfig
+/.idea
+/.claude
+/bin
+/dev
+/dist
+/docs
+/tests
+/vendor
+/node_modules
+/composer.json
+/composer.lock
+/phpcs.xml.dist
+/phpunit.xml.dist
+/.phpunit.result.cache
+/README.md
+/languages/*.po~
+.DS_Store

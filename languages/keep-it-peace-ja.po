@@ -1,0 +1,2351 @@
+# Japanese translation of Keep It Peace.
+# Copyright (C) 2026 mackarel Inc.
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Keep It Peace\n"
+"Report-Msgid-Bugs-To: https://keep-it-peace.com/\n"
+"Last-Translator: mackarel Inc.\n"
+"Language-Team: mackarel Inc.\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Domain: keep-it-peace\n"
+
+#. Plugin Name of the plugin
+#: keep-it-peace.php
+msgid "Keep It Peace"
+msgstr "Keep It Peace"
+
+#. Plugin URI of the plugin
+#: keep-it-peace.php
+msgid "https://keep-it-peace.com"
+msgstr "https://keep-it-peace.com"
+
+#. Description of the plugin
+#: keep-it-peace.php
+msgid "Monitors custom themes, server-side programs outside WordPress, the site's public surface and the PHP runtime, and emails you a summary."
+msgstr "カスタムテーマ、WordPress 外のサーバー上のプログラム、サイトの外部から見た状態、PHP の実行環境を監視し、概要をメールでお知らせします。"
+
+#. Author of the plugin
+#: keep-it-peace.php
+msgid "mackarel Inc."
+msgstr "mackarel Inc."
+
+#. Author URI of the plugin
+#: keep-it-peace.php
+msgid "https://mackarel.jp"
+msgstr "https://mackarel.jp"
+
+#: src/Admin/Admin.php:90
+msgid "Dashboard"
+msgstr "ダッシュボード"
+
+#: src/Admin/Admin.php:91
+#: src/Admin/FindingsPage.php:106
+msgid "Findings"
+msgstr "検出結果"
+
+#: src/Admin/Admin.php:94
+#: src/Admin/ScansPage.php:84
+msgid "Scan history"
+msgstr "スキャン履歴"
+
+#: src/Admin/Admin.php:95
+#: src/Admin/Admin.php:202
+msgid "Settings"
+msgstr "設定"
+
+#: src/Admin/Admin.php:129
+msgid "Starting scan…"
+msgstr "スキャンを開始しています…"
+
+#. translators: %d: progress percentage.
+#: src/Admin/Admin.php:131
+msgid "Scanning… %d%%"
+msgstr "スキャン中… %d%%"
+
+#: src/Admin/Admin.php:132
+msgid "Another scan step is running. Waiting…"
+msgstr "別のスキャン処理が実行中です。待機しています…"
+
+#: src/Admin/Admin.php:133
+msgid "Scan completed. Reloading…"
+msgstr "スキャンが完了しました。再読み込みしています…"
+
+#: src/Admin/Admin.php:134
+msgid "The scan failed. Check the scan history for details."
+msgstr "スキャンに失敗しました。詳細はスキャン履歴を確認してください。"
+
+#. translators: %s: error message.
+#: src/Admin/Admin.php:136
+msgid "Request failed: %s"
+msgstr "リクエストに失敗しました：%s"
+
+#: src/Admin/Admin.php:151
+#: src/Admin/DashboardPage.php:247
+msgid "Scheduled scans may not be running."
+msgstr "定期スキャンが実行されていない可能性があります。"
+
+#: src/Admin/Admin.php:152
+msgid "No scan has completed for longer than expected. WP-Cron only runs when the site receives visits; set up a server cron job (see Settings → Tools) to run scans reliably."
+msgstr "想定より長い期間、スキャンが完了していません。WP-Cron はサイトへのアクセスがあったときにしか実行されません。確実にスキャンを実行するには、サーバーの cron を設定してください（設定 → ツール を参照）。"
+
+#: src/Admin/Admin.php:164
+msgid "Settings saved."
+msgstr "設定を保存しました。"
+
+#: src/Admin/Admin.php:165
+msgid "Settings saved, but some values were not accepted:"
+msgstr "設定を保存しましたが、一部の値は受け付けられませんでした:"
+
+#: src/Admin/Admin.php:166
+msgid "There is no completed scan to export yet."
+msgstr "エクスポートできる完了済みのスキャンはまだありません。"
+
+#: src/Admin/Admin.php:167
+msgid "Status updated."
+msgstr "ステータスを更新しました。"
+
+#: src/Admin/Admin.php:168
+msgid "Selected findings were updated."
+msgstr "選択した検出結果を更新しました。"
+
+#: src/Admin/Admin.php:169
+msgid "The baseline was approved."
+msgstr "ベースラインを承認しました。"
+
+#: src/Admin/Admin.php:170
+msgid "Test notification sent."
+msgstr "テスト通知を送信しました。"
+
+#: src/Admin/Admin.php:171
+msgid "Test notification failed."
+msgstr "テスト通知の送信に失敗しました。"
+
+#: src/Admin/Admin.php:172
+msgid "Item not found."
+msgstr "項目が見つかりません。"
+
+#: src/Admin/Admin.php:224
+msgid "You do not have permission to do this."
+msgstr "この操作を行う権限がありません。"
+
+#. translators: %d: number of files.
+#: src/Admin/Admin.php:302
+msgid "%d file recorded."
+msgid_plural "%d files recorded."
+msgstr[0] "%d 件のファイルを記録しました。"
+
+#: src/Admin/DashboardPage.php:57
+msgid "Scan now"
+msgstr "今すぐスキャン"
+
+#: src/Admin/DashboardPage.php:67
+#: src/Admin/ScansPage.php:99
+msgid "Open issues"
+msgstr "未解決の問題"
+
+#. translators: 1: new, 2: resolved, 3: ongoing.
+#: src/Admin/DashboardPage.php:82
+msgid "Last scan: %1$d new, %2$d resolved, %3$d ongoing"
+msgstr "前回のスキャン：新規 %1$d 件、解決済み %2$d 件、継続中 %3$d 件"
+
+#: src/Admin/DashboardPage.php:89
+msgid "Scans"
+msgstr "スキャン"
+
+#: src/Admin/DashboardPage.php:91
+msgid "Last completed"
+msgstr "最終完了"
+
+#: src/Admin/DashboardPage.php:91
+#: src/Admin/DashboardPage.php:245
+msgid "Never"
+msgstr "なし"
+
+#: src/Admin/DashboardPage.php:92
+msgid "Next scheduled"
+msgstr "次回予定"
+
+#: src/Admin/DashboardPage.php:94
+msgid "Cron health"
+msgstr "Cron の状態"
+
+#: src/Admin/DashboardPage.php:97
+#: src/Scan/PathGuard.php:121
+msgid "OK"
+msgstr "正常"
+
+#: src/Admin/DashboardPage.php:99
+msgid "Scans may not be running"
+msgstr "スキャンが実行されていない可能性"
+
+#: src/Admin/DashboardPage.php:102
+msgid "DISABLE_WP_CRON is set: make sure a server cron job runs."
+msgstr "DISABLE_WP_CRON が設定されています。サーバーの cron が実行されていることを確認してください。"
+
+#: src/Admin/DashboardPage.php:110
+msgid "Server"
+msgstr "サーバー"
+
+#: src/Admin/DashboardPage.php:117
+#: templates/email/summary-html.php:52
+#: templates/email/summary-text.php:30
+msgid "Database"
+msgstr "データベース"
+
+#: src/Admin/DashboardPage.php:123
+#: src/Admin/DashboardPage.php:178
+#: src/Notifications/EmailChannel.php:245
+msgid "end of life"
+msgstr "サポート終了"
+
+#. translators: %s: date.
+#: src/Admin/DashboardPage.php:126
+msgid "supported until %s"
+msgstr "%s までサポート"
+
+#: src/Admin/DashboardPage.php:135
+#: templates/email/summary-html.php:55
+#: templates/email/summary-text.php:33
+msgid "SSL certificate"
+msgstr "SSL 証明書"
+
+#. translators: %d: days.
+#: src/Admin/DashboardPage.php:140
+#: src/Notifications/EmailChannel.php:252
+msgid "%d day left"
+msgid_plural "%d days left"
+msgstr[0] "残り %d 日"
+
+#. translators: %s: date.
+#: src/Admin/DashboardPage.php:181
+#: src/Notifications/EmailChannel.php:229
+msgid "security support until %s"
+msgstr "%s までセキュリティサポート"
+
+#. translators: %s: version.
+#: src/Admin/DashboardPage.php:185
+msgid "Update available: %s"
+msgstr "アップデートあり：%s"
+
+#. translators: %d: number of CVEs.
+#: src/Admin/DashboardPage.php:189
+msgid "%d known vulnerability (NVD)"
+msgid_plural "%d known vulnerabilities (NVD)"
+msgstr[0] "既知の脆弱性 %d 件（NVD）"
+
+#: src/Admin/DashboardPage.php:207
+msgid "Most severe open issues"
+msgstr "重要度の高い未解決の問題"
+
+#: src/Admin/DashboardPage.php:209
+msgid "No open issues."
+msgstr "未解決の問題はありません。"
+
+#: src/Admin/DashboardPage.php:222
+msgid "View all findings"
+msgstr "すべての検出結果を表示"
+
+#: src/Admin/DashboardPage.php:245
+msgid "Last scan:"
+msgstr "前回のスキャン:"
+
+#: src/Admin/DashboardPage.php:249
+msgid "Open Keep It Peace"
+msgstr "Keep It Peace を開く"
+
+#: src/Admin/FindingsListTable.php:121
+#: src/Admin/FindingsListTable.php:196
+msgid "Severity"
+msgstr "重要度"
+
+#: src/Admin/FindingsListTable.php:122
+msgid "Issue"
+msgstr "問題"
+
+#: src/Admin/FindingsListTable.php:123
+#: src/Admin/FindingsListTable.php:202
+#: src/Admin/FindingsPage.php:139
+msgid "Category"
+msgstr "カテゴリー"
+
+#: src/Admin/FindingsListTable.php:124
+#: src/Admin/FindingsPage.php:140
+msgid "Location"
+msgstr "場所"
+
+#: src/Admin/FindingsListTable.php:125
+#: src/Admin/FindingsPage.php:138
+#: src/Admin/FindingsPage.php:169
+#: src/Admin/ScansPage.php:98
+#: src/Admin/SettingsPage.php:484
+msgid "Status"
+msgstr "ステータス"
+
+#: src/Admin/FindingsListTable.php:126
+#: src/Admin/FindingsPage.php:143
+msgid "Last detected"
+msgstr "最終検出"
+
+#: src/Admin/FindingsListTable.php:152
+msgid "Mark as acknowledged"
+msgstr "確認済みにする"
+
+#: src/Admin/FindingsListTable.php:153
+msgid "Ignore"
+msgstr "無視する"
+
+#: src/Admin/FindingsListTable.php:154
+msgid "Mark as resolved"
+msgstr "解決済みにする"
+
+#: src/Admin/FindingsListTable.php:155
+msgid "Reopen"
+msgstr "再オープン"
+
+#: src/Admin/FindingsListTable.php:167
+msgid "Open"
+msgstr "未解決"
+
+#: src/Admin/FindingsListTable.php:172
+msgid "All"
+msgstr "すべて"
+
+#: src/Admin/FindingsListTable.php:197
+msgid "All severities"
+msgstr "すべての重要度"
+
+#: src/Admin/FindingsListTable.php:203
+msgid "All categories"
+msgstr "すべてのカテゴリー"
+
+#: src/Admin/FindingsListTable.php:208
+msgid "Filter"
+msgstr "絞り込み"
+
+#: src/Admin/FindingsListTable.php:268
+msgid "No findings match the current filters."
+msgstr "現在の絞り込み条件に一致する検出結果はありません。"
+
+#: src/Admin/FindingsPage.php:72
+msgid "Changed with a bulk action."
+msgstr "一括操作で変更されました。"
+
+#: src/Admin/FindingsPage.php:112
+msgid "Search findings"
+msgstr "検出結果を検索"
+
+#: src/Admin/FindingsPage.php:129
+msgid "Back to findings"
+msgstr "検出結果に戻る"
+
+#: src/Admin/FindingsPage.php:141
+msgid "Check / rule"
+msgstr "チェック / ルール"
+
+#: src/Admin/FindingsPage.php:142
+msgid "First detected"
+msgstr "初回検出"
+
+#: src/Admin/FindingsPage.php:145
+#: src/Admin/FindingsPage.php:169
+msgid "Note"
+msgstr "メモ"
+
+#: src/Admin/FindingsPage.php:149
+msgid "Description"
+msgstr "説明"
+
+#: src/Admin/FindingsPage.php:155
+msgid "Recommended action"
+msgstr "推奨される対応"
+
+#: src/Admin/FindingsPage.php:167
+msgid "History"
+msgstr "履歴"
+
+#: src/Admin/FindingsPage.php:169
+msgid "Date"
+msgstr "日時"
+
+#: src/Admin/FindingsPage.php:169
+msgid "Event"
+msgstr "イベント"
+
+#: src/Admin/FindingsPage.php:169
+msgid "By"
+msgstr "実行者"
+
+#. translators: %d: scan ID.
+#: src/Admin/FindingsPage.php:179
+msgid "Scan #%d"
+msgstr "スキャン #%d"
+
+#: src/Admin/FindingsPage.php:191
+msgid "Change status"
+msgstr "ステータスを変更"
+
+#: src/Admin/FindingsPage.php:204
+msgid "Note (e.g. why it is ignored)"
+msgstr "メモ（例：無視する理由）"
+
+#: src/Admin/FindingsPage.php:207
+msgid "Ignored findings about a file become active again when the file changes."
+msgstr "ファイルに関する検出結果を無視しても、そのファイルが変更されると再び有効になります。"
+
+#: src/Admin/FindingsPage.php:208
+msgid "Update"
+msgstr "更新"
+
+#: src/Admin/FindingsPage.php:228
+msgid "The code could not be shown (the file was moved, deleted or is not readable)."
+msgstr "コードを表示できませんでした（ファイルが移動・削除されたか、読み取れません）。"
+
+#: src/Admin/FindingsPage.php:233
+msgid "Code"
+msgstr "コード"
+
+#: src/Admin/FindingsPage.php:285
+msgid "Vulnerabilities"
+msgstr "脆弱性"
+
+#: src/Admin/FindingsPage.php:310
+msgid "Detected"
+msgstr "検出"
+
+#: src/Admin/FindingsPage.php:311
+msgid "No longer detected"
+msgstr "検出されなくなった"
+
+#: src/Admin/FindingsPage.php:312
+msgid "Detected again"
+msgstr "再検出"
+
+#: src/Admin/FindingsPage.php:313
+msgid "Ignore cleared (file changed)"
+msgstr "無視を解除（ファイルが変更されたため）"
+
+#: src/Admin/FindingsPage.php:314
+msgid "Status changed"
+msgstr "ステータス変更"
+
+#: src/Admin/ScansPage.php:47
+msgid "Running"
+msgstr "実行中"
+
+#: src/Admin/ScansPage.php:48
+msgid "Completed"
+msgstr "完了"
+
+#: src/Admin/ScansPage.php:49
+msgid "Failed"
+msgstr "失敗"
+
+#: src/Admin/ScansPage.php:50
+msgid "Aborted"
+msgstr "中断"
+
+#: src/Admin/ScansPage.php:63
+msgid "Scheduled"
+msgstr "定期"
+
+#: src/Admin/ScansPage.php:64
+msgid "Manual"
+msgstr "手動"
+
+#. translators: %d: days.
+#: src/Admin/ScansPage.php:88
+msgid "History is kept for %d days."
+msgstr "履歴は %d 日間保存されます。"
+
+#: src/Admin/ScansPage.php:95
+msgid "Started"
+msgstr "開始日時"
+
+#: src/Admin/ScansPage.php:96
+msgid "Duration"
+msgstr "所要時間"
+
+#: src/Admin/ScansPage.php:97
+msgid "Trigger"
+msgstr "実行方法"
+
+#: src/Admin/ScansPage.php:100
+#: src/Findings/FindingStatus.php:49
+msgid "New"
+msgstr "新規"
+
+#: src/Admin/ScansPage.php:101
+#: src/Findings/FindingStatus.php:55
+msgid "Resolved"
+msgstr "解決済み"
+
+#: src/Admin/ScansPage.php:102
+msgid "Ongoing"
+msgstr "継続中"
+
+#: src/Admin/ScansPage.php:107
+msgid "No scans yet."
+msgstr "まだスキャンはありません。"
+
+#: src/Admin/SettingsPage.php:49
+msgid "General"
+msgstr "一般"
+
+#: src/Admin/SettingsPage.php:50
+msgid "Targets"
+msgstr "対象"
+
+#: src/Admin/SettingsPage.php:51
+msgid "Checks"
+msgstr "チェック"
+
+#: src/Admin/SettingsPage.php:52
+msgid "Notifications"
+msgstr "通知"
+
+#: src/Admin/SettingsPage.php:53
+msgid "External services"
+msgstr "外部サービス"
+
+#: src/Admin/SettingsPage.php:54
+msgid "Tools"
+msgstr "ツール"
+
+#: src/Admin/SettingsPage.php:79
+msgid "Keep It Peace settings"
+msgstr "Keep It Peace の設定"
+
+#: src/Admin/SettingsPage.php:150
+msgid "Scan frequency"
+msgstr "スキャンの頻度"
+
+#: src/Admin/SettingsPage.php:160
+msgid "Keep history for"
+msgstr "履歴の保存期間"
+
+#: src/Admin/SettingsPage.php:162
+msgid "days"
+msgstr "日"
+
+#: src/Admin/SettingsPage.php:164
+msgid "0 keeps history forever."
+msgstr "0 にすると履歴を無期限に保存します。"
+
+#: src/Admin/SettingsPage.php:182
+msgid "Themes to scan"
+msgstr "スキャンするテーマ"
+
+#: src/Admin/SettingsPage.php:190
+msgid "(active)"
+msgstr "（有効）"
+
+#: src/Admin/SettingsPage.php:192
+msgid "(parent of the active theme)"
+msgstr "（有効なテーマの親テーマ）"
+
+#: src/Admin/SettingsPage.php:198
+msgid "When nothing is selected, the active theme and its parent are scanned."
+msgstr "何も選択しない場合は、有効なテーマとその親テーマをスキャンします。"
+
+#. translators: %s: theme slugs.
+#: src/Admin/SettingsPage.php:201
+msgid "Currently scanned: %s"
+msgstr "現在のスキャン対象：%s"
+
+#: src/Admin/SettingsPage.php:207
+msgid "Directories outside WordPress"
+msgstr "WordPress 外のディレクトリ"
+
+#: src/Admin/SettingsPage.php:209
+msgid "Other programs on this server, such as a landing page, a form mailer or a legacy application. Enter the absolute server path. The directory must be readable by PHP and inside open_basedir; WordPress itself cannot be registered."
+msgstr "ランディングページ、メールフォーム、古いアプリケーションなど、このサーバー上にあるほかのプログラムです。サーバー上の絶対パスを入力してください。ディレクトリは PHP から読み取れ、open_basedir の範囲内にある必要があります。WordPress 自体は登録できません。"
+
+#: src/Admin/SettingsPage.php:220
+msgid "Additional URLs for external checks"
+msgstr "外部チェックの追加 URL"
+
+#. translators: %s: site address.
+#: src/Admin/SettingsPage.php:226
+msgid "One URL per line. %s is always checked. Only URLs on your own domain (including subdomains) are accepted."
+msgstr "1 行に 1 つの URL を入力してください。%s は常にチェックされます。自分のドメイン（サブドメインを含む）の URL のみ受け付けます。"
+
+#: src/Admin/SettingsPage.php:247
+msgid "Add a directory"
+msgstr "ディレクトリを追加"
+
+#: src/Admin/SettingsPage.php:250
+msgid "Path"
+msgstr "パス"
+
+#: src/Admin/SettingsPage.php:255
+msgid "Label"
+msgstr "ラベル"
+
+#: src/Admin/SettingsPage.php:259
+msgid "Public URL (optional)"
+msgstr "公開 URL（任意）"
+
+#: src/Admin/SettingsPage.php:264
+msgid "Checks and exclusions"
+msgstr "チェックと除外"
+
+#: src/Admin/SettingsPage.php:277
+msgid "Additional exclude patterns (one per line)"
+msgstr "追加の除外パターン（1 行に 1 つ）"
+
+#: src/Admin/SettingsPage.php:282
+msgid "Remove this directory"
+msgstr "このディレクトリを削除"
+
+#: src/Admin/SettingsPage.php:297
+msgid "Enabled checks"
+msgstr "有効なチェック"
+
+#: src/Admin/SettingsPage.php:311
+msgid "Exclude patterns"
+msgstr "除外パターン"
+
+#: src/Admin/SettingsPage.php:314
+msgid "One pattern per line. Without \"/\" a pattern matches any file or folder name (e.g. node_modules, *.min.js). With \"/\" it matches the path from the target root (e.g. assets/vendor/*)."
+msgstr "1 行に 1 つのパターンを入力してください。「/」を含まないパターンは、任意のファイル名またはフォルダ名に一致します（例：node_modules、*.min.js）。「/」を含むパターンは、対象のルートからのパスに一致します（例：assets/vendor/*）。"
+
+#: src/Admin/SettingsPage.php:318
+msgid "Maximum file size for code analysis"
+msgstr "コード解析の最大ファイルサイズ"
+
+#: src/Admin/SettingsPage.php:322
+msgid "Maximum files per target"
+msgstr "対象ごとの最大ファイル数"
+
+#: src/Admin/SettingsPage.php:325
+msgid "0 means no limit."
+msgstr "0 は無制限を意味します。"
+
+#: src/Admin/SettingsPage.php:342
+msgid "Send a report"
+msgstr "レポートの送信"
+
+#: src/Admin/SettingsPage.php:348
+msgid "Minimum severity:"
+msgstr "最低重要度:"
+
+#: src/Admin/SettingsPage.php:363
+msgid "Weekly digest"
+msgstr "週次ダイジェスト"
+
+#: src/Admin/SettingsPage.php:364
+msgid "Send a weekly summary of open issues regardless of the condition above"
+msgstr "上記の条件にかかわらず、未解決の問題の概要を毎週送信する"
+
+#: src/Admin/SettingsPage.php:372
+msgid "Test"
+msgstr "テスト"
+
+#: src/Admin/SettingsPage.php:373
+msgid "Save your settings before sending a test."
+msgstr "テストを送信する前に設定を保存してください。"
+
+#. translators: %s: channel name.
+#: src/Admin/SettingsPage.php:381
+msgid "Send test (%s)"
+msgstr "テストを送信（%s）"
+
+#: src/Admin/SettingsPage.php:395
+msgid "Support periods of PHP, MySQL and MariaDB. Sends: product name only."
+msgstr "PHP、MySQL、MariaDB のサポート期間。送信内容：製品名のみ。"
+
+#: src/Admin/SettingsPage.php:396
+msgid "Latest PHP patch release. Sends: PHP release series (e.g. 8.2)."
+msgstr "PHP の最新パッチリリース。送信内容：PHP のリリース系列（例：8.2）。"
+
+#: src/Admin/SettingsPage.php:397
+msgid "Known vulnerabilities of your PHP version. Sends: PHP version (e.g. 8.2.10)."
+msgstr "お使いの PHP バージョンの既知の脆弱性。送信内容：PHP のバージョン（例：8.2.10）。"
+
+#: src/Admin/SettingsPage.php:398
+msgid "Known vulnerabilities of Composer and npm packages. Sends: package names and versions."
+msgstr "Composer と npm のパッケージの既知の脆弱性。送信内容：パッケージ名とバージョン。"
+
+#: src/Admin/SettingsPage.php:403
+msgid "External APIs"
+msgstr "外部 API"
+
+#: src/Admin/SettingsPage.php:405
+msgid "Allow requests to the services below"
+msgstr "以下のサービスへのリクエストを許可する"
+
+#: src/Admin/SettingsPage.php:406
+msgid "Your site URL, file contents and personal data are never sent. Results are cached. When disabled, a bundled snapshot is used for support periods."
+msgstr "サイトの URL、ファイルの内容、個人データが送信されることはありません。結果はキャッシュされます。無効にした場合、サポート期間には同梱のスナップショットを使用します。"
+
+#: src/Admin/SettingsPage.php:410
+msgid "Services"
+msgstr "サービス"
+
+#: src/Admin/SettingsPage.php:436
+msgid "File baseline"
+msgstr "ファイルのベースライン"
+
+#: src/Admin/SettingsPage.php:437
+msgid "After a planned deployment, approve the current files as the new baseline so they are no longer reported as changed."
+msgstr "予定どおりのデプロイの後は、現在のファイルを新しいベースラインとして承認してください。変更として報告されなくなります。"
+
+#: src/Admin/SettingsPage.php:440
+msgid "never"
+msgstr "未実行"
+
+#. translators: %s: date.
+#: src/Admin/SettingsPage.php:442
+msgid "Approval uses the file state recorded by the last scan (%s). If you deployed after that, run a scan first."
+msgstr "承認には前回のスキャン（%s）で記録されたファイルの状態が使われます。その後にデプロイした場合は、先にスキャンを実行してください。"
+
+#: src/Admin/SettingsPage.php:446
+msgid "Target"
+msgstr "対象"
+
+#: src/Admin/SettingsPage.php:446
+#: src/Admin/Ui.php:80
+msgid "Files"
+msgstr "ファイル数"
+
+#: src/Admin/SettingsPage.php:446
+msgid "Approved"
+msgstr "承認日時"
+
+#: src/Admin/SettingsPage.php:456
+msgid "first scan"
+msgstr "初回スキャン"
+
+#: src/Admin/SettingsPage.php:458
+msgid "Not yet (recorded on the next scan)"
+msgstr "未記録（次回のスキャンで記録）"
+
+#: src/Admin/SettingsPage.php:462
+msgid "Approve current state"
+msgstr "現在の状態を承認"
+
+#: src/Admin/SettingsPage.php:467
+msgid "Approve all targets"
+msgstr "すべての対象を承認"
+
+#: src/Admin/SettingsPage.php:469
+msgid "Export"
+msgstr "エクスポート"
+
+#: src/Admin/SettingsPage.php:470
+msgid "Download the results of the last completed scan as JSON (the format is documented for add-ons and external tools). The file contains file paths and URLs of this site; store it safely."
+msgstr "前回完了したスキャンの結果を JSON でダウンロードします（形式はアドオンや外部ツール向けに公開されています）。このファイルにはサイトのファイルパスや URL が含まれるため、安全に保管してください。"
+
+#: src/Admin/SettingsPage.php:474
+msgid "Download JSON report"
+msgstr "JSON レポートをダウンロード"
+
+#: src/Admin/SettingsPage.php:477
+msgid "Running scans from the server cron"
+msgstr "サーバーの cron からスキャンを実行する"
+
+#: src/Admin/SettingsPage.php:478
+msgid "WP-Cron only runs when someone visits the site. For reliable monitoring, run the scan from the server cron with WP-CLI:"
+msgstr "WP-Cron はサイトへのアクセスがあったときにしか実行されません。確実に監視するには、WP-CLI を使ってサーバーの cron からスキャンを実行してください:"
+
+#: src/Admin/SettingsPage.php:480
+msgid "If WP-CLI is not available (some shared hosts), call wp-cron.php instead:"
+msgstr "WP-CLI が使えない場合（一部の共用サーバー）は、代わりに wp-cron.php を呼び出してください:"
+
+#: src/Admin/SettingsPage.php:482
+msgid "On Xserver, add the command in Server Panel → Cron settings. Use the full path to PHP or WP-CLI shown in the panel's help. When you use a server cron, you can add define( 'DISABLE_WP_CRON', true ); to wp-config.php."
+msgstr "Xserver の場合は、サーバーパネル → Cron 設定 でコマンドを追加してください。PHP または WP-CLI のパスは、パネルのヘルプに記載されたフルパスを使用してください。サーバーの cron を使う場合は、wp-config.php に define( 'DISABLE_WP_CRON', true ); を追加できます。"
+
+#: src/Admin/SettingsPage.php:486
+msgid "Last completed scan"
+msgstr "前回完了したスキャン"
+
+#: src/Admin/SettingsPage.php:487
+msgid "Next scheduled scan"
+msgstr "次回の定期スキャン"
+
+#: src/Admin/SettingsPage.php:490
+msgid "Site ID"
+msgstr "サイト ID"
+
+#: src/Admin/SettingsPage.php:491
+msgid "Rule set"
+msgstr "ルールセット"
+
+#: src/Admin/SettingsPage.php:507
+msgid "Approve the current files as the trusted baseline?"
+msgstr "現在のファイルを信頼できるベースラインとして承認しますか？"
+
+#: src/Admin/SettingsPage.php:533
+msgid "Keep It Peace Pro"
+msgstr "Keep It Peace Pro"
+
+#: src/Admin/SettingsPage.php:534
+msgid "Monitor many sites from one dashboard, get alerts when a site stops reporting, send monthly PDF reports to clients and use Slack or Chatwork notifications."
+msgstr "複数のサイトを 1 つのダッシュボードで監視し、サイトからの報告が途絶えたときにアラートを受け取り、クライアントに毎月 PDF レポートを送り、Slack や Chatwork で通知を受け取れます。"
+
+#: src/Admin/SettingsPage.php:535
+msgid "Learn more"
+msgstr "詳しく見る"
+
+#: src/Admin/SettingsPage.php:539
+msgid "Hide this"
+msgstr "非表示にする"
+
+#. translators: 1: path, 2: reason.
+#: src/Admin/SettingsSanitizer.php:169
+msgid "%1$s: %2$s"
+msgstr "%1$s: %2$s"
+
+#. translators: %s: URL.
+#: src/Admin/SettingsSanitizer.php:183
+#: src/Admin/SettingsSanitizer.php:216
+msgid "%s: only URLs on your own domain can be checked."
+msgstr "%s: チェックできるのは自分のドメインの URL のみです。"
+
+#: src/Admin/Ui.php:74
+msgid "PHP / server"
+msgstr "PHP / サーバー"
+
+#: src/Admin/Ui.php:75
+msgid "Theme"
+msgstr "テーマ"
+
+#: src/Admin/Ui.php:76
+msgid "Outside WordPress"
+msgstr "WordPress 外"
+
+#: src/Admin/Ui.php:77
+msgid "Public surface"
+msgstr "外部から見た状態"
+
+#: src/Admin/Ui.php:78
+msgid "Dependencies"
+msgstr "依存パッケージ"
+
+#: src/Admin/Ui.php:79
+msgid "WordPress environment"
+msgstr "WordPress 環境"
+
+#: src/Checks/Dependencies/DependencyCheck.php:45
+msgid "Vulnerable dependencies"
+msgstr "脆弱性のある依存パッケージ"
+
+#: src/Checks/Dependencies/DependencyCheck.php:63
+msgid "Reads composer.lock and package-lock.json in themes and registered directories and looks up known vulnerabilities on OSV.dev. Only package names and versions are sent."
+msgstr "テーマと登録したディレクトリ内の composer.lock と package-lock.json を読み取り、OSV.dev で既知の脆弱性を調べます。送信されるのはパッケージ名とバージョンだけです。"
+
+#: src/Checks/Dependencies/DependencyCheck.php:92
+msgid "Lock file could not be read"
+msgstr "ロックファイルを読み取れません"
+
+#: src/Checks/Dependencies/DependencyCheck.php:92
+msgid "The file is unreadable, too large or not valid JSON, so its packages were not checked."
+msgstr "ファイルが読み取れないか、大きすぎるか、正しい JSON ではないため、パッケージをチェックできませんでした。"
+
+#. translators: %s: error message.
+#: src/Checks/Dependencies/DependencyCheck.php:114
+msgid "OSV.dev could not be reached: %s. Previous results are kept."
+msgstr "OSV.dev に接続できませんでした：%s。以前の結果はそのまま保持されます。"
+
+#: src/Checks/Dependencies/DependencyCheck.php:116
+msgid "Dependencies could not be checked"
+msgstr "依存パッケージをチェックできませんでした"
+
+#. translators: %d: number of vulnerabilities.
+#: src/Checks/Dependencies/DependencyCheck.php:176
+msgid "and %d more"
+msgstr "ほか %d 件"
+
+#. translators: 1: package, 2: version, 3: command.
+#: src/Checks/Dependencies/DependencyCheck.php:185
+msgid "Update %1$s to %2$s or later (e.g. %3$s), deploy the result and run the scan again."
+msgstr "%1$s を %2$s 以降に更新し（例：%3$s）、反映してから再度スキャンしてください。"
+
+#. translators: 1: package, 2: command.
+#: src/Checks/Dependencies/DependencyCheck.php:188
+msgid "Update %1$s to a version without these vulnerabilities (e.g. %2$s), or replace it if no fix exists."
+msgstr "%1$s をこれらの脆弱性のないバージョンに更新してください（例：%2$s）。修正版がない場合は別のパッケージに置き換えてください。"
+
+#. translators: 1: number, 2: list of vulnerabilities.
+#: src/Checks/Dependencies/DependencyCheck.php:192
+msgid "%1$d known vulnerability: %2$s"
+msgid_plural "%1$d known vulnerabilities: %2$s"
+msgstr[0] "既知の脆弱性 %1$d 件：%2$s"
+
+#: src/Checks/Dependencies/DependencyCheck.php:197
+msgid "(Development dependency, installed on this server.)"
+msgstr "（開発用の依存パッケージですが、このサーバーにインストールされています。）"
+
+#. translators: 1: package, 2: version.
+#: src/Checks/Dependencies/DependencyCheck.php:208
+msgid "Vulnerable package: %1$s %2$s"
+msgstr "脆弱性のあるパッケージ：%1$s %2$s"
+
+#: src/Checks/Dependencies/DependencyCheck.php:246
+msgid "Run the scan again later. You can disable this check in the settings."
+msgstr "しばらくしてから再度スキャンしてください。このチェックは設定で無効にできます。"
+
+#: src/Checks/Environment/UploadsPhpCheck.php:42
+msgid "Executable files in uploads"
+msgstr "アップロードフォルダ内の実行可能ファイル"
+
+#: src/Checks/Environment/UploadsPhpCheck.php:60
+msgid "Looks for .php, .phtml and other executable files in wp-content/uploads, where only media should be stored."
+msgstr "本来メディアだけを置く wp-content/uploads に、.php や .phtml などの実行可能ファイルがないか調べます。"
+
+#: src/Checks/Environment/UploadsPhpCheck.php:101
+msgid "Uploads directory could not be read"
+msgstr "アップロードフォルダを読み取れません"
+
+#: src/Checks/Environment/UploadsPhpCheck.php:103
+msgid "Check the permissions of wp-content/uploads."
+msgstr "wp-content/uploads のパーミッションを確認してください。"
+
+#: src/Checks/Environment/UploadsPhpCheck.php:151
+msgid "PHP file in uploads"
+msgstr "アップロードフォルダ内の PHP ファイル"
+
+#: src/Checks/Environment/UploadsPhpCheck.php:151
+msgid "Executable file in uploads"
+msgstr "アップロードフォルダ内の実行可能ファイル"
+
+#: src/Checks/Environment/UploadsPhpCheck.php:152
+msgid "The uploads directory should only contain media. Executable files here are a common sign of a compromised site or of an insecure upload form."
+msgstr "アップロードフォルダにはメディアだけを置くべきです。ここに実行可能ファイルがあるのは、サイトが改ざんされているか、安全でないアップロードフォームがある典型的な兆候です。"
+
+#: src/Checks/Environment/UploadsPhpCheck.php:153
+msgid "Inspect the file and delete it if it is not required. Also block PHP execution in uploads with server configuration."
+msgstr "ファイルの中身を確認し、不要であれば削除してください。また、サーバーの設定でアップロードフォルダでの PHP の実行をブロックしてください。"
+
+#: src/Checks/Environment/WpConfigCheck.php:38
+msgid "WordPress configuration"
+msgstr "WordPress の設定"
+
+#: src/Checks/Environment/WpConfigCheck.php:56
+msgid "Checks WP_DEBUG, WP_DEBUG_DISPLAY, debug.log, wp-config.php permissions and the built-in file editor."
+msgstr "WP_DEBUG、WP_DEBUG_DISPLAY、debug.log、wp-config.php のパーミッション、組み込みのファイルエディターをチェックします。"
+
+#: src/Checks/Environment/WpConfigCheck.php:99
+msgid "Debug messages are shown to visitors"
+msgstr "デバッグメッセージが訪問者に表示される"
+
+#: src/Checks/Environment/WpConfigCheck.php:99
+msgid "WP_DEBUG is on and WP_DEBUG_DISPLAY is not off, so PHP notices and errors appear on pages and reveal file paths."
+msgstr "WP_DEBUG がオンで WP_DEBUG_DISPLAY がオフになっていないため、PHP の notice やエラーがページに表示され、ファイルのパスが知られてしまいます。"
+
+#: src/Checks/Environment/WpConfigCheck.php:99
+msgid "Set define( 'WP_DEBUG', false ) on production, or at least define( 'WP_DEBUG_DISPLAY', false )."
+msgstr "本番環境では define( 'WP_DEBUG', false ) を設定するか、少なくとも define( 'WP_DEBUG_DISPLAY', false ) を設定してください。"
+
+#: src/Checks/Environment/WpConfigCheck.php:101
+msgid "WP_DEBUG is enabled"
+msgstr "WP_DEBUG が有効"
+
+#: src/Checks/Environment/WpConfigCheck.php:101
+msgid "Debug mode is on. It is meant for development and can slow the site and fill the log."
+msgstr "デバッグモードがオンになっています。これは開発用の機能で、サイトが遅くなったりログが肥大化したりすることがあります。"
+
+#: src/Checks/Environment/WpConfigCheck.php:101
+msgid "Set define( 'WP_DEBUG', false ) on production."
+msgstr "本番環境では define( 'WP_DEBUG', false ) を設定してください。"
+
+#: src/Checks/Environment/WpConfigCheck.php:114
+msgid "debug.log exists"
+msgstr "debug.log が存在する"
+
+#: src/Checks/Environment/WpConfigCheck.php:116
+msgid "A debug log is stored inside wp-content, where it may be downloadable. Logs can contain paths, queries and personal data."
+msgstr "デバッグログが wp-content 内に保存されており、ダウンロードできる可能性があります。ログにはパス、クエリ、個人情報が含まれることがあります。"
+
+#: src/Checks/Environment/WpConfigCheck.php:117
+msgid "A debug log file exists."
+msgstr "デバッグログファイルが存在します。"
+
+#: src/Checks/Environment/WpConfigCheck.php:118
+msgid "Delete the log when it is no longer needed, and set WP_DEBUG_LOG to a path outside the web root."
+msgstr "不要になったログは削除し、WP_DEBUG_LOG には Web ルートの外のパスを設定してください。"
+
+#: src/Checks/Environment/WpConfigCheck.php:131
+msgid "Set the permissions to 400 or 440 (600/640 if your host requires write access)."
+msgstr "パーミッションを 400 または 440 に設定してください（ホスティング会社が書き込み権限を必要とする場合は 600/640）。"
+
+#. translators: %s: permissions such as 666.
+#: src/Checks/Environment/WpConfigCheck.php:134
+msgid "wp-config.php has permissions %s. Anyone on the server can change it."
+msgstr "wp-config.php のパーミッションは %s です。サーバー上の誰でも変更できます。"
+
+#: src/Checks/Environment/WpConfigCheck.php:135
+msgid "wp-config.php is world-writable"
+msgstr "wp-config.php が誰でも書き込める状態"
+
+#. translators: %s: permissions such as 644.
+#: src/Checks/Environment/WpConfigCheck.php:138
+msgid "wp-config.php has permissions %s. On shared servers other accounts may be able to read your database password."
+msgstr "wp-config.php のパーミッションは %s です。共用サーバーでは、他のアカウントからデータベースのパスワードを読まれるおそれがあります。"
+
+#: src/Checks/Environment/WpConfigCheck.php:139
+msgid "wp-config.php is readable by everyone on the server"
+msgstr "wp-config.php がサーバー上の誰でも読める状態"
+
+#: src/Checks/Environment/WpConfigCheck.php:145
+msgid "Theme and plugin file editor is enabled"
+msgstr "テーマ・プラグインのファイルエディターが有効"
+
+#: src/Checks/Environment/WpConfigCheck.php:145
+msgid "Administrators can edit PHP files from the dashboard. A stolen admin account can then run arbitrary code."
+msgstr "管理者がダッシュボードから PHP ファイルを編集できます。管理者アカウントが乗っ取られると、任意のコードを実行されるおそれがあります。"
+
+#: src/Checks/Environment/WpConfigCheck.php:145
+msgid "Add define( 'DISALLOW_FILE_EDIT', true ); to wp-config.php."
+msgstr "wp-config.php に define( 'DISALLOW_FILE_EDIT', true ); を追加してください。"
+
+#: src/Checks/External/AbstractExternalCheck.php:160
+msgid "The site could not be reached for the external check"
+msgstr "外部チェックのためにサイトに接続できない"
+
+#. translators: %s: error message.
+#: src/Checks/External/AbstractExternalCheck.php:162
+msgid "The request failed: %s. Previous results of this check are kept until the site can be checked again."
+msgstr "リクエストに失敗しました：%s。再びチェックできるようになるまで、このチェックの以前の結果は保持されます。"
+
+#: src/Checks/External/AbstractExternalCheck.php:163
+msgid "Some hosts block requests from the server to itself (loopback). If the site works for visitors, ask your host to allow loopback requests or disable this check."
+msgstr "ホスティング会社によっては、サーバーから自分自身へのリクエスト（ループバック）をブロックしています。訪問者がサイトを問題なく閲覧できる場合は、ホスティング会社にループバックリクエストの許可を依頼するか、このチェックを無効にしてください。"
+
+#: src/Checks/External/DirectoryListingCheck.php:36
+msgid "Directory listing"
+msgstr "ディレクトリ一覧表示"
+
+#: src/Checks/External/DirectoryListingCheck.php:45
+msgid "Checks whether wp-content/uploads and other directories show a list of their files (\"Index of /\")."
+msgstr "wp-content/uploads などのディレクトリで、ファイルの一覧（\"Index of /\"）が表示されないかチェックします。"
+
+#: src/Checks/External/DirectoryListingCheck.php:114
+msgid "Directory listing is enabled"
+msgstr "ディレクトリ一覧表示が有効"
+
+#: src/Checks/External/DirectoryListingCheck.php:115
+msgid "Anyone can see the list of files in this directory, including backups and private uploads."
+msgstr "このディレクトリのファイル一覧を誰でも見ることができます。バックアップや非公開のアップロードファイルも含まれます。"
+
+#: src/Checks/External/DirectoryListingCheck.php:116
+msgid "Disable directory listings (\"Options -Indexes\" in .htaccess for Apache, \"autoindex off\" for nginx) or ask your host."
+msgstr "ディレクトリ一覧表示を無効にしてください（Apache は .htaccess に \"Options -Indexes\"、nginx は \"autoindex off\"）。またはホスティング会社に相談してください。"
+
+#: src/Checks/External/ExposedFilesCheck.php:37
+msgid "Exposed sensitive files"
+msgstr "公開されている機密ファイル"
+
+#: src/Checks/External/ExposedFilesCheck.php:46
+msgid "Checks whether files such as .env, .git, wp-config.php backups, SQL dumps, debug.log and phpinfo pages can be downloaded from the site."
+msgstr ".env、.git、wp-config.php のバックアップ、SQL ダンプ、debug.log、phpinfo ページなどのファイルがサイトからダウンロードできないかチェックします。"
+
+#. translators: %s: path.
+#: src/Checks/External/ExposedFilesCheck.php:138
+msgid "Publicly accessible: %s"
+msgstr "公開されているファイル：%s"
+
+#: src/Checks/External/ExposedFilesCheck.php:184
+msgid "Delete the file from the public directory, or block access to it in the server configuration. Change any passwords or keys it contains."
+msgstr "公開ディレクトリからファイルを削除するか、サーバーの設定でアクセスをブロックしてください。ファイルに含まれるパスワードやキーはすべて変更してください。"
+
+#: src/Checks/External/ExposedFilesCheck.php:187
+msgid "An environment file is downloadable. It usually contains database passwords and API keys."
+msgstr "環境設定ファイルがダウンロードできます。通常、データベースのパスワードや API キーが含まれています。"
+
+#: src/Checks/External/ExposedFilesCheck.php:189
+msgid "Version control data is downloadable. Attackers can rebuild your source code, including configuration and credentials committed in the past."
+msgstr "バージョン管理のデータがダウンロードできます。攻撃者はソースコードを復元でき、過去にコミットされた設定や認証情報も知られてしまいます。"
+
+#: src/Checks/External/ExposedFilesCheck.php:189
+msgid "Remove the .git/.svn/.hg directory from the public directory or deny access to it, then rotate any credentials found in the repository history."
+msgstr "公開ディレクトリから .git/.svn/.hg ディレクトリを削除するかアクセスを拒否し、リポジトリの履歴に含まれる認証情報をすべて変更してください。"
+
+#: src/Checks/External/ExposedFilesCheck.php:191
+msgid "A backup of wp-config.php is served as plain text, revealing the database password and security keys."
+msgstr "wp-config.php のバックアップがテキストのまま配信されており、データベースのパスワードとセキュリティキーが知られてしまいます。"
+
+#: src/Checks/External/ExposedFilesCheck.php:191
+msgid "Delete the backup file, change the database password and regenerate the security keys in wp-config.php."
+msgstr "バックアップファイルを削除し、データベースのパスワードを変更して、wp-config.php のセキュリティキーを再生成してください。"
+
+#: src/Checks/External/ExposedFilesCheck.php:193
+msgid "A PHP error log is downloadable. Logs reveal file paths, plugin names and sometimes personal data."
+msgstr "PHP のエラーログがダウンロードできます。ログからはファイルのパス、プラグイン名、場合によっては個人情報が知られてしまいます。"
+
+#: src/Checks/External/ExposedFilesCheck.php:193
+msgid "Delete the log, and write logs outside the public directory (set WP_DEBUG_LOG to a private path)."
+msgstr "ログを削除し、ログは公開ディレクトリの外に書き出してください（WP_DEBUG_LOG に非公開のパスを設定）。"
+
+#: src/Checks/External/ExposedFilesCheck.php:195
+msgid "A phpinfo() page is public. It shows the PHP version, extensions, paths and environment variables."
+msgstr "phpinfo() のページが公開されています。PHP のバージョン、拡張機能、パス、環境変数が表示されます。"
+
+#: src/Checks/External/ExposedFilesCheck.php:195
+msgid "Delete the file after use."
+msgstr "使い終わったらファイルを削除してください。"
+
+#: src/Checks/External/ExposedFilesCheck.php:197
+msgid "A database dump is downloadable. It can contain user accounts, password hashes and customer data."
+msgstr "データベースのダンプがダウンロードできます。ユーザーアカウント、パスワードのハッシュ、顧客データが含まれている可能性があります。"
+
+#: src/Checks/External/ExposedFilesCheck.php:197
+msgid "Delete the dump immediately, store backups outside the public directory, and treat the data as leaked."
+msgstr "ダンプをすぐに削除し、バックアップは公開ディレクトリの外に保存してください。データは漏えいしたものとして扱ってください。"
+
+#: src/Checks/External/ExposedFilesCheck.php:199
+msgid "A backup archive is downloadable. It may contain the whole site including wp-config.php."
+msgstr "バックアップのアーカイブがダウンロードできます。wp-config.php を含むサイト全体が含まれている可能性があります。"
+
+#: src/Checks/External/ExposedFilesCheck.php:199
+msgid "Delete the archive and keep backups outside the public directory."
+msgstr "アーカイブを削除し、バックアップは公開ディレクトリの外に保存してください。"
+
+#: src/Checks/External/ExposedFilesCheck.php:201
+msgid "A password file is downloadable. Password hashes can be cracked offline."
+msgstr "パスワードファイルがダウンロードできます。パスワードのハッシュはオフラインで解読されるおそれがあります。"
+
+#: src/Checks/External/ExposedFilesCheck.php:203
+msgid "A dependency lock file is downloadable. It lists exact package versions, which helps attackers find known vulnerabilities."
+msgstr "依存パッケージのロックファイルがダウンロードできます。パッケージの正確なバージョンが記載されているため、攻撃者が既知の脆弱性を探す手がかりになります。"
+
+#: src/Checks/External/ExposedFilesCheck.php:203
+msgid "Block access to lock files or move them outside the public directory."
+msgstr "ロックファイルへのアクセスをブロックするか、公開ディレクトリの外に移動してください。"
+
+#: src/Checks/External/ExposedFilesCheck.php:205
+msgid "A .DS_Store file is downloadable. It reveals the names of files in the directory."
+msgstr ".DS_Store ファイルがダウンロードできます。ディレクトリ内のファイル名が知られてしまいます。"
+
+#: src/Checks/External/ExposedFilesCheck.php:207
+msgid "A file that should not be public can be downloaded."
+msgstr "公開すべきでないファイルがダウンロードできます。"
+
+#: src/Checks/External/ExternalTargets.php:32
+msgid "Site address"
+msgstr "サイトアドレス"
+
+#: src/Checks/External/ExternalTargets.php:37
+msgid "WordPress address"
+msgstr "WordPress アドレス"
+
+#: src/Checks/External/SecurityHeadersCheck.php:36
+msgid "Security headers"
+msgstr "セキュリティヘッダー"
+
+#: src/Checks/External/SecurityHeadersCheck.php:45
+msgid "Checks HSTS, X-Content-Type-Options, clickjacking protection, Referrer-Policy and Content-Security-Policy, the redirect from HTTP to HTTPS, and whether server, PHP or WordPress versions are revealed."
+msgstr "HSTS、X-Content-Type-Options、クリックジャッキング対策、Referrer-Policy、Content-Security-Policy、HTTP から HTTPS へのリダイレクト、およびサーバー・PHP・WordPress のバージョンが公開されていないかをチェックします。"
+
+#: src/Checks/External/SecurityHeadersCheck.php:97
+msgid "HTTP is not redirected to HTTPS"
+msgstr "HTTP が HTTPS にリダイレクトされない"
+
+#: src/Checks/External/SecurityHeadersCheck.php:98
+msgid "The site can be opened over unencrypted http:// without being redirected to https://."
+msgstr "暗号化されていない http:// でサイトを開いても、https:// にリダイレクトされません。"
+
+#: src/Checks/External/SecurityHeadersCheck.php:99
+msgid "Redirect all http:// requests to https:// with a 301 redirect (hosting panel setting or .htaccess)."
+msgstr "すべての http:// のリクエストを 301 リダイレクトで https:// に転送してください（ホスティングの管理画面の設定または .htaccess）。"
+
+#: src/Checks/External/SecurityHeadersCheck.php:157
+msgid "Strict-Transport-Security (HSTS) is not set"
+msgstr "Strict-Transport-Security（HSTS）が未設定"
+
+#: src/Checks/External/SecurityHeadersCheck.php:157
+msgid "Without HSTS, browsers may still try http:// first, which allows downgrade attacks on public Wi-Fi."
+msgstr "HSTS がないと、ブラウザーが最初に http:// で接続しようとすることがあり、公衆 Wi-Fi などでダウングレード攻撃を受けるおそれがあります。"
+
+#: src/Checks/External/SecurityHeadersCheck.php:157
+msgid "Send \"Strict-Transport-Security: max-age=31536000\" once HTTPS works on all pages and subdomains you use."
+msgstr "使用しているすべてのページとサブドメインで HTTPS が動作するようになったら、\"Strict-Transport-Security: max-age=31536000\" を送信してください。"
+
+#: src/Checks/External/SecurityHeadersCheck.php:159
+msgid "HSTS max-age is short"
+msgstr "HSTS の max-age が短い"
+
+#: src/Checks/External/SecurityHeadersCheck.php:159
+msgid "The HSTS max-age is less than 180 days."
+msgstr "HSTS の max-age が 180 日未満です。"
+
+#: src/Checks/External/SecurityHeadersCheck.php:159
+msgid "Use max-age=31536000 (one year) once the setting is confirmed to work."
+msgstr "設定が問題なく動作することを確認したら、max-age=31536000（1 年）を使用してください。"
+
+#: src/Checks/External/SecurityHeadersCheck.php:163
+msgid "X-Content-Type-Options is not set"
+msgstr "X-Content-Type-Options が未設定"
+
+#: src/Checks/External/SecurityHeadersCheck.php:163
+msgid "Browsers may guess the type of uploaded files and run them as scripts."
+msgstr "ブラウザーがアップロードされたファイルの種類を推測し、スクリプトとして実行してしまうおそれがあります。"
+
+#: src/Checks/External/SecurityHeadersCheck.php:163
+msgid "Send \"X-Content-Type-Options: nosniff\"."
+msgstr "\"X-Content-Type-Options: nosniff\" を送信してください。"
+
+#: src/Checks/External/SecurityHeadersCheck.php:166
+msgid "Clickjacking protection is not set"
+msgstr "クリックジャッキング対策が未設定"
+
+#: src/Checks/External/SecurityHeadersCheck.php:166
+msgid "Other sites can show your pages in a frame and trick visitors into clicking buttons."
+msgstr "他のサイトがあなたのページをフレーム内に表示し、訪問者をだましてボタンをクリックさせるおそれがあります。"
+
+#: src/Checks/External/SecurityHeadersCheck.php:166
+msgid "Send \"X-Frame-Options: SAMEORIGIN\" or a Content-Security-Policy with frame-ancestors 'self'."
+msgstr "\"X-Frame-Options: SAMEORIGIN\" または frame-ancestors 'self' を含む Content-Security-Policy を送信してください。"
+
+#: src/Checks/External/SecurityHeadersCheck.php:169
+msgid "Referrer-Policy is not set"
+msgstr "Referrer-Policy が未設定"
+
+#: src/Checks/External/SecurityHeadersCheck.php:169
+msgid "Full URLs, including query strings, may be sent to other sites when visitors follow links."
+msgstr "訪問者がリンクをたどったときに、クエリ文字列を含む完全な URL が他のサイトに送信されるおそれがあります。"
+
+#: src/Checks/External/SecurityHeadersCheck.php:169
+msgid "Send \"Referrer-Policy: strict-origin-when-cross-origin\"."
+msgstr "\"Referrer-Policy: strict-origin-when-cross-origin\" を送信してください。"
+
+#: src/Checks/External/SecurityHeadersCheck.php:172
+msgid "Content-Security-Policy is not set"
+msgstr "Content-Security-Policy が未設定"
+
+#: src/Checks/External/SecurityHeadersCheck.php:172
+msgid "A Content-Security-Policy limits where scripts can be loaded from and reduces the impact of XSS."
+msgstr "Content-Security-Policy はスクリプトの読み込み元を制限し、XSS の被害を抑えます。"
+
+#: src/Checks/External/SecurityHeadersCheck.php:172
+msgid "Start with a Content-Security-Policy-Report-Only header, check the reports, then enforce it."
+msgstr "まず Content-Security-Policy-Report-Only ヘッダーで始め、レポートを確認してから適用してください。"
+
+#. translators: %s: header value.
+#: src/Checks/External/SecurityHeadersCheck.php:178
+msgid "The Server header is \"%s\". Attackers use versions to pick known exploits."
+msgstr "Server ヘッダーが \"%s\" になっています。攻撃者はバージョン情報から既知の攻撃手法を選びます。"
+
+#: src/Checks/External/SecurityHeadersCheck.php:179
+msgid "The web server version is revealed"
+msgstr "Web サーバーのバージョンが公開されている"
+
+#: src/Checks/External/SecurityHeadersCheck.php:179
+msgid "Hide the version (e.g. ServerTokens Prod for Apache, server_tokens off for nginx) or ask your host."
+msgstr "バージョンを非表示にしてください（例：Apache は ServerTokens Prod、nginx は server_tokens off）。またはホスティング会社に相談してください。"
+
+#. translators: %s: header value.
+#: src/Checks/External/SecurityHeadersCheck.php:184
+msgid "The X-Powered-By header is \"%s\"."
+msgstr "X-Powered-By ヘッダーが \"%s\" になっています。"
+
+#: src/Checks/External/SecurityHeadersCheck.php:185
+msgid "X-Powered-By reveals the PHP version"
+msgstr "X-Powered-By で PHP のバージョンが公開されている"
+
+#: src/Checks/External/SecurityHeadersCheck.php:185
+msgid "Set expose_php = Off in php.ini (or .user.ini), or remove the header in the server configuration."
+msgstr "php.ini（または .user.ini）で expose_php = Off を設定するか、サーバーの設定でこのヘッダーを削除してください。"
+
+#. translators: %s: WordPress version.
+#: src/Checks/External/SecurityHeadersCheck.php:189
+msgid "The generator meta tag reveals WordPress %s."
+msgstr "generator メタタグから WordPress %s であることがわかります。"
+
+#: src/Checks/External/SecurityHeadersCheck.php:190
+msgid "The WordPress version is shown in the page source"
+msgstr "ページのソースに WordPress のバージョンが表示されている"
+
+#: src/Checks/External/SecurityHeadersCheck.php:190
+msgid "Keep WordPress up to date. You can remove the tag with remove_action( 'wp_head', 'wp_generator' )."
+msgstr "WordPress を最新の状態に保ってください。このタグは remove_action( 'wp_head', 'wp_generator' ) で削除できます。"
+
+#: src/Checks/External/TlsCheck.php:38
+msgid "SSL/TLS certificate"
+msgstr "SSL/TLS 証明書"
+
+#: src/Checks/External/TlsCheck.php:47
+msgid "Checks that the site uses HTTPS, how many days the certificate is valid, whether it is trusted and matches the host name, and the TLS version."
+msgstr "サイトが HTTPS を使用しているか、証明書の残り有効日数、信頼できる証明書かどうか、ホスト名と一致しているか、TLS のバージョンをチェックします。"
+
+#: src/Checks/External/TlsCheck.php:108
+msgid "The site address does not use HTTPS"
+msgstr "サイトアドレスが HTTPS を使用していない"
+
+#: src/Checks/External/TlsCheck.php:109
+msgid "Logins, cookies and form data are sent unencrypted."
+msgstr "ログイン情報、Cookie、フォームのデータが暗号化されずに送信されます。"
+
+#: src/Checks/External/TlsCheck.php:110
+msgid "Enable a free certificate (e.g. Let's Encrypt) in your hosting panel and change the WordPress and site addresses to https://."
+msgstr "ホスティングの管理画面で無料の証明書（例：Let's Encrypt）を有効にし、WordPress アドレスとサイトアドレスを https:// に変更してください。"
+
+#: src/Checks/External/TlsCheck.php:123
+msgid "The certificate could not be checked on this server"
+msgstr "このサーバーでは証明書をチェックできない"
+
+#: src/Checks/External/TlsCheck.php:124
+msgid "stream_socket_client() or the OpenSSL extension is not available to PHP."
+msgstr "PHP で stream_socket_client() または OpenSSL 拡張機能が利用できません。"
+
+#: src/Checks/External/TlsCheck.php:125
+msgid "Check the certificate expiry date in your hosting panel instead."
+msgstr "代わりにホスティングの管理画面で証明書の有効期限を確認してください。"
+
+#: src/Checks/External/TlsCheck.php:138
+msgid "Could not connect over HTTPS"
+msgstr "HTTPS で接続できない"
+
+#. translators: %s: error message.
+#: src/Checks/External/TlsCheck.php:140
+msgid "The TLS connection failed: %s"
+msgstr "TLS 接続に失敗しました：%s"
+
+#: src/Checks/External/TlsCheck.php:141
+msgid "If visitors can open the site over HTTPS, the server may block connections to itself. Otherwise check the certificate in your hosting panel."
+msgstr "訪問者が HTTPS でサイトを開ける場合は、サーバーが自分自身への接続をブロックしている可能性があります。開けない場合は、ホスティングの管理画面で証明書を確認してください。"
+
+#. translators: %s: date.
+#: src/Checks/External/TlsCheck.php:177
+msgid "The certificate expires on %s."
+msgstr "証明書の有効期限は %s です。"
+
+#: src/Checks/External/TlsCheck.php:178
+msgid "Renew the certificate or check that automatic renewal works in your hosting panel."
+msgstr "証明書を更新するか、ホスティングの管理画面で自動更新が機能しているか確認してください。"
+
+#: src/Checks/External/TlsCheck.php:180
+msgid "The SSL certificate has expired"
+msgstr "SSL 証明書の有効期限切れ"
+
+#: src/Checks/External/TlsCheck.php:180
+msgid "Browsers show a security warning to visitors."
+msgstr "ブラウザーが訪問者にセキュリティ警告を表示します。"
+
+#. translators: %d: days.
+#: src/Checks/External/TlsCheck.php:183
+#: src/Checks/External/TlsCheck.php:186
+msgid "The SSL certificate expires in %d day"
+msgid_plural "The SSL certificate expires in %d days"
+msgstr[0] "SSL 証明書の有効期限まであと %d 日"
+
+#. translators: %s: names in the certificate.
+#: src/Checks/External/TlsCheck.php:191
+msgid "The certificate is issued for: %s"
+msgstr "証明書の発行対象：%s"
+
+#: src/Checks/External/TlsCheck.php:192
+msgid "The certificate does not match the host name"
+msgstr "証明書がホスト名と一致しない"
+
+#: src/Checks/External/TlsCheck.php:192
+msgid "Issue a certificate that includes this host name (with and without www if both are used)."
+msgstr "このホスト名を含む証明書を発行してください（www あり・なしの両方を使っている場合は両方）。"
+
+#: src/Checks/External/TlsCheck.php:198
+msgid "The certificate is self-signed"
+msgstr "自己署名証明書"
+
+#: src/Checks/External/TlsCheck.php:198
+msgid "The certificate is not trusted"
+msgstr "証明書が信頼されていない"
+
+#. translators: %s: error message.
+#: src/Checks/External/TlsCheck.php:200
+msgid "Certificate verification failed: %s"
+msgstr "証明書の検証に失敗しました：%s"
+
+#: src/Checks/External/TlsCheck.php:201
+msgid "Use a certificate from a public certificate authority and make sure the intermediate certificates are installed."
+msgstr "公的な認証局の証明書を使用し、中間証明書がインストールされていることを確認してください。"
+
+#. translators: %s: protocol such as TLSv1.1.
+#: src/Checks/External/TlsCheck.php:207
+msgid "The connection used %s, which is no longer considered secure."
+msgstr "接続に %s が使われました。このバージョンはもう安全とは見なされていません。"
+
+#: src/Checks/External/TlsCheck.php:208
+msgid "An outdated TLS version is used"
+msgstr "古い TLS バージョンを使用"
+
+#: src/Checks/External/TlsCheck.php:208
+msgid "Enable TLS 1.2 and 1.3 and disable older versions on the server."
+msgstr "サーバーで TLS 1.2 と 1.3 を有効にし、それより古いバージョンを無効にしてください。"
+
+#: src/Checks/Files/CodePatternCheck.php:56
+msgid "Dangerous code patterns"
+msgstr "危険なコードパターン"
+
+#: src/Checks/Files/CodePatternCheck.php:65
+msgid "Scans code for eval, shell execution, obfuscation, unsanitized input, unprepared SQL and missing nonce or capability checks."
+msgstr "eval、シェルコマンドの実行、難読化、無害化されていない入力、prepare されていない SQL、nonce や権限のチェック漏れがないかコードをスキャンします。"
+
+#: src/Checks/Files/IntegrityCheck.php:42
+msgid "File integrity"
+msgstr "ファイルの整合性"
+
+#: src/Checks/Files/IntegrityCheck.php:51
+msgid "Detects files added, changed or deleted since the approved baseline (sha256)."
+msgstr "承認したベースライン以降に追加・変更・削除されたファイルを検出します（sha256）。"
+
+#: src/Checks/Files/IntegrityCheck.php:72
+msgid "File could not be read"
+msgstr "ファイルを読み取れない"
+
+#: src/Checks/Files/IntegrityCheck.php:73
+msgid "The file exists but PHP cannot read it, so changes cannot be detected."
+msgstr "ファイルは存在しますが PHP から読み取れないため、変更を検出できません。"
+
+#: src/Checks/Files/IntegrityCheck.php:74
+msgid "Check the file permissions."
+msgstr "ファイルのパーミッションを確認してください。"
+
+#: src/Checks/Files/IntegrityCheck.php:96
+msgid "New file"
+msgstr "新しいファイル"
+
+#: src/Checks/Files/IntegrityCheck.php:97
+msgid "This file was added after the baseline was approved."
+msgstr "このファイルはベースラインの承認後に追加されました。"
+
+#: src/Checks/Files/IntegrityCheck.php:98
+msgid "If you deployed this file, approve the current state as the baseline. Otherwise inspect it and remove it if it is not yours."
+msgstr "このファイルを自分で配置した場合は、現在の状態をベースラインとして承認してください。そうでない場合は中身を確認し、自分のものでなければ削除してください。"
+
+#: src/Checks/Files/IntegrityCheck.php:116
+msgid "File changed"
+msgstr "ファイルの変更"
+
+#: src/Checks/Files/IntegrityCheck.php:117
+msgid "The contents of this file differ from the approved baseline."
+msgstr "このファイルの内容が承認したベースラインと異なります。"
+
+#: src/Checks/Files/IntegrityCheck.php:118
+msgid "If the change was a planned deployment, approve the current state as the baseline. Otherwise compare the file with your source and restore it."
+msgstr "予定していたデプロイによる変更であれば、現在の状態をベースラインとして承認してください。そうでない場合は、元のソースと比較してファイルを復元してください。"
+
+#: src/Checks/Files/IntegrityCheck.php:159
+msgid "File deleted"
+msgstr "ファイルの削除"
+
+#: src/Checks/Files/IntegrityCheck.php:160
+msgid "This file is in the baseline but no longer exists."
+msgstr "このファイルはベースラインに含まれていますが、もう存在しません。"
+
+#: src/Checks/Files/IntegrityCheck.php:161
+msgid "If you removed it on purpose, approve the current state as the baseline."
+msgstr "意図して削除した場合は、現在の状態をベースラインとして承認してください。"
+
+#: src/Checks/Files/PermissionCheck.php:39
+msgid "File permissions"
+msgstr "ファイルのパーミッション"
+
+#: src/Checks/Files/PermissionCheck.php:48
+msgid "Finds files and directories that every user on the server can write to (e.g. 777, 666)."
+msgstr "サーバー上のすべてのユーザーが書き込めるファイルやディレクトリ（例：777、666）を検出します。"
+
+#: src/Checks/Files/PermissionCheck.php:82
+#: src/Checks/Files/PermissionCheck.php:130
+msgid "World-writable directory"
+msgstr "誰でも書き込めるディレクトリ"
+
+#. translators: %s: permissions such as 777.
+#: src/Checks/Files/PermissionCheck.php:84
+#: src/Checks/Files/PermissionCheck.php:132
+msgid "The directory permissions are %s. Any user or process on the server can add files here."
+msgstr "ディレクトリのパーミッションは %s です。サーバー上のどのユーザーやプロセスでもここにファイルを追加できます。"
+
+#: src/Checks/Files/PermissionCheck.php:85
+#: src/Checks/Files/PermissionCheck.php:133
+msgid "Set directories to 755 (or 750) and files to 644 (or 640)."
+msgstr "ディレクトリは 755（または 750）、ファイルは 644（または 640）に設定してください。"
+
+#: src/Checks/Files/PermissionCheck.php:108
+msgid "World-writable file"
+msgstr "誰でも書き込めるファイル"
+
+#. translators: %s: permissions such as 666.
+#: src/Checks/Files/PermissionCheck.php:110
+msgid "The file permissions are %s. Any user or process on the server can change it."
+msgstr "ファイルのパーミッションは %s です。サーバー上のどのユーザーやプロセスでも変更できます。"
+
+#: src/Checks/Files/PermissionCheck.php:111
+msgid "Set files to 644 (or 640)."
+msgstr "ファイルは 644（または 640）に設定してください。"
+
+#: src/Checks/Files/SuspiciousFileCheck.php:67
+msgid "Suspicious files"
+msgstr "不審なファイル"
+
+#: src/Checks/Files/SuspiciousFileCheck.php:76
+msgid "Finds double extensions, hidden files, PHP files in image or asset folders, PHP code inside images and known web shell names."
+msgstr "二重拡張子、隠しファイル、画像やアセットのフォルダ内の PHP ファイル、画像内の PHP コード、既知の Web シェルの名前を検出します。"
+
+#: src/Checks/Files/SuspiciousFileCheck.php:92
+msgid "Double file extension"
+msgstr "二重拡張子のファイル"
+
+#: src/Checks/Files/SuspiciousFileCheck.php:92
+msgid "The file name has two extensions, a trick used to upload executable files disguised as images or documents."
+msgstr "ファイル名に拡張子が 2 つあります。画像や文書に見せかけて実行可能ファイルをアップロードする手口です。"
+
+#: src/Checks/Files/SuspiciousFileCheck.php:97
+msgid "Hidden PHP file"
+msgstr "隠し PHP ファイル"
+
+#: src/Checks/Files/SuspiciousFileCheck.php:97
+msgid "A PHP file whose name starts with a dot is hidden from normal directory listings. Backdoors are often stored this way."
+msgstr "名前がドットで始まる PHP ファイルは、通常のディレクトリ一覧には表示されません。バックドアはよくこの方法で置かれます。"
+
+#: src/Checks/Files/SuspiciousFileCheck.php:99
+msgid ".htaccess inside the directory"
+msgstr "ディレクトリ内の .htaccess"
+
+#: src/Checks/Files/SuspiciousFileCheck.php:99
+msgid "An .htaccess file can change how the server executes files. Attackers use it to enable PHP in unexpected places or to redirect visitors."
+msgstr ".htaccess ファイルを使うと、サーバーがファイルを実行する方法を変更できます。攻撃者は、想定外の場所で PHP を有効にしたり訪問者をリダイレクトしたりするためにこれを利用します。"
+
+#: src/Checks/Files/SuspiciousFileCheck.php:101
+msgid "Hidden file"
+msgstr "隠しファイル"
+
+#: src/Checks/Files/SuspiciousFileCheck.php:101
+msgid "A file whose name starts with a dot was found."
+msgstr "名前がドットで始まるファイルが見つかりました。"
+
+#: src/Checks/Files/SuspiciousFileCheck.php:108
+msgid "PHP file in an asset folder"
+msgstr "アセットフォルダ内の PHP ファイル"
+
+#: src/Checks/Files/SuspiciousFileCheck.php:108
+msgid "Image, font and CSS folders should not contain PHP. A PHP file here is often an uploaded backdoor."
+msgstr "画像、フォント、CSS のフォルダに PHP ファイルがあるべきではありません。ここにある PHP ファイルは、アップロードされたバックドアであることがよくあります。"
+
+#: src/Checks/Files/SuspiciousFileCheck.php:111
+msgid "File name used by web shells"
+msgstr "Web シェルで使われるファイル名"
+
+#: src/Checks/Files/SuspiciousFileCheck.php:111
+msgid "The file name matches names commonly used by web shells and malware droppers."
+msgstr "このファイル名は、Web シェルやマルウェアのドロッパーでよく使われる名前と一致します。"
+
+#: src/Checks/Files/SuspiciousFileCheck.php:114
+msgid "Unusual PHP extension"
+msgstr "一般的でない PHP の拡張子"
+
+#: src/Checks/Files/SuspiciousFileCheck.php:114
+msgid "Extensions such as .phtml, .php5 or .phar are executable on many servers and are used to bypass upload filters."
+msgstr ".phtml、.php5、.phar などの拡張子は多くのサーバーで実行可能で、アップロードのフィルターを回避するために使われます。"
+
+#: src/Checks/Files/SuspiciousFileCheck.php:121
+msgid "PHP code inside an image"
+msgstr "画像内の PHP コード"
+
+#: src/Checks/Files/SuspiciousFileCheck.php:121
+msgid "The image file contains PHP code. It may be included by another script to run a backdoor."
+msgstr "この画像ファイルには PHP コードが含まれています。別のスクリプトから読み込まれ、バックドアとして実行される可能性があります。"
+
+#: src/Checks/Files/SuspiciousFileCheck.php:147
+msgid "Inspect the file. If you do not know why it is there, remove it, check other files changed at the same time and change your passwords."
+msgstr "ファイルの中身を確認してください。なぜそこにあるのかわからない場合は削除し、同じ時期に変更された他のファイルも確認して、パスワードを変更してください。"
+
+#: src/Checks/Php/DatabaseVersionCheck.php:39
+msgid "Database version"
+msgstr "データベースのバージョン"
+
+#: src/Checks/Php/DatabaseVersionCheck.php:57
+msgid "Checks whether the MySQL or MariaDB version still receives security updates."
+msgstr "MySQL または MariaDB のバージョンがまだセキュリティアップデートを受けられるかチェックします。"
+
+#. translators: 1: MySQL or MariaDB, 2: version.
+#: src/Checks/Php/DatabaseVersionCheck.php:109
+msgid "%1$s %2$s is no longer supported"
+msgstr "%1$s %2$s はサポート終了"
+
+#. translators: %s: date.
+#: src/Checks/Php/DatabaseVersionCheck.php:112
+msgid "Security support ended on %s."
+msgstr "セキュリティサポートは %s に終了しました。"
+
+#: src/Checks/Php/DatabaseVersionCheck.php:113
+msgid "Security support has ended."
+msgstr "セキュリティサポートは終了しています。"
+
+#: src/Checks/Php/DatabaseVersionCheck.php:114
+msgid "Ask your hosting provider to move the database to a supported version."
+msgstr "サポートされているバージョンへのデータベースの移行をホスティング会社に依頼してください。"
+
+#. translators: 1: MySQL or MariaDB, 2: version.
+#: src/Checks/Php/DatabaseVersionCheck.php:124
+msgid "%1$s %2$s support ends soon"
+msgstr "%1$s %2$s のサポート終了が間近"
+
+#. translators: 1: date, 2: days.
+#: src/Checks/Php/DatabaseVersionCheck.php:126
+msgid "Security support ends on %1$s (in %2$d days)."
+msgstr "セキュリティサポートは %1$s に終了します（残り %2$d 日）。"
+
+#: src/Checks/Php/DatabaseVersionCheck.php:127
+msgid "Plan a database upgrade with your hosting provider."
+msgstr "ホスティング会社と相談して、データベースのアップグレードを計画してください。"
+
+#: src/Checks/Php/PhpIniCheck.php:38
+msgid "PHP settings"
+msgstr "PHP の設定"
+
+#: src/Checks/Php/PhpIniCheck.php:56
+msgid "Checks display_errors, expose_php, allow_url_include, allow_url_fopen and similar settings."
+msgstr "display_errors、expose_php、allow_url_include、allow_url_fopen などの設定をチェックします。"
+
+#: src/Checks/Php/PhpIniCheck.php:81
+msgid "display_errors is on"
+msgstr "display_errors が有効"
+
+#: src/Checks/Php/PhpIniCheck.php:81
+msgid "PHP errors are shown to visitors. Error messages reveal file paths and code structure."
+msgstr "PHP のエラーが訪問者に表示されています。エラーメッセージからファイルのパスやコードの構造が分かってしまいます。"
+
+#: src/Checks/Php/PhpIniCheck.php:81
+msgid "Set display_errors = Off and log errors instead (log_errors = On)."
+msgstr "display_errors = Off に設定し、代わりにエラーをログに記録してください（log_errors = On）。"
+
+#: src/Checks/Php/PhpIniCheck.php:82
+msgid "expose_php is on"
+msgstr "expose_php が有効"
+
+#: src/Checks/Php/PhpIniCheck.php:82
+msgid "The PHP version is sent in the X-Powered-By header, which helps attackers pick exploits."
+msgstr "PHP のバージョンが X-Powered-By ヘッダーで送信されており、攻撃者が攻撃手法を選ぶ手がかりになります。"
+
+#: src/Checks/Php/PhpIniCheck.php:82
+msgid "Set expose_php = Off in php.ini (or the hosting control panel)."
+msgstr "php.ini（またはホスティングのコントロールパネル）で expose_php = Off に設定してください。"
+
+#: src/Checks/Php/PhpIniCheck.php:83
+msgid "allow_url_include is on"
+msgstr "allow_url_include が有効"
+
+#: src/Checks/Php/PhpIniCheck.php:83
+msgid "include/require can load code from remote URLs, which turns file inclusion bugs into remote code execution."
+msgstr "include/require でリモートの URL からコードを読み込めるため、ファイルインクルードの不具合がリモートコード実行につながります。"
+
+#: src/Checks/Php/PhpIniCheck.php:83
+msgid "Set allow_url_include = Off."
+msgstr "allow_url_include = Off に設定してください。"
+
+#: src/Checks/Php/PhpIniCheck.php:84
+msgid "allow_url_fopen is on"
+msgstr "allow_url_fopen が有効"
+
+#: src/Checks/Php/PhpIniCheck.php:84
+msgid "File functions can open remote URLs. WordPress does not need this (it uses the HTTP API), but some code may rely on it."
+msgstr "ファイル関数でリモートの URL を開けます。WordPress 自体には不要です（HTTP API を使用します）が、これに依存するコードがある場合があります。"
+
+#: src/Checks/Php/PhpIniCheck.php:84
+msgid "Turn it off if no code on the site depends on it."
+msgstr "サイト上にこの設定に依存するコードがなければ無効にしてください。"
+
+#: src/Checks/Php/PhpIniCheck.php:85
+msgid "log_errors is off"
+msgstr "log_errors が無効"
+
+#: src/Checks/Php/PhpIniCheck.php:85
+msgid "PHP errors are not logged, so problems and attacks may go unnoticed."
+msgstr "PHP のエラーがログに記録されないため、問題や攻撃に気付けない可能性があります。"
+
+#: src/Checks/Php/PhpIniCheck.php:85
+msgid "Set log_errors = On and make sure the log is not publicly accessible."
+msgstr "log_errors = On に設定し、ログが外部から閲覧できないことを確認してください。"
+
+#: src/Checks/Php/PhpIniCheck.php:86
+msgid "session.cookie_httponly is off"
+msgstr "session.cookie_httponly が無効"
+
+#: src/Checks/Php/PhpIniCheck.php:86
+msgid "PHP session cookies can be read by JavaScript. WordPress itself does not use PHP sessions, but other code may."
+msgstr "PHP のセッション Cookie を JavaScript から読み取れます。WordPress 自体は PHP セッションを使用しませんが、他のコードが使用している場合があります。"
+
+#: src/Checks/Php/PhpIniCheck.php:86
+msgid "Set session.cookie_httponly = On."
+msgstr "session.cookie_httponly = On に設定してください。"
+
+#: src/Checks/Php/PhpVersionCheck.php:43
+msgid "PHP version"
+msgstr "PHP のバージョン"
+
+#: src/Checks/Php/PhpVersionCheck.php:61
+msgid "Checks end of life, missing patch releases and known vulnerabilities (CVE) of the running PHP version."
+msgstr "実行中の PHP のバージョンについて、サポート終了、未適用のパッチリリース、既知の脆弱性（CVE）をチェックします。"
+
+#. translators: %s: PHP version.
+#: src/Checks/Php/PhpVersionCheck.php:92
+msgid "PHP %s is no longer supported"
+msgstr "PHP %s はサポートが終了しています"
+
+#. translators: 1: PHP branch, 2: date.
+#: src/Checks/Php/PhpVersionCheck.php:95
+msgid "Security support for PHP %1$s ended on %2$s. New vulnerabilities will not be fixed."
+msgstr "PHP %1$s のセキュリティサポートは %2$s に終了しました。新しい脆弱性は修正されません。"
+
+#. translators: %s: PHP branch.
+#: src/Checks/Php/PhpVersionCheck.php:97
+msgid "Security support for PHP %s has ended. New vulnerabilities will not be fixed."
+msgstr "PHP %s のセキュリティサポートは終了しました。新しい脆弱性は修正されません。"
+
+#: src/Checks/Php/PhpVersionCheck.php:98
+msgid "Upgrade to a supported PHP version in your hosting control panel after testing the site on it."
+msgstr "サイトの動作を確認したうえで、ホスティングのコントロールパネルからサポート中の PHP のバージョンにアップグレードしてください。"
+
+#. translators: %s: PHP version.
+#: src/Checks/Php/PhpVersionCheck.php:109
+msgid "PHP %s support ends soon"
+msgstr "PHP %s のサポート終了が近づいています"
+
+#. translators: 1: PHP branch, 2: date, 3: days.
+#: src/Checks/Php/PhpVersionCheck.php:111
+msgid "Security support for PHP %1$s ends on %2$s (in %3$d days)."
+msgstr "PHP %1$s のセキュリティサポートは %2$s に終了します（残り %3$d 日）。"
+
+#: src/Checks/Php/PhpVersionCheck.php:112
+msgid "Plan an upgrade to a newer PHP version."
+msgstr "新しい PHP のバージョンへのアップグレードを計画してください。"
+
+#: src/Checks/Php/PhpVersionCheck.php:122
+msgid "PHP support status unknown"
+msgstr "PHP のサポート状況が不明"
+
+#. translators: %s: PHP version.
+#: src/Checks/Php/PhpVersionCheck.php:124
+msgid "No release data was found for PHP %s."
+msgstr "PHP %s のリリース情報が見つかりませんでした。"
+
+#: src/Checks/Php/PhpVersionCheck.php:125
+msgid "Enable the endoflife.date API in the settings or check the PHP website."
+msgstr "設定で endoflife.date API を有効にするか、PHP の公式サイトを確認してください。"
+
+#: src/Checks/Php/PhpVersionCheck.php:136
+msgid "PHP patch release is outdated"
+msgstr "PHP のパッチリリースが古い"
+
+#. translators: 1: running version, 2: latest version.
+#: src/Checks/Php/PhpVersionCheck.php:138
+msgid "PHP %1$s is running, but %2$s is available in the same release series. Patch releases contain security fixes."
+msgstr "PHP %1$s が動作していますが、同じリリース系列で %2$s が利用可能です。パッチリリースにはセキュリティ修正が含まれています。"
+
+#: src/Checks/Php/PhpVersionCheck.php:139
+msgid "Ask your hosting provider to update PHP, or select the latest version in the control panel."
+msgstr "ホスティング会社に PHP の更新を依頼するか、コントロールパネルで最新のバージョンを選択してください。"
+
+#. translators: 1: number of CVEs, 2: PHP version.
+#: src/Checks/Php/PhpVersionCheck.php:168
+msgid "%1$d known vulnerability in PHP %2$s"
+msgid_plural "%1$d known vulnerabilities in PHP %2$s"
+msgstr[0] "PHP %2$s の既知の脆弱性 %1$d 件"
+
+#. translators: 1: CVE ID, 2: CVSS score.
+#: src/Checks/Php/PhpVersionCheck.php:170
+msgid "The National Vulnerability Database lists vulnerabilities for this exact PHP version. The most severe is %1$s (CVSS %2$s)."
+msgstr "米国の脆弱性データベース（NVD）に、この PHP のバージョンに該当する脆弱性が登録されています。最も深刻なものは %1$s（CVSS %2$s）です。"
+
+#: src/Checks/Php/PhpVersionCheck.php:171
+msgid "Update to the latest patch release of a supported PHP version."
+msgstr "サポート中の PHP のバージョンの最新パッチリリースに更新してください。"
+
+#: src/Findings/FindingRepository.php:208
+msgid "Baseline approved."
+msgstr "ベースラインを承認しました。"
+
+#: src/Findings/FindingStatus.php:51
+msgid "Acknowledged"
+msgstr "確認済み"
+
+#: src/Findings/FindingStatus.php:53
+msgid "Ignored"
+msgstr "無視"
+
+#: src/Findings/Severity.php:65
+msgid "Critical"
+msgstr "緊急"
+
+#: src/Findings/Severity.php:67
+msgid "High"
+msgstr "高"
+
+#: src/Findings/Severity.php:69
+msgid "Medium"
+msgstr "中"
+
+#: src/Findings/Severity.php:71
+msgid "Low"
+msgstr "低"
+
+#: src/Findings/Severity.php:73
+msgid "Info"
+msgstr "情報"
+
+#: src/Notifications/EmailChannel.php:54
+#: src/Notifications/EmailChannel.php:294
+msgid "Email"
+msgstr "メール"
+
+#. translators: %s: site name.
+#: src/Notifications/EmailChannel.php:132
+msgid "[Test] %s Keep It Peace notification"
+msgstr "【テスト】%s の Keep It Peace 通知"
+
+#: src/Notifications/EmailChannel.php:133
+msgid "This is a test message from Keep It Peace. Notifications are configured correctly."
+msgstr "Keep It Peace からのテストメッセージです。通知は正しく設定されています。"
+
+#: src/Notifications/EmailChannel.php:148
+msgid "No valid email recipients are configured."
+msgstr "有効なメールの宛先が設定されていません。"
+
+#: src/Notifications/EmailChannel.php:178
+msgid "wp_mail() could not send the message."
+msgstr "wp_mail() でメッセージを送信できませんでした。"
+
+#: src/Notifications/EmailChannel.php:190
+msgid "[Action required]"
+msgstr "【要対応】"
+
+#: src/Notifications/EmailChannel.php:192
+msgid "[Attention]"
+msgstr "【要確認】"
+
+#: src/Notifications/EmailChannel.php:194
+msgid "[All clear]"
+msgstr "【問題なし】"
+
+#. translators: 1: status prefix, 2: site name.
+#: src/Notifications/EmailChannel.php:198
+msgid "%1$s %2$s weekly security digest"
+msgstr "%1$s %2$s の週間セキュリティダイジェスト"
+
+#. translators: 1: status prefix, 2: site name.
+#: src/Notifications/EmailChannel.php:201
+msgid "%1$s %2$s security check results"
+msgstr "%1$s %2$s のセキュリティチェック結果"
+
+#: src/Notifications/EmailChannel.php:226
+msgid "end of life (no security updates)"
+msgstr "サポート終了（セキュリティ更新なし）"
+
+#. translators: %s: version.
+#: src/Notifications/EmailChannel.php:233
+msgid "update available: %s"
+msgstr "更新あり：%s"
+
+#. translators: %d: number of CVEs.
+#: src/Notifications/EmailChannel.php:237
+msgid "%d known vulnerability"
+msgid_plural "%d known vulnerabilities"
+msgstr[0] "既知の脆弱性 %d 件"
+
+#: src/Notifications/EmailChannel.php:296
+msgid "Send email notifications"
+msgstr "メール通知を送信"
+
+#: src/Notifications/EmailChannel.php:300
+msgid "Recipients"
+msgstr "宛先"
+
+#: src/Notifications/EmailChannel.php:303
+msgid "One address per line."
+msgstr "1 行に 1 つのアドレスを入力してください。"
+
+#: src/Notifications/EmailChannel.php:307
+msgid "Format"
+msgstr "形式"
+
+#: src/Notifications/EmailChannel.php:310
+msgid "HTML (with plain-text alternative)"
+msgstr "HTML（プレーンテキスト版付き）"
+
+#: src/Notifications/EmailChannel.php:311
+msgid "Plain text"
+msgstr "プレーンテキスト"
+
+#: src/Notifications/NotificationPolicy.php:32
+msgid "After every scan"
+msgstr "スキャンのたびに毎回"
+
+#: src/Notifications/NotificationPolicy.php:33
+msgid "Only when there are open issues"
+msgstr "未解決の問題がある場合のみ"
+
+#: src/Notifications/NotificationPolicy.php:34
+msgid "Only when new issues were found"
+msgstr "新しい問題が見つかった場合のみ"
+
+#: src/Notifications/NotificationPolicy.php:35
+msgid "Only when issues at or above a severity exist"
+msgstr "指定した重要度以上の問題がある場合のみ"
+
+#: src/Notifications/Notifier.php:93
+msgid "Unknown notification channel."
+msgstr "不明な通知チャネルです。"
+
+#. translators: %d: HTTP status code.
+#: src/Remote/HttpClient.php:126
+msgid "HTTP status %d"
+msgstr "HTTP ステータス %d"
+
+#: src/Remote/HttpClient.php:129
+msgid "Invalid JSON response"
+msgstr "無効な JSON レスポンス"
+
+#: src/Remote/OsvClient.php:73
+msgid "OSV.dev is disabled in the settings."
+msgstr "OSV.dev は設定で無効になっています。"
+
+#: src/Remote/SiteProbe.php:82
+msgid "The URL is not on this site's domain."
+msgstr "この URL はこのサイトのドメインではありません。"
+
+#: src/Remote/TlsInspector.php:69
+msgid "The certificate could not be read."
+msgstr "証明書を読み取れませんでした。"
+
+#: src/Remote/TlsInspector.php:125
+msgid "Connection failed."
+msgstr "接続に失敗しました。"
+
+#: src/Rest/RestController.php:162
+msgid "Finding not found."
+msgstr "検出結果が見つかりません。"
+
+#: src/Rules/RuleMessages.php:38
+msgid "eval() is used"
+msgstr "eval() の使用"
+
+#: src/Rules/RuleMessages.php:39
+msgid "eval() runs a string as PHP code. Injected malware often uses it, and if the string contains user input it allows remote code execution."
+msgstr "eval() は文字列を PHP コードとして実行します。埋め込まれたマルウェアがよく使用するほか、文字列にユーザー入力が含まれるとリモートコード実行が可能になります。"
+
+#: src/Rules/RuleMessages.php:40
+msgid "Replace eval() with regular code. If you did not write this, the file may be compromised: compare it with your original source."
+msgstr "eval() を通常のコードに置き換えてください。ご自身で書いたコードでない場合、ファイルが改ざんされている可能性があります。元のソースと比較してください。"
+
+#: src/Rules/RuleMessages.php:43
+msgid "assert() with dynamic code"
+msgstr "動的なコードを渡す assert()"
+
+#: src/Rules/RuleMessages.php:44
+msgid "On older PHP versions assert() evaluates a string argument as code, a common backdoor technique."
+msgstr "古い PHP では assert() に文字列を渡すとコードとして評価されます。バックドアでよく使われる手法です。"
+
+#: src/Rules/RuleMessages.php:45
+msgid "Remove the call or pass a boolean expression. Check whether the file was modified by someone else."
+msgstr "呼び出しを削除するか、真偽値の式を渡してください。第三者によってファイルが変更されていないか確認してください。"
+
+#: src/Rules/RuleMessages.php:48
+msgid "create_function() is used"
+msgstr "create_function() の使用"
+
+#: src/Rules/RuleMessages.php:49
+msgid "create_function() evaluates code internally and was removed in PHP 8. It is also used by malware."
+msgstr "create_function() は内部でコードを評価する関数で、PHP 8 で削除されました。マルウェアにも使われます。"
+
+#: src/Rules/RuleMessages.php:50
+msgid "Use an anonymous function instead."
+msgstr "代わりに無名関数を使用してください。"
+
+#: src/Rules/RuleMessages.php:53
+msgid "preg_replace() with the /e modifier"
+msgstr "/e 修飾子付きの preg_replace()"
+
+#: src/Rules/RuleMessages.php:54
+msgid "The /e modifier evaluates the replacement as PHP code. It only works on very old PHP and is a well-known backdoor pattern."
+msgstr "/e 修飾子は置換文字列を PHP コードとして評価します。非常に古い PHP でのみ動作し、よく知られたバックドアのパターンです。"
+
+#: src/Rules/RuleMessages.php:55
+msgid "Use preg_replace_callback(). Treat the file as suspicious if you did not write it."
+msgstr "preg_replace_callback() を使用してください。ご自身で書いたコードでない場合は、不審なファイルとして扱ってください。"
+
+#: src/Rules/RuleMessages.php:58
+msgid "Shell command execution"
+msgstr "シェルコマンドの実行"
+
+#: src/Rules/RuleMessages.php:59
+msgid "Functions such as shell_exec(), system(), exec() and passthru() run operating system commands. Themes rarely need them and web shells rely on them."
+msgstr "shell_exec()、system()、exec()、passthru() などの関数は OS のコマンドを実行します。テーマで必要になることはほとんどなく、Web シェルがよく利用します。"
+
+#: src/Rules/RuleMessages.php:60
+msgid "Remove the call if it is not required. If it is, never pass user input and escape arguments with escapeshellarg()."
+msgstr "不要であれば呼び出しを削除してください。必要な場合は、ユーザー入力を決して渡さず、引数を escapeshellarg() でエスケープしてください。"
+
+#: src/Rules/RuleMessages.php:63
+msgid "Chained decoding functions"
+msgstr "デコード関数の連鎖"
+
+#: src/Rules/RuleMessages.php:64
+msgid "Nested calls such as base64_decode(gzinflate(...)) are typical of obfuscated malware."
+msgstr "base64_decode(gzinflate(...)) のような入れ子の呼び出しは、難読化されたマルウェアによく見られます。"
+
+#: src/Rules/RuleMessages.php:65
+msgid "Decode the payload safely offline to see what it does, and restore the file from a clean copy."
+msgstr "安全なオフライン環境でデータをデコードして内容を確認し、ファイルをクリーンなコピーから復元してください。"
+
+#: src/Rules/RuleMessages.php:68
+msgid "base64_decode() is used"
+msgstr "base64_decode() の使用"
+
+#: src/Rules/RuleMessages.php:69
+msgid "base64_decode() has legitimate uses but is also used to hide code."
+msgstr "base64_decode() には正当な用途もありますが、コードを隠すためにも使われます。"
+
+#: src/Rules/RuleMessages.php:70
+msgid "Confirm what is decoded. Ignore this finding if the use is legitimate."
+msgstr "何がデコードされているか確認してください。正当な用途であれば、この検出結果は無視してかまいません。"
+
+#: src/Rules/RuleMessages.php:73
+msgid "Remote or stream file inclusion"
+msgstr "リモートまたはストリームからのファイルインクルード"
+
+#: src/Rules/RuleMessages.php:74
+msgid "include/require with a URL or stream wrapper (http://, php://, data://) executes code from outside the server."
+msgstr "URL やストリームラッパー（http://、php://、data://）を指定した include/require は、サーバー外のコードを実行します。"
+
+#: src/Rules/RuleMessages.php:75
+msgid "Include only local files. Remove the statement and investigate how it got there."
+msgstr "ローカルのファイルのみをインクルードしてください。該当の文を削除し、どのように追加されたのかを調査してください。"
+
+#: src/Rules/RuleMessages.php:78
+msgid "External URL is loaded"
+msgstr "外部 URL の読み込み"
+
+#: src/Rules/RuleMessages.php:79
+msgid "The code fetches content from a fixed external URL. This can be legitimate (APIs) but is also used to download payloads."
+msgstr "コードが固定の外部 URL からコンテンツを取得しています。正当な場合（API など）もありますが、悪意のあるデータのダウンロードにも使われます。"
+
+#: src/Rules/RuleMessages.php:80
+msgid "Confirm that the URL is expected and that the response is not executed or output without escaping."
+msgstr "URL が想定どおりのものであること、またレスポンスを実行したりエスケープせずに出力したりしていないことを確認してください。"
+
+#: src/Rules/RuleMessages.php:83
+msgid "unserialize() on request data"
+msgstr "リクエストのデータに対する unserialize()"
+
+#: src/Rules/RuleMessages.php:84
+msgid "Unserializing user input enables PHP object injection."
+msgstr "ユーザー入力をアンシリアライズすると、PHP オブジェクトインジェクションが可能になります。"
+
+#: src/Rules/RuleMessages.php:85
+msgid "Use json_decode() for user input, or pass allowed_classes => false."
+msgstr "ユーザー入力には json_decode() を使用するか、allowed_classes => false を指定してください。"
+
+#: src/Rules/RuleMessages.php:88
+msgid "extract() on request data"
+msgstr "リクエストのデータに対する extract()"
+
+#: src/Rules/RuleMessages.php:89
+msgid "extract() on $_GET/$_POST lets visitors overwrite any local variable."
+msgstr "$_GET/$_POST に extract() を使うと、訪問者が任意のローカル変数を上書きできてしまいます。"
+
+#: src/Rules/RuleMessages.php:90
+msgid "Read the needed keys explicitly and sanitize each value."
+msgstr "必要なキーを明示的に読み取り、それぞれの値をサニタイズしてください。"
+
+#: src/Rules/RuleMessages.php:93
+msgid "Error reporting disabled in code"
+msgstr "コード内でのエラー報告の無効化"
+
+#: src/Rules/RuleMessages.php:94
+msgid "error_reporting(0) hides errors. Malware uses it to stay unnoticed."
+msgstr "error_reporting(0) はエラーを隠します。マルウェアが気付かれないようにするために使います。"
+
+#: src/Rules/RuleMessages.php:95
+msgid "Configure error display in php.ini or wp-config.php instead of in theme code."
+msgstr "エラー表示はテーマのコードではなく、php.ini または wp-config.php で設定してください。"
+
+#: src/Rules/RuleMessages.php:98
+msgid "Known web shell signature"
+msgstr "既知の Web シェルのシグネチャ"
+
+#: src/Rules/RuleMessages.php:99
+msgid "The file contains a string used by well-known web shells."
+msgstr "よく知られた Web シェルで使われる文字列がファイルに含まれています。"
+
+#: src/Rules/RuleMessages.php:100
+msgid "Treat the site as compromised: take a backup for analysis, remove the file, change all passwords and look for other modified files."
+msgstr "サイトが侵害されたものとして対応してください。調査用にバックアップを取ってからファイルを削除し、すべてのパスワードを変更し、ほかに変更されたファイルがないか確認してください。"
+
+#: src/Rules/RuleMessages.php:103
+msgid "External script is loaded"
+msgstr "外部スクリプトの読み込み"
+
+#: src/Rules/RuleMessages.php:104
+msgid "A script is loaded from another domain. If that domain is compromised, so is your site."
+msgstr "別のドメインからスクリプトを読み込んでいます。そのドメインが侵害されると、あなたのサイトも侵害されます。"
+
+#: src/Rules/RuleMessages.php:105
+msgid "Confirm the source is trusted. Prefer wp_enqueue_script() and consider Subresource Integrity."
+msgstr "読み込み元が信頼できることを確認してください。wp_enqueue_script() の使用を推奨します。Subresource Integrity の利用も検討してください。"
+
+#: src/Rules/RuleMessages.php:108
+msgid "Variable function call"
+msgstr "可変関数の呼び出し"
+
+#: src/Rules/RuleMessages.php:109
+msgid "Calling $name(...) runs whatever function the variable contains. Malware uses it to hide calls such as system()."
+msgstr "$name(...) の呼び出しは、変数に入っている任意の関数を実行します。マルウェアは system() などの呼び出しを隠すためにこれを使います。"
+
+#: src/Rules/RuleMessages.php:110
+msgid "Make sure the variable cannot be controlled by users, or call the function directly."
+msgstr "変数をユーザーが操作できないようにするか、関数を直接呼び出してください。"
+
+#: src/Rules/RuleMessages.php:113
+msgid "Backtick shell execution"
+msgstr "バッククォートによるシェル実行"
+
+#: src/Rules/RuleMessages.php:114
+msgid "Text between backticks is executed as a shell command."
+msgstr "バッククォートで囲まれたテキストはシェルコマンドとして実行されます。"
+
+#: src/Rules/RuleMessages.php:115
+msgid "Remove it. Themes should not run shell commands."
+msgstr "削除してください。テーマでシェルコマンドを実行すべきではありません。"
+
+#: src/Rules/RuleMessages.php:118
+msgid "Request data is output without escaping"
+msgstr "リクエストのデータをエスケープせずに出力"
+
+#: src/Rules/RuleMessages.php:119
+msgid "A value from $_GET/$_POST/$_REQUEST/$_COOKIE is printed directly, which allows cross-site scripting (XSS)."
+msgstr "$_GET/$_POST/$_REQUEST/$_COOKIE の値がそのまま出力されており、クロスサイトスクリプティング（XSS）が可能になります。"
+
+#: src/Rules/RuleMessages.php:120
+msgid "Escape on output with esc_html(), esc_attr() or esc_url() and sanitize on input."
+msgstr "出力時に esc_html()、esc_attr()、esc_url() でエスケープし、入力時にサニタイズしてください。"
+
+#: src/Rules/RuleMessages.php:123
+msgid "Request data in a SQL query"
+msgstr "SQL クエリ内のリクエストのデータ"
+
+#: src/Rules/RuleMessages.php:124
+msgid "A request value is used in a database query without $wpdb->prepare(), which allows SQL injection."
+msgstr "リクエストの値が $wpdb->prepare() を使わずにデータベースのクエリに使われており、SQL インジェクションが可能になります。"
+
+#: src/Rules/RuleMessages.php:125
+msgid "Use $wpdb->prepare() with placeholders."
+msgstr "プレースホルダー付きで $wpdb->prepare() を使用してください。"
+
+#: src/Rules/RuleMessages.php:128
+msgid "Request data in include/require"
+msgstr "include/require 内のリクエストのデータ"
+
+#: src/Rules/RuleMessages.php:129
+msgid "A request value decides which file is included, which allows local or remote file inclusion."
+msgstr "リクエストの値によってインクルードするファイルが決まるため、ローカルまたはリモートのファイルインクルードが可能になります。"
+
+#: src/Rules/RuleMessages.php:130
+msgid "Map allowed values to fixed file names with an allowlist."
+msgstr "許可リストを使い、許可する値を固定のファイル名に対応付けてください。"
+
+#: src/Rules/RuleMessages.php:133
+msgid "Request data in a file operation"
+msgstr "ファイル操作内のリクエストのデータ"
+
+#: src/Rules/RuleMessages.php:134
+msgid "A request value is used as a file path or content, which can allow reading or writing arbitrary files."
+msgstr "リクエストの値がファイルのパスや内容に使われており、任意のファイルの読み書きが可能になるおそれがあります。"
+
+#: src/Rules/RuleMessages.php:135
+msgid "Validate against an allowlist, use basename() and sanitize_file_name(), and keep operations inside a fixed directory."
+msgstr "許可リストで検証し、basename() と sanitize_file_name() を使用し、操作を固定のディレクトリ内に限定してください。"
+
+#: src/Rules/RuleMessages.php:138
+msgid "Database query without prepare()"
+msgstr "prepare() を使わないデータベースクエリ"
+
+#: src/Rules/RuleMessages.php:139
+msgid "A $wpdb query is built from variables without $wpdb->prepare(). If any part comes from users, this allows SQL injection."
+msgstr "$wpdb のクエリが $wpdb->prepare() を使わずに変数から組み立てられています。一部でもユーザー由来の値が含まれる場合、SQL インジェクションが可能になります。"
+
+#: src/Rules/RuleMessages.php:140
+msgid "Build the query with $wpdb->prepare() and placeholders."
+msgstr "$wpdb->prepare() とプレースホルダーを使ってクエリを組み立ててください。"
+
+#: src/Rules/RuleMessages.php:143
+msgid "AJAX/admin-post handler without nonce check"
+msgstr "nonce をチェックしない AJAX/admin-post ハンドラー"
+
+#: src/Rules/RuleMessages.php:144
+msgid "The handler does not call check_ajax_referer(), check_admin_referer() or wp_verify_nonce(), so requests can be forged (CSRF)."
+msgstr "ハンドラーが check_ajax_referer()、check_admin_referer()、wp_verify_nonce() のいずれも呼び出していないため、リクエストを偽造される（CSRF）おそれがあります。"
+
+#: src/Rules/RuleMessages.php:145
+msgid "Verify a nonce at the start of the handler."
+msgstr "ハンドラーの最初で nonce を検証してください。"
+
+#: src/Rules/RuleMessages.php:148
+msgid "AJAX/admin-post handler without capability check"
+msgstr "権限をチェックしない AJAX/admin-post ハンドラー"
+
+#: src/Rules/RuleMessages.php:149
+msgid "Any logged-in user (including subscribers) can call this handler because current_user_can() is not checked."
+msgstr "current_user_can() がチェックされていないため、ログインしているユーザーなら誰でも（購読者を含む）このハンドラーを呼び出せます。"
+
+#: src/Rules/RuleMessages.php:150
+msgid "Check the required capability with current_user_can() before doing anything."
+msgstr "処理を行う前に、current_user_can() で必要な権限をチェックしてください。"
+
+#: src/Rules/RuleMessages.php:153
+msgid "REST route without permission_callback"
+msgstr "permission_callback のない REST ルート"
+
+#: src/Rules/RuleMessages.php:154
+msgid "The route has no permission_callback, so access control is undefined."
+msgstr "このルートには permission_callback がないため、アクセス制御が定義されていません。"
+
+#: src/Rules/RuleMessages.php:155
+msgid "Add a permission_callback that checks capabilities (use __return_true only for truly public data)."
+msgstr "権限をチェックする permission_callback を追加してください（__return_true は本当に公開してよいデータの場合にのみ使用してください）。"
+
+#: src/Rules/RuleMessages.php:158
+msgid "Public REST route"
+msgstr "公開されている REST ルート"
+
+#: src/Rules/RuleMessages.php:159
+msgid "The route is open to everyone (permission_callback is __return_true)."
+msgstr "このルートは誰でもアクセスできます（permission_callback が __return_true）。"
+
+#: src/Rules/RuleMessages.php:160
+msgid "Confirm that the route only exposes public data and changes nothing."
+msgstr "このルートが公開データのみを返し、何も変更しないことを確認してください。"
+
+#: src/Rules/RuleMessages.php:163
+msgid "Form processing without nonce check"
+msgstr "nonce をチェックしないフォーム処理"
+
+#: src/Rules/RuleMessages.php:164
+msgid "The file handles $_POST and changes data, but no nonce is verified anywhere in the file."
+msgstr "このファイルは $_POST を処理してデータを変更していますが、ファイル内のどこでも nonce が検証されていません。"
+
+#: src/Rules/RuleMessages.php:165
+msgid "Add wp_nonce_field() to the form and verify it with check_admin_referer() or wp_verify_nonce()."
+msgstr "フォームに wp_nonce_field() を追加し、check_admin_referer() または wp_verify_nonce() で検証してください。"
+
+#: src/Rules/RuleMessages.php:168
+msgid "Obfuscated string"
+msgstr "難読化された文字列"
+
+#: src/Rules/RuleMessages.php:169
+msgid "A very long encoded string, a run of escape sequences or a chain of chr() calls was found. This is typical of injected code."
+msgstr "非常に長いエンコード済みの文字列、連続したエスケープシーケンス、または chr() の連続した呼び出しが見つかりました。埋め込まれたコードによく見られる特徴です。"
+
+#: src/Rules/RuleMessages.php:170
+msgid "Check what the string contains. Restore the file from a clean copy if you did not add it."
+msgstr "文字列の内容を確認してください。ご自身で追加したものでない場合は、ファイルをクリーンなコピーから復元してください。"
+
+#: src/Scan/PathGuard.php:111
+msgid "The path is not absolute."
+msgstr "パスが絶対パスではありません。"
+
+#: src/Scan/PathGuard.php:113
+msgid "The path is outside open_basedir, so PHP cannot read it."
+msgstr "パスが open_basedir の範囲外のため、PHP から読み取れません。"
+
+#: src/Scan/PathGuard.php:115
+msgid "The path does not exist."
+msgstr "パスが存在しません。"
+
+#: src/Scan/PathGuard.php:117
+msgid "The path is not a directory."
+msgstr "パスがディレクトリではありません。"
+
+#: src/Scan/PathGuard.php:119
+msgid "The directory is not readable by PHP."
+msgstr "ディレクトリを PHP から読み取れません。"
+
+#: src/Scan/PathValidator.php:116
+msgid "The directory is WordPress itself or contains it. Register only directories of other programs."
+msgstr "このディレクトリは WordPress 自体であるか、WordPress を含んでいます。他のプログラムのディレクトリのみを登録してください。"
+
+#: src/Scan/PathValidator.php:118
+msgid "The directory overlaps wp-admin, wp-includes or wp-content, which are covered by other checks."
+msgstr "このディレクトリは wp-admin、wp-includes、wp-content と重なっています。これらは他のチェックで対象になっています。"
+
+#: src/Scan/Scanner.php:377
+msgid "File limit reached"
+msgstr "ファイル数の上限に到達"
+
+#. translators: %d: number of files.
+#: src/Scan/Scanner.php:379
+msgid "Scanning stopped after %d files. Files after that were not checked."
+msgstr "%d 件のファイルでスキャンを停止しました。それ以降のファイルはチェックされていません。"
+
+#: src/Scan/Scanner.php:380
+msgid "Add exclude patterns for generated or vendor directories, or raise the file limit in the settings."
+msgstr "生成されたディレクトリや vendor ディレクトリの除外パターンを追加するか、設定でファイル数の上限を引き上げてください。"
+
+#: src/Scan/Scanner.php:549
+msgid "A check could not finish"
+msgstr "完了できなかったチェック"
+
+#. translators: 1: check ID, 2: error message.
+#: src/Scan/Scanner.php:551
+msgid "The check %1$s stopped with an error: %2$s"
+msgstr "チェック %1$s がエラーで停止しました：%2$s"
+
+#: src/Scan/Scanner.php:552
+msgid "Run the scan again. If the error persists, disable the check and report the problem."
+msgstr "もう一度スキャンを実行してください。エラーが続く場合は、そのチェックを無効にして問題を報告してください。"
+
+#: src/Scan/Scanner.php:575
+msgid "Directory could not be read"
+msgstr "ディレクトリを読み取れない"
+
+#: src/Scan/Scanner.php:577
+msgid "Check the path, permissions and the open_basedir setting. Files in this directory were not checked."
+msgstr "パス、パーミッション、open_basedir の設定を確認してください。このディレクトリ内のファイルはチェックされていません。"
+
+#: src/Scan/Scheduler.php:58
+msgid "Daily"
+msgstr "毎日"
+
+#: src/Scan/Scheduler.php:62
+msgid "Weekly"
+msgstr "毎週"
+
+#: templates/email/summary-html.php:41
+#: templates/email/summary-text.php:22
+msgid "Since the previous scan"
+msgstr "前回のスキャンからの変化"
+
+#. translators: 1: new count, 2: resolved count.
+#: templates/email/summary-html.php:44
+#: templates/email/summary-text.php:24
+msgid "%1$d new, %2$d resolved"
+msgstr "新規 %1$d 件、解決済み %2$d 件"
+
+#: templates/email/summary-html.php:59
+msgid "Open the dashboard"
+msgstr "ダッシュボードを開く"
+
+#: templates/email/summary-html.php:60
+msgid "File names and code are not included in email for security reasons. Please check the details in the dashboard."
+msgstr "セキュリティ上の理由から、ファイル名やコードはメールに含まれていません。詳細はダッシュボードで確認してください。"
+
+#: templates/email/summary-text.php:13
+msgid "Site"
+msgstr "サイト"
+
+#: templates/email/summary-text.php:14
+msgid "Checked at"
+msgstr "チェック日時"
+
+#: templates/email/summary-text.php:16
+msgid "Open issues by severity"
+msgstr "重要度別の未解決の問題"
+
+#: templates/email/summary-text.php:35
+msgid "Details are available only in the dashboard (they are not included in email for security reasons):"
+msgstr "詳細はダッシュボードでのみ確認できます（セキュリティ上の理由からメールには含まれていません）:"

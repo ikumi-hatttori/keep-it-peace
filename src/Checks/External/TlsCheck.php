@@ -188,7 +188,8 @@ class TlsCheck extends AbstractExternalCheck {
 
 		if ( ! self::host_ok( $host, (array) $info['names'] ) ) {
 			/* translators: %s: names in the certificate. */
-			$out[] = $check->tls_finding( $target, 'tls.name_mismatch', Severity::HIGH, __( 'The certificate does not match the host name', 'keep-it-peace' ), sprintf( __( 'The certificate is issued for: %s', 'keep-it-peace' ), implode( ', ', array_slice( (array) $info['names'], 0, 10 ) ) ), __( 'Issue a certificate that includes this host name (with and without www if both are used).', 'keep-it-peace' ) );
+			$message = sprintf( __( 'The certificate is issued for: %s', 'keep-it-peace' ), implode( ', ', array_slice( (array) $info['names'], 0, 10 ) ) );
+			$out[]   = $check->tls_finding( $target, 'tls.name_mismatch', Severity::HIGH, __( 'The certificate does not match the host name', 'keep-it-peace' ), $message, __( 'Issue a certificate that includes this host name (with and without www if both are used).', 'keep-it-peace' ) );
 		} elseif ( ! $info['trusted'] && $days >= 0 ) {
 			$out[] = $check->tls_finding(
 				$target,
@@ -202,8 +203,9 @@ class TlsCheck extends AbstractExternalCheck {
 		}
 
 		if ( in_array( $info['protocol'], array( 'TLSv1', 'TLSv1.0', 'TLSv1.1', 'SSLv3' ), true ) ) {
-			/* translators: %s: protocol. */
-			$out[] = $check->tls_finding( $target, 'tls.old_protocol', Severity::MEDIUM, __( 'An outdated TLS version is used', 'keep-it-peace' ), sprintf( __( 'The connection used %s, which is no longer considered secure.', 'keep-it-peace' ), $info['protocol'] ), __( 'Enable TLS 1.2 and 1.3 and disable older versions on the server.', 'keep-it-peace' ) );
+			/* translators: %s: protocol such as TLSv1.1. */
+			$message = sprintf( __( 'The connection used %s, which is no longer considered secure.', 'keep-it-peace' ), $info['protocol'] );
+			$out[]   = $check->tls_finding( $target, 'tls.old_protocol', Severity::MEDIUM, __( 'An outdated TLS version is used', 'keep-it-peace' ), $message, __( 'Enable TLS 1.2 and 1.3 and disable older versions on the server.', 'keep-it-peace' ) );
 		}
 		return $out;
 	}

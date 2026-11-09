@@ -437,8 +437,9 @@ class SettingsPage {
 		<p><?php esc_html_e( 'After a planned deployment, approve the current files as the new baseline so they are no longer reported as changed.', 'keep-it-peace' ); ?></p>
 		<p class="description">
 			<?php
+			$last_scan = $latest ? Ui::datetime( $latest->finished_at ) : __( 'never', 'keep-it-peace' );
 			/* translators: %s: date. */
-			echo esc_html( sprintf( __( 'Approval uses the file state recorded by the last scan (%s). If you deployed after that, run a scan first.', 'keep-it-peace' ), $latest ? Ui::datetime( $latest->finished_at ) : __( 'never', 'keep-it-peace' ) ) );
+			echo esc_html( sprintf( __( 'Approval uses the file state recorded by the last scan (%s). If you deployed after that, run a scan first.', 'keep-it-peace' ), $last_scan ) );
 			?>
 		</p>
 		<table class="widefat striped" style="max-width:900px">

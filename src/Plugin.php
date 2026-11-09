@@ -110,6 +110,7 @@ final class Plugin {
 		}
 		if ( defined( 'WP_CLI' ) && WP_CLI ) {
 			\WP_CLI::add_command( 'keep-it-peace', \KeepItPeace\Cli\Command::class );
+			\WP_CLI::add_command( 'keep-it-peace baseline', \KeepItPeace\Cli\BaselineCommand::class );
 		}
 	}
 
@@ -117,7 +118,8 @@ final class Plugin {
 	 * Loads bundled translations (wp.org language packs take precedence when present).
 	 */
 	public function load_textdomain(): void {
-		load_plugin_textdomain( 'keep-it-peace', false, dirname( plugin_basename( KEEPITPEACE_FILE ) ) . '/languages' );
+		// The bundled Japanese translation lives in /languages; WordPress.org language packs still take precedence.
+		load_plugin_textdomain( 'keep-it-peace', false, dirname( plugin_basename( KEEPITPEACE_FILE ) ) . '/languages' ); // phpcs:ignore PluginCheck.CodeAnalysis.DiscouragedFunctions.load_plugin_textdomainFound
 	}
 
 	/**

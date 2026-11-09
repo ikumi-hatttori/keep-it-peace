@@ -535,6 +535,12 @@ Api::get_settings(): Settings
 - `docs/developer.md`、`readme.txt`、日本語 `README.md`
 - PHPCS（WPCS＋PHPCompatibilityWP、`testVersion 7.4-`）、Plugin Check の対応、`bin/build-zip.sh`
 
+**フェーズ 3 の実装メモ（設計からの変更点）**
+- 管理画面の JS の文言は `wp_localize_script` で PHP から渡しているため、JS 用の翻訳 JSON は不要（PHP の `.mo` で翻訳される）
+- 検出結果の文言はスキャン時のサイトの言語で保存する（メールと同じ言語）。ユーザーごとに言語を変えても、保存済みの検出結果の文言は変わらない
+- WP-CLI に `checks` / `targets` を追加。CLI の出力はスクリプトで扱いやすいよう英語のまま
+- Plugin Check の Offloading 検出に掛かるため、共用ドメインの一覧から `herokuapp.com` を外した
+
 ---
 
 ## 6. 決定事項

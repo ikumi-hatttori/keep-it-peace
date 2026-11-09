@@ -3,7 +3,7 @@
  * Plugin Name:       Keep It Peace
  * Plugin URI:        https://keep-it-peace.com
  * Description:       Monitors custom themes, server-side programs outside WordPress, the site's public surface and the PHP runtime, and emails you a summary.
- * Version:           0.2.0
+ * Version:           0.3.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            mackarel Inc.
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'KEEPITPEACE_VERSION', '0.2.0' );
+define( 'KEEPITPEACE_VERSION', '0.3.0' );
 define( 'KEEPITPEACE_API_VERSION', '1.0.0' );
 define( 'KEEPITPEACE_EXPORT_SCHEMA_VERSION', '1.0.0' );
 define( 'KEEPITPEACE_RULESET_SCHEMA_VERSION', 1 );

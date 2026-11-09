@@ -3,8 +3,7 @@
 WordPress サイトのセキュリティ状態を定期的にチェックし、結果をメールで通知するプラグインです。
 WordPress 本体や wp.org 配布プラグインではなく、**カスタムテーマ・WP 外のプログラム・外部から見たサイトの状態・PHP 本体**を対象にします。
 
-> 開発中（フェーズ 2 まで実装済み）。設計は [docs/DESIGN.md](docs/DESIGN.md) を参照してください。
-> 配布用の `readme.txt`、日本語訳、開発者向けドキュメントはフェーズ 3 で整備します。
+> 設計は [docs/DESIGN.md](docs/DESIGN.md)、拡張方法は [docs/developer.md](docs/developer.md) を参照してください。wp.org 用の説明は [readme.txt](readme.txt) にあります。
 
 ## 動作環境
 
@@ -39,7 +38,20 @@ WordPress 本体や wp.org 配布プラグインではなく、**カスタムテ
 - 定期実行（WP-Cron、毎日／毎週）。1 回の実行時間に上限を設け、続きは次の Cron で再開
 - 管理画面：ダッシュボード、検出結果（絞り込み・一括操作・詳細のコード表示・履歴）、スキャン履歴、タブ式の設定
 - メール通知（テキスト／HTML、送信条件、週次ダイジェスト、テスト送信）。ファイルパスやコードはメールに含めません
-- WP-CLI：`wp keep-it-peace scan` / `wp keep-it-peace status`
+- 日本語訳を同梱（`languages/`）
+
+## WP-CLI
+
+| コマンド | 内容 |
+|---|---|
+| `wp keep-it-peace scan [--checks=<ids>] [--no-notify] [--format=table\|json]` | スキャンを完了まで実行（実行中のスキャンがあれば続きを実行） |
+| `wp keep-it-peace status [--format=json]` | 重要度別の未解決件数と最終スキャン |
+| `wp keep-it-peace findings [--status=open] [--severity=high] [--category=…] [--check=…] [--format=…]` | 検出結果の一覧 |
+| `wp keep-it-peace export [--scan=<id>] [--pretty]` | スキャン結果の JSON（[docs/export-schema.json](docs/export-schema.json)） |
+| `wp keep-it-peace baseline approve (--scope=<scope> \| --all) [--yes]` | 現在のファイルをベースラインとして承認（デプロイ後に使用） |
+| `wp keep-it-peace checks` / `wp keep-it-peace targets` | チェック・スキャン対象の一覧 |
+
+コマンドの出力は、スクリプトで扱いやすいよう英語のままです。
 
 ## サーバーの cron から実行する
 
@@ -68,9 +80,13 @@ WP-Cron はサイトにアクセスがあったときにしか動きません。
 
 ```
 composer install
-vendor/bin/phpunit
-vendor/bin/phpcs
+vendor/bin/phpunit       # ユニットテスト
+vendor/bin/phpcs         # コーディング規約（WPCS + PHPCompatibilityWP）
+bin/make-pot.sh          # 翻訳テンプレートの更新と .mo のコンパイル（WP-CLI が必要）
+bin/build-zip.sh         # 配布用 ZIP を dist/ に作成
 ```
+
+拡張ポイントの動作確認用に、サンプルアドオンが [dev/sample-addon/](dev/sample-addon/) にあります（配布 ZIP には含めません）。
 
 ## ライセンス
 

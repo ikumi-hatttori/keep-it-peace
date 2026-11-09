@@ -1,0 +1,2418 @@
+# Copyright (C) 2026 mackarel Inc.
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Keep It Peace 0.3.0\n"
+"Report-Msgid-Bugs-To: https://keep-it-peace.com/\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: mackarel Inc.\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-09T06:58:36+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: keep-it-peace\n"
+
+#. Plugin Name of the plugin
+#: keep-it-peace.php
+msgid "Keep It Peace"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: keep-it-peace.php
+msgid "https://keep-it-peace.com"
+msgstr ""
+
+#. Description of the plugin
+#: keep-it-peace.php
+msgid "Monitors custom themes, server-side programs outside WordPress, the site's public surface and the PHP runtime, and emails you a summary."
+msgstr ""
+
+#. Author of the plugin
+#: keep-it-peace.php
+msgid "mackarel Inc."
+msgstr ""
+
+#. Author URI of the plugin
+#: keep-it-peace.php
+msgid "https://mackarel.jp"
+msgstr ""
+
+#: src/Admin/Admin.php:90
+msgid "Dashboard"
+msgstr ""
+
+#: src/Admin/Admin.php:91
+#: src/Admin/FindingsPage.php:106
+msgid "Findings"
+msgstr ""
+
+#: src/Admin/Admin.php:94
+#: src/Admin/ScansPage.php:84
+msgid "Scan history"
+msgstr ""
+
+#: src/Admin/Admin.php:95
+#: src/Admin/Admin.php:202
+msgid "Settings"
+msgstr ""
+
+#: src/Admin/Admin.php:129
+msgid "Starting scan…"
+msgstr ""
+
+#. translators: %d: progress percentage.
+#: src/Admin/Admin.php:131
+#, php-format
+msgid "Scanning… %d%%"
+msgstr ""
+
+#: src/Admin/Admin.php:132
+msgid "Another scan step is running. Waiting…"
+msgstr ""
+
+#: src/Admin/Admin.php:133
+msgid "Scan completed. Reloading…"
+msgstr ""
+
+#: src/Admin/Admin.php:134
+msgid "The scan failed. Check the scan history for details."
+msgstr ""
+
+#. translators: %s: error message.
+#: src/Admin/Admin.php:136
+#, php-format
+msgid "Request failed: %s"
+msgstr ""
+
+#: src/Admin/Admin.php:151
+#: src/Admin/DashboardPage.php:247
+msgid "Scheduled scans may not be running."
+msgstr ""
+
+#: src/Admin/Admin.php:152
+msgid "No scan has completed for longer than expected. WP-Cron only runs when the site receives visits; set up a server cron job (see Settings → Tools) to run scans reliably."
+msgstr ""
+
+#: src/Admin/Admin.php:164
+msgid "Settings saved."
+msgstr ""
+
+#: src/Admin/Admin.php:165
+msgid "Settings saved, but some values were not accepted:"
+msgstr ""
+
+#: src/Admin/Admin.php:166
+msgid "There is no completed scan to export yet."
+msgstr ""
+
+#: src/Admin/Admin.php:167
+msgid "Status updated."
+msgstr ""
+
+#: src/Admin/Admin.php:168
+msgid "Selected findings were updated."
+msgstr ""
+
+#: src/Admin/Admin.php:169
+msgid "The baseline was approved."
+msgstr ""
+
+#: src/Admin/Admin.php:170
+msgid "Test notification sent."
+msgstr ""
+
+#: src/Admin/Admin.php:171
+msgid "Test notification failed."
+msgstr ""
+
+#: src/Admin/Admin.php:172
+msgid "Item not found."
+msgstr ""
+
+#: src/Admin/Admin.php:224
+msgid "You do not have permission to do this."
+msgstr ""
+
+#. translators: %d: number of files.
+#: src/Admin/Admin.php:302
+#, php-format
+msgid "%d file recorded."
+msgid_plural "%d files recorded."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Admin/DashboardPage.php:57
+msgid "Scan now"
+msgstr ""
+
+#: src/Admin/DashboardPage.php:67
+#: src/Admin/ScansPage.php:99
+msgid "Open issues"
+msgstr ""
+
+#. translators: 1: new, 2: resolved, 3: ongoing.
+#: src/Admin/DashboardPage.php:82
+#, php-format
+msgid "Last scan: %1$d new, %2$d resolved, %3$d ongoing"
+msgstr ""
+
+#: src/Admin/DashboardPage.php:89
+msgid "Scans"
+msgstr ""
+
+#: src/Admin/DashboardPage.php:91
+msgid "Last completed"
+msgstr ""
+
+#: src/Admin/DashboardPage.php:91
+#: src/Admin/DashboardPage.php:245
+msgid "Never"
+msgstr ""
+
+#: src/Admin/DashboardPage.php:92
+msgid "Next scheduled"
+msgstr ""
+
+#: src/Admin/DashboardPage.php:94
+msgid "Cron health"
+msgstr ""
+
+#: src/Admin/DashboardPage.php:97
+#: src/Scan/PathGuard.php:121
+msgid "OK"
+msgstr ""
+
+#: src/Admin/DashboardPage.php:99
+msgid "Scans may not be running"
+msgstr ""
+
+#: src/Admin/DashboardPage.php:102
+msgid "DISABLE_WP_CRON is set: make sure a server cron job runs."
+msgstr ""
+
+#: src/Admin/DashboardPage.php:110
+msgid "Server"
+msgstr ""
+
+#: src/Admin/DashboardPage.php:117
+#: templates/email/summary-html.php:52
+#: templates/email/summary-text.php:30
+msgid "Database"
+msgstr ""
+
+#: src/Admin/DashboardPage.php:123
+#: src/Admin/DashboardPage.php:178
+#: src/Notifications/EmailChannel.php:245
+msgid "end of life"
+msgstr ""
+
+#. translators: %s: date.
+#: src/Admin/DashboardPage.php:126
+#, php-format
+msgid "supported until %s"
+msgstr ""
+
+#: src/Admin/DashboardPage.php:135
+#: templates/email/summary-html.php:55
+#: templates/email/summary-text.php:33
+msgid "SSL certificate"
+msgstr ""
+
+#. translators: %d: days.
+#: src/Admin/DashboardPage.php:140
+#: src/Notifications/EmailChannel.php:252
+#, php-format
+msgid "%d day left"
+msgid_plural "%d days left"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: date.
+#: src/Admin/DashboardPage.php:181
+#: src/Notifications/EmailChannel.php:229
+#, php-format
+msgid "security support until %s"
+msgstr ""
+
+#. translators: %s: version.
+#: src/Admin/DashboardPage.php:185
+#, php-format
+msgid "Update available: %s"
+msgstr ""
+
+#. translators: %d: number of CVEs.
+#: src/Admin/DashboardPage.php:189
+#, php-format
+msgid "%d known vulnerability (NVD)"
+msgid_plural "%d known vulnerabilities (NVD)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Admin/DashboardPage.php:207
+msgid "Most severe open issues"
+msgstr ""
+
+#: src/Admin/DashboardPage.php:209
+msgid "No open issues."
+msgstr ""
+
+#: src/Admin/DashboardPage.php:222
+msgid "View all findings"
+msgstr ""
+
+#: src/Admin/DashboardPage.php:245
+msgid "Last scan:"
+msgstr ""
+
+#: src/Admin/DashboardPage.php:249
+msgid "Open Keep It Peace"
+msgstr ""
+
+#: src/Admin/FindingsListTable.php:121
+#: src/Admin/FindingsListTable.php:196
+msgid "Severity"
+msgstr ""
+
+#: src/Admin/FindingsListTable.php:122
+msgid "Issue"
+msgstr ""
+
+#: src/Admin/FindingsListTable.php:123
+#: src/Admin/FindingsListTable.php:202
+#: src/Admin/FindingsPage.php:139
+msgid "Category"
+msgstr ""
+
+#: src/Admin/FindingsListTable.php:124
+#: src/Admin/FindingsPage.php:140
+msgid "Location"
+msgstr ""
+
+#: src/Admin/FindingsListTable.php:125
+#: src/Admin/FindingsPage.php:138
+#: src/Admin/FindingsPage.php:169
+#: src/Admin/ScansPage.php:98
+#: src/Admin/SettingsPage.php:484
+msgid "Status"
+msgstr ""
+
+#: src/Admin/FindingsListTable.php:126
+#: src/Admin/FindingsPage.php:143
+msgid "Last detected"
+msgstr ""
+
+#: src/Admin/FindingsListTable.php:152
+msgid "Mark as acknowledged"
+msgstr ""
+
+#: src/Admin/FindingsListTable.php:153
+msgid "Ignore"
+msgstr ""
+
+#: src/Admin/FindingsListTable.php:154
+msgid "Mark as resolved"
+msgstr ""
+
+#: src/Admin/FindingsListTable.php:155
+msgid "Reopen"
+msgstr ""
+
+#: src/Admin/FindingsListTable.php:167
+msgid "Open"
+msgstr ""
+
+#: src/Admin/FindingsListTable.php:172
+msgid "All"
+msgstr ""
+
+#: src/Admin/FindingsListTable.php:197
+msgid "All severities"
+msgstr ""
+
+#: src/Admin/FindingsListTable.php:203
+msgid "All categories"
+msgstr ""
+
+#: src/Admin/FindingsListTable.php:208
+msgid "Filter"
+msgstr ""
+
+#: src/Admin/FindingsListTable.php:268
+msgid "No findings match the current filters."
+msgstr ""
+
+#: src/Admin/FindingsPage.php:72
+msgid "Changed with a bulk action."
+msgstr ""
+
+#: src/Admin/FindingsPage.php:112
+msgid "Search findings"
+msgstr ""
+
+#: src/Admin/FindingsPage.php:129
+msgid "Back to findings"
+msgstr ""
+
+#: src/Admin/FindingsPage.php:141
+msgid "Check / rule"
+msgstr ""
+
+#: src/Admin/FindingsPage.php:142
+msgid "First detected"
+msgstr ""
+
+#: src/Admin/FindingsPage.php:145
+#: src/Admin/FindingsPage.php:169
+msgid "Note"
+msgstr ""
+
+#: src/Admin/FindingsPage.php:149
+msgid "Description"
+msgstr ""
+
+#: src/Admin/FindingsPage.php:155
+msgid "Recommended action"
+msgstr ""
+
+#: src/Admin/FindingsPage.php:167
+msgid "History"
+msgstr ""
+
+#: src/Admin/FindingsPage.php:169
+msgid "Date"
+msgstr ""
+
+#: src/Admin/FindingsPage.php:169
+msgid "Event"
+msgstr ""
+
+#: src/Admin/FindingsPage.php:169
+msgid "By"
+msgstr ""
+
+#. translators: %d: scan ID.
+#: src/Admin/FindingsPage.php:179
+#, php-format
+msgid "Scan #%d"
+msgstr ""
+
+#: src/Admin/FindingsPage.php:191
+msgid "Change status"
+msgstr ""
+
+#: src/Admin/FindingsPage.php:204
+msgid "Note (e.g. why it is ignored)"
+msgstr ""
+
+#: src/Admin/FindingsPage.php:207
+msgid "Ignored findings about a file become active again when the file changes."
+msgstr ""
+
+#: src/Admin/FindingsPage.php:208
+msgid "Update"
+msgstr ""
+
+#: src/Admin/FindingsPage.php:228
+msgid "The code could not be shown (the file was moved, deleted or is not readable)."
+msgstr ""
+
+#: src/Admin/FindingsPage.php:233
+msgid "Code"
+msgstr ""
+
+#: src/Admin/FindingsPage.php:285
+msgid "Vulnerabilities"
+msgstr ""
+
+#: src/Admin/FindingsPage.php:310
+msgid "Detected"
+msgstr ""
+
+#: src/Admin/FindingsPage.php:311
+msgid "No longer detected"
+msgstr ""
+
+#: src/Admin/FindingsPage.php:312
+msgid "Detected again"
+msgstr ""
+
+#: src/Admin/FindingsPage.php:313
+msgid "Ignore cleared (file changed)"
+msgstr ""
+
+#: src/Admin/FindingsPage.php:314
+msgid "Status changed"
+msgstr ""
+
+#: src/Admin/ScansPage.php:47
+msgid "Running"
+msgstr ""
+
+#: src/Admin/ScansPage.php:48
+msgid "Completed"
+msgstr ""
+
+#: src/Admin/ScansPage.php:49
+msgid "Failed"
+msgstr ""
+
+#: src/Admin/ScansPage.php:50
+msgid "Aborted"
+msgstr ""
+
+#: src/Admin/ScansPage.php:63
+msgid "Scheduled"
+msgstr ""
+
+#: src/Admin/ScansPage.php:64
+msgid "Manual"
+msgstr ""
+
+#. translators: %d: days.
+#: src/Admin/ScansPage.php:88
+#, php-format
+msgid "History is kept for %d days."
+msgstr ""
+
+#: src/Admin/ScansPage.php:95
+msgid "Started"
+msgstr ""
+
+#: src/Admin/ScansPage.php:96
+msgid "Duration"
+msgstr ""
+
+#: src/Admin/ScansPage.php:97
+msgid "Trigger"
+msgstr ""
+
+#: src/Admin/ScansPage.php:100
+#: src/Findings/FindingStatus.php:49
+msgid "New"
+msgstr ""
+
+#: src/Admin/ScansPage.php:101
+#: src/Findings/FindingStatus.php:55
+msgid "Resolved"
+msgstr ""
+
+#: src/Admin/ScansPage.php:102
+msgid "Ongoing"
+msgstr ""
+
+#: src/Admin/ScansPage.php:107
+msgid "No scans yet."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:49
+msgid "General"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:50
+msgid "Targets"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:51
+msgid "Checks"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:52
+msgid "Notifications"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:53
+msgid "External services"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:54
+msgid "Tools"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:79
+msgid "Keep It Peace settings"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:150
+msgid "Scan frequency"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:160
+msgid "Keep history for"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:162
+msgid "days"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:164
+msgid "0 keeps history forever."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:182
+msgid "Themes to scan"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:190
+msgid "(active)"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:192
+msgid "(parent of the active theme)"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:198
+msgid "When nothing is selected, the active theme and its parent are scanned."
+msgstr ""
+
+#. translators: %s: theme slugs.
+#: src/Admin/SettingsPage.php:201
+#, php-format
+msgid "Currently scanned: %s"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:207
+msgid "Directories outside WordPress"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:209
+msgid "Other programs on this server, such as a landing page, a form mailer or a legacy application. Enter the absolute server path. The directory must be readable by PHP and inside open_basedir; WordPress itself cannot be registered."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:220
+msgid "Additional URLs for external checks"
+msgstr ""
+
+#. translators: %s: site address.
+#: src/Admin/SettingsPage.php:226
+#, php-format
+msgid "One URL per line. %s is always checked. Only URLs on your own domain (including subdomains) are accepted."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:247
+msgid "Add a directory"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:250
+msgid "Path"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:255
+msgid "Label"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:259
+msgid "Public URL (optional)"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:264
+msgid "Checks and exclusions"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:277
+msgid "Additional exclude patterns (one per line)"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:282
+msgid "Remove this directory"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:297
+msgid "Enabled checks"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:311
+msgid "Exclude patterns"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:314
+msgid "One pattern per line. Without \"/\" a pattern matches any file or folder name (e.g. node_modules, *.min.js). With \"/\" it matches the path from the target root (e.g. assets/vendor/*)."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:318
+msgid "Maximum file size for code analysis"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:322
+msgid "Maximum files per target"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:325
+msgid "0 means no limit."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:342
+msgid "Send a report"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:348
+msgid "Minimum severity:"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:363
+msgid "Weekly digest"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:364
+msgid "Send a weekly summary of open issues regardless of the condition above"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:372
+msgid "Test"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:373
+msgid "Save your settings before sending a test."
+msgstr ""
+
+#. translators: %s: channel name.
+#: src/Admin/SettingsPage.php:381
+#, php-format
+msgid "Send test (%s)"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:395
+msgid "Support periods of PHP, MySQL and MariaDB. Sends: product name only."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:396
+msgid "Latest PHP patch release. Sends: PHP release series (e.g. 8.2)."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:397
+msgid "Known vulnerabilities of your PHP version. Sends: PHP version (e.g. 8.2.10)."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:398
+msgid "Known vulnerabilities of Composer and npm packages. Sends: package names and versions."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:403
+msgid "External APIs"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:405
+msgid "Allow requests to the services below"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:406
+msgid "Your site URL, file contents and personal data are never sent. Results are cached. When disabled, a bundled snapshot is used for support periods."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:410
+msgid "Services"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:436
+msgid "File baseline"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:437
+msgid "After a planned deployment, approve the current files as the new baseline so they are no longer reported as changed."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:440
+msgid "never"
+msgstr ""
+
+#. translators: %s: date.
+#: src/Admin/SettingsPage.php:442
+#, php-format
+msgid "Approval uses the file state recorded by the last scan (%s). If you deployed after that, run a scan first."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:446
+msgid "Target"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:446
+#: src/Admin/Ui.php:80
+msgid "Files"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:446
+msgid "Approved"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:456
+msgid "first scan"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:458
+msgid "Not yet (recorded on the next scan)"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:462
+msgid "Approve current state"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:467
+msgid "Approve all targets"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:469
+msgid "Export"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:470
+msgid "Download the results of the last completed scan as JSON (the format is documented for add-ons and external tools). The file contains file paths and URLs of this site; store it safely."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:474
+msgid "Download JSON report"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:477
+msgid "Running scans from the server cron"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:478
+msgid "WP-Cron only runs when someone visits the site. For reliable monitoring, run the scan from the server cron with WP-CLI:"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:480
+msgid "If WP-CLI is not available (some shared hosts), call wp-cron.php instead:"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:482
+msgid "On Xserver, add the command in Server Panel → Cron settings. Use the full path to PHP or WP-CLI shown in the panel's help. When you use a server cron, you can add define( 'DISABLE_WP_CRON', true ); to wp-config.php."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:486
+msgid "Last completed scan"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:487
+msgid "Next scheduled scan"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:490
+msgid "Site ID"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:491
+msgid "Rule set"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:507
+msgid "Approve the current files as the trusted baseline?"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:533
+msgid "Keep It Peace Pro"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:534
+msgid "Monitor many sites from one dashboard, get alerts when a site stops reporting, send monthly PDF reports to clients and use Slack or Chatwork notifications."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:535
+msgid "Learn more"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:539
+msgid "Hide this"
+msgstr ""
+
+#. translators: 1: path, 2: reason.
+#: src/Admin/SettingsSanitizer.php:169
+#, php-format
+msgid "%1$s: %2$s"
+msgstr ""
+
+#. translators: %s: URL.
+#: src/Admin/SettingsSanitizer.php:183
+#: src/Admin/SettingsSanitizer.php:216
+#, php-format
+msgid "%s: only URLs on your own domain can be checked."
+msgstr ""
+
+#: src/Admin/Ui.php:74
+msgid "PHP / server"
+msgstr ""
+
+#: src/Admin/Ui.php:75
+msgid "Theme"
+msgstr ""
+
+#: src/Admin/Ui.php:76
+msgid "Outside WordPress"
+msgstr ""
+
+#: src/Admin/Ui.php:77
+msgid "Public surface"
+msgstr ""
+
+#: src/Admin/Ui.php:78
+msgid "Dependencies"
+msgstr ""
+
+#: src/Admin/Ui.php:79
+msgid "WordPress environment"
+msgstr ""
+
+#: src/Checks/Dependencies/DependencyCheck.php:45
+msgid "Vulnerable dependencies"
+msgstr ""
+
+#: src/Checks/Dependencies/DependencyCheck.php:63
+msgid "Reads composer.lock and package-lock.json in themes and registered directories and looks up known vulnerabilities on OSV.dev. Only package names and versions are sent."
+msgstr ""
+
+#: src/Checks/Dependencies/DependencyCheck.php:92
+msgid "Lock file could not be read"
+msgstr ""
+
+#: src/Checks/Dependencies/DependencyCheck.php:92
+msgid "The file is unreadable, too large or not valid JSON, so its packages were not checked."
+msgstr ""
+
+#. translators: %s: error message.
+#: src/Checks/Dependencies/DependencyCheck.php:114
+#, php-format
+msgid "OSV.dev could not be reached: %s. Previous results are kept."
+msgstr ""
+
+#: src/Checks/Dependencies/DependencyCheck.php:116
+msgid "Dependencies could not be checked"
+msgstr ""
+
+#. translators: %d: number of vulnerabilities.
+#: src/Checks/Dependencies/DependencyCheck.php:176
+#, php-format
+msgid "and %d more"
+msgstr ""
+
+#. translators: 1: package, 2: version, 3: command.
+#: src/Checks/Dependencies/DependencyCheck.php:185
+#, php-format
+msgid "Update %1$s to %2$s or later (e.g. %3$s), deploy the result and run the scan again."
+msgstr ""
+
+#. translators: 1: package, 2: command.
+#: src/Checks/Dependencies/DependencyCheck.php:188
+#, php-format
+msgid "Update %1$s to a version without these vulnerabilities (e.g. %2$s), or replace it if no fix exists."
+msgstr ""
+
+#. translators: 1: number, 2: list of vulnerabilities.
+#: src/Checks/Dependencies/DependencyCheck.php:192
+#, php-format
+msgid "%1$d known vulnerability: %2$s"
+msgid_plural "%1$d known vulnerabilities: %2$s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Checks/Dependencies/DependencyCheck.php:197
+msgid "(Development dependency, installed on this server.)"
+msgstr ""
+
+#. translators: 1: package, 2: version.
+#: src/Checks/Dependencies/DependencyCheck.php:208
+#, php-format
+msgid "Vulnerable package: %1$s %2$s"
+msgstr ""
+
+#: src/Checks/Dependencies/DependencyCheck.php:246
+msgid "Run the scan again later. You can disable this check in the settings."
+msgstr ""
+
+#: src/Checks/Environment/UploadsPhpCheck.php:42
+msgid "Executable files in uploads"
+msgstr ""
+
+#: src/Checks/Environment/UploadsPhpCheck.php:60
+msgid "Looks for .php, .phtml and other executable files in wp-content/uploads, where only media should be stored."
+msgstr ""
+
+#: src/Checks/Environment/UploadsPhpCheck.php:101
+msgid "Uploads directory could not be read"
+msgstr ""
+
+#: src/Checks/Environment/UploadsPhpCheck.php:103
+msgid "Check the permissions of wp-content/uploads."
+msgstr ""
+
+#: src/Checks/Environment/UploadsPhpCheck.php:151
+msgid "PHP file in uploads"
+msgstr ""
+
+#: src/Checks/Environment/UploadsPhpCheck.php:151
+msgid "Executable file in uploads"
+msgstr ""
+
+#: src/Checks/Environment/UploadsPhpCheck.php:152
+msgid "The uploads directory should only contain media. Executable files here are a common sign of a compromised site or of an insecure upload form."
+msgstr ""
+
+#: src/Checks/Environment/UploadsPhpCheck.php:153
+msgid "Inspect the file and delete it if it is not required. Also block PHP execution in uploads with server configuration."
+msgstr ""
+
+#: src/Checks/Environment/WpConfigCheck.php:38
+msgid "WordPress configuration"
+msgstr ""
+
+#: src/Checks/Environment/WpConfigCheck.php:56
+msgid "Checks WP_DEBUG, WP_DEBUG_DISPLAY, debug.log, wp-config.php permissions and the built-in file editor."
+msgstr ""
+
+#: src/Checks/Environment/WpConfigCheck.php:99
+msgid "Debug messages are shown to visitors"
+msgstr ""
+
+#: src/Checks/Environment/WpConfigCheck.php:99
+msgid "WP_DEBUG is on and WP_DEBUG_DISPLAY is not off, so PHP notices and errors appear on pages and reveal file paths."
+msgstr ""
+
+#: src/Checks/Environment/WpConfigCheck.php:99
+msgid "Set define( 'WP_DEBUG', false ) on production, or at least define( 'WP_DEBUG_DISPLAY', false )."
+msgstr ""
+
+#: src/Checks/Environment/WpConfigCheck.php:101
+msgid "WP_DEBUG is enabled"
+msgstr ""
+
+#: src/Checks/Environment/WpConfigCheck.php:101
+msgid "Debug mode is on. It is meant for development and can slow the site and fill the log."
+msgstr ""
+
+#: src/Checks/Environment/WpConfigCheck.php:101
+msgid "Set define( 'WP_DEBUG', false ) on production."
+msgstr ""
+
+#: src/Checks/Environment/WpConfigCheck.php:114
+msgid "debug.log exists"
+msgstr ""
+
+#: src/Checks/Environment/WpConfigCheck.php:116
+msgid "A debug log is stored inside wp-content, where it may be downloadable. Logs can contain paths, queries and personal data."
+msgstr ""
+
+#: src/Checks/Environment/WpConfigCheck.php:117
+msgid "A debug log file exists."
+msgstr ""
+
+#: src/Checks/Environment/WpConfigCheck.php:118
+msgid "Delete the log when it is no longer needed, and set WP_DEBUG_LOG to a path outside the web root."
+msgstr ""
+
+#: src/Checks/Environment/WpConfigCheck.php:131
+msgid "Set the permissions to 400 or 440 (600/640 if your host requires write access)."
+msgstr ""
+
+#. translators: %s: permissions such as 666.
+#: src/Checks/Environment/WpConfigCheck.php:134
+#, php-format
+msgid "wp-config.php has permissions %s. Anyone on the server can change it."
+msgstr ""
+
+#: src/Checks/Environment/WpConfigCheck.php:135
+msgid "wp-config.php is world-writable"
+msgstr ""
+
+#. translators: %s: permissions such as 644.
+#: src/Checks/Environment/WpConfigCheck.php:138
+#, php-format
+msgid "wp-config.php has permissions %s. On shared servers other accounts may be able to read your database password."
+msgstr ""
+
+#: src/Checks/Environment/WpConfigCheck.php:139
+msgid "wp-config.php is readable by everyone on the server"
+msgstr ""
+
+#: src/Checks/Environment/WpConfigCheck.php:145
+msgid "Theme and plugin file editor is enabled"
+msgstr ""
+
+#: src/Checks/Environment/WpConfigCheck.php:145
+msgid "Administrators can edit PHP files from the dashboard. A stolen admin account can then run arbitrary code."
+msgstr ""
+
+#: src/Checks/Environment/WpConfigCheck.php:145
+msgid "Add define( 'DISALLOW_FILE_EDIT', true ); to wp-config.php."
+msgstr ""
+
+#: src/Checks/External/AbstractExternalCheck.php:160
+msgid "The site could not be reached for the external check"
+msgstr ""
+
+#. translators: %s: error message.
+#: src/Checks/External/AbstractExternalCheck.php:162
+#, php-format
+msgid "The request failed: %s. Previous results of this check are kept until the site can be checked again."
+msgstr ""
+
+#: src/Checks/External/AbstractExternalCheck.php:163
+msgid "Some hosts block requests from the server to itself (loopback). If the site works for visitors, ask your host to allow loopback requests or disable this check."
+msgstr ""
+
+#: src/Checks/External/DirectoryListingCheck.php:36
+msgid "Directory listing"
+msgstr ""
+
+#: src/Checks/External/DirectoryListingCheck.php:45
+msgid "Checks whether wp-content/uploads and other directories show a list of their files (\"Index of /\")."
+msgstr ""
+
+#: src/Checks/External/DirectoryListingCheck.php:114
+msgid "Directory listing is enabled"
+msgstr ""
+
+#: src/Checks/External/DirectoryListingCheck.php:115
+msgid "Anyone can see the list of files in this directory, including backups and private uploads."
+msgstr ""
+
+#: src/Checks/External/DirectoryListingCheck.php:116
+msgid "Disable directory listings (\"Options -Indexes\" in .htaccess for Apache, \"autoindex off\" for nginx) or ask your host."
+msgstr ""
+
+#: src/Checks/External/ExposedFilesCheck.php:37
+msgid "Exposed sensitive files"
+msgstr ""
+
+#: src/Checks/External/ExposedFilesCheck.php:46
+msgid "Checks whether files such as .env, .git, wp-config.php backups, SQL dumps, debug.log and phpinfo pages can be downloaded from the site."
+msgstr ""
+
+#. translators: %s: path.
+#: src/Checks/External/ExposedFilesCheck.php:138
+#, php-format
+msgid "Publicly accessible: %s"
+msgstr ""
+
+#: src/Checks/External/ExposedFilesCheck.php:184
+msgid "Delete the file from the public directory, or block access to it in the server configuration. Change any passwords or keys it contains."
+msgstr ""
+
+#: src/Checks/External/ExposedFilesCheck.php:187
+msgid "An environment file is downloadable. It usually contains database passwords and API keys."
+msgstr ""
+
+#: src/Checks/External/ExposedFilesCheck.php:189
+msgid "Version control data is downloadable. Attackers can rebuild your source code, including configuration and credentials committed in the past."
+msgstr ""
+
+#: src/Checks/External/ExposedFilesCheck.php:189
+msgid "Remove the .git/.svn/.hg directory from the public directory or deny access to it, then rotate any credentials found in the repository history."
+msgstr ""
+
+#: src/Checks/External/ExposedFilesCheck.php:191
+msgid "A backup of wp-config.php is served as plain text, revealing the database password and security keys."
+msgstr ""
+
+#: src/Checks/External/ExposedFilesCheck.php:191
+msgid "Delete the backup file, change the database password and regenerate the security keys in wp-config.php."
+msgstr ""
+
+#: src/Checks/External/ExposedFilesCheck.php:193
+msgid "A PHP error log is downloadable. Logs reveal file paths, plugin names and sometimes personal data."
+msgstr ""
+
+#: src/Checks/External/ExposedFilesCheck.php:193
+msgid "Delete the log, and write logs outside the public directory (set WP_DEBUG_LOG to a private path)."
+msgstr ""
+
+#: src/Checks/External/ExposedFilesCheck.php:195
+msgid "A phpinfo() page is public. It shows the PHP version, extensions, paths and environment variables."
+msgstr ""
+
+#: src/Checks/External/ExposedFilesCheck.php:195
+msgid "Delete the file after use."
+msgstr ""
+
+#: src/Checks/External/ExposedFilesCheck.php:197
+msgid "A database dump is downloadable. It can contain user accounts, password hashes and customer data."
+msgstr ""
+
+#: src/Checks/External/ExposedFilesCheck.php:197
+msgid "Delete the dump immediately, store backups outside the public directory, and treat the data as leaked."
+msgstr ""
+
+#: src/Checks/External/ExposedFilesCheck.php:199
+msgid "A backup archive is downloadable. It may contain the whole site including wp-config.php."
+msgstr ""
+
+#: src/Checks/External/ExposedFilesCheck.php:199
+msgid "Delete the archive and keep backups outside the public directory."
+msgstr ""
+
+#: src/Checks/External/ExposedFilesCheck.php:201
+msgid "A password file is downloadable. Password hashes can be cracked offline."
+msgstr ""
+
+#: src/Checks/External/ExposedFilesCheck.php:203
+msgid "A dependency lock file is downloadable. It lists exact package versions, which helps attackers find known vulnerabilities."
+msgstr ""
+
+#: src/Checks/External/ExposedFilesCheck.php:203
+msgid "Block access to lock files or move them outside the public directory."
+msgstr ""
+
+#: src/Checks/External/ExposedFilesCheck.php:205
+msgid "A .DS_Store file is downloadable. It reveals the names of files in the directory."
+msgstr ""
+
+#: src/Checks/External/ExposedFilesCheck.php:207
+msgid "A file that should not be public can be downloaded."
+msgstr ""
+
+#: src/Checks/External/ExternalTargets.php:32
+msgid "Site address"
+msgstr ""
+
+#: src/Checks/External/ExternalTargets.php:37
+msgid "WordPress address"
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:36
+msgid "Security headers"
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:45
+msgid "Checks HSTS, X-Content-Type-Options, clickjacking protection, Referrer-Policy and Content-Security-Policy, the redirect from HTTP to HTTPS, and whether server, PHP or WordPress versions are revealed."
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:97
+msgid "HTTP is not redirected to HTTPS"
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:98
+msgid "The site can be opened over unencrypted http:// without being redirected to https://."
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:99
+msgid "Redirect all http:// requests to https:// with a 301 redirect (hosting panel setting or .htaccess)."
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:157
+msgid "Strict-Transport-Security (HSTS) is not set"
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:157
+msgid "Without HSTS, browsers may still try http:// first, which allows downgrade attacks on public Wi-Fi."
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:157
+msgid "Send \"Strict-Transport-Security: max-age=31536000\" once HTTPS works on all pages and subdomains you use."
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:159
+msgid "HSTS max-age is short"
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:159
+msgid "The HSTS max-age is less than 180 days."
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:159
+msgid "Use max-age=31536000 (one year) once the setting is confirmed to work."
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:163
+msgid "X-Content-Type-Options is not set"
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:163
+msgid "Browsers may guess the type of uploaded files and run them as scripts."
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:163
+msgid "Send \"X-Content-Type-Options: nosniff\"."
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:166
+msgid "Clickjacking protection is not set"
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:166
+msgid "Other sites can show your pages in a frame and trick visitors into clicking buttons."
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:166
+msgid "Send \"X-Frame-Options: SAMEORIGIN\" or a Content-Security-Policy with frame-ancestors 'self'."
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:169
+msgid "Referrer-Policy is not set"
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:169
+msgid "Full URLs, including query strings, may be sent to other sites when visitors follow links."
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:169
+msgid "Send \"Referrer-Policy: strict-origin-when-cross-origin\"."
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:172
+msgid "Content-Security-Policy is not set"
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:172
+msgid "A Content-Security-Policy limits where scripts can be loaded from and reduces the impact of XSS."
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:172
+msgid "Start with a Content-Security-Policy-Report-Only header, check the reports, then enforce it."
+msgstr ""
+
+#. translators: %s: header value.
+#: src/Checks/External/SecurityHeadersCheck.php:178
+#, php-format
+msgid "The Server header is \"%s\". Attackers use versions to pick known exploits."
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:179
+msgid "The web server version is revealed"
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:179
+msgid "Hide the version (e.g. ServerTokens Prod for Apache, server_tokens off for nginx) or ask your host."
+msgstr ""
+
+#. translators: %s: header value.
+#: src/Checks/External/SecurityHeadersCheck.php:184
+#, php-format
+msgid "The X-Powered-By header is \"%s\"."
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:185
+msgid "X-Powered-By reveals the PHP version"
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:185
+msgid "Set expose_php = Off in php.ini (or .user.ini), or remove the header in the server configuration."
+msgstr ""
+
+#. translators: %s: WordPress version.
+#: src/Checks/External/SecurityHeadersCheck.php:189
+#, php-format
+msgid "The generator meta tag reveals WordPress %s."
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:190
+msgid "The WordPress version is shown in the page source"
+msgstr ""
+
+#: src/Checks/External/SecurityHeadersCheck.php:190
+msgid "Keep WordPress up to date. You can remove the tag with remove_action( 'wp_head', 'wp_generator' )."
+msgstr ""
+
+#: src/Checks/External/TlsCheck.php:38
+msgid "SSL/TLS certificate"
+msgstr ""
+
+#: src/Checks/External/TlsCheck.php:47
+msgid "Checks that the site uses HTTPS, how many days the certificate is valid, whether it is trusted and matches the host name, and the TLS version."
+msgstr ""
+
+#: src/Checks/External/TlsCheck.php:108
+msgid "The site address does not use HTTPS"
+msgstr ""
+
+#: src/Checks/External/TlsCheck.php:109
+msgid "Logins, cookies and form data are sent unencrypted."
+msgstr ""
+
+#: src/Checks/External/TlsCheck.php:110
+msgid "Enable a free certificate (e.g. Let's Encrypt) in your hosting panel and change the WordPress and site addresses to https://."
+msgstr ""
+
+#: src/Checks/External/TlsCheck.php:123
+msgid "The certificate could not be checked on this server"
+msgstr ""
+
+#: src/Checks/External/TlsCheck.php:124
+msgid "stream_socket_client() or the OpenSSL extension is not available to PHP."
+msgstr ""
+
+#: src/Checks/External/TlsCheck.php:125
+msgid "Check the certificate expiry date in your hosting panel instead."
+msgstr ""
+
+#: src/Checks/External/TlsCheck.php:138
+msgid "Could not connect over HTTPS"
+msgstr ""
+
+#. translators: %s: error message.
+#: src/Checks/External/TlsCheck.php:140
+#, php-format
+msgid "The TLS connection failed: %s"
+msgstr ""
+
+#: src/Checks/External/TlsCheck.php:141
+msgid "If visitors can open the site over HTTPS, the server may block connections to itself. Otherwise check the certificate in your hosting panel."
+msgstr ""
+
+#. translators: %s: date.
+#: src/Checks/External/TlsCheck.php:177
+#, php-format
+msgid "The certificate expires on %s."
+msgstr ""
+
+#: src/Checks/External/TlsCheck.php:178
+msgid "Renew the certificate or check that automatic renewal works in your hosting panel."
+msgstr ""
+
+#: src/Checks/External/TlsCheck.php:180
+msgid "The SSL certificate has expired"
+msgstr ""
+
+#: src/Checks/External/TlsCheck.php:180
+msgid "Browsers show a security warning to visitors."
+msgstr ""
+
+#. translators: %d: days.
+#: src/Checks/External/TlsCheck.php:183
+#: src/Checks/External/TlsCheck.php:186
+#, php-format
+msgid "The SSL certificate expires in %d day"
+msgid_plural "The SSL certificate expires in %d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: names in the certificate.
+#: src/Checks/External/TlsCheck.php:191
+#, php-format
+msgid "The certificate is issued for: %s"
+msgstr ""
+
+#: src/Checks/External/TlsCheck.php:192
+msgid "The certificate does not match the host name"
+msgstr ""
+
+#: src/Checks/External/TlsCheck.php:192
+msgid "Issue a certificate that includes this host name (with and without www if both are used)."
+msgstr ""
+
+#: src/Checks/External/TlsCheck.php:198
+msgid "The certificate is self-signed"
+msgstr ""
+
+#: src/Checks/External/TlsCheck.php:198
+msgid "The certificate is not trusted"
+msgstr ""
+
+#. translators: %s: error message.
+#: src/Checks/External/TlsCheck.php:200
+#, php-format
+msgid "Certificate verification failed: %s"
+msgstr ""
+
+#: src/Checks/External/TlsCheck.php:201
+msgid "Use a certificate from a public certificate authority and make sure the intermediate certificates are installed."
+msgstr ""
+
+#. translators: %s: protocol such as TLSv1.1.
+#: src/Checks/External/TlsCheck.php:207
+#, php-format
+msgid "The connection used %s, which is no longer considered secure."
+msgstr ""
+
+#: src/Checks/External/TlsCheck.php:208
+msgid "An outdated TLS version is used"
+msgstr ""
+
+#: src/Checks/External/TlsCheck.php:208
+msgid "Enable TLS 1.2 and 1.3 and disable older versions on the server."
+msgstr ""
+
+#: src/Checks/Files/CodePatternCheck.php:56
+msgid "Dangerous code patterns"
+msgstr ""
+
+#: src/Checks/Files/CodePatternCheck.php:65
+msgid "Scans code for eval, shell execution, obfuscation, unsanitized input, unprepared SQL and missing nonce or capability checks."
+msgstr ""
+
+#: src/Checks/Files/IntegrityCheck.php:42
+msgid "File integrity"
+msgstr ""
+
+#: src/Checks/Files/IntegrityCheck.php:51
+msgid "Detects files added, changed or deleted since the approved baseline (sha256)."
+msgstr ""
+
+#: src/Checks/Files/IntegrityCheck.php:72
+msgid "File could not be read"
+msgstr ""
+
+#: src/Checks/Files/IntegrityCheck.php:73
+msgid "The file exists but PHP cannot read it, so changes cannot be detected."
+msgstr ""
+
+#: src/Checks/Files/IntegrityCheck.php:74
+msgid "Check the file permissions."
+msgstr ""
+
+#: src/Checks/Files/IntegrityCheck.php:96
+msgid "New file"
+msgstr ""
+
+#: src/Checks/Files/IntegrityCheck.php:97
+msgid "This file was added after the baseline was approved."
+msgstr ""
+
+#: src/Checks/Files/IntegrityCheck.php:98
+msgid "If you deployed this file, approve the current state as the baseline. Otherwise inspect it and remove it if it is not yours."
+msgstr ""
+
+#: src/Checks/Files/IntegrityCheck.php:116
+msgid "File changed"
+msgstr ""
+
+#: src/Checks/Files/IntegrityCheck.php:117
+msgid "The contents of this file differ from the approved baseline."
+msgstr ""
+
+#: src/Checks/Files/IntegrityCheck.php:118
+msgid "If the change was a planned deployment, approve the current state as the baseline. Otherwise compare the file with your source and restore it."
+msgstr ""
+
+#: src/Checks/Files/IntegrityCheck.php:159
+msgid "File deleted"
+msgstr ""
+
+#: src/Checks/Files/IntegrityCheck.php:160
+msgid "This file is in the baseline but no longer exists."
+msgstr ""
+
+#: src/Checks/Files/IntegrityCheck.php:161
+msgid "If you removed it on purpose, approve the current state as the baseline."
+msgstr ""
+
+#: src/Checks/Files/PermissionCheck.php:39
+msgid "File permissions"
+msgstr ""
+
+#: src/Checks/Files/PermissionCheck.php:48
+msgid "Finds files and directories that every user on the server can write to (e.g. 777, 666)."
+msgstr ""
+
+#: src/Checks/Files/PermissionCheck.php:82
+#: src/Checks/Files/PermissionCheck.php:130
+msgid "World-writable directory"
+msgstr ""
+
+#. translators: %s: permissions such as 777.
+#: src/Checks/Files/PermissionCheck.php:84
+#: src/Checks/Files/PermissionCheck.php:132
+#, php-format
+msgid "The directory permissions are %s. Any user or process on the server can add files here."
+msgstr ""
+
+#: src/Checks/Files/PermissionCheck.php:85
+#: src/Checks/Files/PermissionCheck.php:133
+msgid "Set directories to 755 (or 750) and files to 644 (or 640)."
+msgstr ""
+
+#: src/Checks/Files/PermissionCheck.php:108
+msgid "World-writable file"
+msgstr ""
+
+#. translators: %s: permissions such as 666.
+#: src/Checks/Files/PermissionCheck.php:110
+#, php-format
+msgid "The file permissions are %s. Any user or process on the server can change it."
+msgstr ""
+
+#: src/Checks/Files/PermissionCheck.php:111
+msgid "Set files to 644 (or 640)."
+msgstr ""
+
+#: src/Checks/Files/SuspiciousFileCheck.php:67
+msgid "Suspicious files"
+msgstr ""
+
+#: src/Checks/Files/SuspiciousFileCheck.php:76
+msgid "Finds double extensions, hidden files, PHP files in image or asset folders, PHP code inside images and known web shell names."
+msgstr ""
+
+#: src/Checks/Files/SuspiciousFileCheck.php:92
+msgid "Double file extension"
+msgstr ""
+
+#: src/Checks/Files/SuspiciousFileCheck.php:92
+msgid "The file name has two extensions, a trick used to upload executable files disguised as images or documents."
+msgstr ""
+
+#: src/Checks/Files/SuspiciousFileCheck.php:97
+msgid "Hidden PHP file"
+msgstr ""
+
+#: src/Checks/Files/SuspiciousFileCheck.php:97
+msgid "A PHP file whose name starts with a dot is hidden from normal directory listings. Backdoors are often stored this way."
+msgstr ""
+
+#: src/Checks/Files/SuspiciousFileCheck.php:99
+msgid ".htaccess inside the directory"
+msgstr ""
+
+#: src/Checks/Files/SuspiciousFileCheck.php:99
+msgid "An .htaccess file can change how the server executes files. Attackers use it to enable PHP in unexpected places or to redirect visitors."
+msgstr ""
+
+#: src/Checks/Files/SuspiciousFileCheck.php:101
+msgid "Hidden file"
+msgstr ""
+
+#: src/Checks/Files/SuspiciousFileCheck.php:101
+msgid "A file whose name starts with a dot was found."
+msgstr ""
+
+#: src/Checks/Files/SuspiciousFileCheck.php:108
+msgid "PHP file in an asset folder"
+msgstr ""
+
+#: src/Checks/Files/SuspiciousFileCheck.php:108
+msgid "Image, font and CSS folders should not contain PHP. A PHP file here is often an uploaded backdoor."
+msgstr ""
+
+#: src/Checks/Files/SuspiciousFileCheck.php:111
+msgid "File name used by web shells"
+msgstr ""
+
+#: src/Checks/Files/SuspiciousFileCheck.php:111
+msgid "The file name matches names commonly used by web shells and malware droppers."
+msgstr ""
+
+#: src/Checks/Files/SuspiciousFileCheck.php:114
+msgid "Unusual PHP extension"
+msgstr ""
+
+#: src/Checks/Files/SuspiciousFileCheck.php:114
+msgid "Extensions such as .phtml, .php5 or .phar are executable on many servers and are used to bypass upload filters."
+msgstr ""
+
+#: src/Checks/Files/SuspiciousFileCheck.php:121
+msgid "PHP code inside an image"
+msgstr ""
+
+#: src/Checks/Files/SuspiciousFileCheck.php:121
+msgid "The image file contains PHP code. It may be included by another script to run a backdoor."
+msgstr ""
+
+#: src/Checks/Files/SuspiciousFileCheck.php:147
+msgid "Inspect the file. If you do not know why it is there, remove it, check other files changed at the same time and change your passwords."
+msgstr ""
+
+#: src/Checks/Php/DatabaseVersionCheck.php:39
+msgid "Database version"
+msgstr ""
+
+#: src/Checks/Php/DatabaseVersionCheck.php:57
+msgid "Checks whether the MySQL or MariaDB version still receives security updates."
+msgstr ""
+
+#. translators: 1: MySQL or MariaDB, 2: version.
+#: src/Checks/Php/DatabaseVersionCheck.php:109
+#, php-format
+msgid "%1$s %2$s is no longer supported"
+msgstr ""
+
+#. translators: %s: date.
+#: src/Checks/Php/DatabaseVersionCheck.php:112
+#, php-format
+msgid "Security support ended on %s."
+msgstr ""
+
+#: src/Checks/Php/DatabaseVersionCheck.php:113
+msgid "Security support has ended."
+msgstr ""
+
+#: src/Checks/Php/DatabaseVersionCheck.php:114
+msgid "Ask your hosting provider to move the database to a supported version."
+msgstr ""
+
+#. translators: 1: MySQL or MariaDB, 2: version.
+#: src/Checks/Php/DatabaseVersionCheck.php:124
+#, php-format
+msgid "%1$s %2$s support ends soon"
+msgstr ""
+
+#. translators: 1: date, 2: days.
+#: src/Checks/Php/DatabaseVersionCheck.php:126
+#, php-format
+msgid "Security support ends on %1$s (in %2$d days)."
+msgstr ""
+
+#: src/Checks/Php/DatabaseVersionCheck.php:127
+msgid "Plan a database upgrade with your hosting provider."
+msgstr ""
+
+#: src/Checks/Php/PhpIniCheck.php:38
+msgid "PHP settings"
+msgstr ""
+
+#: src/Checks/Php/PhpIniCheck.php:56
+msgid "Checks display_errors, expose_php, allow_url_include, allow_url_fopen and similar settings."
+msgstr ""
+
+#: src/Checks/Php/PhpIniCheck.php:81
+msgid "display_errors is on"
+msgstr ""
+
+#: src/Checks/Php/PhpIniCheck.php:81
+msgid "PHP errors are shown to visitors. Error messages reveal file paths and code structure."
+msgstr ""
+
+#: src/Checks/Php/PhpIniCheck.php:81
+msgid "Set display_errors = Off and log errors instead (log_errors = On)."
+msgstr ""
+
+#: src/Checks/Php/PhpIniCheck.php:82
+msgid "expose_php is on"
+msgstr ""
+
+#: src/Checks/Php/PhpIniCheck.php:82
+msgid "The PHP version is sent in the X-Powered-By header, which helps attackers pick exploits."
+msgstr ""
+
+#: src/Checks/Php/PhpIniCheck.php:82
+msgid "Set expose_php = Off in php.ini (or the hosting control panel)."
+msgstr ""
+
+#: src/Checks/Php/PhpIniCheck.php:83
+msgid "allow_url_include is on"
+msgstr ""
+
+#: src/Checks/Php/PhpIniCheck.php:83
+msgid "include/require can load code from remote URLs, which turns file inclusion bugs into remote code execution."
+msgstr ""
+
+#: src/Checks/Php/PhpIniCheck.php:83
+msgid "Set allow_url_include = Off."
+msgstr ""
+
+#: src/Checks/Php/PhpIniCheck.php:84
+msgid "allow_url_fopen is on"
+msgstr ""
+
+#: src/Checks/Php/PhpIniCheck.php:84
+msgid "File functions can open remote URLs. WordPress does not need this (it uses the HTTP API), but some code may rely on it."
+msgstr ""
+
+#: src/Checks/Php/PhpIniCheck.php:84
+msgid "Turn it off if no code on the site depends on it."
+msgstr ""
+
+#: src/Checks/Php/PhpIniCheck.php:85
+msgid "log_errors is off"
+msgstr ""
+
+#: src/Checks/Php/PhpIniCheck.php:85
+msgid "PHP errors are not logged, so problems and attacks may go unnoticed."
+msgstr ""
+
+#: src/Checks/Php/PhpIniCheck.php:85
+msgid "Set log_errors = On and make sure the log is not publicly accessible."
+msgstr ""
+
+#: src/Checks/Php/PhpIniCheck.php:86
+msgid "session.cookie_httponly is off"
+msgstr ""
+
+#: src/Checks/Php/PhpIniCheck.php:86
+msgid "PHP session cookies can be read by JavaScript. WordPress itself does not use PHP sessions, but other code may."
+msgstr ""
+
+#: src/Checks/Php/PhpIniCheck.php:86
+msgid "Set session.cookie_httponly = On."
+msgstr ""
+
+#: src/Checks/Php/PhpVersionCheck.php:43
+msgid "PHP version"
+msgstr ""
+
+#: src/Checks/Php/PhpVersionCheck.php:61
+msgid "Checks end of life, missing patch releases and known vulnerabilities (CVE) of the running PHP version."
+msgstr ""
+
+#. translators: %s: PHP version.
+#: src/Checks/Php/PhpVersionCheck.php:92
+#, php-format
+msgid "PHP %s is no longer supported"
+msgstr ""
+
+#. translators: 1: PHP branch, 2: date.
+#: src/Checks/Php/PhpVersionCheck.php:95
+#, php-format
+msgid "Security support for PHP %1$s ended on %2$s. New vulnerabilities will not be fixed."
+msgstr ""
+
+#. translators: %s: PHP branch.
+#: src/Checks/Php/PhpVersionCheck.php:97
+#, php-format
+msgid "Security support for PHP %s has ended. New vulnerabilities will not be fixed."
+msgstr ""
+
+#: src/Checks/Php/PhpVersionCheck.php:98
+msgid "Upgrade to a supported PHP version in your hosting control panel after testing the site on it."
+msgstr ""
+
+#. translators: %s: PHP version.
+#: src/Checks/Php/PhpVersionCheck.php:109
+#, php-format
+msgid "PHP %s support ends soon"
+msgstr ""
+
+#. translators: 1: PHP branch, 2: date, 3: days.
+#: src/Checks/Php/PhpVersionCheck.php:111
+#, php-format
+msgid "Security support for PHP %1$s ends on %2$s (in %3$d days)."
+msgstr ""
+
+#: src/Checks/Php/PhpVersionCheck.php:112
+msgid "Plan an upgrade to a newer PHP version."
+msgstr ""
+
+#: src/Checks/Php/PhpVersionCheck.php:122
+msgid "PHP support status unknown"
+msgstr ""
+
+#. translators: %s: PHP version.
+#: src/Checks/Php/PhpVersionCheck.php:124
+#, php-format
+msgid "No release data was found for PHP %s."
+msgstr ""
+
+#: src/Checks/Php/PhpVersionCheck.php:125
+msgid "Enable the endoflife.date API in the settings or check the PHP website."
+msgstr ""
+
+#: src/Checks/Php/PhpVersionCheck.php:136
+msgid "PHP patch release is outdated"
+msgstr ""
+
+#. translators: 1: running version, 2: latest version.
+#: src/Checks/Php/PhpVersionCheck.php:138
+#, php-format
+msgid "PHP %1$s is running, but %2$s is available in the same release series. Patch releases contain security fixes."
+msgstr ""
+
+#: src/Checks/Php/PhpVersionCheck.php:139
+msgid "Ask your hosting provider to update PHP, or select the latest version in the control panel."
+msgstr ""
+
+#. translators: 1: number of CVEs, 2: PHP version.
+#: src/Checks/Php/PhpVersionCheck.php:168
+#, php-format
+msgid "%1$d known vulnerability in PHP %2$s"
+msgid_plural "%1$d known vulnerabilities in PHP %2$s"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: CVE ID, 2: CVSS score.
+#: src/Checks/Php/PhpVersionCheck.php:170
+#, php-format
+msgid "The National Vulnerability Database lists vulnerabilities for this exact PHP version. The most severe is %1$s (CVSS %2$s)."
+msgstr ""
+
+#: src/Checks/Php/PhpVersionCheck.php:171
+msgid "Update to the latest patch release of a supported PHP version."
+msgstr ""
+
+#: src/Findings/FindingRepository.php:208
+msgid "Baseline approved."
+msgstr ""
+
+#: src/Findings/FindingStatus.php:51
+msgid "Acknowledged"
+msgstr ""
+
+#: src/Findings/FindingStatus.php:53
+msgid "Ignored"
+msgstr ""
+
+#: src/Findings/Severity.php:65
+msgid "Critical"
+msgstr ""
+
+#: src/Findings/Severity.php:67
+msgid "High"
+msgstr ""
+
+#: src/Findings/Severity.php:69
+msgid "Medium"
+msgstr ""
+
+#: src/Findings/Severity.php:71
+msgid "Low"
+msgstr ""
+
+#: src/Findings/Severity.php:73
+msgid "Info"
+msgstr ""
+
+#: src/Notifications/EmailChannel.php:54
+#: src/Notifications/EmailChannel.php:294
+msgid "Email"
+msgstr ""
+
+#. translators: %s: site name.
+#: src/Notifications/EmailChannel.php:132
+#, php-format
+msgid "[Test] %s Keep It Peace notification"
+msgstr ""
+
+#: src/Notifications/EmailChannel.php:133
+msgid "This is a test message from Keep It Peace. Notifications are configured correctly."
+msgstr ""
+
+#: src/Notifications/EmailChannel.php:148
+msgid "No valid email recipients are configured."
+msgstr ""
+
+#: src/Notifications/EmailChannel.php:178
+msgid "wp_mail() could not send the message."
+msgstr ""
+
+#: src/Notifications/EmailChannel.php:190
+msgid "[Action required]"
+msgstr ""
+
+#: src/Notifications/EmailChannel.php:192
+msgid "[Attention]"
+msgstr ""
+
+#: src/Notifications/EmailChannel.php:194
+msgid "[All clear]"
+msgstr ""
+
+#. translators: 1: status prefix, 2: site name.
+#: src/Notifications/EmailChannel.php:198
+#, php-format
+msgid "%1$s %2$s weekly security digest"
+msgstr ""
+
+#. translators: 1: status prefix, 2: site name.
+#: src/Notifications/EmailChannel.php:201
+#, php-format
+msgid "%1$s %2$s security check results"
+msgstr ""
+
+#: src/Notifications/EmailChannel.php:226
+msgid "end of life (no security updates)"
+msgstr ""
+
+#. translators: %s: version.
+#: src/Notifications/EmailChannel.php:233
+#, php-format
+msgid "update available: %s"
+msgstr ""
+
+#. translators: %d: number of CVEs.
+#: src/Notifications/EmailChannel.php:237
+#, php-format
+msgid "%d known vulnerability"
+msgid_plural "%d known vulnerabilities"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Notifications/EmailChannel.php:296
+msgid "Send email notifications"
+msgstr ""
+
+#: src/Notifications/EmailChannel.php:300
+msgid "Recipients"
+msgstr ""
+
+#: src/Notifications/EmailChannel.php:303
+msgid "One address per line."
+msgstr ""
+
+#: src/Notifications/EmailChannel.php:307
+msgid "Format"
+msgstr ""
+
+#: src/Notifications/EmailChannel.php:310
+msgid "HTML (with plain-text alternative)"
+msgstr ""
+
+#: src/Notifications/EmailChannel.php:311
+msgid "Plain text"
+msgstr ""
+
+#: src/Notifications/NotificationPolicy.php:32
+msgid "After every scan"
+msgstr ""
+
+#: src/Notifications/NotificationPolicy.php:33
+msgid "Only when there are open issues"
+msgstr ""
+
+#: src/Notifications/NotificationPolicy.php:34
+msgid "Only when new issues were found"
+msgstr ""
+
+#: src/Notifications/NotificationPolicy.php:35
+msgid "Only when issues at or above a severity exist"
+msgstr ""
+
+#: src/Notifications/Notifier.php:93
+msgid "Unknown notification channel."
+msgstr ""
+
+#. translators: %d: HTTP status code.
+#: src/Remote/HttpClient.php:126
+#, php-format
+msgid "HTTP status %d"
+msgstr ""
+
+#: src/Remote/HttpClient.php:129
+msgid "Invalid JSON response"
+msgstr ""
+
+#: src/Remote/OsvClient.php:73
+msgid "OSV.dev is disabled in the settings."
+msgstr ""
+
+#: src/Remote/SiteProbe.php:82
+msgid "The URL is not on this site's domain."
+msgstr ""
+
+#: src/Remote/TlsInspector.php:69
+msgid "The certificate could not be read."
+msgstr ""
+
+#: src/Remote/TlsInspector.php:125
+msgid "Connection failed."
+msgstr ""
+
+#: src/Rest/RestController.php:162
+msgid "Finding not found."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:38
+msgid "eval() is used"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:39
+msgid "eval() runs a string as PHP code. Injected malware often uses it, and if the string contains user input it allows remote code execution."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:40
+msgid "Replace eval() with regular code. If you did not write this, the file may be compromised: compare it with your original source."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:43
+msgid "assert() with dynamic code"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:44
+msgid "On older PHP versions assert() evaluates a string argument as code, a common backdoor technique."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:45
+msgid "Remove the call or pass a boolean expression. Check whether the file was modified by someone else."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:48
+msgid "create_function() is used"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:49
+msgid "create_function() evaluates code internally and was removed in PHP 8. It is also used by malware."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:50
+msgid "Use an anonymous function instead."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:53
+msgid "preg_replace() with the /e modifier"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:54
+msgid "The /e modifier evaluates the replacement as PHP code. It only works on very old PHP and is a well-known backdoor pattern."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:55
+msgid "Use preg_replace_callback(). Treat the file as suspicious if you did not write it."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:58
+msgid "Shell command execution"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:59
+msgid "Functions such as shell_exec(), system(), exec() and passthru() run operating system commands. Themes rarely need them and web shells rely on them."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:60
+msgid "Remove the call if it is not required. If it is, never pass user input and escape arguments with escapeshellarg()."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:63
+msgid "Chained decoding functions"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:64
+msgid "Nested calls such as base64_decode(gzinflate(...)) are typical of obfuscated malware."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:65
+msgid "Decode the payload safely offline to see what it does, and restore the file from a clean copy."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:68
+msgid "base64_decode() is used"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:69
+msgid "base64_decode() has legitimate uses but is also used to hide code."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:70
+msgid "Confirm what is decoded. Ignore this finding if the use is legitimate."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:73
+msgid "Remote or stream file inclusion"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:74
+msgid "include/require with a URL or stream wrapper (http://, php://, data://) executes code from outside the server."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:75
+msgid "Include only local files. Remove the statement and investigate how it got there."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:78
+msgid "External URL is loaded"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:79
+msgid "The code fetches content from a fixed external URL. This can be legitimate (APIs) but is also used to download payloads."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:80
+msgid "Confirm that the URL is expected and that the response is not executed or output without escaping."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:83
+msgid "unserialize() on request data"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:84
+msgid "Unserializing user input enables PHP object injection."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:85
+msgid "Use json_decode() for user input, or pass allowed_classes => false."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:88
+msgid "extract() on request data"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:89
+msgid "extract() on $_GET/$_POST lets visitors overwrite any local variable."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:90
+msgid "Read the needed keys explicitly and sanitize each value."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:93
+msgid "Error reporting disabled in code"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:94
+msgid "error_reporting(0) hides errors. Malware uses it to stay unnoticed."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:95
+msgid "Configure error display in php.ini or wp-config.php instead of in theme code."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:98
+msgid "Known web shell signature"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:99
+msgid "The file contains a string used by well-known web shells."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:100
+msgid "Treat the site as compromised: take a backup for analysis, remove the file, change all passwords and look for other modified files."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:103
+msgid "External script is loaded"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:104
+msgid "A script is loaded from another domain. If that domain is compromised, so is your site."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:105
+msgid "Confirm the source is trusted. Prefer wp_enqueue_script() and consider Subresource Integrity."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:108
+msgid "Variable function call"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:109
+msgid "Calling $name(...) runs whatever function the variable contains. Malware uses it to hide calls such as system()."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:110
+msgid "Make sure the variable cannot be controlled by users, or call the function directly."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:113
+msgid "Backtick shell execution"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:114
+msgid "Text between backticks is executed as a shell command."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:115
+msgid "Remove it. Themes should not run shell commands."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:118
+msgid "Request data is output without escaping"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:119
+msgid "A value from $_GET/$_POST/$_REQUEST/$_COOKIE is printed directly, which allows cross-site scripting (XSS)."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:120
+msgid "Escape on output with esc_html(), esc_attr() or esc_url() and sanitize on input."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:123
+msgid "Request data in a SQL query"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:124
+msgid "A request value is used in a database query without $wpdb->prepare(), which allows SQL injection."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:125
+msgid "Use $wpdb->prepare() with placeholders."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:128
+msgid "Request data in include/require"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:129
+msgid "A request value decides which file is included, which allows local or remote file inclusion."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:130
+msgid "Map allowed values to fixed file names with an allowlist."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:133
+msgid "Request data in a file operation"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:134
+msgid "A request value is used as a file path or content, which can allow reading or writing arbitrary files."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:135
+msgid "Validate against an allowlist, use basename() and sanitize_file_name(), and keep operations inside a fixed directory."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:138
+msgid "Database query without prepare()"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:139
+msgid "A $wpdb query is built from variables without $wpdb->prepare(). If any part comes from users, this allows SQL injection."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:140
+msgid "Build the query with $wpdb->prepare() and placeholders."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:143
+msgid "AJAX/admin-post handler without nonce check"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:144
+msgid "The handler does not call check_ajax_referer(), check_admin_referer() or wp_verify_nonce(), so requests can be forged (CSRF)."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:145
+msgid "Verify a nonce at the start of the handler."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:148
+msgid "AJAX/admin-post handler without capability check"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:149
+msgid "Any logged-in user (including subscribers) can call this handler because current_user_can() is not checked."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:150
+msgid "Check the required capability with current_user_can() before doing anything."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:153
+msgid "REST route without permission_callback"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:154
+msgid "The route has no permission_callback, so access control is undefined."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:155
+msgid "Add a permission_callback that checks capabilities (use __return_true only for truly public data)."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:158
+msgid "Public REST route"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:159
+msgid "The route is open to everyone (permission_callback is __return_true)."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:160
+msgid "Confirm that the route only exposes public data and changes nothing."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:163
+msgid "Form processing without nonce check"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:164
+msgid "The file handles $_POST and changes data, but no nonce is verified anywhere in the file."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:165
+msgid "Add wp_nonce_field() to the form and verify it with check_admin_referer() or wp_verify_nonce()."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:168
+msgid "Obfuscated string"
+msgstr ""
+
+#: src/Rules/RuleMessages.php:169
+msgid "A very long encoded string, a run of escape sequences or a chain of chr() calls was found. This is typical of injected code."
+msgstr ""
+
+#: src/Rules/RuleMessages.php:170
+msgid "Check what the string contains. Restore the file from a clean copy if you did not add it."
+msgstr ""
+
+#: src/Scan/PathGuard.php:111
+msgid "The path is not absolute."
+msgstr ""
+
+#: src/Scan/PathGuard.php:113
+msgid "The path is outside open_basedir, so PHP cannot read it."
+msgstr ""
+
+#: src/Scan/PathGuard.php:115
+msgid "The path does not exist."
+msgstr ""
+
+#: src/Scan/PathGuard.php:117
+msgid "The path is not a directory."
+msgstr ""
+
+#: src/Scan/PathGuard.php:119
+msgid "The directory is not readable by PHP."
+msgstr ""
+
+#: src/Scan/PathValidator.php:116
+msgid "The directory is WordPress itself or contains it. Register only directories of other programs."
+msgstr ""
+
+#: src/Scan/PathValidator.php:118
+msgid "The directory overlaps wp-admin, wp-includes or wp-content, which are covered by other checks."
+msgstr ""
+
+#: src/Scan/Scanner.php:377
+msgid "File limit reached"
+msgstr ""
+
+#. translators: %d: number of files.
+#: src/Scan/Scanner.php:379
+#, php-format
+msgid "Scanning stopped after %d files. Files after that were not checked."
+msgstr ""
+
+#: src/Scan/Scanner.php:380
+msgid "Add exclude patterns for generated or vendor directories, or raise the file limit in the settings."
+msgstr ""
+
+#: src/Scan/Scanner.php:549
+msgid "A check could not finish"
+msgstr ""
+
+#. translators: 1: check ID, 2: error message.
+#: src/Scan/Scanner.php:551
+#, php-format
+msgid "The check %1$s stopped with an error: %2$s"
+msgstr ""
+
+#: src/Scan/Scanner.php:552
+msgid "Run the scan again. If the error persists, disable the check and report the problem."
+msgstr ""
+
+#: src/Scan/Scanner.php:575
+msgid "Directory could not be read"
+msgstr ""
+
+#: src/Scan/Scanner.php:577
+msgid "Check the path, permissions and the open_basedir setting. Files in this directory were not checked."
+msgstr ""
+
+#: src/Scan/Scheduler.php:58
+msgid "Daily"
+msgstr ""
+
+#: src/Scan/Scheduler.php:62
+msgid "Weekly"
+msgstr ""
+
+#: templates/email/summary-html.php:41
+#: templates/email/summary-text.php:22
+msgid "Since the previous scan"
+msgstr ""
+
+#. translators: 1: new count, 2: resolved count.
+#: templates/email/summary-html.php:44
+#: templates/email/summary-text.php:24
+#, php-format
+msgid "%1$d new, %2$d resolved"
+msgstr ""
+
+#: templates/email/summary-html.php:59
+msgid "Open the dashboard"
+msgstr ""
+
+#: templates/email/summary-html.php:60
+msgid "File names and code are not included in email for security reasons. Please check the details in the dashboard."
+msgstr ""
+
+#: templates/email/summary-text.php:13
+msgid "Site"
+msgstr ""
+
+#: templates/email/summary-text.php:14
+msgid "Checked at"
+msgstr ""
+
+#: templates/email/summary-text.php:16
+msgid "Open issues by severity"
+msgstr ""
+
+#: templates/email/summary-text.php:35
+msgid "Details are available only in the dashboard (they are not included in email for security reasons):"
+msgstr ""
