@@ -577,7 +577,7 @@ msgid "Directories outside WordPress"
 msgstr ""
 
 #: src/Admin/SettingsPage.php:209
-msgid "Other programs on this server, such as a landing page, a form mailer or a legacy application. Enter the absolute server path. The directory must be readable by PHP and inside open_basedir; WordPress itself cannot be registered."
+msgid "Other programs on this server, such as a landing page, a form mailer or a legacy application. Enter the absolute server path. The directory must be readable by PHP and inside open_basedir. WordPress itself, themes and plugins cannot be registered here; select themes and plugins above."
 msgstr ""
 
 #: src/Admin/SettingsPage.php:220
@@ -2330,11 +2330,11 @@ msgid "The directory is not readable by PHP."
 msgstr ""
 
 #: src/Scan/PathValidator.php:116
-msgid "The directory is WordPress itself or contains it. Register only directories of other programs."
+msgid "This is the WordPress folder or one of its parent folders, so WordPress itself would be scanned. Register the folder of the other program instead (e.g. …/public_html/lp)."
 msgstr ""
 
 #: src/Scan/PathValidator.php:118
-msgid "The directory overlaps wp-admin, wp-includes or wp-content, which are covered by other checks."
+msgid "This folder is part of WordPress (wp-admin, wp-includes or wp-content such as uploads), which cannot be registered here. Select themes and custom plugins above; uploads are checked automatically."
 msgstr ""
 
 #: src/Scan/Scanner.php:377
@@ -2416,3 +2416,138 @@ msgstr ""
 #: templates/email/summary-text.php:35
 msgid "Details are available only in the dashboard (they are not included in email for security reasons):"
 msgstr ""
+
+#: src/Admin/BaselinePanel.php
+msgid "The baseline is the list of fingerprints (sha256 hashes) of every file in your scan targets, recorded as the trusted state. Each scan compares the current files with it and reports added, changed and deleted files as \"File integrity\" findings. The first scan of a target records the baseline automatically."
+msgstr ""
+
+#: src/Admin/BaselinePanel.php
+msgid "When you changed files yourself (theme update, deployment, edits):"
+msgstr ""
+
+#: src/Admin/BaselinePanel.php
+msgid "Run a scan so that the latest files are recorded."
+msgstr ""
+
+#: src/Admin/BaselinePanel.php
+msgid "Check that the reported files are the ones you changed."
+msgstr ""
+
+#: src/Admin/BaselinePanel.php
+msgid "Approve the current state. The changes are marked as resolved and are no longer reported."
+msgstr ""
+
+#: src/Admin/BaselinePanel.php
+msgid "Do not approve changes you do not recognize. They may be signs of tampering; check the findings first."
+msgstr ""
+
+#: src/Admin/BaselinePanel.php
+msgid "Unapproved changes"
+msgstr ""
+
+#: src/Admin/BaselinePanel.php
+msgid "If you changed these files yourself, approve them. If you do not recognize the changes, check them before approving."
+msgstr ""
+
+#: src/Admin/BaselinePanel.php
+msgid "Review changes"
+msgstr ""
+
+#: src/Admin/BaselinePanel.php
+msgid "Approve these changes"
+msgstr ""
+
+#: src/Admin/BaselinePanel.php
+msgid "What is the baseline?"
+msgstr ""
+
+#. translators: %s: check name.
+#: src/Admin/FindingsListTable.php
+msgid "Check: %s"
+msgstr ""
+
+#: src/Admin/FindingsListTable.php
+msgid "Clear"
+msgstr ""
+
+#: src/Admin/SettingsPage.php
+msgid "+ Add another directory"
+msgstr ""
+
+#: src/Admin/SettingsPage.php
+msgid "You can add several directories at once. Empty rows are ignored when saving."
+msgstr ""
+
+#: src/Admin/SettingsPage.php
+msgid "WordPress root (ABSPATH)"
+msgstr ""
+
+#: src/Admin/SettingsPage.php
+msgid "Document root"
+msgstr ""
+
+#: src/Admin/SettingsPage.php
+msgid "Paths on this server (for reference)"
+msgstr ""
+
+#: src/Admin/SettingsPage.php
+msgid "Click a folder from the server root to the WordPress root to insert it into an empty Path field, then append the rest of the path."
+msgstr ""
+
+#: src/Admin/SettingsPage.php
+msgid "File baseline approval has moved to the General tab."
+msgstr ""
+
+#: src/Admin/SettingsPage.php
+msgid "Go to the General tab"
+msgstr ""
+
+#. translators: %s: number of files.
+#: src/Admin/BaselinePanel.php
+msgid "%s file differs from the approved baseline."
+msgid_plural "%s files differ from the approved baseline."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Scan/PathValidator.php
+msgid "This is a plugin folder. Plugins are not registered here: select custom plugins under \"Plugins to scan\" above."
+msgstr ""
+
+#: src/Scan/PathValidator.php
+msgid "This is a theme folder. Themes are not registered here: select them under \"Themes to scan\" above."
+msgstr ""
+
+#: src/Scan/PluginTargetProvider.php
+msgid "Must-use plugins (mu-plugins)"
+msgstr ""
+
+#: src/Admin/Ui.php
+msgid "Plugin"
+msgstr ""
+
+#: src/Admin/SettingsPage.php
+msgid "Plugins to scan"
+msgstr ""
+
+#: src/Admin/SettingsPage.php
+msgid "Select plugins you or your client developed (custom plugins). Plugins distributed on WordPress.org are not scanned because they are maintained and checked for vulnerabilities by their authors and WordPress.org. Nothing is scanned unless you select it."
+msgstr ""
+
+#: src/Admin/SettingsPage.php
+msgid "No custom plugins were found."
+msgstr ""
+
+#: src/Admin/SettingsPage.php
+msgid "WordPress has not checked plugin updates yet, so plugins from WordPress.org cannot be told apart. Open Dashboard → Updates once and reload this page."
+msgstr ""
+
+#: src/Admin/SettingsPage.php
+msgid "Single-file plugins placed directly in the plugins folder are not listed."
+msgstr ""
+
+#. translators: %d: number of plugins.
+#: src/Admin/SettingsPage.php
+msgid "%d plugin from WordPress.org (not scanned)"
+msgid_plural "%d plugins from WordPress.org (not scanned)"
+msgstr[0] ""
+msgstr[1] ""

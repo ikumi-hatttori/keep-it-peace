@@ -73,6 +73,7 @@ final class Ui {
 		$labels = array(
 			'php'           => __( 'PHP / server', 'keep-it-peace' ),
 			'theme'         => __( 'Theme', 'keep-it-peace' ),
+			'plugin'        => __( 'Plugin', 'keep-it-peace' ),
 			'external_path' => __( 'Outside WordPress', 'keep-it-peace' ),
 			'external'      => __( 'Public surface', 'keep-it-peace' ),
 			'dependency'    => __( 'Dependencies', 'keep-it-peace' ),

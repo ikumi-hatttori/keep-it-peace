@@ -47,6 +47,7 @@ class Settings {
 			'schedule'          => 'daily',
 			'retention_days'    => 30,
 			'themes'            => array(),
+			'plugins'           => array(),
 			'paths'             => array(),
 			'urls'              => array(),
 			'checks'            => array(),

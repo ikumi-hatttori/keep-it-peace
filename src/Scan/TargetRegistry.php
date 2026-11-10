@@ -93,6 +93,9 @@ class TargetRegistry {
 			case 'site':
 				return PathGuard::normalize( ABSPATH );
 		}
+		if ( 0 === strpos( $scope, 'plugin:' ) ) {
+			return PluginTargetProvider::resolve_root( $scope );
+		}
 		if ( 0 === strpos( $scope, 'theme:' ) ) {
 			$theme = wp_get_theme( substr( $scope, 6 ) );
 			if ( $theme->exists() ) {

@@ -72,12 +72,19 @@ class HostPolicyTest extends TestCase {
 		$dirs = array(
 			'root'      => '/var/www/html',
 			'protected' => array( '/var/www/html/wp-admin', '/var/www/html/wp-includes', '/var/www/html/wp-content' ),
+			'plugins'   => array( '/var/www/html/wp-content/plugins', '/var/www/html/wp-content/mu-plugins' ),
+			'themes'    => array( '/var/www/html/wp-content/themes' ),
 		);
 		$this->assertSame( PathValidator::CONTAINS_WORDPRESS, PathValidator::overlap( '/var/www/html', $dirs ) );
 		$this->assertSame( PathValidator::CONTAINS_WORDPRESS, PathValidator::overlap( '/var/www', $dirs ) );
 		$this->assertSame( PathValidator::CONTAINS_WORDPRESS, PathValidator::overlap( '/', $dirs ) );
 		$this->assertSame( PathValidator::OVERLAPS_WORDPRESS, PathValidator::overlap( '/var/www/html/wp-content/uploads', $dirs ) );
 		$this->assertSame( PathValidator::OVERLAPS_WORDPRESS, PathValidator::overlap( '/var/www/html/wp-admin', $dirs ) );
+		$this->assertSame( PathValidator::OVERLAPS_WORDPRESS, PathValidator::overlap( '/var/www/html/wp-content', $dirs ) );
+		$this->assertSame( PathValidator::IN_PLUGINS, PathValidator::overlap( '/var/www/html/wp-content/plugins/my-plugin', $dirs ) );
+		$this->assertSame( PathValidator::IN_PLUGINS, PathValidator::overlap( '/var/www/html/wp-content/plugins', $dirs ) );
+		$this->assertSame( PathValidator::IN_PLUGINS, PathValidator::overlap( '/var/www/html/wp-content/mu-plugins/x', $dirs ) );
+		$this->assertSame( PathValidator::IN_THEMES, PathValidator::overlap( '/var/www/html/wp-content/themes/my-theme', $dirs ) );
 		$this->assertSame( '', PathValidator::overlap( '/var/www/html/lp', $dirs ) );
 		$this->assertSame( '', PathValidator::overlap( '/var/www/html/wp-content-old', $dirs ) );
 		$this->assertSame( '', PathValidator::overlap( '/home/user/app', $dirs ) );

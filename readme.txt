@@ -8,17 +8,17 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Scheduled security checks for custom themes, programs outside WordPress, the public surface of your site and PHP itself, with e-mail summaries.
+Scheduled security checks for custom themes and plugins, programs outside WordPress, the public surface of your site and PHP itself, with e-mail summaries.
 
 == Description ==
 
 Most security plugins focus on WordPress core and plugins from WordPress.org. Keep It Peace checks the parts they usually miss:
 
-* **Custom themes** – file integrity against a trusted baseline (added, modified and deleted files) and a static scan for dangerous code: eval(), shell execution, obfuscated payloads, unescaped request data, SQL without prepare(), AJAX and REST handlers without nonce or capability checks, and more.
+* **Custom themes and plugins** – choose your own themes and the plugins you developed (plugins from WordPress.org are excluded). File integrity against a trusted baseline (added, modified and deleted files) and a static scan for dangerous code: eval(), shell execution, obfuscated payloads, unescaped request data, SQL without prepare(), AJAX and REST handlers without nonce or capability checks, and more.
 * **Programs outside WordPress** – landing pages, form mailers or legacy applications on the same server. Register their directories and they get the same file checks.
 * **The public surface** – SSL certificate expiry and trust, TLS version, security headers, version disclosure, publicly downloadable files such as .env, .git, wp-config.php backups, SQL dumps and debug.log, and directory listings.
 * **PHP and the server** – end of life and security support of your PHP version, missing patch releases, known CVEs, risky php.ini settings, MySQL/MariaDB support status, WP_DEBUG and wp-config.php permissions, PHP files in the uploads folder.
-* **Dependencies** – known vulnerabilities in composer.lock and package-lock.json found in themes and registered directories.
+* **Dependencies** – known vulnerabilities in composer.lock and package-lock.json found in themes, selected plugins and registered directories.
 
 Results are stored as findings with a history. New, resolved and ongoing issues are tracked between scans; you can acknowledge or ignore findings (ignored file findings become active again when the file changes).
 
@@ -54,7 +54,7 @@ The external checks (SSL certificate, headers, exposed files, directory listings
 == Installation ==
 
 1. Install and activate the plugin.
-2. Open Keep It Peace → Settings. Choose the themes to scan (by default the active theme and its parent), add directories outside WordPress if you have any, and set the notification recipients.
+2. Open Keep It Peace → Settings. Choose the themes to scan (by default the active theme and its parent) and your custom plugins, add directories outside WordPress if you have any, and set the notification recipients.
 3. Click "Scan now" on the Keep It Peace dashboard. The first scan records the current files as the trusted baseline.
 4. For reliable scheduling, run the scan from the server cron: `wp keep-it-peace scan --quiet`. Settings → Tools shows the exact command for your site.
 
@@ -62,11 +62,11 @@ The external checks (SSL certificate, headers, exposed files, directory listings
 
 = Does it scan WordPress core and plugins from WordPress.org? =
 
-No. Those are better covered by update checks and existing tools. Keep It Peace focuses on code that only you have: custom themes and other programs on your server, plus your PHP version and the public surface of the site.
+No. Those are better covered by update checks and existing tools. Keep It Peace focuses on code that only you have: custom themes, custom plugins and other programs on your server, plus your PHP version and the public surface of the site.
 
-= I deployed new theme files. How do I stop the "modified file" findings? =
+= I deployed new theme or plugin files. How do I stop the "modified file" findings? =
 
-Run a scan after the deployment, then approve the new state in Settings → Tools (or with `wp keep-it-peace baseline approve --all`). The files become the new trusted baseline.
+Run a scan after the deployment, then approve the new state from the notice shown on Keep It Peace screens or in Settings → General (or with `wp keep-it-peace baseline approve --all`). The files become the new trusted baseline.
 
 = Scheduled scans do not run. =
 
@@ -92,7 +92,7 @@ Keep It Peace is complete on its own. A separate Pro add-on (multi-site dashboar
 = 1.0.0 =
 * First public release.
 * Checks: PHP and database support status, php.ini, wp-config.php, PHP files in uploads.
-* Custom themes and directories outside WordPress: file integrity against a baseline, dangerous code patterns, suspicious files, permissions, vulnerable Composer/npm dependencies (OSV.dev).
+* Custom themes, custom plugins and directories outside WordPress: file integrity against a baseline, dangerous code patterns, suspicious files, permissions, vulnerable Composer/npm dependencies (OSV.dev).
 * External checks: SSL/TLS, security headers, exposed files, directory listings.
 * E-mail summaries, findings history, JSON export, WP-CLI commands and Japanese translation.
 

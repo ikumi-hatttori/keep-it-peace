@@ -13,6 +13,7 @@ use KeepItPeace\Notifications\NotificationPolicy;
 use KeepItPeace\Plugin;
 use KeepItPeace\Remote\HostPolicy;
 use KeepItPeace\Scan\PathTargetProvider;
+use KeepItPeace\Scan\PluginTargetProvider;
 use KeepItPeace\Scan\PathValidator;
 use KeepItPeace\Scan\Scheduler;
 use KeepItPeace\Settings\Settings;
@@ -76,8 +77,17 @@ class SettingsSanitizer {
 					}
 				}
 				$values['themes'] = array_values( array_unique( $themes ) );
-				$values['paths']  = $this->sanitize_paths( (array) ( $input['paths'] ?? array() ), (array) ( $current['paths'] ?? array() ) );
-				$values['urls']   = $this->sanitize_urls( self::lines( (string) ( $input['urls'] ?? '' ) ) );
+				$available        = PluginTargetProvider::available();
+				$plugins          = array();
+				foreach ( (array) ( $input['plugins'] ?? array() ) as $slug ) {
+					$slug = sanitize_text_field( (string) $slug );
+					if ( ( isset( $available[ $slug ] ) && ! $available[ $slug ]['wporg'] ) || ( PluginTargetProvider::MU_PLUGINS === $slug && PluginTargetProvider::mu_plugins_available() ) ) {
+						$plugins[] = $slug;
+					}
+				}
+				$values['plugins'] = array_values( array_unique( $plugins ) );
+				$values['paths']   = $this->sanitize_paths( (array) ( $input['paths'] ?? array() ), (array) ( $current['paths'] ?? array() ) );
+				$values['urls']    = $this->sanitize_urls( self::lines( (string) ( $input['urls'] ?? '' ) ) );
 				break;
 
 			case 'checks':

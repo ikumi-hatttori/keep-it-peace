@@ -16,6 +16,8 @@ final class PathValidator {
 
 	const OVERLAPS_WORDPRESS = 'overlaps_wordpress';
 	const CONTAINS_WORDPRESS = 'contains_wordpress';
+	const IN_PLUGINS         = 'in_plugins';
+	const IN_THEMES          = 'in_themes';
 
 	/**
 	 * Validates and canonicalizes a path.
@@ -51,12 +53,23 @@ final class PathValidator {
 	/**
 	 * WordPress directories that must not be registered (scanned by other checks or too large).
 	 *
-	 * @return array{root:string,protected:string[]}
+	 * @return array{root:string,protected:string[],plugins:string[],themes:string[]}
 	 */
 	public static function wordpress_dirs(): array {
-		$root = self::canonical( ABSPATH );
+		$root    = self::canonical( ABSPATH );
+		$plugins = array( self::canonical( WP_PLUGIN_DIR ) );
+		if ( defined( 'WPMU_PLUGIN_DIR' ) ) {
+			$plugins[] = self::canonical( WPMU_PLUGIN_DIR );
+		}
+		global $wp_theme_directories;
+		$themes = array( self::canonical( WP_CONTENT_DIR . '/themes' ) );
+		foreach ( (array) $wp_theme_directories as $theme_dir ) {
+			$themes[] = self::canonical( (string) $theme_dir );
+		}
 		return array(
 			'root'      => $root,
+			'plugins'   => array_values( array_unique( $plugins ) ),
+			'themes'    => array_values( array_unique( $themes ) ),
 			'protected' => array_values(
 				array_unique(
 					array(
@@ -82,6 +95,18 @@ final class PathValidator {
 		$root = PathGuard::normalize( (string) $dirs['root'] );
 		if ( $path === $root || self::is_inside( $root, $path ) ) {
 			return self::CONTAINS_WORDPRESS;
+		}
+		// A plugin or theme folder: point to the dedicated selection instead of a generic error.
+		foreach ( array(
+			self::IN_PLUGINS => (array) ( $dirs['plugins'] ?? array() ),
+			self::IN_THEMES  => (array) ( $dirs['themes'] ?? array() ),
+		) as $code => $parents ) {
+			foreach ( $parents as $parent ) {
+				$parent = PathGuard::normalize( (string) $parent );
+				if ( $path === $parent || self::is_inside( $path, $parent ) ) {
+					return $code;
+				}
+			}
 		}
 		foreach ( (array) $dirs['protected'] as $dir ) {
 			$dir = PathGuard::normalize( (string) $dir );
@@ -113,9 +138,13 @@ final class PathValidator {
 	public static function describe( string $error ): string {
 		switch ( $error ) {
 			case self::CONTAINS_WORDPRESS:
-				return __( 'The directory is WordPress itself or contains it. Register only directories of other programs.', 'keep-it-peace' );
+				return __( 'This is the WordPress folder or one of its parent folders, so WordPress itself would be scanned. Register the folder of the other program instead (e.g. …/public_html/lp).', 'keep-it-peace' );
+			case self::IN_PLUGINS:
+				return __( 'This is a plugin folder. Plugins are not registered here: select custom plugins under "Plugins to scan" above.', 'keep-it-peace' );
+			case self::IN_THEMES:
+				return __( 'This is a theme folder. Themes are not registered here: select them under "Themes to scan" above.', 'keep-it-peace' );
 			case self::OVERLAPS_WORDPRESS:
-				return __( 'The directory overlaps wp-admin, wp-includes or wp-content, which are covered by other checks.', 'keep-it-peace' );
+				return __( 'This folder is part of WordPress (wp-admin, wp-includes or wp-content such as uploads), which cannot be registered here. Select themes and custom plugins above; uploads are checked automatically.', 'keep-it-peace' );
 		}
 		return PathGuard::describe( $error );
 	}

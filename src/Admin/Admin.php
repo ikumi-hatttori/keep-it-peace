@@ -153,6 +153,15 @@ class Admin {
 			echo '</p></div>';
 		}
 
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Navigation only.
+		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
+		$tab  = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'general';
+		// phpcs:enable
+		// The General tab already shows the full baseline section.
+		if ( ! ( self::SETTINGS_SLUG === $page && 'general' === $tab ) ) {
+			( new BaselinePanel( $this->plugin ) )->render_notice();
+		}
+
 		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Display-only message codes.
 		if ( empty( $_GET['keepitpeace_msg'] ) ) {
 			return;
@@ -288,18 +297,22 @@ class Admin {
 		$this->guard( 'keepitpeace_approve_baseline' );
 		$scope  = isset( $_POST['scope'] ) ? sanitize_text_field( wp_unslash( $_POST['scope'] ) ) : '';
 		$scopes = array_keys( $this->plugin->targets()->get_targets( $this->plugin->settings() ) );
-		if ( '__all__' !== $scope ) {
+		if ( '__pending__' === $scope ) {
+			$scopes = array_keys( ( new BaselinePanel( $this->plugin ) )->pending() );
+		} elseif ( '__all__' !== $scope ) {
 			$scopes = in_array( $scope, $scopes, true ) ? array( $scope ) : array();
 		}
+		$referer = wp_get_referer();
+		$back    = $referer ? remove_query_arg( array( 'keepitpeace_msg', 'keepitpeace_text' ), $referer ) : BaselinePanel::section_url();
 		if ( empty( $scopes ) ) {
-			$this->redirect( self::url( self::SETTINGS_SLUG, array( 'tab' => 'tools' ) ), 'not_found' );
+			$this->redirect( $back, 'not_found' );
 		}
 		$total = 0;
 		foreach ( $scopes as $item ) {
 			$total += BaselineActions::approve( $this->plugin, $item, get_current_user_id() );
 		}
 		/* translators: %d: number of files. */
-		$this->redirect( self::url( self::SETTINGS_SLUG, array( 'tab' => 'tools' ) ), 'baseline', sprintf( _n( '%d file recorded.', '%d files recorded.', $total, 'keep-it-peace' ), $total ) );
+		$this->redirect( $back, 'baseline', sprintf( _n( '%d file recorded.', '%d files recorded.', $total, 'keep-it-peace' ), $total ) );
 	}
 
 	/**

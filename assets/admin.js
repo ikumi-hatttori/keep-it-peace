@@ -94,3 +94,66 @@
 		step();
 	}
 }() );
+
+// Settings → Targets: add directory rows and insert reference paths.
+( function () {
+	'use strict';
+
+	var container = document.getElementById( 'kip-path-rows' );
+	var template = document.getElementById( 'kip-path-row-template' );
+	var addButton = document.getElementById( 'kip-add-path' );
+	if ( ! container || ! template ) {
+		return;
+	}
+	var lastFocused = null;
+
+	container.addEventListener( 'focusin', function ( event ) {
+		if ( event.target.matches( 'input[name$="[path]"]' ) ) {
+			lastFocused = event.target;
+		}
+	} );
+
+	function addRow() {
+		var index = parseInt( addButton.getAttribute( 'data-next' ), 10 ) || 0;
+		addButton.setAttribute( 'data-next', String( index + 1 ) );
+		var wrapper = document.createElement( 'div' );
+		wrapper.innerHTML = template.innerHTML.split( '__INDEX__' ).join( String( index ) );
+		var row = wrapper.firstElementChild;
+		container.appendChild( row );
+		return row.querySelector( 'input[name$="[path]"]' );
+	}
+
+	function emptyPathInput() {
+		var inputs = container.querySelectorAll( 'input[name$="[path]"]' );
+		for ( var i = 0; i < inputs.length; i++ ) {
+			if ( '' === inputs[ i ].value.trim() ) {
+				return inputs[ i ];
+			}
+		}
+		return null;
+	}
+
+	if ( addButton ) {
+		addButton.addEventListener( 'click', function () {
+			var input = addRow();
+			if ( input ) {
+				input.focus();
+			}
+		} );
+	}
+
+	document.querySelectorAll( '.kip-path-chip' ).forEach( function ( chip ) {
+		chip.addEventListener( 'click', function () {
+			var input = lastFocused && '' === lastFocused.value.trim() ? lastFocused : emptyPathInput();
+			if ( ! input && addButton ) {
+				input = addRow();
+			}
+			if ( ! input ) {
+				return;
+			}
+			input.value = chip.getAttribute( 'data-path' );
+			input.focus();
+			input.setSelectionRange( input.value.length, input.value.length );
+		} );
+	} );
+}() );

@@ -25,7 +25,7 @@ class BaselineCommand {
 	 * ## OPTIONS
 	 *
 	 * [--scope=<scope>]
-	 * : Target to approve, e.g. theme:twentytwentyfive or path:<id>. See `wp keep-it-peace targets`.
+	 * : Target to approve, e.g. theme:twentytwentyfive, plugin:my-plugin or path:<id>. See `wp keep-it-peace targets`.
 	 *
 	 * [--all]
 	 * : Approve all targets.

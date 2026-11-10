@@ -45,6 +45,7 @@ use KeepItPeace\Scan\ScanRepository;
 use KeepItPeace\Scan\Scanner;
 use KeepItPeace\Scan\Scheduler;
 use KeepItPeace\Scan\TargetRegistry;
+use KeepItPeace\Scan\PluginTargetProvider;
 use KeepItPeace\Scan\ThemeTargetProvider;
 use KeepItPeace\Settings\Settings;
 
@@ -293,7 +294,7 @@ final class Plugin {
 		return $this->service(
 			'targets',
 			static function () {
-				return new TargetRegistry( array( new ThemeTargetProvider(), new PathTargetProvider() ) );
+				return new TargetRegistry( array( new ThemeTargetProvider(), new PluginTargetProvider(), new PathTargetProvider() ) );
 			}
 		);
 	}

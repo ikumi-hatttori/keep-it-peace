@@ -63,3 +63,21 @@
 	flex-wrap: wrap;
 	gap: 12px;
 }
+
+.kip-path-ref {
+	background: #f6f7f7;
+	border: 1px solid #dcdcde;
+	padding: 8px 12px;
+	margin: 8px 0 12px;
+	max-width: 900px;
+	box-sizing: border-box;
+}
+.kip-path-ref p { margin: 4px 0; }
+.kip-path-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.kip-path-chip { font-family: Menlo, Consolas, monospace; }
+.kip-help { max-width: 900px; }
+.kip-help ol { margin-left: 2em; }
+.kip-baseline-table { max-width: 900px; }
+.kip-inline-form { display: inline-block; margin: 0; }
+.kip-notice-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.kip-filter-chip { display: inline-block; margin-left: 8px; padding: 2px 8px; background: #f0f6fc; border: 1px solid #c5d9ed; border-radius: 3px; line-height: 26px; }

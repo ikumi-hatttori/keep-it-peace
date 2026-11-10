@@ -338,6 +338,32 @@ class FindingRepository {
 	}
 
 	/**
+	 * Counts open findings of a check per target scope.
+	 *
+	 * @param string   $check_id      Check ID.
+	 * @param string[] $exclude_rules Rule IDs to leave out.
+	 * @return array<string,int> Scope => count.
+	 */
+	public function count_open_by_scope( string $check_id, array $exclude_rules = array() ): array {
+		global $wpdb;
+		// A dummy value keeps NOT IN valid when nothing is excluded.
+		$exclude      = $exclude_rules ? array_values( $exclude_rules ) : array( '' );
+		$placeholders = implode( ',', array_fill( 0, count( $exclude ), '%s' ) );
+		$rows         = $wpdb->get_results(
+			$wpdb->prepare( // phpcs:ignore WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber -- Placeholders are generated.
+				// phpcs:ignore WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare -- Placeholders are generated.
+				"SELECT target_scope, COUNT(*) AS c FROM {$this->table()} WHERE check_id = %s AND status IN (%s, %s) AND rule_id NOT IN ($placeholders) GROUP BY target_scope",
+				array_merge( array( $check_id, FindingStatus::NEW_FINDING, FindingStatus::ACKNOWLEDGED ), $exclude )
+			)
+		);
+		$out = array();
+		foreach ( (array) $rows as $row ) {
+			$out[ (string) $row->target_scope ] = (int) $row->c;
+		}
+		return $out;
+	}
+
+	/**
 	 * Distinct categories.
 	 *
 	 * @return string[]

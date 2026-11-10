@@ -12,6 +12,7 @@ use KeepItPeace\Findings\Severity;
 use KeepItPeace\Notifications\NotificationPolicy;
 use KeepItPeace\Plugin;
 use KeepItPeace\Scan\CronHealth;
+use KeepItPeace\Scan\PluginTargetProvider;
 use KeepItPeace\Scan\Scheduler;
 use KeepItPeace\Scan\ThemeTargetProvider;
 use KeepItPeace\Settings\Settings;
@@ -167,6 +168,7 @@ class SettingsPage {
 		</tr>
 		<?php
 		$this->form_end( 'general', $settings );
+		( new BaselinePanel( $this->plugin ) )->render_section();
 	}
 
 	/**
@@ -203,17 +205,24 @@ class SettingsPage {
 				</p>
 			</td>
 		</tr>
+		<?php $this->plugins_row( $settings ); ?>
 		<tr>
 			<th scope="row"><?php esc_html_e( 'Directories outside WordPress', 'keep-it-peace' ); ?></th>
 			<td>
-				<p class="description"><?php esc_html_e( 'Other programs on this server, such as a landing page, a form mailer or a legacy application. Enter the absolute server path. The directory must be readable by PHP and inside open_basedir; WordPress itself cannot be registered.', 'keep-it-peace' ); ?></p>
-				<?php
-				$rows   = (array) $settings->get( 'paths', array() );
-				$rows[] = array();
-				foreach ( $rows as $index => $row ) {
-					$this->path_row( (int) $index, (array) $row );
-				}
-				?>
+				<p class="description"><?php esc_html_e( 'Other programs on this server, such as a landing page, a form mailer or a legacy application. Enter the absolute server path. The directory must be readable by PHP and inside open_basedir. WordPress itself, themes and plugins cannot be registered here; select themes and plugins above.', 'keep-it-peace' ); ?></p>
+				<?php $this->render_path_reference(); ?>
+				<div id="kip-path-rows">
+					<?php
+					$rows   = array_values( (array) $settings->get( 'paths', array() ) );
+					$rows[] = array();
+					foreach ( $rows as $index => $row ) {
+						$this->path_row( (string) $index, (array) $row );
+					}
+					?>
+				</div>
+				<template id="kip-path-row-template"><?php $this->path_row( '__INDEX__', array() ); ?></template>
+				<p><button type="button" class="button" id="kip-add-path" data-next="<?php echo esc_attr( (string) count( $rows ) ); ?>"><?php esc_html_e( '+ Add another directory', 'keep-it-peace' ); ?></button></p>
+				<p class="description"><?php esc_html_e( 'You can add several directories at once. Empty rows are ignored when saving.', 'keep-it-peace' ); ?></p>
 			</td>
 		</tr>
 		<tr>
@@ -233,12 +242,123 @@ class SettingsPage {
 	}
 
 	/**
+	 * Custom plugins to scan. Plugins from WordPress.org are listed but cannot be selected.
+	 *
+	 * @param Settings $settings Settings.
+	 */
+	private function plugins_row( Settings $settings ): void {
+		$selected  = array_map( 'strval', (array) $settings->get( 'plugins', array() ) );
+		$available = PluginTargetProvider::available();
+		$custom    = array_filter(
+			$available,
+			static function ( $info ) {
+				return ! $info['wporg'];
+			}
+		);
+		$wporg     = array_diff_key( $available, $custom );
+		?>
+		<tr>
+			<th scope="row"><?php esc_html_e( 'Plugins to scan', 'keep-it-peace' ); ?></th>
+			<td>
+				<p class="description"><?php esc_html_e( 'Select plugins you or your client developed (custom plugins). Plugins distributed on WordPress.org are not scanned because they are maintained and checked for vulnerabilities by their authors and WordPress.org. Nothing is scanned unless you select it.', 'keep-it-peace' ); ?></p>
+				<fieldset>
+					<?php if ( empty( $custom ) && ! PluginTargetProvider::mu_plugins_available() ) : ?>
+						<p><em><?php esc_html_e( 'No custom plugins were found.', 'keep-it-peace' ); ?></em></p>
+					<?php endif; ?>
+					<?php foreach ( $custom as $slug => $info ) : ?>
+						<label style="display:block">
+							<input type="checkbox" name="keepitpeace[plugins][]" value="<?php echo esc_attr( (string) $slug ); ?>" <?php checked( in_array( (string) $slug, $selected, true ) ); ?>>
+							<?php echo esc_html( $info['name'] ); ?> <code><?php echo esc_html( (string) $slug ); ?></code>
+							<?php if ( '' !== $info['version'] ) : ?>
+								<span class="description"><?php echo esc_html( $info['version'] ); ?></span>
+							<?php endif; ?>
+							<?php if ( is_plugin_active( $info['file'] ) ) : ?>
+								<span class="description"><?php esc_html_e( '(active)', 'keep-it-peace' ); ?></span>
+							<?php endif; ?>
+						</label>
+					<?php endforeach; ?>
+					<?php if ( PluginTargetProvider::mu_plugins_available() ) : ?>
+						<label style="display:block">
+							<input type="checkbox" name="keepitpeace[plugins][]" value="<?php echo esc_attr( PluginTargetProvider::MU_PLUGINS ); ?>" <?php checked( in_array( PluginTargetProvider::MU_PLUGINS, $selected, true ) ); ?>>
+							<?php esc_html_e( 'Must-use plugins (mu-plugins)', 'keep-it-peace' ); ?> <code><?php echo esc_html( wp_basename( WPMU_PLUGIN_DIR ) ); ?></code>
+						</label>
+					<?php endif; ?>
+				</fieldset>
+				<?php if ( ! PluginTargetProvider::source_known() ) : ?>
+					<p class="description kip-warn"><?php esc_html_e( 'WordPress has not checked plugin updates yet, so plugins from WordPress.org cannot be told apart. Open Dashboard → Updates once and reload this page.', 'keep-it-peace' ); ?></p>
+				<?php endif; ?>
+				<?php if ( $wporg ) : ?>
+					<details>
+						<summary>
+							<?php
+							/* translators: %d: number of plugins. */
+							echo esc_html( sprintf( _n( '%d plugin from WordPress.org (not scanned)', '%d plugins from WordPress.org (not scanned)', count( $wporg ), 'keep-it-peace' ), count( $wporg ) ) );
+							?>
+						</summary>
+						<ul class="kip-list">
+							<?php foreach ( $wporg as $slug => $info ) : ?>
+								<li><?php echo esc_html( $info['name'] ); ?> <code><?php echo esc_html( (string) $slug ); ?></code></li>
+							<?php endforeach; ?>
+						</ul>
+					</details>
+				<?php endif; ?>
+				<p class="description"><?php esc_html_e( 'Single-file plugins placed directly in the plugins folder are not listed.', 'keep-it-peace' ); ?></p>
+			</td>
+		</tr>
+		<?php
+	}
+
+	/**
+	 * Server paths for reference when registering directories.
+	 */
+	private function render_path_reference(): void {
+		$wp_root  = untrailingslashit( wp_normalize_path( ABSPATH ) );
+		$rows     = array(
+			__( 'WordPress root (ABSPATH)', 'keep-it-peace' ) => $wp_root,
+		);
+		$doc_root = isset( $_SERVER['DOCUMENT_ROOT'] ) ? untrailingslashit( wp_normalize_path( sanitize_text_field( wp_unslash( $_SERVER['DOCUMENT_ROOT'] ) ) ) ) : '';
+		if ( '' !== $doc_root && $doc_root !== $wp_root ) {
+			$rows[ __( 'Document root', 'keep-it-peace' ) ] = $doc_root;
+		}
+		$basedir = (string) ini_get( 'open_basedir' );
+		if ( '' !== $basedir ) {
+			$rows['open_basedir'] = $basedir;
+		}
+
+		// Ancestors of the WordPress root, from "/" down to ABSPATH.
+		$ancestors = array();
+		$current   = '';
+		foreach ( array_filter( explode( '/', $wp_root ), 'strlen' ) as $segment ) {
+			$current    .= '/' . $segment;
+			$ancestors[] = $current;
+		}
+		?>
+		<div class="kip-path-ref">
+			<p><strong><?php esc_html_e( 'Paths on this server (for reference)', 'keep-it-peace' ); ?></strong></p>
+			<table class="kip-kv">
+				<?php foreach ( $rows as $label => $value ) : ?>
+					<tr><th><?php echo esc_html( $label ); ?></th><td class="kip-mono"><?php echo esc_html( $value ); ?></td></tr>
+				<?php endforeach; ?>
+			</table>
+			<?php if ( $ancestors ) : ?>
+				<p class="description"><?php esc_html_e( 'Click a folder from the server root to the WordPress root to insert it into an empty Path field, then append the rest of the path.', 'keep-it-peace' ); ?></p>
+				<p class="kip-path-chips">
+					<?php foreach ( $ancestors as $path ) : ?>
+						<button type="button" class="button button-small kip-path-chip" data-path="<?php echo esc_attr( $path . '/' ); ?>"><?php echo esc_html( $path . '/' ); ?></button>
+					<?php endforeach; ?>
+				</p>
+			<?php endif; ?>
+		</div>
+		<?php
+	}
+
+	/**
 	 * One registered directory (an empty row adds a new one).
 	 *
-	 * @param int   $index Row index.
-	 * @param array $row   Entry.
+	 * @param string $index Row index (`__INDEX__` in the JS template).
+	 * @param array  $row   Entry.
 	 */
-	private function path_row( int $index, array $row ): void {
+	private function path_row( string $index, array $row ): void {
 		$is_new = empty( $row['path'] );
 		$name   = 'keepitpeace[paths][' . $index . ']';
 		$prefix = 'kip-path-' . $index;
@@ -422,50 +542,18 @@ class SettingsPage {
 	}
 
 	/**
-	 * Tools tab: baseline approval, cron instructions.
+	 * Tools tab: export, cron instructions, status.
 	 *
 	 * @param Settings $settings Settings.
 	 */
 	private function tab_tools( Settings $settings ): void {
-		$targets = $this->plugin->targets()->get_targets( $settings );
-		$scopes  = $this->plugin->files()->scopes();
-		$counts  = $this->plugin->files()->counts();
-		$health  = CronHealth::status( $settings );
-		$latest  = $this->plugin->scans()->latest_completed();
+		$health = CronHealth::status( $settings );
+		$latest = $this->plugin->scans()->latest_completed();
 		?>
-		<h2><?php esc_html_e( 'File baseline', 'keep-it-peace' ); ?></h2>
-		<p><?php esc_html_e( 'After a planned deployment, approve the current files as the new baseline so they are no longer reported as changed.', 'keep-it-peace' ); ?></p>
 		<p class="description">
-			<?php
-			$last_scan = $latest ? Ui::datetime( $latest->finished_at ) : __( 'never', 'keep-it-peace' );
-			/* translators: %s: date. */
-			echo esc_html( sprintf( __( 'Approval uses the file state recorded by the last scan (%s). If you deployed after that, run a scan first.', 'keep-it-peace' ), $last_scan ) );
-			?>
+			<?php esc_html_e( 'File baseline approval has moved to the General tab.', 'keep-it-peace' ); ?>
+			<a href="<?php echo esc_url( BaselinePanel::section_url() ); ?>"><?php esc_html_e( 'Go to the General tab', 'keep-it-peace' ); ?></a>
 		</p>
-		<table class="widefat striped" style="max-width:900px">
-			<thead><tr><th><?php esc_html_e( 'Target', 'keep-it-peace' ); ?></th><th><?php esc_html_e( 'Files', 'keep-it-peace' ); ?></th><th><?php esc_html_e( 'Approved', 'keep-it-peace' ); ?></th><th></th></tr></thead>
-			<tbody>
-			<?php foreach ( $targets as $id => $target ) : ?>
-				<tr>
-					<td><strong><?php echo esc_html( $target->label ); ?></strong><br><code><?php echo esc_html( $id ); ?></code></td>
-					<td><?php echo esc_html( number_format_i18n( $counts[ $id ] ?? 0 ) ); ?></td>
-					<td>
-						<?php
-						if ( isset( $scopes[ $id ] ) ) {
-							$user = ! empty( $scopes[ $id ]['approved_by'] ) ? get_userdata( (int) $scopes[ $id ]['approved_by'] ) : null;
-							echo esc_html( Ui::timestamp( (int) $scopes[ $id ]['approved_at'] ) . ( $user ? ' / ' . $user->display_name : ' / ' . __( 'first scan', 'keep-it-peace' ) ) );
-						} else {
-							esc_html_e( 'Not yet (recorded on the next scan)', 'keep-it-peace' );
-						}
-						?>
-					</td>
-					<td><?php $this->approve_button( $id, __( 'Approve current state', 'keep-it-peace' ), ! isset( $scopes[ $id ] ) ); ?></td>
-				</tr>
-			<?php endforeach; ?>
-			</tbody>
-		</table>
-		<p><?php $this->approve_button( '__all__', __( 'Approve all targets', 'keep-it-peace' ), empty( $scopes ) ); ?></p>
-
 		<h2><?php esc_html_e( 'Export', 'keep-it-peace' ); ?></h2>
 		<p><?php esc_html_e( 'Download the results of the last completed scan as JSON (the format is documented for add-ons and external tools). The file contains file paths and URLs of this site; store it safely.', 'keep-it-peace' ); ?></p>
 		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
@@ -493,24 +581,6 @@ class SettingsPage {
 		<?php
 		/** This action is documented in SettingsPage::form_end(). */
 		do_action( 'keepitpeace_settings_section_tools', $settings );
-	}
-
-	/**
-	 * Baseline approval button.
-	 *
-	 * @param string $scope    Scope.
-	 * @param string $label    Label.
-	 * @param bool   $disabled Disabled.
-	 */
-	private function approve_button( string $scope, string $label, bool $disabled ): void {
-		?>
-		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" onsubmit="return confirm(<?php echo esc_attr( wp_json_encode( __( 'Approve the current files as the trusted baseline?', 'keep-it-peace' ) ) ); ?>);">
-			<input type="hidden" name="action" value="keepitpeace_approve_baseline">
-			<input type="hidden" name="scope" value="<?php echo esc_attr( $scope ); ?>">
-			<?php wp_nonce_field( 'keepitpeace_approve_baseline' ); ?>
-			<?php submit_button( $label, 'secondary', 'submit', false, $disabled ? array( 'disabled' => 'disabled' ) : array() ); ?>
-		</form>
-		<?php
 	}
 
 	/**

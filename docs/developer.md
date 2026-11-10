@@ -100,7 +100,7 @@ add_filter( 'keepitpeace_checks', function ( array $checks ) {
 | `severity` | `Severity::CRITICAL`〜`INFO`、または `'high'` などの文字列 |
 | `category` | `php` / `environment` / `theme` / `external_path` / `external` / `dependency` / `files` / 独自の値 |
 | `target_type` | `env` / `file` / `url` |
-| `target_scope` | `site` / `uploads` / `content` / `external` / `theme:<slug>` / `path:<id>` など |
+| `target_scope` | `site` / `uploads` / `content` / `external` / `theme:<slug>` / `plugin:<slug>` / `path:<id>` など |
 | `target` | 対象（ファイルの相対パス、URL、設定名など） |
 | `line` | 行番号（任意） |
 | `title` / `message` / `recommendation` | 表示用の文言（翻訳済みの文字列） |

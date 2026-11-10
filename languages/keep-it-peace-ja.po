@@ -562,8 +562,8 @@ msgid "Directories outside WordPress"
 msgstr "WordPress 外のディレクトリ"
 
 #: src/Admin/SettingsPage.php:209
-msgid "Other programs on this server, such as a landing page, a form mailer or a legacy application. Enter the absolute server path. The directory must be readable by PHP and inside open_basedir; WordPress itself cannot be registered."
-msgstr "ランディングページ、メールフォーム、古いアプリケーションなど、このサーバー上にあるほかのプログラムです。サーバー上の絶対パスを入力してください。ディレクトリは PHP から読み取れ、open_basedir の範囲内にある必要があります。WordPress 自体は登録できません。"
+msgid "Other programs on this server, such as a landing page, a form mailer or a legacy application. Enter the absolute server path. The directory must be readable by PHP and inside open_basedir. WordPress itself, themes and plugins cannot be registered here; select themes and plugins above."
+msgstr "ランディングページ、メールフォーム、古いアプリケーションなど、このサーバー上にあるほかのプログラムです。サーバー上の絶対パスを入力してください。ディレクトリは PHP から読み取れ、open_basedir の範囲内にある必要があります。WordPress 本体・テーマ・プラグインはここでは登録できません（テーマとプラグインは上で選択してください）。"
 
 #: src/Admin/SettingsPage.php:220
 msgid "Additional URLs for external checks"
@@ -2266,12 +2266,12 @@ msgid "The directory is not readable by PHP."
 msgstr "ディレクトリを PHP から読み取れません。"
 
 #: src/Scan/PathValidator.php:116
-msgid "The directory is WordPress itself or contains it. Register only directories of other programs."
-msgstr "このディレクトリは WordPress 自体であるか、WordPress を含んでいます。他のプログラムのディレクトリのみを登録してください。"
+msgid "This is the WordPress folder or one of its parent folders, so WordPress itself would be scanned. Register the folder of the other program instead (e.g. …/public_html/lp)."
+msgstr "WordPress のフォルダー、またはその親フォルダーです。このまま登録すると WordPress 本体がスキャン対象になってしまいます。ほかのプログラムのフォルダー（例：…/public_html/lp）を登録してください。"
 
 #: src/Scan/PathValidator.php:118
-msgid "The directory overlaps wp-admin, wp-includes or wp-content, which are covered by other checks."
-msgstr "このディレクトリは wp-admin、wp-includes、wp-content と重なっています。これらは他のチェックで対象になっています。"
+msgid "This folder is part of WordPress (wp-admin, wp-includes or wp-content such as uploads), which cannot be registered here. Select themes and custom plugins above; uploads are checked automatically."
+msgstr "このフォルダーは WordPress の一部（wp-admin、wp-includes、uploads などの wp-content）のため、ここでは登録できません。テーマと自作プラグインは上で選択してください。uploads は自動でチェックされます。"
 
 #: src/Scan/Scanner.php:377
 msgid "File limit reached"
@@ -2349,3 +2349,136 @@ msgstr "重要度別の未解決の問題"
 #: templates/email/summary-text.php:35
 msgid "Details are available only in the dashboard (they are not included in email for security reasons):"
 msgstr "詳細はダッシュボードでのみ確認できます（セキュリティ上の理由からメールには含まれていません）:"
+
+#: src/Admin/BaselinePanel.php
+msgid "The baseline is the list of fingerprints (sha256 hashes) of every file in your scan targets, recorded as the trusted state. Each scan compares the current files with it and reports added, changed and deleted files as \"File integrity\" findings. The first scan of a target records the baseline automatically."
+msgstr "ベースラインとは、スキャン対象のすべてのファイルの指紋（sha256 ハッシュ）を「正しい状態」として記録したものです。スキャンのたびに現在のファイルと比較し、追加・変更・削除されたファイルを「ファイルの整合性」の検出結果として報告します。各対象の初回スキャン時に自動で記録されます。"
+
+#: src/Admin/BaselinePanel.php
+msgid "When you changed files yourself (theme update, deployment, edits):"
+msgstr "自分でファイルを変更したとき（テーマの更新、デプロイ、編集など）："
+
+#: src/Admin/BaselinePanel.php
+msgid "Run a scan so that the latest files are recorded."
+msgstr "スキャンを実行して、最新のファイルの状態を記録します。"
+
+#: src/Admin/BaselinePanel.php
+msgid "Check that the reported files are the ones you changed."
+msgstr "報告されたファイルが、自分で変更したものか確認します。"
+
+#: src/Admin/BaselinePanel.php
+msgid "Approve the current state. The changes are marked as resolved and are no longer reported."
+msgstr "現在の状態を承認します。変更は解決済みになり、以後は報告されません。"
+
+#: src/Admin/BaselinePanel.php
+msgid "Do not approve changes you do not recognize. They may be signs of tampering; check the findings first."
+msgstr "身に覚えのない変更は承認しないでください。改ざんの可能性があります。先に検出結果を確認してください。"
+
+#: src/Admin/BaselinePanel.php
+msgid "Unapproved changes"
+msgstr "未承認の変更"
+
+#: src/Admin/BaselinePanel.php
+msgid "If you changed these files yourself, approve them. If you do not recognize the changes, check them before approving."
+msgstr "自分で変更したファイルであれば承認してください。身に覚えのない変更の場合は、承認する前に内容を確認してください。"
+
+#: src/Admin/BaselinePanel.php
+msgid "Review changes"
+msgstr "変更を確認"
+
+#: src/Admin/BaselinePanel.php
+msgid "Approve these changes"
+msgstr "これらの変更を承認"
+
+#: src/Admin/BaselinePanel.php
+msgid "What is the baseline?"
+msgstr "ベースラインとは？"
+
+#. translators: %s: check name.
+#: src/Admin/FindingsListTable.php
+msgid "Check: %s"
+msgstr "チェック：%s"
+
+#: src/Admin/FindingsListTable.php
+msgid "Clear"
+msgstr "解除"
+
+#: src/Admin/SettingsPage.php
+msgid "+ Add another directory"
+msgstr "＋ ディレクトリを追加"
+
+#: src/Admin/SettingsPage.php
+msgid "You can add several directories at once. Empty rows are ignored when saving."
+msgstr "複数のディレクトリをまとめて追加できます。空の行は保存時に無視されます。"
+
+#: src/Admin/SettingsPage.php
+msgid "WordPress root (ABSPATH)"
+msgstr "WordPress のルート（ABSPATH）"
+
+#: src/Admin/SettingsPage.php
+msgid "Document root"
+msgstr "ドキュメントルート"
+
+#: src/Admin/SettingsPage.php
+msgid "Paths on this server (for reference)"
+msgstr "このサーバーのパス（参照用）"
+
+#: src/Admin/SettingsPage.php
+msgid "Click a folder from the server root to the WordPress root to insert it into an empty Path field, then append the rest of the path."
+msgstr "サーバーのルートから WordPress のルートまでのフォルダーをクリックすると、空の「パス」欄に入力されます。続きのパスを追記してください。"
+
+#: src/Admin/SettingsPage.php
+msgid "File baseline approval has moved to the General tab."
+msgstr "ファイルのベースラインの承認は「一般」タブに移動しました。"
+
+#: src/Admin/SettingsPage.php
+msgid "Go to the General tab"
+msgstr "一般タブを開く"
+
+#. translators: %s: number of files.
+#: src/Admin/BaselinePanel.php
+msgid "%s file differs from the approved baseline."
+msgid_plural "%s files differ from the approved baseline."
+msgstr[0] "承認済みのベースラインと異なるファイルが %s 件あります。"
+
+#: src/Scan/PathValidator.php
+msgid "This is a plugin folder. Plugins are not registered here: select custom plugins under \"Plugins to scan\" above."
+msgstr "プラグインのフォルダーです。プラグインはここでは登録せず、上の「スキャンするプラグイン」で自作プラグインを選択してください。"
+
+#: src/Scan/PathValidator.php
+msgid "This is a theme folder. Themes are not registered here: select them under \"Themes to scan\" above."
+msgstr "テーマのフォルダーです。テーマはここでは登録せず、上の「スキャンするテーマ」で選択してください。"
+
+#: src/Scan/PluginTargetProvider.php
+msgid "Must-use plugins (mu-plugins)"
+msgstr "マストユースプラグイン（mu-plugins）"
+
+#: src/Admin/Ui.php
+msgid "Plugin"
+msgstr "プラグイン"
+
+#: src/Admin/SettingsPage.php
+msgid "Plugins to scan"
+msgstr "スキャンするプラグイン"
+
+#: src/Admin/SettingsPage.php
+msgid "Select plugins you or your client developed (custom plugins). Plugins distributed on WordPress.org are not scanned because they are maintained and checked for vulnerabilities by their authors and WordPress.org. Nothing is scanned unless you select it."
+msgstr "自社やクライアントが開発したプラグイン（自作プラグイン）を選択してください。WordPress.org で配布されているプラグインは、作者と WordPress.org が保守・脆弱性の管理を行っているため対象外です。選択しない限りスキャンされません。"
+
+#: src/Admin/SettingsPage.php
+msgid "No custom plugins were found."
+msgstr "自作プラグインは見つかりませんでした。"
+
+#: src/Admin/SettingsPage.php
+msgid "WordPress has not checked plugin updates yet, so plugins from WordPress.org cannot be told apart. Open Dashboard → Updates once and reload this page."
+msgstr "WordPress がまだプラグインの更新を確認していないため、WordPress.org のプラグインを判別できません。一度「ダッシュボード → 更新」を開いてから、このページを再読み込みしてください。"
+
+#: src/Admin/SettingsPage.php
+msgid "Single-file plugins placed directly in the plugins folder are not listed."
+msgstr "plugins フォルダー直下に置かれた単一ファイルのプラグインは一覧に表示されません。"
+
+#. translators: %d: number of plugins.
+#: src/Admin/SettingsPage.php
+msgid "%d plugin from WordPress.org (not scanned)"
+msgid_plural "%d plugins from WordPress.org (not scanned)"
+msgstr[0] "WordPress.org のプラグイン %d 件（スキャン対象外）"

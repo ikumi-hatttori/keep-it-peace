@@ -58,6 +58,7 @@ class FindingsListTable extends \WP_List_Table {
 			'status'   => $status,
 			'severity' => isset( $_REQUEST['severity'] ) ? absint( $_REQUEST['severity'] ) : 0,
 			'category' => isset( $_REQUEST['category'] ) ? sanitize_key( wp_unslash( $_REQUEST['category'] ) ) : '',
+			'check'    => isset( $_REQUEST['check'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['check'] ) ) : '',
 			'search'   => isset( $_REQUEST['s'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['s'] ) ) : '',
 			'orderby'  => isset( $_REQUEST['orderby'] ) ? sanitize_key( wp_unslash( $_REQUEST['orderby'] ) ) : 'severity',
 			'order'    => isset( $_REQUEST['order'] ) && 'asc' === strtolower( sanitize_key( wp_unslash( $_REQUEST['order'] ) ) ) ? 'ASC' : 'DESC',
@@ -92,6 +93,7 @@ class FindingsListTable extends \WP_List_Table {
 				'status'   => self::statuses( $filters['status'] ),
 				'severity' => $filters['severity'],
 				'category' => $filters['category'],
+				'check_id' => $filters['check'],
 				'search'   => $filters['search'],
 				'orderby'  => $filters['orderby'],
 				'order'    => $filters['order'],
@@ -205,7 +207,15 @@ class FindingsListTable extends \WP_List_Table {
 			printf( '<option value="%1$s" %2$s>%3$s</option>', esc_attr( $category ), selected( $filters['category'], $category, false ), esc_html( Ui::category_label( $category ) ) );
 		}
 		echo '</select>';
+		if ( '' !== $filters['check'] ) {
+			$check = $this->plugin->checks()->get( $filters['check'] );
+			echo '<input type="hidden" name="check" value="' . esc_attr( $filters['check'] ) . '">';
+		}
 		submit_button( __( 'Filter', 'keep-it-peace' ), '', 'filter_action', false );
+		if ( '' !== $filters['check'] ) {
+			/* translators: %s: check name. */
+			echo ' <span class="kip-filter-chip">' . esc_html( sprintf( __( 'Check: %s', 'keep-it-peace' ), $check ? $check->get_name() : $filters['check'] ) ) . ' <a href="' . esc_url( remove_query_arg( array( 'check', 'paged' ) ) ) . '">' . esc_html__( 'Clear', 'keep-it-peace' ) . '</a></span>';
+		}
 		echo '</div>';
 	}
 
