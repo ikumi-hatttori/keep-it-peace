@@ -8,7 +8,7 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Scheduled security checks for custom themes and plugins, programs outside WordPress, the public surface of your site and PHP itself, with e-mail summaries.
+Scheduled security checks for custom themes and plugins, programs outside WordPress, your site's public surface and PHP, with e-mail summaries.
 
 == Description ==
 

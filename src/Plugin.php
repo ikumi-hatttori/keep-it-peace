@@ -7,6 +7,8 @@
 
 namespace KeepItPeace;
 
+defined( 'ABSPATH' ) || exit;
+
 use KeepItPeace\Admin\Admin;
 use KeepItPeace\Baseline\FileIndexRepository;
 use KeepItPeace\Checks\Dependencies\DependencyCheck;
@@ -48,8 +50,6 @@ use KeepItPeace\Scan\TargetRegistry;
 use KeepItPeace\Scan\PluginTargetProvider;
 use KeepItPeace\Scan\ThemeTargetProvider;
 use KeepItPeace\Settings\Settings;
-
-defined( 'ABSPATH' ) || exit;
 
 /**
  * Main plugin class. Services are created lazily.
