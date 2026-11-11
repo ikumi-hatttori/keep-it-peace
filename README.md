@@ -1,93 +1,106 @@
 # Keep It Peace
 
-WordPress サイトのセキュリティ状態を定期的にチェックし、結果をメールで通知するプラグインです。
-WordPress 本体や wp.org 配布プラグインではなく、**カスタムテーマ・WP 外のプログラム・外部から見たサイトの状態・PHP 本体**を対象にします。
+English | [日本語](README.ja.md)
 
-> 設計は [docs/DESIGN.md](docs/DESIGN.md)、拡張方法は [docs/developer.md](docs/developer.md) を参照してください。wp.org 用の説明は [readme.txt](readme.txt) にあります。
+A WordPress plugin that checks the security of your site on a schedule and e-mails you a summary.
+Instead of WordPress core and plugins from WordPress.org, it focuses on the parts other security plugins usually miss: **custom themes and plugins, programs outside WordPress, the public surface of the site, and the PHP runtime**.
 
-## 動作環境
+- User documentation: https://keep-it-peace.com/docs/
+- Extending the plugin: [docs/developer.md](docs/developer.md)
+- Design notes (Japanese): [docs/DESIGN.md](docs/DESIGN.md)
+- WordPress.org description: [readme.txt](readme.txt)
 
-- WordPress 6.0 以上
-- PHP 7.4 以上（シェル実行関数は使いません。`open_basedir` 下でも動作します）
+## Requirements
 
-## 実装済みの機能
+- WordPress 6.0 or later
+- PHP 7.4 or later (no shell execution functions are used; works under `open_basedir`)
 
-| チェック | 内容 |
+## Checks
+
+| Check | What it looks at |
 |---|---|
-| `php.version` | PHP の EOL・同系列の最新パッチとの差・既知 CVE（NVD） |
-| `php.ini` | `display_errors` / `expose_php` / `allow_url_include` / `allow_url_fopen` など |
-| `server.database` | MySQL / MariaDB のバージョンと EOL |
-| `env.wp_config` | `WP_DEBUG` / `WP_DEBUG_DISPLAY`、`debug.log`、`wp-config.php` の権限、ファイル編集機能 |
-| `env.uploads_php` | `wp-content/uploads` 配下の `.php` などの実行ファイル |
-| `files.integrity` | テーマの改ざん検知（sha256 ベースライン、追加・変更・削除） |
-| `files.code_pattern` | 危険コードの静的スキャン（ルールは `rules/core.json`） |
-| `files.suspicious` | 二重拡張子、隠しファイル、画像フォルダ内の PHP、画像内の PHP コード |
-| `files.permissions` | 777 / 666 などのファイル・ディレクトリ |
-| `deps.osv` | テーマ・WP 外のパスにある `composer.lock` / `package-lock.json` の既知の脆弱性（OSV.dev）。開発用パッケージは実際にインストールされている場合のみ |
-| `external.tls` | HTTPS の有無、証明書の残り日数・信頼性・ホスト名の一致、TLS バージョン |
-| `external.headers` | HSTS などのセキュリティヘッダー、HTTP→HTTPS のリダイレクト、Server / X-Powered-By / generator によるバージョン露出 |
-| `external.exposed_files` | `.env`、`.git`、`wp-config.php` のバックアップ、SQL ダンプ、`debug.log`、phpinfo などの公開漏れ（中身を確認して誤検知を防止） |
-| `external.dir_listing` | `uploads` などのディレクトリ一覧表示 |
+| `php.version` | PHP end of life, missing patch releases in the same series, known CVEs (NVD) |
+| `php.ini` | `display_errors`, `expose_php`, `allow_url_include`, `allow_url_fopen` and more |
+| `server.database` | MySQL / MariaDB version and end of life |
+| `env.wp_config` | `WP_DEBUG` / `WP_DEBUG_DISPLAY`, `debug.log`, `wp-config.php` permissions, the file editor |
+| `env.uploads_php` | `.php` and other executable files under `wp-content/uploads` |
+| `files.integrity` | Changes to themes and selected plugins against a sha256 baseline (added, modified, deleted) |
+| `files.code_pattern` | Static scan for dangerous code (rules in `rules/core.json`) |
+| `files.suspicious` | Double extensions, hidden files, PHP in asset folders, PHP code inside images |
+| `files.permissions` | Files and directories with modes such as 777 / 666 |
+| `deps.osv` | Known vulnerabilities in `composer.lock` / `package-lock.json` (OSV.dev). Dev packages only when they are actually installed |
+| `external.tls` | HTTPS, certificate expiry, trust and host name, TLS version |
+| `external.headers` | HSTS and other security headers, HTTP→HTTPS redirect, version disclosure via Server / X-Powered-By / generator |
+| `external.exposed_files` | Publicly downloadable `.env`, `.git`, `wp-config.php` backups, SQL dumps, `debug.log`, phpinfo and more (the response body is checked to avoid false positives) |
+| `external.dir_listing` | Directory listings such as `uploads` |
 
-**WP 外のパス**：設定 → 対象 で、LP やフォームなど WordPress 以外のプログラムのディレクトリを登録できます。存在・読み取り権限・`open_basedir`・WordPress 本体との重複を保存時に検証します。パスごとにチェックの ON/OFF、除外パターン、公開 URL（外部チェックの対象）を設定できます。
+**Scan targets**: Settings → Targets. Choose the themes to scan (by default the active theme and its parent) and the plugins you developed yourself (plugins distributed on WordPress.org are not scanned). You can also register directories outside WordPress, such as landing pages or form mailers. Existence, read permission, `open_basedir` and overlap with WordPress are validated on save. Each directory has its own check switches, exclude patterns and an optional public URL for the external checks.
 
-**外部チェックの対象 URL**：サイトアドレス・WordPress アドレスと、設定で追加した URL です。追加できるのはサイトと同じドメイン（サブドメインを含む）だけで、それ以外はフィルター `keepitpeace_allowed_hosts` で許可した場合に限ります。レンタルサーバーの共有ドメイン（`xsrv.jp` など）では、他のユーザーのサブドメインは対象になりません。
+**URLs for external checks**: the site address, the WordPress address and the URLs added in the settings. Only the site's own domain (including subdomains) is allowed; other hosts must be allowed with the `keepitpeace_allowed_hosts` filter. On shared hosting domains (such as `xsrv.jp`), other users' subdomains are never targeted.
 
-**JSON エクスポート**：設定 → ツール から最新スキャンの結果を JSON でダウンロードできます。アドオンからは `KeepItPeace\Api::export_scan()` で取得できます。形式は [docs/export-schema.json](docs/export-schema.json) を参照してください。
+**JSON export**: Settings → Tools downloads the latest scan as JSON. Add-ons can use `KeepItPeace\Api::export_scan()`. The format is defined in [docs/export-schema.json](docs/export-schema.json).
 
-- 定期実行（WP-Cron、毎日／毎週）。1 回の実行時間に上限を設け、続きは次の Cron で再開
-- 管理画面：ダッシュボード、検出結果（絞り込み・一括操作・詳細のコード表示・履歴）、スキャン履歴、タブ式の設定
-- メール通知（テキスト／HTML、送信条件、週次ダイジェスト、テスト送信）。ファイルパスやコードはメールに含めません
-- 日本語訳を同梱（`languages/`）
+Also:
+
+- Scheduled scans (WP-Cron, daily or weekly). Each run has a time limit and the scan resumes on the next cron run
+- Admin screens: dashboard, findings (filters, bulk actions, code view, history), scan history, tabbed settings
+- E-mail notifications (plain text / HTML, send conditions, weekly digest, test e-mail). File paths and code are never included in e-mails
+- Japanese translation bundled (`languages/`)
 
 ## WP-CLI
 
-| コマンド | 内容 |
+| Command | Description |
 |---|---|
-| `wp keep-it-peace scan [--checks=<ids>] [--no-notify] [--format=table\|json]` | スキャンを完了まで実行（実行中のスキャンがあれば続きを実行） |
-| `wp keep-it-peace status [--format=json]` | 重要度別の未解決件数と最終スキャン |
-| `wp keep-it-peace findings [--status=open] [--severity=high] [--category=…] [--check=…] [--format=…]` | 検出結果の一覧 |
-| `wp keep-it-peace export [--scan=<id>] [--pretty]` | スキャン結果の JSON（[docs/export-schema.json](docs/export-schema.json)） |
-| `wp keep-it-peace baseline approve (--scope=<scope> \| --all) [--yes]` | 現在のファイルをベースラインとして承認（デプロイ後に使用） |
-| `wp keep-it-peace checks` / `wp keep-it-peace targets` | チェック・スキャン対象の一覧 |
+| `wp keep-it-peace scan [--checks=<ids>] [--no-notify] [--format=table\|json]` | Run a scan to completion (continues a running scan if there is one) |
+| `wp keep-it-peace status [--format=json]` | Open issues by severity and the last scan |
+| `wp keep-it-peace findings [--status=open] [--severity=high] [--category=…] [--check=…] [--format=…]` | List findings |
+| `wp keep-it-peace export [--scan=<id>] [--pretty]` | Scan result as JSON ([docs/export-schema.json](docs/export-schema.json)) |
+| `wp keep-it-peace baseline approve (--scope=<scope> \| --all) [--yes]` | Approve the current files as the baseline (use after a deployment) |
+| `wp keep-it-peace checks` / `wp keep-it-peace targets` | List checks and scan targets |
 
-コマンドの出力は、スクリプトで扱いやすいよう英語のままです。
+Command output is always in English so that scripts can parse it.
 
-## サーバーの cron から実行する
+### Running from the server cron
 
-WP-Cron はサイトにアクセスがあったときにしか動きません。確実に監視するには、サーバーの cron から WP-CLI で実行してください。
+WP-Cron only runs when the site receives a request. For reliable monitoring, run the scan from the server cron:
 
 ```
 0 3 * * * cd /path/to/wordpress && wp keep-it-peace scan --quiet
 ```
 
-共用サーバーでは CLI と Web で PHP のバージョンや php.ini が異なることがあります。本プラグインは管理画面を開いたときなどに Web 側の PHP の情報を記録し、CLI から実行したスキャンでもその情報を評価します。
+On shared hosting, the CLI and the web server may use different PHP versions or php.ini files. The plugin records the web server's PHP information (for example when you open the admin screens) and evaluates it even when the scan runs on the CLI.
 
-## 外部サービスへの送信
+## External services
 
-| サービス | 送信する内容 |
+| Service | What is sent |
 |---|---|
-| endoflife.date | 製品名（php / mysql / mariadb） |
-| php.net | PHP のリリース系列（例：8.2） |
-| NVD | PHP のバージョン（例：8.2.10） |
-| OSV.dev | パッケージ名とバージョン（例：guzzlehttp/guzzle 7.4.0） |
+| endoflife.date | Product name (php / mysql / mariadb) |
+| php.net | PHP release series (e.g. 8.2) |
+| NVD | PHP version (e.g. 8.2.10) |
+| OSV.dev | Package names and versions (e.g. guzzlehttp/guzzle 7.4.0) |
 
-サイトの URL・ファイルの内容・個人情報は送信しません。設定画面の「外部サービス」タブで個別に OFF にできます。
+The site URL, file contents and personal data are never sent. Each service can be switched off under Settings → External services. See `== External services ==` in [readme.txt](readme.txt) for details and the services' terms.
 
-外部チェック（TLS・ヘッダー・公開ファイル・ディレクトリ一覧）は、サーバーから自分のサイトにアクセスして確認します（第三者のサービスは使いません）。サーバーが自分自身への接続（ループバック）を禁止している場合は確認できず、前回の結果を保持したまま「確認できなかった」旨の Info を表示します。
+The external checks (TLS, headers, exposed files, directory listings) send requests from your server to your own site; no third-party service is used. If the server blocks loopback requests, the previous results are kept and an Info finding says the check could not be completed.
 
-## 開発
+## Development
 
 ```
 composer install
-vendor/bin/phpunit       # ユニットテスト
-vendor/bin/phpcs         # コーディング規約（WPCS + PHPCompatibilityWP）
-bin/make-pot.sh          # 翻訳テンプレートの更新と .mo のコンパイル（WP-CLI が必要）
-bin/build-zip.sh         # 配布用 ZIP を dist/ に作成
+composer test            # unit tests (PHPUnit, WordPress is not loaded)
+composer lint            # coding standards (WPCS + PHPCompatibilityWP)
+bin/make-pot.sh          # update the translation template and compile .mo files (requires WP-CLI)
+bin/build-zip.sh         # build the distribution ZIP in dist/
 ```
 
-拡張ポイントの動作確認用に、サンプルアドオンが [dev/sample-addon/](dev/sample-addon/) にあります（配布 ZIP には含めません）。
+A sample add-on that exercises the extension points is in [dev/sample-addon/](dev/sample-addon/) (not included in the distribution ZIP).
 
-## ライセンス
+See [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+
+## Security
+
+Please do not report vulnerabilities in public issues. See [SECURITY.md](SECURITY.md).
+
+## License
 
 GPLv2 or later

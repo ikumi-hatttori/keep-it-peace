@@ -36,7 +36,8 @@ After each scan you get an e-mail summary (HTML and plain text) with the number 
 
 = For developers =
 
-Checks, scan targets, notification channels, rules, settings tabs and the JSON export can be extended through documented interfaces, actions and filters. See the developer documentation in the plugin repository.
+Checks, scan targets, notification channels, rules, settings tabs and the JSON export can be extended through documented interfaces, actions and filters. See the [developer documentation on GitHub](https://github.com/ACCOUNT/keep-it-peace/blob/main/docs/developer.md).
+<!-- GITHUB_REPO_PLACEHOLDER: replace ACCOUNT/keep-it-peace in the link above with the real repository, then delete this comment. bin/build-zip.sh refuses to build while this marker remains. -->
 
 == External services ==
 

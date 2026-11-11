@@ -1,56 +1,58 @@
-# Keep It Peace 開発者向けドキュメント
+# Keep It Peace developer documentation
 
-本体を改修せずに機能を追加するための拡張ポイントをまとめます。動作するサンプルは [`dev/sample-addon/`](../dev/sample-addon/) にあります（独自チェック 1 つ、通知チャネル 1 つ、設定タブ 1 つ）。
+English | [日本語](developer.ja.md)
 
-- 対象バージョン：本体 1.0.0 / 拡張 API `1.0.0`
-- 要件：WordPress 6.0+ / PHP 7.4+
+This document describes the extension points for adding features without modifying the plugin. A working sample is in [`dev/sample-addon/`](../dev/sample-addon/) (one custom check, one notification channel and one settings tab).
+
+- Applies to: plugin 1.0.0 / extension API `1.0.0`
+- Requirements: WordPress 6.0+ / PHP 7.4+
 
 ---
 
-## 1. アドオンの起動
+## 1. Bootstrapping an add-on
 
-`keepitpeace_loaded` は `plugins_loaded` の中で、本体がフックを登録し終えたあとに発火します。ここで API バージョンを確認してから処理を登録してください。
+`keepitpeace_loaded` fires inside `plugins_loaded`, after the plugin has registered its own hooks. Check the API version there before registering anything.
 
 ```php
 add_action( 'keepitpeace_loaded', function ( \KeepItPeace\Plugin $plugin ) {
 	if ( version_compare( KEEPITPEACE_API_VERSION, '1.0', '<' ) || version_compare( KEEPITPEACE_API_VERSION, '2.0', '>=' ) ) {
-		return; // 対応していないバージョン
+		return; // Unsupported version.
 	}
-	// フィルター・アクションを登録する
+	// Register filters and actions.
 } );
 ```
 
-本体が無効なときに読み込まれないよう、プラグインヘッダーに `Requires Plugins: keep-it-peace` を書くことを推奨します（WordPress 6.5+）。
+Adding `Requires Plugins: keep-it-peace` to your plugin header is recommended, so that the add-on is not loaded while Keep It Peace is inactive (WordPress 6.5+).
 
-### 1.1 定数
+### 1.1 Constants
 
-| 定数 | 内容 |
+| Constant | Description |
 |---|---|
-| `KEEPITPEACE_VERSION` | 本体のバージョン |
-| `KEEPITPEACE_API_VERSION` | 拡張 API のバージョン（semver）。インターフェース・フック引数・`Api` のメソッドを互換性なく変える場合だけメジャーを上げます |
-| `KEEPITPEACE_EXPORT_SCHEMA_VERSION` | エクスポート JSON のスキーマバージョン |
-| `KEEPITPEACE_RULESET_SCHEMA_VERSION` | ルール JSON のスキーマバージョン（整数） |
-| `KEEPITPEACE_FILE` / `KEEPITPEACE_DIR` / `KEEPITPEACE_URL` | 本体のパス・URL |
+| `KEEPITPEACE_VERSION` | Plugin version |
+| `KEEPITPEACE_API_VERSION` | Extension API version (semver). The major version changes only when interfaces, hook arguments or `Api` methods change incompatibly |
+| `KEEPITPEACE_EXPORT_SCHEMA_VERSION` | Schema version of the export JSON |
+| `KEEPITPEACE_RULESET_SCHEMA_VERSION` | Schema version of the rule JSON (integer) |
+| `KEEPITPEACE_FILE` / `KEEPITPEACE_DIR` / `KEEPITPEACE_URL` | Plugin paths and URL |
 
-### 1.2 互換性の約束
+### 1.2 Compatibility promise
 
-API バージョン 1.x の間は、次のものを互換性なく変更しません。
+While the API version is 1.x, the following will not change incompatibly:
 
-- `src/Contracts/` のインターフェース
-- このドキュメントに載っているフックの名前と引数
-- `KeepItPeace\Api` の公開メソッド
-- `AbstractCheck` / `AbstractFileCheck` の protected ヘルパー（`finding()`、`file_finding()`）
-- `Finding`・`ScanReport`・`ScanTarget`・`CheckResult` の公開プロパティ
+- The interfaces in `src/Contracts/`
+- The names and arguments of the hooks listed in this document
+- The public methods of `KeepItPeace\Api`
+- The protected helpers of `AbstractCheck` / `AbstractFileCheck` (`finding()`, `file_finding()`)
+- The public properties of `Finding`, `ScanReport`, `ScanTarget` and `CheckResult`
 
-それ以外のクラス（リポジトリ、管理画面など）は内部実装なので、直接使わないでください。
+Other classes (repositories, admin screens and so on) are internal. Do not use them directly.
 
 ---
 
-## 2. チェックを追加する
+## 2. Adding checks
 
-### 2.1 単独のチェック（`CheckInterface`）
+### 2.1 Standalone checks (`CheckInterface`)
 
-`AbstractCheck` を継承すると、設定画面の ON/OFF（`is_enabled()`）と `finding()` ヘルパーが使えます。
+Extending `AbstractCheck` gives you the on/off switch on the settings screen (`is_enabled()`) and the `finding()` helper.
 
 ```php
 use KeepItPeace\Checks\AbstractCheck;
@@ -59,14 +61,14 @@ use KeepItPeace\Scan\CheckResult;
 use KeepItPeace\Scan\ScanContext;
 
 class MyCheck extends AbstractCheck {
-	public function get_id(): string { return 'myaddon.something'; } // 自分の接頭辞を付ける
+	public function get_id(): string { return 'myaddon.something'; } // Use your own prefix.
 	public function get_name(): string { return __( 'Something', 'my-addon' ); }
 	public function get_category(): string { return 'environment'; }
 	public function get_description(): string { return __( 'Checks something.', 'my-addon' ); }
 
 	public function run( ScanContext $context, array $cursor ): CheckResult {
 		$findings = array();
-		if ( /* 問題がある */ true ) {
+		if ( /* there is a problem */ true ) {
 			$findings[] = $this->finding( array(
 				'rule_id'        => 'myaddon.something_wrong',
 				'severity'       => Severity::MEDIUM,
@@ -86,33 +88,33 @@ add_filter( 'keepitpeace_checks', function ( array $checks ) {
 } );
 ```
 
-- **登録順＝実行順**です。同じ ID を登録すると後から登録した方で置き換わります（本体のチェックの差し替えも可能）。
-- `CheckResult::complete( $findings, $data )` の `$data` は、スキャンの `summary.data[チェックID]` に保存されます（ダッシュボード・通知・エクスポートで利用可能）。
-- **時間のかかる処理**は `$context->has_time()` を確認し、時間切れなら `CheckResult::partial( $findings, $cursor, $progress )` を返してください。次のリクエストで `run( $context, $cursor )` として続きから呼ばれます。`$cursor` は JSON にして保存するので、配列・文字列・数値だけにしてください。
-- 外部 API の失敗などで判定できなかったときは `$context->keep( $this->get_id() )` を呼ぶと、既存の検出結果が「解決済み」になりません。
-- 例外を投げると、そのチェックだけが中断され、Info の検出結果「チェックを完了できませんでした」が記録されます（スキャン全体は続きます）。
+- **Checks run in the order they are registered.** Registering the same ID again replaces the earlier check (this also works for the built-in checks).
+- The `$data` in `CheckResult::complete( $findings, $data )` is stored in the scan's `summary.data[check ID]` and is available to the dashboard, notifications and the export.
+- For **long-running work**, check `$context->has_time()` and, when time is up, return `CheckResult::partial( $findings, $cursor, $progress )`. The next request continues with `run( $context, $cursor )`. `$cursor` is stored as JSON, so use only arrays, strings and numbers.
+- When the check cannot decide (for example an external API failed), call `$context->keep( $this->get_id() )` so that existing findings are not marked as resolved.
+- If the check throws an exception, only that check stops and an Info finding "A check could not finish" is recorded. The rest of the scan continues.
 
-### 2.2 検出結果（`Finding`）
+### 2.2 Findings (`Finding`)
 
-| キー | 内容 |
+| Key | Description |
 |---|---|
-| `rule_id` | ルール ID（必須） |
-| `severity` | `Severity::CRITICAL`〜`INFO`、または `'high'` などの文字列 |
-| `category` | `php` / `environment` / `theme` / `external_path` / `external` / `dependency` / `files` / 独自の値 |
+| `rule_id` | Rule ID (required) |
+| `severity` | `Severity::CRITICAL` to `INFO`, or a string such as `'high'` |
+| `category` | `php` / `environment` / `theme` / `external_path` / `external` / `dependency` / `files` / your own value |
 | `target_type` | `env` / `file` / `url` |
-| `target_scope` | `site` / `uploads` / `content` / `external` / `theme:<slug>` / `plugin:<slug>` / `path:<id>` など |
-| `target` | 対象（ファイルの相対パス、URL、設定名など） |
-| `line` | 行番号（任意） |
-| `title` / `message` / `recommendation` | 表示用の文言（翻訳済みの文字列） |
-| `meta` | 任意の配列（JSON で保存） |
-| `file_hash` | ファイルの sha256。無視にした検出は、このハッシュが変わると自動で再開されます |
-| `fingerprint_basis` | 同じ対象に同じルールの検出が複数あるときに区別する文字列 |
+| `target_scope` | `site` / `uploads` / `content` / `external` / `theme:<slug>` / `plugin:<slug>` / `path:<id>` and so on |
+| `target` | What the finding is about (relative file path, URL, setting name and so on) |
+| `line` | Line number (optional) |
+| `title` / `message` / `recommendation` | Display text (already translated) |
+| `meta` | Any array (stored as JSON) |
+| `file_hash` | sha256 of the file. An ignored finding becomes active again when this hash changes |
+| `fingerprint_basis` | A string that distinguishes several findings of the same rule on the same target |
 
-**同一性（fingerprint）** は `check_id`・`rule_id`・`target_scope`・`target`・`fingerprint_basis` から計算します。行番号や文言は含まないので、行がずれたり文言を変えたりしても同じ検出として扱われます。スキャンで再び出なかった検出は自動で「解決済み」になります。
+**Identity (fingerprint)** is computed from `check_id`, `rule_id`, `target_scope`, `target` and `fingerprint_basis`. Line numbers and text are not included, so a finding keeps its identity when lines shift or the wording changes. A finding that is not reported again by a scan is automatically marked as resolved.
 
-### 2.3 ファイルを走査するチェック（`FileCheckInterface`）
+### 2.3 File checks (`FileCheckInterface`)
 
-ファイルの走査は本体が対象ごとに 1 回だけ行い、各ファイルをすべてのファイルチェックに渡します。`AbstractFileCheck` を継承すると、必要なメソッドだけ実装すれば済みます。
+The plugin walks the files of each target once and passes every file to all file checks. Extend `AbstractFileCheck` and implement only the methods you need.
 
 ```php
 use KeepItPeace\Checks\AbstractFileCheck;
@@ -129,7 +131,7 @@ class TodoCheck extends AbstractFileCheck {
 		if ( ! $file->is_php() ) {
 			return array();
 		}
-		$code = $file->contents( $context->max_file_bytes() ); // 上限を超えると null
+		$code = $file->contents( $context->max_file_bytes() ); // null when the file is over the limit
 		if ( null === $code || false === strpos( $code, 'TODO' ) ) {
 			return array();
 		}
@@ -140,18 +142,18 @@ class TodoCheck extends AbstractFileCheck {
 }
 ```
 
-| メソッド | 呼ばれるタイミング |
+| Method | When it is called |
 |---|---|
-| `supports_target( ScanTarget $target )` | 対象ごとに、このチェックを使うかどうか |
-| `begin_target( $target, $context )` | 対象の走査を始める前（Finding[] を返せる） |
-| `analyze_file( $file, $target, $context )` | ファイルごと |
-| `end_target( $target, $context )` | 対象の走査が終わったあと（例：削除されたファイルの検出） |
+| `supports_target( ScanTarget $target )` | For each target: whether this check applies |
+| `begin_target( $target, $context )` | Before the target is walked (may return Finding[]) |
+| `analyze_file( $file, $target, $context )` | For each file |
+| `end_target( $target, $context )` | After the target has been walked (for example, to report deleted files) |
 
-走査は複数のリクエストに分かれることがあるため、`begin_target` と `end_target` が別のリクエストで呼ばれる場合があります。対象をまたいで状態を持つ場合は、オブジェクトのプロパティではなく DB やオプションに保存してください。
+A walk can be split across several requests, so `begin_target` and `end_target` may be called in different requests. If you need state across a target, store it in the database or an option, not in object properties.
 
-`FileInfo` の主なメンバー：`path`、`rel_path`、`basename`、`extension`、`size`、`mtime`、`perms`、`is_php()`、`hash()`、`contents( $max_bytes )`、`head( $length )`。ファイルの内容と sha256 はチェック間で共有されます。
+Main members of `FileInfo`: `path`, `rel_path`, `basename`, `extension`, `size`, `mtime`, `perms`, `is_php()`, `hash()`, `contents( $max_bytes )`, `head( $length )`. File contents and sha256 are shared between checks.
 
-### 2.4 スキャン対象を追加する（`ScanTargetProviderInterface`）
+### 2.4 Adding scan targets (`ScanTargetProviderInterface`)
 
 ```php
 add_filter( 'keepitpeace_scan_target_providers', function ( array $providers ) {
@@ -166,13 +168,13 @@ add_filter( 'keepitpeace_scan_target_providers', function ( array $providers ) {
 } );
 ```
 
-対象 ID は検出結果の `target_scope` とベースラインの単位になります。ID を変えると別の対象として扱われ、初回スキャンでベースラインを取り直します。
+The target ID becomes the `target_scope` of findings and the unit of the baseline. Changing the ID makes it a different target, and the baseline is recorded again on the next scan.
 
 ---
 
-## 3. ルールを追加する
+## 3. Adding rules
 
-### 3.1 ルールプロバイダー（`RuleProviderInterface`）
+### 3.1 Rule providers (`RuleProviderInterface`)
 
 ```php
 add_filter( 'keepitpeace_rule_providers', function ( array $providers ) {
@@ -187,9 +189,9 @@ add_filter( 'keepitpeace_rule_providers', function ( array $providers ) {
 } );
 ```
 
-ルールは ID で統合され、後から登録したプロバイダーが優先されます（同じ ID で本体のルールを差し替え可能）。最後に `keepitpeace_rules`（`Rule[]`）で一覧全体を調整できます。
+Rules are merged by ID, and providers registered later take precedence (so a built-in rule can be replaced by using the same ID). Finally, `keepitpeace_rules` (`Rule[]`) lets you adjust the whole list.
 
-### 3.2 ルール JSON
+### 3.2 Rule JSON
 
 ```json
 {
@@ -214,18 +216,18 @@ add_filter( 'keepitpeace_rule_providers', function ( array $providers ) {
 }
 ```
 
-| キー | 内容 |
+| Key | Description |
 |---|---|
-| `type` | `regex`（行単位の正規表現）または `detector` |
-| `target` | `code`（コメントと文字列を除いたコード。既定）または `raw`（ファイルの内容そのまま） |
-| `file_types` | 対象の拡張子。`php` は `.php` / `.phtml` などの PHP ファイル全般 |
-| `pattern` / `flags` | 区切り文字なしの正規表現と、`imsxuU` のフラグ |
+| `type` | `regex` (a regular expression matched per line) or `detector` |
+| `target` | `code` (code with comments and strings removed; default) or `raw` (the file contents as they are) |
+| `file_types` | File extensions. `php` covers all PHP files such as `.php` and `.phtml` |
+| `pattern` / `flags` | A regular expression without delimiters, and flags from `imsxuU` |
 
-本体同梱ルールの文言は翻訳のため PHP 側（`RuleMessages`）にありますが、アドオンのルールは JSON の `title` などがそのまま表示されます。
+The texts of the bundled rules live in PHP (`RuleMessages`) so that they can be translated. For add-on rules, `title` and the other texts in the JSON are displayed as they are.
 
-### 3.3 検出器（`DetectorInterface`）
+### 3.3 Detectors (`DetectorInterface`)
 
-正規表現では難しい判定は、トークン解析の検出器で行います。`get_name()` がルール JSON の `detector` と対応します。
+Logic that is hard to express as a regular expression is implemented as a detector working on tokens. `get_name()` corresponds to `detector` in the rule JSON.
 
 ```php
 add_filter( 'keepitpeace_rule_detectors', function ( array $detectors ) {
@@ -234,11 +236,11 @@ add_filter( 'keepitpeace_rule_detectors', function ( array $detectors ) {
 } );
 ```
 
-`detect( SourceFile $source )` は `array( 'rule_id' => …, 'line' => …, 'severity' => …（任意）, 'meta' => …（任意）)` の配列を返します。`SourceFile` は `token_get_all()` の結果、コメント・文字列を除いたコード、行の情報を持ちます。`Rules\Detectors\AbstractDetector` のヘルパー（次のトークンの検索、括弧の対応など）も利用できます。
+`detect( SourceFile $source )` returns an array of `array( 'rule_id' => …, 'line' => …, 'severity' => … (optional), 'meta' => … (optional) )`. `SourceFile` holds the result of `token_get_all()`, the code with comments and strings removed, and line information. The helpers in `Rules\Detectors\AbstractDetector` (finding the next token, matching brackets and so on) are also available.
 
 ---
 
-## 4. 通知チャネルを追加する
+## 4. Adding notification channels
 
 ```php
 add_filter( 'keepitpeace_notification_channels', function ( array $channels ) {
@@ -247,26 +249,26 @@ add_filter( 'keepitpeace_notification_channels', function ( array $channels ) {
 } );
 ```
 
-| メソッド | 内容 |
+| Method | Description |
 |---|---|
-| `get_id()` | `slack` など。設定は `keepitpeace_settings['channels'][ID]` に保存されます |
-| `is_enabled( Settings $s )` | 設定済みで有効か |
-| `send( ScanReport $report )` | `true` または `WP_Error` を返す |
-| `send_test()` | 設定画面の「テスト送信」 |
-| `render_settings( Settings $s )` | 通知タブのフォーム内（`<tr>` 単位）。入力名は `keepitpeace[channels][ID][...]` |
-| `sanitize_settings( array $input, array $current )` | 保存時のサニタイズ |
+| `get_id()` | For example `slack`. Settings are stored in `keepitpeace_settings['channels'][ID]` |
+| `is_enabled( Settings $s )` | Whether the channel is configured and enabled |
+| `send( ScanReport $report )` | Returns `true` or a `WP_Error` |
+| `send_test()` | "Send test" on the settings screen |
+| `render_settings( Settings $s )` | Rows (`<tr>`) inside the form of the Notifications tab. Input names are `keepitpeace[channels][ID][...]` |
+| `sanitize_settings( array $input, array $current )` | Sanitizing on save |
 
-**`ScanReport` の内容**：`scan`（`Scan`）、`site_name`、`site_url`、`admin_url`、`by_severity`（重要度ごとの未解決件数）、`diff`（`new` / `resolved` / `ongoing`）、`php`、`database`、`tls`、`is_digest`、`max_severity()`、`has_issues()`、`total_issues()`。
+**Contents of `ScanReport`**: `scan` (`Scan`), `site_name`, `site_url`, `admin_url`, `by_severity` (open issues per severity), `diff` (`new` / `resolved` / `ongoing`), `php`, `database`, `tls`, `is_digest`, `max_severity()`, `has_issues()`, `total_issues()`.
 
-外部サービスに送るメッセージには、**ファイルパス・コード片・URL のパスを含めないでください**（本体のメールも件数と状態だけを送ります）。詳細は管理画面へのリンク（`admin_url`）で確認してもらう設計です。
+**Do not include file paths, code snippets or URL paths** in messages sent to external services (the plugin's own e-mails only contain counts and status). Details are meant to be checked in the admin screens through the `admin_url` link.
 
-送信するかどうかは本体の通知条件で決まり、チャネルごとに `keepitpeace_should_notify` で上書きできます。
+Whether a notification is sent is decided by the plugin's send conditions, and can be overridden per channel with `keepitpeace_should_notify`.
 
 ---
 
-## 5. 設定画面を拡張する
+## 5. Extending the settings screen
 
-### 5.1 タブを追加する
+### 5.1 Adding a tab
 
 ```php
 add_filter( 'keepitpeace_settings_tabs', function ( $tabs ) {
@@ -286,7 +288,7 @@ add_action( 'keepitpeace_settings_tab_myaddon', function ( \KeepItPeace\Settings
 	<?php
 } );
 
-// 既定値とサニタイズ（本体の設定オプションに同居させる場合）
+// Defaults and sanitizing (when storing in the plugin's settings option).
 add_filter( 'keepitpeace_default_settings', function ( $d ) { $d['myaddon'] = array( 'key' => '' ); return $d; } );
 add_filter( 'keepitpeace_sanitize_settings', function ( $values, $input, $tab ) {
 	if ( 'myaddon' === $tab ) {
@@ -296,40 +298,40 @@ add_filter( 'keepitpeace_sanitize_settings', function ( $values, $input, $tab ) 
 }, 10, 3 );
 ```
 
-`keepitpeace_save_settings` のハンドラーが権限（`keepitpeace_capability`）と nonce を確認します。独自のオプションに保存したい場合は、自分で `admin-post` ハンドラーを用意し、同じように権限と nonce を確認してください。
+The `keepitpeace_save_settings` handler checks the capability (`keepitpeace_capability`) and the nonce. To store settings in your own option, write your own `admin-post` handler and check the capability and nonce in the same way.
 
-### 5.2 その他の画面
+### 5.2 Other screens
 
-| フック | 内容 |
+| Hook | Description |
 |---|---|
-| `keepitpeace_settings_section_{$tab}` | 本体のタブのフォーム表の末尾に行を追加（`tools` タブはフォームの外） |
-| `keepitpeace_dashboard_widgets` | 本プラグインのダッシュボードにカードを追加 |
-| `keepitpeace_finding_detail_panels` | 検出結果の詳細画面にパネルを追加（差分表示、AI による解説など） |
-| `keepitpeace_show_pro_notice` | `false` を返すと設定画面の Pro の案内を消す（Pro を導入済みのとき） |
+| `keepitpeace_settings_section_{$tab}` | Adds rows at the end of the form table of a built-in tab (on the `tools` tab, outside the form) |
+| `keepitpeace_dashboard_widgets` | Adds cards to the plugin's dashboard |
+| `keepitpeace_finding_detail_panels` | Adds panels to the finding detail screen (diffs, AI explanations and so on) |
+| `keepitpeace_show_pro_notice` | Return `false` to hide the Pro notice on the settings screen (when Pro is installed) |
 
 ---
 
-## 6. PHP API（`KeepItPeace\Api`）
+## 6. PHP API (`KeepItPeace\Api`)
 
 ```php
 use KeepItPeace\Api;
 
-Api::get_site_uuid();                    // サイト固有の UUID（URL を出さずにサイトを識別）
-Api::export_scan( $scan_id = null );     // array|null（null = 最新の完了スキャン）
+Api::get_site_uuid();                    // A UUID that identifies the site without exposing its URL
+Api::export_scan( $scan_id = null );     // array|null (null = the latest completed scan)
 Api::export_scan_json( $scan_id = null, JSON_PRETTY_PRINT ); // string|null
 Api::get_latest_scan();                  // Scan|null
 Api::get_findings( array( 'status' => array( 'new' ), 'severity' => 4, 'category' => 'theme', 'per_page' => 50 ) ); // Finding[]
-Api::start_scan( 'myaddon' );            // スキャン ID。続きは WP-Cron で実行
-Api::get_settings();                     // Settings（$settings->get( 'channels.email.recipients' ) のようにドット記法で取得）
+Api::start_scan( 'myaddon' );            // Scan ID. The scan continues on WP-Cron
+Api::get_settings();                     // Settings (dot notation, e.g. $settings->get( 'channels.email.recipients' ))
 ```
 
-### 6.1 エクスポートの JSON
+### 6.1 Export JSON
 
-形式は [`export-schema.json`](export-schema.json)（JSON Schema 2020-12）で定義しています。
+The format is defined in [`export-schema.json`](export-schema.json) (JSON Schema 2020-12).
 
-- `schema` は常に `keepitpeace.scan-report`。`schema_version` は semver で、マイナーバージョンでは任意項目の追加だけを行います
-- `findings` は、そのスキャンで検出されたものと、そのスキャンで解決されたもの。`status` は現在の状態、`diff`（`new` / `ongoing` / `resolved`）はそのスキャン時点の差分
-- アドオンのデータは `keepitpeace_export_data` で `extensions.<アドオンのスラッグ>` の下に追加します
+- `schema` is always `keepitpeace.scan-report`. `schema_version` is semver; minor versions only add optional fields
+- `findings` contains the findings detected in the scan and those resolved by the scan. `status` is the current status, and `diff` (`new` / `ongoing` / `resolved`) is the difference at the time of the scan
+- Add-ons add their data under `extensions.<add-on slug>` with `keepitpeace_export_data`
 
 ```php
 add_filter( 'keepitpeace_export_data', function ( array $data, int $scan_id ) {
@@ -338,77 +340,77 @@ add_filter( 'keepitpeace_export_data', function ( array $data, int $scan_id ) {
 }, 10, 2 );
 ```
 
-エクスポートにはファイルパスや URL が含まれます。外部（集約サーバーなど）に送る場合は、アドオン側でサイト管理者の同意を得て、送信先と内容を明示してください。
+The export contains file paths and URLs. If your add-on sends it to an external service (such as an aggregation server), obtain the site administrator's consent and state clearly where it is sent and what it contains.
 
 ---
 
-## 7. フック一覧
+## 7. Hook reference
 
-### 7.1 アクション
+### 7.1 Actions
 
-| フック | 引数 | 発火のタイミング |
+| Hook | Arguments | Fires when |
 |---|---|---|
-| `keepitpeace_loaded` | `Plugin $plugin` | 本体の準備完了（`plugins_loaded`） |
-| `keepitpeace_scan_started` | `Scan $scan` | スキャン開始 |
-| `keepitpeace_scan_completed` | `ScanReport $report` | スキャン完了（通知の前） |
-| `keepitpeace_scan_failed` | `Scan $scan, WP_Error $error` | スキャンの失敗 |
-| `keepitpeace_finding_created` | `Finding $finding, Scan $scan` | 初めて検出された |
-| `keepitpeace_finding_reopened` | `Finding $finding, Scan $scan, string $outcome` | 解決済み・無視が再開された（`reopened` / `ignore_reset`） |
-| `keepitpeace_finding_resolved` | `Finding $finding, Scan $scan` | 検出されなくなった |
-| `keepitpeace_finding_status_changed` | `Finding $finding, string $old, string $new, int $user_id, string $note` | 管理画面で状態を変更 |
-| `keepitpeace_baseline_approved` | `string $scope, int $file_count, int $user_id` | ベースラインの承認 |
-| `keepitpeace_baseline_file_recorded` | `string $abs_path, string $scope, string $rel_path, string $sha256` | 承認時にファイルごと（フックがある場合のみ発火。差分表示用にファイルの内容を保存する用途） |
-| `keepitpeace_notification_sent` | `string $channel_id, ScanReport $report, true\|WP_Error $result` | 各チャネルの送信後 |
-| `keepitpeace_daily_maintenance` | — | 日次メンテナンスの Cron |
-| `keepitpeace_settings_tab_{$tab}` | `Settings $settings` | 追加タブの描画 |
-| `keepitpeace_settings_section_{$tab}` | `Settings $settings` | 既存タブの末尾 |
-| `keepitpeace_dashboard_widgets` | `Settings $settings` | ダッシュボード |
-| `keepitpeace_finding_detail_panels` | `Finding $finding` | 検出結果の詳細画面 |
+| `keepitpeace_loaded` | `Plugin $plugin` | The plugin is ready (`plugins_loaded`) |
+| `keepitpeace_scan_started` | `Scan $scan` | A scan starts |
+| `keepitpeace_scan_completed` | `ScanReport $report` | A scan completes (before notifications) |
+| `keepitpeace_scan_failed` | `Scan $scan, WP_Error $error` | A scan fails |
+| `keepitpeace_finding_created` | `Finding $finding, Scan $scan` | A finding is detected for the first time |
+| `keepitpeace_finding_reopened` | `Finding $finding, Scan $scan, string $outcome` | A resolved or ignored finding becomes active again (`reopened` / `ignore_reset`) |
+| `keepitpeace_finding_resolved` | `Finding $finding, Scan $scan` | A finding is no longer detected |
+| `keepitpeace_finding_status_changed` | `Finding $finding, string $old, string $new, int $user_id, string $note` | The status is changed in the admin screens |
+| `keepitpeace_baseline_approved` | `string $scope, int $file_count, int $user_id` | A baseline is approved |
+| `keepitpeace_baseline_file_recorded` | `string $abs_path, string $scope, string $rel_path, string $sha256` | For each file on approval (fires only when hooked; for example, to store file contents for diffs) |
+| `keepitpeace_notification_sent` | `string $channel_id, ScanReport $report, true\|WP_Error $result` | After each channel has sent |
+| `keepitpeace_daily_maintenance` | — | The daily maintenance cron |
+| `keepitpeace_settings_tab_{$tab}` | `Settings $settings` | Rendering an added tab |
+| `keepitpeace_settings_section_{$tab}` | `Settings $settings` | End of a built-in tab |
+| `keepitpeace_dashboard_widgets` | `Settings $settings` | Dashboard |
+| `keepitpeace_finding_detail_panels` | `Finding $finding` | Finding detail screen |
 
-### 7.2 フィルター
+### 7.2 Filters
 
-| フック | 値（追加の引数） | 用途 |
+| Hook | Value (extra arguments) | Purpose |
 |---|---|---|
-| `keepitpeace_checks` | `CheckInterface[]` | チェックの登録・差し替え・削除 |
-| `keepitpeace_scan_target_providers` | `ScanTargetProviderInterface[]` | スキャン対象の追加 |
-| `keepitpeace_notification_channels` | `NotificationChannelInterface[]` | 通知チャネルの追加 |
-| `keepitpeace_rule_providers` | `RuleProviderInterface[]` | ルールの追加・配信 |
-| `keepitpeace_rules` | `Rule[]` | ルールの最終調整 |
-| `keepitpeace_rule_detectors` | `array<string, DetectorInterface>` | 検出器の追加 |
-| `keepitpeace_schedule_options` | `array<string, array{label, interval}>` | スキャン頻度の追加（例：毎時） |
-| `keepitpeace_time_budget` | `float $seconds`（`string $trigger`） | 1 回の実行時間の上限 |
-| `keepitpeace_file_limits` | `array{max_size, max_files}` | ファイルサイズ・ファイル数の上限 |
-| `keepitpeace_exclude_patterns` | `string[]`（`ScanTarget $target`） | 除外パターン |
-| `keepitpeace_retention_max_days` | `int`（既定 365。`0` = 無期限） | 保持期間の上限 |
-| `keepitpeace_should_notify` | `bool`（`ScanReport $report, string $channel_id`） | 通知するかどうか |
-| `keepitpeace_email_recipients` | `string[]` | メールの宛先 |
-| `keepitpeace_email_subject` | `string`（`ScanReport $report`） | 件名 |
-| `keepitpeace_email_body_text` / `keepitpeace_email_body_html` | `string`（`ScanReport $report`） | 本文 |
-| `keepitpeace_settings_tabs` | `array<string, string>` | 設定タブの追加 |
-| `keepitpeace_default_settings` | `array` | 設定の既定値 |
-| `keepitpeace_sanitize_settings` | `array $values`（`array $input, string $tab`） | 設定のサニタイズ |
-| `keepitpeace_allowed_hosts` | `string[]` | 外部チェックで許可するホスト（完全一致または `*.example.com`） |
-| `keepitpeace_public_suffixes` | `string[]` | 登録可能ドメインの判定に使う複数ラベルのサフィックス（共用ドメインの追加） |
-| `keepitpeace_external_urls` | `array[]`（`Settings $settings`） | 外部チェックで確認する URL（許可されていないホストは除外されます） |
-| `keepitpeace_sensitive_paths` | `array[]` | 公開漏れチェックのパス定義（`data/sensitive-paths.json` と同じ形式） |
-| `keepitpeace_listing_urls` | `string[]` | ディレクトリ一覧表示を確認する URL |
-| `keepitpeace_probe_timeout` | `int`（既定 5） | 外部チェックのタイムアウト（秒） |
-| `keepitpeace_osv_details_limit` | `int`（既定 40） | 1 回の実行で取得する脆弱性の詳細の上限 |
-| `keepitpeace_export_data` | `array`（`int $scan_id`） | エクスポートの拡張 |
-| `keepitpeace_capability` | `string`（既定 `manage_options`） | 画面・操作に必要な権限 |
-| `keepitpeace_show_pro_notice` | `bool` | Pro の案内を表示するか |
+| `keepitpeace_checks` | `CheckInterface[]` | Register, replace or remove checks |
+| `keepitpeace_scan_target_providers` | `ScanTargetProviderInterface[]` | Add scan targets |
+| `keepitpeace_notification_channels` | `NotificationChannelInterface[]` | Add notification channels |
+| `keepitpeace_rule_providers` | `RuleProviderInterface[]` | Add or deliver rules |
+| `keepitpeace_rules` | `Rule[]` | Final adjustment of the rules |
+| `keepitpeace_rule_detectors` | `array<string, DetectorInterface>` | Add detectors |
+| `keepitpeace_schedule_options` | `array<string, array{label, interval}>` | Add scan frequencies (e.g. hourly) |
+| `keepitpeace_time_budget` | `float $seconds` (`string $trigger`) | Time limit of one run |
+| `keepitpeace_file_limits` | `array{max_size, max_files}` | File size and file count limits |
+| `keepitpeace_exclude_patterns` | `string[]` (`ScanTarget $target`) | Exclude patterns |
+| `keepitpeace_retention_max_days` | `int` (default 365; `0` = unlimited) | Maximum retention period |
+| `keepitpeace_should_notify` | `bool` (`ScanReport $report, string $channel_id`) | Whether to notify |
+| `keepitpeace_email_recipients` | `string[]` | E-mail recipients |
+| `keepitpeace_email_subject` | `string` (`ScanReport $report`) | Subject |
+| `keepitpeace_email_body_text` / `keepitpeace_email_body_html` | `string` (`ScanReport $report`) | Body |
+| `keepitpeace_settings_tabs` | `array<string, string>` | Add settings tabs |
+| `keepitpeace_default_settings` | `array` | Default settings |
+| `keepitpeace_sanitize_settings` | `array $values` (`array $input, string $tab`) | Sanitize settings |
+| `keepitpeace_allowed_hosts` | `string[]` | Hosts allowed for external checks (exact match or `*.example.com`) |
+| `keepitpeace_public_suffixes` | `string[]` | Multi-label suffixes used to find the registrable domain (add shared hosting domains) |
+| `keepitpeace_external_urls` | `array[]` (`Settings $settings`) | URLs checked by the external checks (hosts that are not allowed are removed) |
+| `keepitpeace_sensitive_paths` | `array[]` | Path definitions for the exposed files check (same format as `data/sensitive-paths.json`) |
+| `keepitpeace_listing_urls` | `string[]` | URLs checked for directory listings |
+| `keepitpeace_probe_timeout` | `int` (default 5) | Timeout of the external checks (seconds) |
+| `keepitpeace_osv_details_limit` | `int` (default 40) | Maximum number of vulnerability details fetched per run |
+| `keepitpeace_export_data` | `array` (`int $scan_id`) | Extend the export |
+| `keepitpeace_capability` | `string` (default `manage_options`) | Capability required for the screens and actions |
+| `keepitpeace_show_pro_notice` | `bool` | Whether to show the Pro notice |
 
 ---
 
-## 8. 本体の開発
+## 8. Developing the plugin
 
 ```
 composer install
-vendor/bin/phpunit          # ユニットテスト（WordPress を起動しない）
-vendor/bin/phpcs            # WPCS + PHPCompatibilityWP（testVersion 7.4-）
-vendor/bin/phpcs --runtime-set text_domain kip-sample-addon dev   # サンプルアドオン
-bin/build-zip.sh            # 配布用 ZIP（.distignore に従う）
-bin/make-pot.sh             # 翻訳テンプレートと日本語訳のコンパイル（WP-CLI が必要）
+vendor/bin/phpunit          # unit tests (WordPress is not loaded)
+vendor/bin/phpcs            # WPCS + PHPCompatibilityWP (testVersion 7.4-)
+vendor/bin/phpcs --runtime-set text_domain kip-sample-addon dev   # sample add-on
+bin/build-zip.sh            # distribution ZIP (follows .distignore)
+bin/make-pot.sh             # translation template and Japanese .mo (requires WP-CLI)
 ```
 
-サンプルアドオンをテスト環境で使うには、`dev/sample-addon` を `wp-content/plugins/` にコピー（またはシンボリックリンク）して有効化します。
+To use the sample add-on in a test site, copy (or symlink) `dev/sample-addon` into `wp-content/plugins/` and activate it.

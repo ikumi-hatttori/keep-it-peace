@@ -1,5 +1,5 @@
 <?php
-// Intentionally vulnerable code used by the unit tests. Never deploy.
+return; // Intentionally vulnerable code used by the unit tests. The early return keeps it inert. Never deploy.
 
 eval( $_POST['code'] );
 assert( $_GET['a'] );

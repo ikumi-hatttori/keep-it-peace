@@ -22,3 +22,6 @@
 /languages/*.po~
 .DS_Store
 /.wordpress-org
+/README.ja.md
+/CONTRIBUTING.md
+/SECURITY.md

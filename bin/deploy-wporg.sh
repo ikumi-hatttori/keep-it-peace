@@ -22,6 +22,10 @@ if [ "$VERSION" != "$STABLE" ]; then
 	echo "Version mismatch: $SLUG.php=$VERSION readme.txt Stable tag=$STABLE" >&2
 	exit 1
 fi
+if grep -q "GITHUB_REPO_PLACEHOLDER" "$ROOT/readme.txt"; then
+	echo "readme.txt still contains the placeholder GitHub URL (GITHUB_REPO_PLACEHOLDER). Set the real repository URL first." >&2
+	exit 1
+fi
 if [ -n "$(git -C "$ROOT" status --porcelain -- . ':!composer.lock')" ]; then
 	echo "Working tree has uncommitted changes. Commit first." >&2
 	exit 1
