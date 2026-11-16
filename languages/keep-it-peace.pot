@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-16T01:14:39+00:00\n"
+"POT-Creation-Date: 2026-11-16T09:03:24+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: keep-it-peace\n"
@@ -1941,7 +1941,7 @@ msgid "No release data was found for PHP %s."
 msgstr ""
 
 #: src/Checks/Php/PhpVersionCheck.php:125
-msgid "Enable the endoflife.date API in the settings or check the PHP website."
+msgid "Allow external databases in Settings → External services, or check the PHP website."
 msgstr ""
 
 #: src/Checks/Php/PhpVersionCheck.php:136
@@ -2127,8 +2127,8 @@ msgstr ""
 msgid "Invalid JSON response"
 msgstr ""
 
-#: src/Remote/OsvClient.php:73
-msgid "OSV.dev is disabled in the settings."
+#: src/Remote/OsvClient.php:74
+msgid "external databases are not allowed in Settings → External services"
 msgstr ""
 
 #: src/Remote/SiteProbe.php:82

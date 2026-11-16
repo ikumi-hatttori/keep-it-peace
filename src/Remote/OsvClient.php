@@ -70,7 +70,8 @@ class OsvClient {
 			if ( null === $response['data'] ) {
 				$out['error'] = (string) ( $response['error'] ?? '' );
 				if ( '' === $out['error'] ) {
-					$out['error'] = __( 'OSV.dev is disabled in the settings.', 'keep-it-peace' );
+					// Shown inside "OSV.dev could not be reached: %s.", so no trailing period.
+					$out['error'] = __( 'external databases are not allowed in Settings → External services', 'keep-it-peace' );
 				}
 				return $out;
 			}

@@ -122,7 +122,7 @@ class PhpVersionCheck extends AbstractCheck {
 					'title'          => __( 'PHP support status unknown', 'keep-it-peace' ),
 					/* translators: %s: PHP version. */
 					'message'        => sprintf( __( 'No release data was found for PHP %s.', 'keep-it-peace' ), $branch ),
-					'recommendation' => __( 'Enable the endoflife.date API in the settings or check the PHP website.', 'keep-it-peace' ),
+					'recommendation' => __( 'Allow external databases in Settings → External services, or check the PHP website.', 'keep-it-peace' ),
 				)
 			);
 		}
