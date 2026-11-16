@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-09T06:58:36+00:00\n"
+"POT-Creation-Date: 2026-11-16T01:14:39+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: keep-it-peace\n"
@@ -39,109 +39,236 @@ msgstr ""
 msgid "https://mackarel.jp"
 msgstr ""
 
-#: src/Admin/Admin.php:90
+#: src/Admin/Admin.php:92
 msgid "Dashboard"
 msgstr ""
 
-#: src/Admin/Admin.php:91
+#: src/Admin/Admin.php:93
 #: src/Admin/FindingsPage.php:106
 msgid "Findings"
 msgstr ""
 
-#: src/Admin/Admin.php:94
+#: src/Admin/Admin.php:96
 #: src/Admin/ScansPage.php:84
 msgid "Scan history"
 msgstr ""
 
-#: src/Admin/Admin.php:95
-#: src/Admin/Admin.php:202
+#: src/Admin/Admin.php:97
+#: src/Admin/Admin.php:239
 msgid "Settings"
 msgstr ""
 
-#: src/Admin/Admin.php:129
+#: src/Admin/Admin.php:132
 msgid "Starting scan…"
 msgstr ""
 
 #. translators: %d: progress percentage.
-#: src/Admin/Admin.php:131
+#: src/Admin/Admin.php:134
 #, php-format
 msgid "Scanning… %d%%"
 msgstr ""
 
-#: src/Admin/Admin.php:132
+#: src/Admin/Admin.php:135
 msgid "Another scan step is running. Waiting…"
 msgstr ""
 
-#: src/Admin/Admin.php:133
+#: src/Admin/Admin.php:136
 msgid "Scan completed. Reloading…"
 msgstr ""
 
-#: src/Admin/Admin.php:134
+#: src/Admin/Admin.php:137
 msgid "The scan failed. Check the scan history for details."
 msgstr ""
 
 #. translators: %s: error message.
-#: src/Admin/Admin.php:136
+#: src/Admin/Admin.php:139
 #, php-format
 msgid "Request failed: %s"
 msgstr ""
 
 #: src/Admin/Admin.php:151
-#: src/Admin/DashboardPage.php:247
-msgid "Scheduled scans may not be running."
+msgid "Use external vulnerability databases?"
 msgstr ""
 
 #: src/Admin/Admin.php:152
+msgid "Keep It Peace can look up support periods and known vulnerabilities online. It then sends your PHP version, your database type and version, and the names and versions of Composer/npm packages found in scanned folders to endoflife.date, php.net, NVD (NIST) and OSV.dev. Your site URL, file contents and personal data are never sent."
+msgstr ""
+
+#: src/Admin/Admin.php:153
+msgid "Until you agree, nothing is sent and support periods are checked with data bundled with the plugin. You can change this at any time in Settings → External services."
+msgstr ""
+
+#: src/Admin/Admin.php:157
+msgid "Use external databases"
+msgstr ""
+
+#: src/Admin/Admin.php:158
+msgid "Do not use"
+msgstr ""
+
+#: src/Admin/Admin.php:177
+#: src/Admin/DashboardPage.php:253
+msgid "Scheduled scans may not be running."
+msgstr ""
+
+#: src/Admin/Admin.php:178
 msgid "No scan has completed for longer than expected. WP-Cron only runs when the site receives visits; set up a server cron job (see Settings → Tools) to run scans reliably."
 msgstr ""
 
-#: src/Admin/Admin.php:164
+#: src/Admin/Admin.php:199
 msgid "Settings saved."
 msgstr ""
 
-#: src/Admin/Admin.php:165
+#: src/Admin/Admin.php:200
+msgid "External vulnerability databases will be used from the next scan."
+msgstr ""
+
+#: src/Admin/Admin.php:201
+msgid "External databases will not be used. You can change this in Settings → External services."
+msgstr ""
+
+#: src/Admin/Admin.php:202
 msgid "Settings saved, but some values were not accepted:"
 msgstr ""
 
-#: src/Admin/Admin.php:166
+#: src/Admin/Admin.php:203
 msgid "There is no completed scan to export yet."
 msgstr ""
 
-#: src/Admin/Admin.php:167
+#: src/Admin/Admin.php:204
 msgid "Status updated."
 msgstr ""
 
-#: src/Admin/Admin.php:168
+#: src/Admin/Admin.php:205
 msgid "Selected findings were updated."
 msgstr ""
 
-#: src/Admin/Admin.php:169
+#: src/Admin/Admin.php:206
 msgid "The baseline was approved."
 msgstr ""
 
-#: src/Admin/Admin.php:170
+#: src/Admin/Admin.php:207
 msgid "Test notification sent."
 msgstr ""
 
-#: src/Admin/Admin.php:171
+#: src/Admin/Admin.php:208
 msgid "Test notification failed."
 msgstr ""
 
-#: src/Admin/Admin.php:172
+#: src/Admin/Admin.php:209
 msgid "Item not found."
 msgstr ""
 
-#: src/Admin/Admin.php:224
+#: src/Admin/Admin.php:261
 msgid "You do not have permission to do this."
 msgstr ""
 
 #. translators: %d: number of files.
-#: src/Admin/Admin.php:302
+#: src/Admin/Admin.php:347
 #, php-format
 msgid "%d file recorded."
 msgid_plural "%d files recorded."
 msgstr[0] ""
 msgstr[1] ""
+
+#: src/Admin/BaselinePanel.php:83
+msgid "The baseline is the list of fingerprints (sha256 hashes) of every file in your scan targets, recorded as the trusted state. Each scan compares the current files with it and reports added, changed and deleted files as \"File integrity\" findings. The first scan of a target records the baseline automatically."
+msgstr ""
+
+#: src/Admin/BaselinePanel.php:84
+msgid "When you changed files yourself (theme update, deployment, edits):"
+msgstr ""
+
+#: src/Admin/BaselinePanel.php:86
+msgid "Run a scan so that the latest files are recorded."
+msgstr ""
+
+#: src/Admin/BaselinePanel.php:87
+msgid "Check that the reported files are the ones you changed."
+msgstr ""
+
+#: src/Admin/BaselinePanel.php:88
+msgid "Approve the current state. The changes are marked as resolved and are no longer reported."
+msgstr ""
+
+#: src/Admin/BaselinePanel.php:90
+msgid "Do not approve changes you do not recognize. They may be signs of tampering; check the findings first."
+msgstr ""
+
+#: src/Admin/BaselinePanel.php:105
+msgid "File baseline"
+msgstr ""
+
+#: src/Admin/BaselinePanel.php:109
+msgid "never"
+msgstr ""
+
+#. translators: %s: date.
+#: src/Admin/BaselinePanel.php:111
+#, php-format
+msgid "Approval uses the file state recorded by the last scan (%s). If you deployed after that, run a scan first."
+msgstr ""
+
+#: src/Admin/BaselinePanel.php:115
+msgid "Target"
+msgstr ""
+
+#: src/Admin/BaselinePanel.php:115
+#: src/Admin/Ui.php:81
+msgid "Files"
+msgstr ""
+
+#: src/Admin/BaselinePanel.php:115
+msgid "Unapproved changes"
+msgstr ""
+
+#: src/Admin/BaselinePanel.php:115
+msgid "Approved"
+msgstr ""
+
+#: src/Admin/BaselinePanel.php:132
+msgid "first scan"
+msgstr ""
+
+#: src/Admin/BaselinePanel.php:134
+msgid "Not yet (recorded on the next scan)"
+msgstr ""
+
+#: src/Admin/BaselinePanel.php:138
+msgid "Approve current state"
+msgstr ""
+
+#: src/Admin/BaselinePanel.php:143
+msgid "Approve all targets"
+msgstr ""
+
+#. translators: %s: number of files.
+#: src/Admin/BaselinePanel.php:167
+#, php-format
+msgid "%s file differs from the approved baseline."
+msgid_plural "%s files differ from the approved baseline."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Admin/BaselinePanel.php:172
+msgid "If you changed these files yourself, approve them. If you do not recognize the changes, check them before approving."
+msgstr ""
+
+#: src/Admin/BaselinePanel.php:174
+msgid "Review changes"
+msgstr ""
+
+#: src/Admin/BaselinePanel.php:175
+msgid "Approve these changes"
+msgstr ""
+
+#: src/Admin/BaselinePanel.php:176
+msgid "What is the baseline?"
+msgstr ""
+
+#: src/Admin/BaselinePanel.php:192
+msgid "Approve the current files as the trusted baseline?"
+msgstr ""
 
 #: src/Admin/DashboardPage.php:57
 msgid "Scan now"
@@ -167,7 +294,7 @@ msgid "Last completed"
 msgstr ""
 
 #: src/Admin/DashboardPage.php:91
-#: src/Admin/DashboardPage.php:245
+#: src/Admin/DashboardPage.php:251
 msgid "Never"
 msgstr ""
 
@@ -203,7 +330,7 @@ msgid "Database"
 msgstr ""
 
 #: src/Admin/DashboardPage.php:123
-#: src/Admin/DashboardPage.php:178
+#: src/Admin/DashboardPage.php:181
 #: src/Notifications/EmailChannel.php:245
 msgid "end of life"
 msgstr ""
@@ -229,117 +356,133 @@ msgid_plural "%d days left"
 msgstr[0] ""
 msgstr[1] ""
 
+#: src/Admin/DashboardPage.php:176
+#: src/Admin/DashboardPage.php:195
+msgid "External databases not used (checked with bundled data)"
+msgstr ""
+
 #. translators: %s: date.
-#: src/Admin/DashboardPage.php:181
+#: src/Admin/DashboardPage.php:184
 #: src/Notifications/EmailChannel.php:229
 #, php-format
 msgid "security support until %s"
 msgstr ""
 
 #. translators: %s: version.
-#: src/Admin/DashboardPage.php:185
+#: src/Admin/DashboardPage.php:188
 #, php-format
 msgid "Update available: %s"
 msgstr ""
 
 #. translators: %d: number of CVEs.
-#: src/Admin/DashboardPage.php:189
+#: src/Admin/DashboardPage.php:192
 #, php-format
 msgid "%d known vulnerability (NVD)"
 msgid_plural "%d known vulnerabilities (NVD)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Admin/DashboardPage.php:207
+#: src/Admin/DashboardPage.php:213
 msgid "Most severe open issues"
 msgstr ""
 
-#: src/Admin/DashboardPage.php:209
+#: src/Admin/DashboardPage.php:215
 msgid "No open issues."
 msgstr ""
 
-#: src/Admin/DashboardPage.php:222
+#: src/Admin/DashboardPage.php:228
 msgid "View all findings"
 msgstr ""
 
-#: src/Admin/DashboardPage.php:245
+#: src/Admin/DashboardPage.php:251
 msgid "Last scan:"
 msgstr ""
 
-#: src/Admin/DashboardPage.php:249
+#: src/Admin/DashboardPage.php:255
 msgid "Open Keep It Peace"
 msgstr ""
 
-#: src/Admin/FindingsListTable.php:121
-#: src/Admin/FindingsListTable.php:196
+#: src/Admin/FindingsListTable.php:123
+#: src/Admin/FindingsListTable.php:198
 msgid "Severity"
 msgstr ""
 
-#: src/Admin/FindingsListTable.php:122
+#: src/Admin/FindingsListTable.php:124
 msgid "Issue"
 msgstr ""
 
-#: src/Admin/FindingsListTable.php:123
-#: src/Admin/FindingsListTable.php:202
+#: src/Admin/FindingsListTable.php:125
+#: src/Admin/FindingsListTable.php:204
 #: src/Admin/FindingsPage.php:139
 msgid "Category"
 msgstr ""
 
-#: src/Admin/FindingsListTable.php:124
+#: src/Admin/FindingsListTable.php:126
 #: src/Admin/FindingsPage.php:140
 msgid "Location"
 msgstr ""
 
-#: src/Admin/FindingsListTable.php:125
+#: src/Admin/FindingsListTable.php:127
 #: src/Admin/FindingsPage.php:138
 #: src/Admin/FindingsPage.php:169
 #: src/Admin/ScansPage.php:98
-#: src/Admin/SettingsPage.php:484
+#: src/Admin/SettingsPage.php:573
 msgid "Status"
 msgstr ""
 
-#: src/Admin/FindingsListTable.php:126
+#: src/Admin/FindingsListTable.php:128
 #: src/Admin/FindingsPage.php:143
 msgid "Last detected"
 msgstr ""
 
-#: src/Admin/FindingsListTable.php:152
+#: src/Admin/FindingsListTable.php:154
 msgid "Mark as acknowledged"
 msgstr ""
 
-#: src/Admin/FindingsListTable.php:153
+#: src/Admin/FindingsListTable.php:155
 msgid "Ignore"
 msgstr ""
 
-#: src/Admin/FindingsListTable.php:154
+#: src/Admin/FindingsListTable.php:156
 msgid "Mark as resolved"
 msgstr ""
 
-#: src/Admin/FindingsListTable.php:155
+#: src/Admin/FindingsListTable.php:157
 msgid "Reopen"
 msgstr ""
 
-#: src/Admin/FindingsListTable.php:167
+#: src/Admin/FindingsListTable.php:169
 msgid "Open"
 msgstr ""
 
-#: src/Admin/FindingsListTable.php:172
+#: src/Admin/FindingsListTable.php:174
 msgid "All"
 msgstr ""
 
-#: src/Admin/FindingsListTable.php:197
+#: src/Admin/FindingsListTable.php:199
 msgid "All severities"
 msgstr ""
 
-#: src/Admin/FindingsListTable.php:203
+#: src/Admin/FindingsListTable.php:205
 msgid "All categories"
 msgstr ""
 
-#: src/Admin/FindingsListTable.php:208
+#: src/Admin/FindingsListTable.php:214
 msgid "Filter"
 msgstr ""
 
-#: src/Admin/FindingsListTable.php:268
+#. translators: %s: check name.
+#: src/Admin/FindingsListTable.php:217
+#, php-format
+msgid "Check: %s"
+msgstr ""
+
+#. translators: %s: check name.
+#: src/Admin/FindingsListTable.php:217
+msgid "Clear"
+msgstr ""
+
+#: src/Admin/FindingsListTable.php:278
 msgid "No findings match the current filters."
 msgstr ""
 
@@ -506,324 +649,339 @@ msgstr ""
 msgid "No scans yet."
 msgstr ""
 
-#: src/Admin/SettingsPage.php:49
+#: src/Admin/SettingsPage.php:51
 msgid "General"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:50
+#: src/Admin/SettingsPage.php:52
 msgid "Targets"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:51
+#: src/Admin/SettingsPage.php:53
 msgid "Checks"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:52
+#: src/Admin/SettingsPage.php:54
 msgid "Notifications"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:53
+#: src/Admin/SettingsPage.php:55
 msgid "External services"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:54
+#: src/Admin/SettingsPage.php:56
 msgid "Tools"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:79
+#: src/Admin/SettingsPage.php:81
 msgid "Keep It Peace settings"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:150
+#: src/Admin/SettingsPage.php:152
 msgid "Scan frequency"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:160
+#: src/Admin/SettingsPage.php:162
 msgid "Keep history for"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:162
+#: src/Admin/SettingsPage.php:164
 msgid "days"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:164
+#: src/Admin/SettingsPage.php:166
 msgid "0 keeps history forever."
 msgstr ""
 
-#: src/Admin/SettingsPage.php:182
+#: src/Admin/SettingsPage.php:185
 msgid "Themes to scan"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:190
+#: src/Admin/SettingsPage.php:193
+#: src/Admin/SettingsPage.php:277
 msgid "(active)"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:192
+#: src/Admin/SettingsPage.php:195
 msgid "(parent of the active theme)"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:198
+#: src/Admin/SettingsPage.php:201
 msgid "When nothing is selected, the active theme and its parent are scanned."
 msgstr ""
 
 #. translators: %s: theme slugs.
-#: src/Admin/SettingsPage.php:201
+#: src/Admin/SettingsPage.php:204
 #, php-format
 msgid "Currently scanned: %s"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:207
+#: src/Admin/SettingsPage.php:211
 msgid "Directories outside WordPress"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:209
+#: src/Admin/SettingsPage.php:213
 msgid "Other programs on this server, such as a landing page, a form mailer or a legacy application. Enter the absolute server path. The directory must be readable by PHP and inside open_basedir. WordPress itself, themes and plugins cannot be registered here; select themes and plugins above."
 msgstr ""
 
-#: src/Admin/SettingsPage.php:220
+#: src/Admin/SettingsPage.php:225
+msgid "+ Add another directory"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:226
+msgid "You can add several directories at once. Empty rows are ignored when saving."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:230
 msgid "Additional URLs for external checks"
 msgstr ""
 
 #. translators: %s: site address.
-#: src/Admin/SettingsPage.php:226
+#: src/Admin/SettingsPage.php:236
 #, php-format
 msgid "One URL per line. %s is always checked. Only URLs on your own domain (including subdomains) are accepted."
 msgstr ""
 
-#: src/Admin/SettingsPage.php:247
-msgid "Add a directory"
-msgstr ""
-
-#: src/Admin/SettingsPage.php:250
-msgid "Path"
-msgstr ""
-
-#: src/Admin/SettingsPage.php:255
-msgid "Label"
-msgstr ""
-
-#: src/Admin/SettingsPage.php:259
-msgid "Public URL (optional)"
+#: src/Admin/SettingsPage.php:262
+msgid "Plugins to scan"
 msgstr ""
 
 #: src/Admin/SettingsPage.php:264
-msgid "Checks and exclusions"
+msgid "Select plugins you or your client developed (custom plugins). Plugins distributed on WordPress.org are not scanned because they are maintained and checked for vulnerabilities by their authors and WordPress.org. Nothing is scanned unless you select it."
 msgstr ""
 
-#: src/Admin/SettingsPage.php:277
-msgid "Additional exclude patterns (one per line)"
+#: src/Admin/SettingsPage.php:267
+msgid "No custom plugins were found."
 msgstr ""
 
-#: src/Admin/SettingsPage.php:282
-msgid "Remove this directory"
+#: src/Admin/SettingsPage.php:284
+#: src/Scan/PluginTargetProvider.php:135
+msgid "Must-use plugins (mu-plugins)"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:297
-msgid "Enabled checks"
+#: src/Admin/SettingsPage.php:289
+msgid "WordPress has not checked plugin updates yet, so plugins from WordPress.org cannot be told apart. Open Dashboard → Updates once and reload this page."
 msgstr ""
 
-#: src/Admin/SettingsPage.php:311
-msgid "Exclude patterns"
-msgstr ""
+#. translators: %d: number of plugins.
+#: src/Admin/SettingsPage.php:296
+#, php-format
+msgid "%d plugin from WordPress.org (not scanned)"
+msgid_plural "%d plugins from WordPress.org (not scanned)"
+msgstr[0] ""
+msgstr[1] ""
 
-#: src/Admin/SettingsPage.php:314
-msgid "One pattern per line. Without \"/\" a pattern matches any file or folder name (e.g. node_modules, *.min.js). With \"/\" it matches the path from the target root (e.g. assets/vendor/*)."
+#: src/Admin/SettingsPage.php:306
+msgid "Single-file plugins placed directly in the plugins folder are not listed."
 msgstr ""
 
 #: src/Admin/SettingsPage.php:318
-msgid "Maximum file size for code analysis"
+msgid "WordPress root (ABSPATH)"
 msgstr ""
 
 #: src/Admin/SettingsPage.php:322
+msgid "Document root"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:338
+msgid "Paths on this server (for reference)"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:345
+msgid "Click a folder from the server root to the WordPress root to insert it into an empty Path field, then append the rest of the path."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:368
+msgid "Add a directory"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:371
+msgid "Path"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:376
+msgid "Label"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:380
+msgid "Public URL (optional)"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:385
+msgid "Checks and exclusions"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:398
+msgid "Additional exclude patterns (one per line)"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:403
+msgid "Remove this directory"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:418
+msgid "Enabled checks"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:432
+msgid "Exclude patterns"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:435
+msgid "One pattern per line. Without \"/\" a pattern matches any file or folder name (e.g. node_modules, *.min.js). With \"/\" it matches the path from the target root (e.g. assets/vendor/*)."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:439
+msgid "Maximum file size for code analysis"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:443
 msgid "Maximum files per target"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:325
+#: src/Admin/SettingsPage.php:446
 msgid "0 means no limit."
 msgstr ""
 
-#: src/Admin/SettingsPage.php:342
+#: src/Admin/SettingsPage.php:463
 msgid "Send a report"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:348
+#: src/Admin/SettingsPage.php:469
 msgid "Minimum severity:"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:363
+#: src/Admin/SettingsPage.php:484
 msgid "Weekly digest"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:364
+#: src/Admin/SettingsPage.php:485
 msgid "Send a weekly summary of open issues regardless of the condition above"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:372
+#: src/Admin/SettingsPage.php:493
 msgid "Test"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:373
+#: src/Admin/SettingsPage.php:494
 msgid "Save your settings before sending a test."
 msgstr ""
 
 #. translators: %s: channel name.
-#: src/Admin/SettingsPage.php:381
+#: src/Admin/SettingsPage.php:502
 #, php-format
 msgid "Send test (%s)"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:395
+#: src/Admin/SettingsPage.php:516
 msgid "Support periods of PHP, MySQL and MariaDB. Sends: product name only."
 msgstr ""
 
-#: src/Admin/SettingsPage.php:396
+#: src/Admin/SettingsPage.php:517
 msgid "Latest PHP patch release. Sends: PHP release series (e.g. 8.2)."
 msgstr ""
 
-#: src/Admin/SettingsPage.php:397
+#: src/Admin/SettingsPage.php:518
 msgid "Known vulnerabilities of your PHP version. Sends: PHP version (e.g. 8.2.10)."
 msgstr ""
 
-#: src/Admin/SettingsPage.php:398
+#: src/Admin/SettingsPage.php:519
 msgid "Known vulnerabilities of Composer and npm packages. Sends: package names and versions."
 msgstr ""
 
-#: src/Admin/SettingsPage.php:403
+#: src/Admin/SettingsPage.php:524
 msgid "External APIs"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:405
+#: src/Admin/SettingsPage.php:526
 msgid "Allow requests to the services below"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:406
-msgid "Your site URL, file contents and personal data are never sent. Results are cached. When disabled, a bundled snapshot is used for support periods."
+#: src/Admin/SettingsPage.php:527
+msgid "Off by default: nothing is sent to these services until you enable this option. Your site URL, file contents and personal data are never sent. Results are cached. While disabled, a bundled snapshot is used for support periods."
 msgstr ""
 
-#: src/Admin/SettingsPage.php:410
+#: src/Admin/SettingsPage.php:531
 msgid "Services"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:436
-msgid "File baseline"
+#: src/Admin/SettingsPage.php:555
+msgid "File baseline approval has moved to the General tab."
 msgstr ""
 
-#: src/Admin/SettingsPage.php:437
-msgid "After a planned deployment, approve the current files as the new baseline so they are no longer reported as changed."
+#: src/Admin/SettingsPage.php:556
+msgid "Go to the General tab"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:440
-msgid "never"
-msgstr ""
-
-#. translators: %s: date.
-#: src/Admin/SettingsPage.php:442
-#, php-format
-msgid "Approval uses the file state recorded by the last scan (%s). If you deployed after that, run a scan first."
-msgstr ""
-
-#: src/Admin/SettingsPage.php:446
-msgid "Target"
-msgstr ""
-
-#: src/Admin/SettingsPage.php:446
-#: src/Admin/Ui.php:80
-msgid "Files"
-msgstr ""
-
-#: src/Admin/SettingsPage.php:446
-msgid "Approved"
-msgstr ""
-
-#: src/Admin/SettingsPage.php:456
-msgid "first scan"
-msgstr ""
-
-#: src/Admin/SettingsPage.php:458
-msgid "Not yet (recorded on the next scan)"
-msgstr ""
-
-#: src/Admin/SettingsPage.php:462
-msgid "Approve current state"
-msgstr ""
-
-#: src/Admin/SettingsPage.php:467
-msgid "Approve all targets"
-msgstr ""
-
-#: src/Admin/SettingsPage.php:469
+#: src/Admin/SettingsPage.php:558
 msgid "Export"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:470
+#: src/Admin/SettingsPage.php:559
 msgid "Download the results of the last completed scan as JSON (the format is documented for add-ons and external tools). The file contains file paths and URLs of this site; store it safely."
 msgstr ""
 
-#: src/Admin/SettingsPage.php:474
+#: src/Admin/SettingsPage.php:563
 msgid "Download JSON report"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:477
+#: src/Admin/SettingsPage.php:566
 msgid "Running scans from the server cron"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:478
+#: src/Admin/SettingsPage.php:567
 msgid "WP-Cron only runs when someone visits the site. For reliable monitoring, run the scan from the server cron with WP-CLI:"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:480
+#: src/Admin/SettingsPage.php:569
 msgid "If WP-CLI is not available (some shared hosts), call wp-cron.php instead:"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:482
+#: src/Admin/SettingsPage.php:571
 msgid "On Xserver, add the command in Server Panel → Cron settings. Use the full path to PHP or WP-CLI shown in the panel's help. When you use a server cron, you can add define( 'DISABLE_WP_CRON', true ); to wp-config.php."
 msgstr ""
 
-#: src/Admin/SettingsPage.php:486
+#: src/Admin/SettingsPage.php:575
 msgid "Last completed scan"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:487
+#: src/Admin/SettingsPage.php:576
 msgid "Next scheduled scan"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:490
+#: src/Admin/SettingsPage.php:579
 msgid "Site ID"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:491
+#: src/Admin/SettingsPage.php:580
 msgid "Rule set"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:507
-msgid "Approve the current files as the trusted baseline?"
-msgstr ""
-
-#: src/Admin/SettingsPage.php:533
+#: src/Admin/SettingsPage.php:604
 msgid "Keep It Peace Pro"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:534
+#: src/Admin/SettingsPage.php:605
 msgid "Monitor many sites from one dashboard, get alerts when a site stops reporting, send monthly PDF reports to clients and use Slack or Chatwork notifications."
 msgstr ""
 
-#: src/Admin/SettingsPage.php:535
+#: src/Admin/SettingsPage.php:606
 msgid "Learn more"
 msgstr ""
 
-#: src/Admin/SettingsPage.php:539
+#: src/Admin/SettingsPage.php:610
 msgid "Hide this"
 msgstr ""
 
 #. translators: 1: path, 2: reason.
-#: src/Admin/SettingsSanitizer.php:169
+#: src/Admin/SettingsSanitizer.php:179
 #, php-format
 msgid "%1$s: %2$s"
 msgstr ""
 
 #. translators: %s: URL.
-#: src/Admin/SettingsSanitizer.php:183
-#: src/Admin/SettingsSanitizer.php:216
+#: src/Admin/SettingsSanitizer.php:193
+#: src/Admin/SettingsSanitizer.php:226
 #, php-format
 msgid "%s: only URLs on your own domain can be checked."
 msgstr ""
@@ -837,18 +995,22 @@ msgid "Theme"
 msgstr ""
 
 #: src/Admin/Ui.php:76
-msgid "Outside WordPress"
+msgid "Plugin"
 msgstr ""
 
 #: src/Admin/Ui.php:77
-msgid "Public surface"
+msgid "Outside WordPress"
 msgstr ""
 
 #: src/Admin/Ui.php:78
-msgid "Dependencies"
+msgid "Public surface"
 msgstr ""
 
 #: src/Admin/Ui.php:79
+msgid "Dependencies"
+msgstr ""
+
+#: src/Admin/Ui.php:80
 msgid "WordPress environment"
 msgstr ""
 
@@ -1814,7 +1976,7 @@ msgstr ""
 msgid "Update to the latest patch release of a supported PHP version."
 msgstr ""
 
-#: src/Findings/FindingRepository.php:208
+#: src/Findings/FindingRepository.php:210
 msgid "Baseline approved."
 msgstr ""
 
@@ -1956,12 +2118,12 @@ msgid "Unknown notification channel."
 msgstr ""
 
 #. translators: %d: HTTP status code.
-#: src/Remote/HttpClient.php:126
+#: src/Remote/HttpClient.php:127
 #, php-format
 msgid "HTTP status %d"
 msgstr ""
 
-#: src/Remote/HttpClient.php:129
+#: src/Remote/HttpClient.php:130
 msgid "Invalid JSON response"
 msgstr ""
 
@@ -2329,11 +2491,19 @@ msgstr ""
 msgid "The directory is not readable by PHP."
 msgstr ""
 
-#: src/Scan/PathValidator.php:116
+#: src/Scan/PathValidator.php:141
 msgid "This is the WordPress folder or one of its parent folders, so WordPress itself would be scanned. Register the folder of the other program instead (e.g. …/public_html/lp)."
 msgstr ""
 
-#: src/Scan/PathValidator.php:118
+#: src/Scan/PathValidator.php:143
+msgid "This is a plugin folder. Plugins are not registered here: select custom plugins under \"Plugins to scan\" above."
+msgstr ""
+
+#: src/Scan/PathValidator.php:145
+msgid "This is a theme folder. Themes are not registered here: select them under \"Themes to scan\" above."
+msgstr ""
+
+#: src/Scan/PathValidator.php:147
 msgid "This folder is part of WordPress (wp-admin, wp-includes or wp-content such as uploads), which cannot be registered here. Select themes and custom plugins above; uploads are checked automatically."
 msgstr ""
 
@@ -2416,138 +2586,3 @@ msgstr ""
 #: templates/email/summary-text.php:35
 msgid "Details are available only in the dashboard (they are not included in email for security reasons):"
 msgstr ""
-
-#: src/Admin/BaselinePanel.php
-msgid "The baseline is the list of fingerprints (sha256 hashes) of every file in your scan targets, recorded as the trusted state. Each scan compares the current files with it and reports added, changed and deleted files as \"File integrity\" findings. The first scan of a target records the baseline automatically."
-msgstr ""
-
-#: src/Admin/BaselinePanel.php
-msgid "When you changed files yourself (theme update, deployment, edits):"
-msgstr ""
-
-#: src/Admin/BaselinePanel.php
-msgid "Run a scan so that the latest files are recorded."
-msgstr ""
-
-#: src/Admin/BaselinePanel.php
-msgid "Check that the reported files are the ones you changed."
-msgstr ""
-
-#: src/Admin/BaselinePanel.php
-msgid "Approve the current state. The changes are marked as resolved and are no longer reported."
-msgstr ""
-
-#: src/Admin/BaselinePanel.php
-msgid "Do not approve changes you do not recognize. They may be signs of tampering; check the findings first."
-msgstr ""
-
-#: src/Admin/BaselinePanel.php
-msgid "Unapproved changes"
-msgstr ""
-
-#: src/Admin/BaselinePanel.php
-msgid "If you changed these files yourself, approve them. If you do not recognize the changes, check them before approving."
-msgstr ""
-
-#: src/Admin/BaselinePanel.php
-msgid "Review changes"
-msgstr ""
-
-#: src/Admin/BaselinePanel.php
-msgid "Approve these changes"
-msgstr ""
-
-#: src/Admin/BaselinePanel.php
-msgid "What is the baseline?"
-msgstr ""
-
-#. translators: %s: check name.
-#: src/Admin/FindingsListTable.php
-msgid "Check: %s"
-msgstr ""
-
-#: src/Admin/FindingsListTable.php
-msgid "Clear"
-msgstr ""
-
-#: src/Admin/SettingsPage.php
-msgid "+ Add another directory"
-msgstr ""
-
-#: src/Admin/SettingsPage.php
-msgid "You can add several directories at once. Empty rows are ignored when saving."
-msgstr ""
-
-#: src/Admin/SettingsPage.php
-msgid "WordPress root (ABSPATH)"
-msgstr ""
-
-#: src/Admin/SettingsPage.php
-msgid "Document root"
-msgstr ""
-
-#: src/Admin/SettingsPage.php
-msgid "Paths on this server (for reference)"
-msgstr ""
-
-#: src/Admin/SettingsPage.php
-msgid "Click a folder from the server root to the WordPress root to insert it into an empty Path field, then append the rest of the path."
-msgstr ""
-
-#: src/Admin/SettingsPage.php
-msgid "File baseline approval has moved to the General tab."
-msgstr ""
-
-#: src/Admin/SettingsPage.php
-msgid "Go to the General tab"
-msgstr ""
-
-#. translators: %s: number of files.
-#: src/Admin/BaselinePanel.php
-msgid "%s file differs from the approved baseline."
-msgid_plural "%s files differ from the approved baseline."
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/Scan/PathValidator.php
-msgid "This is a plugin folder. Plugins are not registered here: select custom plugins under \"Plugins to scan\" above."
-msgstr ""
-
-#: src/Scan/PathValidator.php
-msgid "This is a theme folder. Themes are not registered here: select them under \"Themes to scan\" above."
-msgstr ""
-
-#: src/Scan/PluginTargetProvider.php
-msgid "Must-use plugins (mu-plugins)"
-msgstr ""
-
-#: src/Admin/Ui.php
-msgid "Plugin"
-msgstr ""
-
-#: src/Admin/SettingsPage.php
-msgid "Plugins to scan"
-msgstr ""
-
-#: src/Admin/SettingsPage.php
-msgid "Select plugins you or your client developed (custom plugins). Plugins distributed on WordPress.org are not scanned because they are maintained and checked for vulnerabilities by their authors and WordPress.org. Nothing is scanned unless you select it."
-msgstr ""
-
-#: src/Admin/SettingsPage.php
-msgid "No custom plugins were found."
-msgstr ""
-
-#: src/Admin/SettingsPage.php
-msgid "WordPress has not checked plugin updates yet, so plugins from WordPress.org cannot be told apart. Open Dashboard → Updates once and reload this page."
-msgstr ""
-
-#: src/Admin/SettingsPage.php
-msgid "Single-file plugins placed directly in the plugins folder are not listed."
-msgstr ""
-
-#. translators: %d: number of plugins.
-#: src/Admin/SettingsPage.php
-msgid "%d plugin from WordPress.org (not scanned)"
-msgid_plural "%d plugins from WordPress.org (not scanned)"
-msgstr[0] ""
-msgstr[1] ""

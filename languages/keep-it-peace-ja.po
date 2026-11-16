@@ -1,16 +1,15 @@
-# Japanese translation of Keep It Peace.
-# Copyright (C) 2026 mackarel Inc.
-# This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
 "Project-Id-Version: Keep It Peace\n"
 "Report-Msgid-Bugs-To: https://keep-it-peace.com/\n"
 "Last-Translator: mackarel Inc.\n"
 "Language-Team: mackarel Inc.\n"
-"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-16T01:14:40+00:00\n"
+"PO-Revision-Date: 2026-11-16T01:14:40+00:00\n"
+"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Domain: keep-it-peace\n"
 
@@ -39,102 +38,105 @@ msgstr "mackarel Inc."
 msgid "https://mackarel.jp"
 msgstr "https://mackarel.jp"
 
-#: src/Admin/Admin.php:90
+#: src/Admin/Admin.php:92
 msgid "Dashboard"
 msgstr "ダッシュボード"
 
-#: src/Admin/Admin.php:91
+#: src/Admin/Admin.php:93
 #: src/Admin/FindingsPage.php:106
 msgid "Findings"
 msgstr "検出結果"
 
-#: src/Admin/Admin.php:94
+#: src/Admin/Admin.php:96
 #: src/Admin/ScansPage.php:84
 msgid "Scan history"
 msgstr "スキャン履歴"
 
-#: src/Admin/Admin.php:95
-#: src/Admin/Admin.php:202
+#: src/Admin/Admin.php:97
+#: src/Admin/Admin.php:239
 msgid "Settings"
 msgstr "設定"
 
-#: src/Admin/Admin.php:129
+#: src/Admin/Admin.php:132
 msgid "Starting scan…"
 msgstr "スキャンを開始しています…"
 
 #. translators: %d: progress percentage.
-#: src/Admin/Admin.php:131
+#: src/Admin/Admin.php:134
+#, php-format
 msgid "Scanning… %d%%"
 msgstr "スキャン中… %d%%"
 
-#: src/Admin/Admin.php:132
+#: src/Admin/Admin.php:135
 msgid "Another scan step is running. Waiting…"
 msgstr "別のスキャン処理が実行中です。待機しています…"
 
-#: src/Admin/Admin.php:133
+#: src/Admin/Admin.php:136
 msgid "Scan completed. Reloading…"
 msgstr "スキャンが完了しました。再読み込みしています…"
 
-#: src/Admin/Admin.php:134
+#: src/Admin/Admin.php:137
 msgid "The scan failed. Check the scan history for details."
 msgstr "スキャンに失敗しました。詳細はスキャン履歴を確認してください。"
 
 #. translators: %s: error message.
-#: src/Admin/Admin.php:136
+#: src/Admin/Admin.php:139
+#, php-format
 msgid "Request failed: %s"
 msgstr "リクエストに失敗しました：%s"
 
-#: src/Admin/Admin.php:151
-#: src/Admin/DashboardPage.php:247
+#: src/Admin/Admin.php:177
+#: src/Admin/DashboardPage.php:253
 msgid "Scheduled scans may not be running."
 msgstr "定期スキャンが実行されていない可能性があります。"
 
-#: src/Admin/Admin.php:152
+#: src/Admin/Admin.php:178
 msgid "No scan has completed for longer than expected. WP-Cron only runs when the site receives visits; set up a server cron job (see Settings → Tools) to run scans reliably."
 msgstr "想定より長い期間、スキャンが完了していません。WP-Cron はサイトへのアクセスがあったときにしか実行されません。確実にスキャンを実行するには、サーバーの cron を設定してください（設定 → ツール を参照）。"
 
-#: src/Admin/Admin.php:164
+#: src/Admin/Admin.php:199
 msgid "Settings saved."
 msgstr "設定を保存しました。"
 
-#: src/Admin/Admin.php:165
+#: src/Admin/Admin.php:202
 msgid "Settings saved, but some values were not accepted:"
 msgstr "設定を保存しましたが、一部の値は受け付けられませんでした:"
 
-#: src/Admin/Admin.php:166
+#: src/Admin/Admin.php:203
 msgid "There is no completed scan to export yet."
 msgstr "エクスポートできる完了済みのスキャンはまだありません。"
 
-#: src/Admin/Admin.php:167
+#: src/Admin/Admin.php:204
 msgid "Status updated."
 msgstr "ステータスを更新しました。"
 
-#: src/Admin/Admin.php:168
+#: src/Admin/Admin.php:205
 msgid "Selected findings were updated."
 msgstr "選択した検出結果を更新しました。"
 
-#: src/Admin/Admin.php:169
+#: src/Admin/Admin.php:206
 msgid "The baseline was approved."
 msgstr "ベースラインを承認しました。"
 
-#: src/Admin/Admin.php:170
+#: src/Admin/Admin.php:207
 msgid "Test notification sent."
 msgstr "テスト通知を送信しました。"
 
-#: src/Admin/Admin.php:171
+#: src/Admin/Admin.php:208
 msgid "Test notification failed."
 msgstr "テスト通知の送信に失敗しました。"
 
-#: src/Admin/Admin.php:172
+#: src/Admin/Admin.php:209
 msgid "Item not found."
 msgstr "項目が見つかりません。"
 
-#: src/Admin/Admin.php:224
+#: src/Admin/Admin.php:261
 msgid "You do not have permission to do this."
 msgstr "この操作を行う権限がありません。"
 
 #. translators: %d: number of files.
-#: src/Admin/Admin.php:302
+#: src/Admin/Admin.php:347
+#, php-format
 msgid "%d file recorded."
 msgid_plural "%d files recorded."
 msgstr[0] "%d 件のファイルを記録しました。"
@@ -150,6 +152,7 @@ msgstr "未解決の問題"
 
 #. translators: 1: new, 2: resolved, 3: ongoing.
 #: src/Admin/DashboardPage.php:82
+#, php-format
 msgid "Last scan: %1$d new, %2$d resolved, %3$d ongoing"
 msgstr "前回のスキャン：新規 %1$d 件、解決済み %2$d 件、継続中 %3$d 件"
 
@@ -162,7 +165,7 @@ msgid "Last completed"
 msgstr "最終完了"
 
 #: src/Admin/DashboardPage.php:91
-#: src/Admin/DashboardPage.php:245
+#: src/Admin/DashboardPage.php:251
 msgid "Never"
 msgstr "なし"
 
@@ -198,13 +201,14 @@ msgid "Database"
 msgstr "データベース"
 
 #: src/Admin/DashboardPage.php:123
-#: src/Admin/DashboardPage.php:178
+#: src/Admin/DashboardPage.php:181
 #: src/Notifications/EmailChannel.php:245
 msgid "end of life"
 msgstr "サポート終了"
 
 #. translators: %s: date.
 #: src/Admin/DashboardPage.php:126
+#, php-format
 msgid "supported until %s"
 msgstr "%s までサポート"
 
@@ -217,117 +221,121 @@ msgstr "SSL 証明書"
 #. translators: %d: days.
 #: src/Admin/DashboardPage.php:140
 #: src/Notifications/EmailChannel.php:252
+#, php-format
 msgid "%d day left"
 msgid_plural "%d days left"
 msgstr[0] "残り %d 日"
 
 #. translators: %s: date.
-#: src/Admin/DashboardPage.php:181
+#: src/Admin/DashboardPage.php:184
 #: src/Notifications/EmailChannel.php:229
+#, php-format
 msgid "security support until %s"
 msgstr "%s までセキュリティサポート"
 
 #. translators: %s: version.
-#: src/Admin/DashboardPage.php:185
+#: src/Admin/DashboardPage.php:188
+#, php-format
 msgid "Update available: %s"
 msgstr "アップデートあり：%s"
 
 #. translators: %d: number of CVEs.
-#: src/Admin/DashboardPage.php:189
+#: src/Admin/DashboardPage.php:192
+#, php-format
 msgid "%d known vulnerability (NVD)"
 msgid_plural "%d known vulnerabilities (NVD)"
 msgstr[0] "既知の脆弱性 %d 件（NVD）"
 
-#: src/Admin/DashboardPage.php:207
+#: src/Admin/DashboardPage.php:213
 msgid "Most severe open issues"
 msgstr "重要度の高い未解決の問題"
 
-#: src/Admin/DashboardPage.php:209
+#: src/Admin/DashboardPage.php:215
 msgid "No open issues."
 msgstr "未解決の問題はありません。"
 
-#: src/Admin/DashboardPage.php:222
+#: src/Admin/DashboardPage.php:228
 msgid "View all findings"
 msgstr "すべての検出結果を表示"
 
-#: src/Admin/DashboardPage.php:245
+#: src/Admin/DashboardPage.php:251
 msgid "Last scan:"
 msgstr "前回のスキャン:"
 
-#: src/Admin/DashboardPage.php:249
+#: src/Admin/DashboardPage.php:255
 msgid "Open Keep It Peace"
 msgstr "Keep It Peace を開く"
 
-#: src/Admin/FindingsListTable.php:121
-#: src/Admin/FindingsListTable.php:196
+#: src/Admin/FindingsListTable.php:123
+#: src/Admin/FindingsListTable.php:198
 msgid "Severity"
 msgstr "重要度"
 
-#: src/Admin/FindingsListTable.php:122
+#: src/Admin/FindingsListTable.php:124
 msgid "Issue"
 msgstr "問題"
 
-#: src/Admin/FindingsListTable.php:123
-#: src/Admin/FindingsListTable.php:202
+#: src/Admin/FindingsListTable.php:125
+#: src/Admin/FindingsListTable.php:204
 #: src/Admin/FindingsPage.php:139
 msgid "Category"
 msgstr "カテゴリー"
 
-#: src/Admin/FindingsListTable.php:124
+#: src/Admin/FindingsListTable.php:126
 #: src/Admin/FindingsPage.php:140
 msgid "Location"
 msgstr "場所"
 
-#: src/Admin/FindingsListTable.php:125
+#: src/Admin/FindingsListTable.php:127
 #: src/Admin/FindingsPage.php:138
 #: src/Admin/FindingsPage.php:169
 #: src/Admin/ScansPage.php:98
-#: src/Admin/SettingsPage.php:484
+#: src/Admin/SettingsPage.php:573
 msgid "Status"
 msgstr "ステータス"
 
-#: src/Admin/FindingsListTable.php:126
+#: src/Admin/FindingsListTable.php:128
 #: src/Admin/FindingsPage.php:143
 msgid "Last detected"
 msgstr "最終検出"
 
-#: src/Admin/FindingsListTable.php:152
+#: src/Admin/FindingsListTable.php:154
 msgid "Mark as acknowledged"
 msgstr "確認済みにする"
 
-#: src/Admin/FindingsListTable.php:153
+#: src/Admin/FindingsListTable.php:155
 msgid "Ignore"
 msgstr "無視する"
 
-#: src/Admin/FindingsListTable.php:154
+#: src/Admin/FindingsListTable.php:156
 msgid "Mark as resolved"
 msgstr "解決済みにする"
 
-#: src/Admin/FindingsListTable.php:155
+#: src/Admin/FindingsListTable.php:157
 msgid "Reopen"
 msgstr "再オープン"
 
-#: src/Admin/FindingsListTable.php:167
+#: src/Admin/FindingsListTable.php:169
 msgid "Open"
 msgstr "未解決"
 
-#: src/Admin/FindingsListTable.php:172
+#: src/Admin/FindingsListTable.php:174
 msgid "All"
 msgstr "すべて"
 
-#: src/Admin/FindingsListTable.php:197
+#: src/Admin/FindingsListTable.php:199
 msgid "All severities"
 msgstr "すべての重要度"
 
-#: src/Admin/FindingsListTable.php:203
+#: src/Admin/FindingsListTable.php:205
 msgid "All categories"
 msgstr "すべてのカテゴリー"
 
-#: src/Admin/FindingsListTable.php:208
+#: src/Admin/FindingsListTable.php:214
 msgid "Filter"
 msgstr "絞り込み"
 
-#: src/Admin/FindingsListTable.php:268
+#: src/Admin/FindingsListTable.php:278
 msgid "No findings match the current filters."
 msgstr "現在の絞り込み条件に一致する検出結果はありません。"
 
@@ -382,6 +390,7 @@ msgstr "実行者"
 
 #. translators: %d: scan ID.
 #: src/Admin/FindingsPage.php:179
+#, php-format
 msgid "Scan #%d"
 msgstr "スキャン #%d"
 
@@ -459,6 +468,7 @@ msgstr "手動"
 
 #. translators: %d: days.
 #: src/Admin/ScansPage.php:88
+#, php-format
 msgid "History is kept for %d days."
 msgstr "履歴は %d 日間保存されます。"
 
@@ -492,319 +502,318 @@ msgstr "継続中"
 msgid "No scans yet."
 msgstr "まだスキャンはありません。"
 
-#: src/Admin/SettingsPage.php:49
+#: src/Admin/SettingsPage.php:51
 msgid "General"
 msgstr "一般"
 
-#: src/Admin/SettingsPage.php:50
+#: src/Admin/SettingsPage.php:52
 msgid "Targets"
 msgstr "対象"
 
-#: src/Admin/SettingsPage.php:51
+#: src/Admin/SettingsPage.php:53
 msgid "Checks"
 msgstr "チェック"
 
-#: src/Admin/SettingsPage.php:52
+#: src/Admin/SettingsPage.php:54
 msgid "Notifications"
 msgstr "通知"
 
-#: src/Admin/SettingsPage.php:53
+#: src/Admin/SettingsPage.php:55
 msgid "External services"
 msgstr "外部サービス"
 
-#: src/Admin/SettingsPage.php:54
+#: src/Admin/SettingsPage.php:56
 msgid "Tools"
 msgstr "ツール"
 
-#: src/Admin/SettingsPage.php:79
+#: src/Admin/SettingsPage.php:81
 msgid "Keep It Peace settings"
 msgstr "Keep It Peace の設定"
 
-#: src/Admin/SettingsPage.php:150
+#: src/Admin/SettingsPage.php:152
 msgid "Scan frequency"
 msgstr "スキャンの頻度"
 
-#: src/Admin/SettingsPage.php:160
+#: src/Admin/SettingsPage.php:162
 msgid "Keep history for"
 msgstr "履歴の保存期間"
 
-#: src/Admin/SettingsPage.php:162
+#: src/Admin/SettingsPage.php:164
 msgid "days"
 msgstr "日"
 
-#: src/Admin/SettingsPage.php:164
+#: src/Admin/SettingsPage.php:166
 msgid "0 keeps history forever."
 msgstr "0 にすると履歴を無期限に保存します。"
 
-#: src/Admin/SettingsPage.php:182
+#: src/Admin/SettingsPage.php:185
 msgid "Themes to scan"
 msgstr "スキャンするテーマ"
 
-#: src/Admin/SettingsPage.php:190
+#: src/Admin/SettingsPage.php:193
+#: src/Admin/SettingsPage.php:277
 msgid "(active)"
 msgstr "（有効）"
 
-#: src/Admin/SettingsPage.php:192
+#: src/Admin/SettingsPage.php:195
 msgid "(parent of the active theme)"
 msgstr "（有効なテーマの親テーマ）"
 
-#: src/Admin/SettingsPage.php:198
+#: src/Admin/SettingsPage.php:201
 msgid "When nothing is selected, the active theme and its parent are scanned."
 msgstr "何も選択しない場合は、有効なテーマとその親テーマをスキャンします。"
 
 #. translators: %s: theme slugs.
-#: src/Admin/SettingsPage.php:201
+#: src/Admin/SettingsPage.php:204
+#, php-format
 msgid "Currently scanned: %s"
 msgstr "現在のスキャン対象：%s"
 
-#: src/Admin/SettingsPage.php:207
+#: src/Admin/SettingsPage.php:211
 msgid "Directories outside WordPress"
 msgstr "WordPress 外のディレクトリ"
 
-#: src/Admin/SettingsPage.php:209
+#: src/Admin/SettingsPage.php:213
 msgid "Other programs on this server, such as a landing page, a form mailer or a legacy application. Enter the absolute server path. The directory must be readable by PHP and inside open_basedir. WordPress itself, themes and plugins cannot be registered here; select themes and plugins above."
 msgstr "ランディングページ、メールフォーム、古いアプリケーションなど、このサーバー上にあるほかのプログラムです。サーバー上の絶対パスを入力してください。ディレクトリは PHP から読み取れ、open_basedir の範囲内にある必要があります。WordPress 本体・テーマ・プラグインはここでは登録できません（テーマとプラグインは上で選択してください）。"
 
-#: src/Admin/SettingsPage.php:220
+#: src/Admin/SettingsPage.php:230
 msgid "Additional URLs for external checks"
 msgstr "外部チェックの追加 URL"
 
 #. translators: %s: site address.
-#: src/Admin/SettingsPage.php:226
+#: src/Admin/SettingsPage.php:236
+#, php-format
 msgid "One URL per line. %s is always checked. Only URLs on your own domain (including subdomains) are accepted."
 msgstr "1 行に 1 つの URL を入力してください。%s は常にチェックされます。自分のドメイン（サブドメインを含む）の URL のみ受け付けます。"
 
-#: src/Admin/SettingsPage.php:247
+#: src/Admin/SettingsPage.php:368
 msgid "Add a directory"
 msgstr "ディレクトリを追加"
 
-#: src/Admin/SettingsPage.php:250
+#: src/Admin/SettingsPage.php:371
 msgid "Path"
 msgstr "パス"
 
-#: src/Admin/SettingsPage.php:255
+#: src/Admin/SettingsPage.php:376
 msgid "Label"
 msgstr "ラベル"
 
-#: src/Admin/SettingsPage.php:259
+#: src/Admin/SettingsPage.php:380
 msgid "Public URL (optional)"
 msgstr "公開 URL（任意）"
 
-#: src/Admin/SettingsPage.php:264
+#: src/Admin/SettingsPage.php:385
 msgid "Checks and exclusions"
 msgstr "チェックと除外"
 
-#: src/Admin/SettingsPage.php:277
+#: src/Admin/SettingsPage.php:398
 msgid "Additional exclude patterns (one per line)"
 msgstr "追加の除外パターン（1 行に 1 つ）"
 
-#: src/Admin/SettingsPage.php:282
+#: src/Admin/SettingsPage.php:403
 msgid "Remove this directory"
 msgstr "このディレクトリを削除"
 
-#: src/Admin/SettingsPage.php:297
+#: src/Admin/SettingsPage.php:418
 msgid "Enabled checks"
 msgstr "有効なチェック"
 
-#: src/Admin/SettingsPage.php:311
+#: src/Admin/SettingsPage.php:432
 msgid "Exclude patterns"
 msgstr "除外パターン"
 
-#: src/Admin/SettingsPage.php:314
+#: src/Admin/SettingsPage.php:435
 msgid "One pattern per line. Without \"/\" a pattern matches any file or folder name (e.g. node_modules, *.min.js). With \"/\" it matches the path from the target root (e.g. assets/vendor/*)."
 msgstr "1 行に 1 つのパターンを入力してください。「/」を含まないパターンは、任意のファイル名またはフォルダ名に一致します（例：node_modules、*.min.js）。「/」を含むパターンは、対象のルートからのパスに一致します（例：assets/vendor/*）。"
 
-#: src/Admin/SettingsPage.php:318
+#: src/Admin/SettingsPage.php:439
 msgid "Maximum file size for code analysis"
 msgstr "コード解析の最大ファイルサイズ"
 
-#: src/Admin/SettingsPage.php:322
+#: src/Admin/SettingsPage.php:443
 msgid "Maximum files per target"
 msgstr "対象ごとの最大ファイル数"
 
-#: src/Admin/SettingsPage.php:325
+#: src/Admin/SettingsPage.php:446
 msgid "0 means no limit."
 msgstr "0 は無制限を意味します。"
 
-#: src/Admin/SettingsPage.php:342
+#: src/Admin/SettingsPage.php:463
 msgid "Send a report"
 msgstr "レポートの送信"
 
-#: src/Admin/SettingsPage.php:348
+#: src/Admin/SettingsPage.php:469
 msgid "Minimum severity:"
 msgstr "最低重要度:"
 
-#: src/Admin/SettingsPage.php:363
+#: src/Admin/SettingsPage.php:484
 msgid "Weekly digest"
 msgstr "週次ダイジェスト"
 
-#: src/Admin/SettingsPage.php:364
+#: src/Admin/SettingsPage.php:485
 msgid "Send a weekly summary of open issues regardless of the condition above"
 msgstr "上記の条件にかかわらず、未解決の問題の概要を毎週送信する"
 
-#: src/Admin/SettingsPage.php:372
+#: src/Admin/SettingsPage.php:493
 msgid "Test"
 msgstr "テスト"
 
-#: src/Admin/SettingsPage.php:373
+#: src/Admin/SettingsPage.php:494
 msgid "Save your settings before sending a test."
 msgstr "テストを送信する前に設定を保存してください。"
 
 #. translators: %s: channel name.
-#: src/Admin/SettingsPage.php:381
+#: src/Admin/SettingsPage.php:502
+#, php-format
 msgid "Send test (%s)"
 msgstr "テストを送信（%s）"
 
-#: src/Admin/SettingsPage.php:395
+#: src/Admin/SettingsPage.php:516
 msgid "Support periods of PHP, MySQL and MariaDB. Sends: product name only."
 msgstr "PHP、MySQL、MariaDB のサポート期間。送信内容：製品名のみ。"
 
-#: src/Admin/SettingsPage.php:396
+#: src/Admin/SettingsPage.php:517
 msgid "Latest PHP patch release. Sends: PHP release series (e.g. 8.2)."
 msgstr "PHP の最新パッチリリース。送信内容：PHP のリリース系列（例：8.2）。"
 
-#: src/Admin/SettingsPage.php:397
+#: src/Admin/SettingsPage.php:518
 msgid "Known vulnerabilities of your PHP version. Sends: PHP version (e.g. 8.2.10)."
 msgstr "お使いの PHP バージョンの既知の脆弱性。送信内容：PHP のバージョン（例：8.2.10）。"
 
-#: src/Admin/SettingsPage.php:398
+#: src/Admin/SettingsPage.php:519
 msgid "Known vulnerabilities of Composer and npm packages. Sends: package names and versions."
 msgstr "Composer と npm のパッケージの既知の脆弱性。送信内容：パッケージ名とバージョン。"
 
-#: src/Admin/SettingsPage.php:403
+#: src/Admin/SettingsPage.php:524
 msgid "External APIs"
 msgstr "外部 API"
 
-#: src/Admin/SettingsPage.php:405
+#: src/Admin/SettingsPage.php:526
 msgid "Allow requests to the services below"
 msgstr "以下のサービスへのリクエストを許可する"
 
-#: src/Admin/SettingsPage.php:406
-msgid "Your site URL, file contents and personal data are never sent. Results are cached. When disabled, a bundled snapshot is used for support periods."
-msgstr "サイトの URL、ファイルの内容、個人データが送信されることはありません。結果はキャッシュされます。無効にした場合、サポート期間には同梱のスナップショットを使用します。"
-
-#: src/Admin/SettingsPage.php:410
+#: src/Admin/SettingsPage.php:531
 msgid "Services"
 msgstr "サービス"
 
-#: src/Admin/SettingsPage.php:436
+#: src/Admin/BaselinePanel.php:105
 msgid "File baseline"
 msgstr "ファイルのベースライン"
 
-#: src/Admin/SettingsPage.php:437
-msgid "After a planned deployment, approve the current files as the new baseline so they are no longer reported as changed."
-msgstr "予定どおりのデプロイの後は、現在のファイルを新しいベースラインとして承認してください。変更として報告されなくなります。"
-
-#: src/Admin/SettingsPage.php:440
+#: src/Admin/BaselinePanel.php:109
 msgid "never"
 msgstr "未実行"
 
 #. translators: %s: date.
-#: src/Admin/SettingsPage.php:442
+#: src/Admin/BaselinePanel.php:111
+#, php-format
 msgid "Approval uses the file state recorded by the last scan (%s). If you deployed after that, run a scan first."
 msgstr "承認には前回のスキャン（%s）で記録されたファイルの状態が使われます。その後にデプロイした場合は、先にスキャンを実行してください。"
 
-#: src/Admin/SettingsPage.php:446
+#: src/Admin/BaselinePanel.php:115
 msgid "Target"
 msgstr "対象"
 
-#: src/Admin/SettingsPage.php:446
-#: src/Admin/Ui.php:80
+#: src/Admin/BaselinePanel.php:115
+#: src/Admin/Ui.php:81
 msgid "Files"
 msgstr "ファイル数"
 
-#: src/Admin/SettingsPage.php:446
+#: src/Admin/BaselinePanel.php:115
 msgid "Approved"
 msgstr "承認日時"
 
-#: src/Admin/SettingsPage.php:456
+#: src/Admin/BaselinePanel.php:132
 msgid "first scan"
 msgstr "初回スキャン"
 
-#: src/Admin/SettingsPage.php:458
+#: src/Admin/BaselinePanel.php:134
 msgid "Not yet (recorded on the next scan)"
 msgstr "未記録（次回のスキャンで記録）"
 
-#: src/Admin/SettingsPage.php:462
+#: src/Admin/BaselinePanel.php:138
 msgid "Approve current state"
 msgstr "現在の状態を承認"
 
-#: src/Admin/SettingsPage.php:467
+#: src/Admin/BaselinePanel.php:143
 msgid "Approve all targets"
 msgstr "すべての対象を承認"
 
-#: src/Admin/SettingsPage.php:469
+#: src/Admin/SettingsPage.php:558
 msgid "Export"
 msgstr "エクスポート"
 
-#: src/Admin/SettingsPage.php:470
+#: src/Admin/SettingsPage.php:559
 msgid "Download the results of the last completed scan as JSON (the format is documented for add-ons and external tools). The file contains file paths and URLs of this site; store it safely."
 msgstr "前回完了したスキャンの結果を JSON でダウンロードします（形式はアドオンや外部ツール向けに公開されています）。このファイルにはサイトのファイルパスや URL が含まれるため、安全に保管してください。"
 
-#: src/Admin/SettingsPage.php:474
+#: src/Admin/SettingsPage.php:563
 msgid "Download JSON report"
 msgstr "JSON レポートをダウンロード"
 
-#: src/Admin/SettingsPage.php:477
+#: src/Admin/SettingsPage.php:566
 msgid "Running scans from the server cron"
 msgstr "サーバーの cron からスキャンを実行する"
 
-#: src/Admin/SettingsPage.php:478
+#: src/Admin/SettingsPage.php:567
 msgid "WP-Cron only runs when someone visits the site. For reliable monitoring, run the scan from the server cron with WP-CLI:"
 msgstr "WP-Cron はサイトへのアクセスがあったときにしか実行されません。確実に監視するには、WP-CLI を使ってサーバーの cron からスキャンを実行してください:"
 
-#: src/Admin/SettingsPage.php:480
+#: src/Admin/SettingsPage.php:569
 msgid "If WP-CLI is not available (some shared hosts), call wp-cron.php instead:"
 msgstr "WP-CLI が使えない場合（一部の共用サーバー）は、代わりに wp-cron.php を呼び出してください:"
 
-#: src/Admin/SettingsPage.php:482
+#: src/Admin/SettingsPage.php:571
 msgid "On Xserver, add the command in Server Panel → Cron settings. Use the full path to PHP or WP-CLI shown in the panel's help. When you use a server cron, you can add define( 'DISABLE_WP_CRON', true ); to wp-config.php."
 msgstr "Xserver の場合は、サーバーパネル → Cron 設定 でコマンドを追加してください。PHP または WP-CLI のパスは、パネルのヘルプに記載されたフルパスを使用してください。サーバーの cron を使う場合は、wp-config.php に define( 'DISABLE_WP_CRON', true ); を追加できます。"
 
-#: src/Admin/SettingsPage.php:486
+#: src/Admin/SettingsPage.php:575
 msgid "Last completed scan"
 msgstr "前回完了したスキャン"
 
-#: src/Admin/SettingsPage.php:487
+#: src/Admin/SettingsPage.php:576
 msgid "Next scheduled scan"
 msgstr "次回の定期スキャン"
 
-#: src/Admin/SettingsPage.php:490
+#: src/Admin/SettingsPage.php:579
 msgid "Site ID"
 msgstr "サイト ID"
 
-#: src/Admin/SettingsPage.php:491
+#: src/Admin/SettingsPage.php:580
 msgid "Rule set"
 msgstr "ルールセット"
 
-#: src/Admin/SettingsPage.php:507
+#: src/Admin/BaselinePanel.php:192
 msgid "Approve the current files as the trusted baseline?"
 msgstr "現在のファイルを信頼できるベースラインとして承認しますか？"
 
-#: src/Admin/SettingsPage.php:533
+#: src/Admin/SettingsPage.php:604
 msgid "Keep It Peace Pro"
 msgstr "Keep It Peace Pro"
 
-#: src/Admin/SettingsPage.php:534
+#: src/Admin/SettingsPage.php:605
 msgid "Monitor many sites from one dashboard, get alerts when a site stops reporting, send monthly PDF reports to clients and use Slack or Chatwork notifications."
 msgstr "複数のサイトを 1 つのダッシュボードで監視し、サイトからの報告が途絶えたときにアラートを受け取り、クライアントに毎月 PDF レポートを送り、Slack や Chatwork で通知を受け取れます。"
 
-#: src/Admin/SettingsPage.php:535
+#: src/Admin/SettingsPage.php:606
 msgid "Learn more"
 msgstr "詳しく見る"
 
-#: src/Admin/SettingsPage.php:539
+#: src/Admin/SettingsPage.php:610
 msgid "Hide this"
 msgstr "非表示にする"
 
 #. translators: 1: path, 2: reason.
-#: src/Admin/SettingsSanitizer.php:169
+#: src/Admin/SettingsSanitizer.php:179
+#, php-format
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
 
 #. translators: %s: URL.
-#: src/Admin/SettingsSanitizer.php:183
-#: src/Admin/SettingsSanitizer.php:216
+#: src/Admin/SettingsSanitizer.php:193
+#: src/Admin/SettingsSanitizer.php:226
+#, php-format
 msgid "%s: only URLs on your own domain can be checked."
 msgstr "%s: チェックできるのは自分のドメインの URL のみです。"
 
@@ -816,19 +825,19 @@ msgstr "PHP / サーバー"
 msgid "Theme"
 msgstr "テーマ"
 
-#: src/Admin/Ui.php:76
+#: src/Admin/Ui.php:77
 msgid "Outside WordPress"
 msgstr "WordPress 外"
 
-#: src/Admin/Ui.php:77
+#: src/Admin/Ui.php:78
 msgid "Public surface"
 msgstr "外部から見た状態"
 
-#: src/Admin/Ui.php:78
+#: src/Admin/Ui.php:79
 msgid "Dependencies"
 msgstr "依存パッケージ"
 
-#: src/Admin/Ui.php:79
+#: src/Admin/Ui.php:80
 msgid "WordPress environment"
 msgstr "WordPress 環境"
 
@@ -850,6 +859,7 @@ msgstr "ファイルが読み取れないか、大きすぎるか、正しい JS
 
 #. translators: %s: error message.
 #: src/Checks/Dependencies/DependencyCheck.php:114
+#, php-format
 msgid "OSV.dev could not be reached: %s. Previous results are kept."
 msgstr "OSV.dev に接続できませんでした：%s。以前の結果はそのまま保持されます。"
 
@@ -859,21 +869,25 @@ msgstr "依存パッケージをチェックできませんでした"
 
 #. translators: %d: number of vulnerabilities.
 #: src/Checks/Dependencies/DependencyCheck.php:176
+#, php-format
 msgid "and %d more"
 msgstr "ほか %d 件"
 
 #. translators: 1: package, 2: version, 3: command.
 #: src/Checks/Dependencies/DependencyCheck.php:185
+#, php-format
 msgid "Update %1$s to %2$s or later (e.g. %3$s), deploy the result and run the scan again."
 msgstr "%1$s を %2$s 以降に更新し（例：%3$s）、反映してから再度スキャンしてください。"
 
 #. translators: 1: package, 2: command.
 #: src/Checks/Dependencies/DependencyCheck.php:188
+#, php-format
 msgid "Update %1$s to a version without these vulnerabilities (e.g. %2$s), or replace it if no fix exists."
 msgstr "%1$s をこれらの脆弱性のないバージョンに更新してください（例：%2$s）。修正版がない場合は別のパッケージに置き換えてください。"
 
 #. translators: 1: number, 2: list of vulnerabilities.
 #: src/Checks/Dependencies/DependencyCheck.php:192
+#, php-format
 msgid "%1$d known vulnerability: %2$s"
 msgid_plural "%1$d known vulnerabilities: %2$s"
 msgstr[0] "既知の脆弱性 %1$d 件：%2$s"
@@ -884,6 +898,7 @@ msgstr "（開発用の依存パッケージですが、このサーバーにイ
 
 #. translators: 1: package, 2: version.
 #: src/Checks/Dependencies/DependencyCheck.php:208
+#, php-format
 msgid "Vulnerable package: %1$s %2$s"
 msgstr "脆弱性のあるパッケージ：%1$s %2$s"
 
@@ -977,6 +992,7 @@ msgstr "パーミッションを 400 または 440 に設定してください�
 
 #. translators: %s: permissions such as 666.
 #: src/Checks/Environment/WpConfigCheck.php:134
+#, php-format
 msgid "wp-config.php has permissions %s. Anyone on the server can change it."
 msgstr "wp-config.php のパーミッションは %s です。サーバー上の誰でも変更できます。"
 
@@ -986,6 +1002,7 @@ msgstr "wp-config.php が誰でも書き込める状態"
 
 #. translators: %s: permissions such as 644.
 #: src/Checks/Environment/WpConfigCheck.php:138
+#, php-format
 msgid "wp-config.php has permissions %s. On shared servers other accounts may be able to read your database password."
 msgstr "wp-config.php のパーミッションは %s です。共用サーバーでは、他のアカウントからデータベースのパスワードを読まれるおそれがあります。"
 
@@ -1011,6 +1028,7 @@ msgstr "外部チェックのためにサイトに接続できない"
 
 #. translators: %s: error message.
 #: src/Checks/External/AbstractExternalCheck.php:162
+#, php-format
 msgid "The request failed: %s. Previous results of this check are kept until the site can be checked again."
 msgstr "リクエストに失敗しました：%s。再びチェックできるようになるまで、このチェックの以前の結果は保持されます。"
 
@@ -1048,6 +1066,7 @@ msgstr ".env、.git、wp-config.php のバックアップ、SQL ダンプ、debu
 
 #. translators: %s: path.
 #: src/Checks/External/ExposedFilesCheck.php:138
+#, php-format
 msgid "Publicly accessible: %s"
 msgstr "公開されているファイル：%s"
 
@@ -1229,6 +1248,7 @@ msgstr "まず Content-Security-Policy-Report-Only ヘッダーで始め、レ�
 
 #. translators: %s: header value.
 #: src/Checks/External/SecurityHeadersCheck.php:178
+#, php-format
 msgid "The Server header is \"%s\". Attackers use versions to pick known exploits."
 msgstr "Server ヘッダーが \"%s\" になっています。攻撃者はバージョン情報から既知の攻撃手法を選びます。"
 
@@ -1242,6 +1262,7 @@ msgstr "バージョンを非表示にしてください（例：Apache は Serv
 
 #. translators: %s: header value.
 #: src/Checks/External/SecurityHeadersCheck.php:184
+#, php-format
 msgid "The X-Powered-By header is \"%s\"."
 msgstr "X-Powered-By ヘッダーが \"%s\" になっています。"
 
@@ -1255,6 +1276,7 @@ msgstr "php.ini（または .user.ini）で expose_php = Off を設定するか�
 
 #. translators: %s: WordPress version.
 #: src/Checks/External/SecurityHeadersCheck.php:189
+#, php-format
 msgid "The generator meta tag reveals WordPress %s."
 msgstr "generator メタタグから WordPress %s であることがわかります。"
 
@@ -1304,6 +1326,7 @@ msgstr "HTTPS で接続できない"
 
 #. translators: %s: error message.
 #: src/Checks/External/TlsCheck.php:140
+#, php-format
 msgid "The TLS connection failed: %s"
 msgstr "TLS 接続に失敗しました：%s"
 
@@ -1313,6 +1336,7 @@ msgstr "訪問者が HTTPS でサイトを開ける場合は、サーバーが�
 
 #. translators: %s: date.
 #: src/Checks/External/TlsCheck.php:177
+#, php-format
 msgid "The certificate expires on %s."
 msgstr "証明書の有効期限は %s です。"
 
@@ -1331,12 +1355,14 @@ msgstr "ブラウザーが訪問者にセキュリティ警告を表示します
 #. translators: %d: days.
 #: src/Checks/External/TlsCheck.php:183
 #: src/Checks/External/TlsCheck.php:186
+#, php-format
 msgid "The SSL certificate expires in %d day"
 msgid_plural "The SSL certificate expires in %d days"
 msgstr[0] "SSL 証明書の有効期限まであと %d 日"
 
 #. translators: %s: names in the certificate.
 #: src/Checks/External/TlsCheck.php:191
+#, php-format
 msgid "The certificate is issued for: %s"
 msgstr "証明書の発行対象：%s"
 
@@ -1358,6 +1384,7 @@ msgstr "証明書が信頼されていない"
 
 #. translators: %s: error message.
 #: src/Checks/External/TlsCheck.php:200
+#, php-format
 msgid "Certificate verification failed: %s"
 msgstr "証明書の検証に失敗しました：%s"
 
@@ -1367,6 +1394,7 @@ msgstr "公的な認証局の証明書を使用し、中間証明書がインス
 
 #. translators: %s: protocol such as TLSv1.1.
 #: src/Checks/External/TlsCheck.php:207
+#, php-format
 msgid "The connection used %s, which is no longer considered secure."
 msgstr "接続に %s が使われました。このバージョンはもう安全とは見なされていません。"
 
@@ -1458,6 +1486,7 @@ msgstr "誰でも書き込めるディレクトリ"
 #. translators: %s: permissions such as 777.
 #: src/Checks/Files/PermissionCheck.php:84
 #: src/Checks/Files/PermissionCheck.php:132
+#, php-format
 msgid "The directory permissions are %s. Any user or process on the server can add files here."
 msgstr "ディレクトリのパーミッションは %s です。サーバー上のどのユーザーやプロセスでもここにファイルを追加できます。"
 
@@ -1472,6 +1501,7 @@ msgstr "誰でも書き込めるファイル"
 
 #. translators: %s: permissions such as 666.
 #: src/Checks/Files/PermissionCheck.php:110
+#, php-format
 msgid "The file permissions are %s. Any user or process on the server can change it."
 msgstr "ファイルのパーミッションは %s です。サーバー上のどのユーザーやプロセスでも変更できます。"
 
@@ -1565,11 +1595,13 @@ msgstr "MySQL または MariaDB のバージョンがまだセキュリティア
 
 #. translators: 1: MySQL or MariaDB, 2: version.
 #: src/Checks/Php/DatabaseVersionCheck.php:109
+#, php-format
 msgid "%1$s %2$s is no longer supported"
 msgstr "%1$s %2$s はサポート終了"
 
 #. translators: %s: date.
 #: src/Checks/Php/DatabaseVersionCheck.php:112
+#, php-format
 msgid "Security support ended on %s."
 msgstr "セキュリティサポートは %s に終了しました。"
 
@@ -1583,11 +1615,13 @@ msgstr "サポートされているバージョンへのデータベースの移
 
 #. translators: 1: MySQL or MariaDB, 2: version.
 #: src/Checks/Php/DatabaseVersionCheck.php:124
+#, php-format
 msgid "%1$s %2$s support ends soon"
 msgstr "%1$s %2$s のサポート終了が間近"
 
 #. translators: 1: date, 2: days.
 #: src/Checks/Php/DatabaseVersionCheck.php:126
+#, php-format
 msgid "Security support ends on %1$s (in %2$d days)."
 msgstr "セキュリティサポートは %1$s に終了します（残り %2$d 日）。"
 
@@ -1685,16 +1719,19 @@ msgstr "実行中の PHP のバージョンについて、サポート終了、�
 
 #. translators: %s: PHP version.
 #: src/Checks/Php/PhpVersionCheck.php:92
+#, php-format
 msgid "PHP %s is no longer supported"
 msgstr "PHP %s はサポートが終了しています"
 
 #. translators: 1: PHP branch, 2: date.
 #: src/Checks/Php/PhpVersionCheck.php:95
+#, php-format
 msgid "Security support for PHP %1$s ended on %2$s. New vulnerabilities will not be fixed."
 msgstr "PHP %1$s のセキュリティサポートは %2$s に終了しました。新しい脆弱性は修正されません。"
 
 #. translators: %s: PHP branch.
 #: src/Checks/Php/PhpVersionCheck.php:97
+#, php-format
 msgid "Security support for PHP %s has ended. New vulnerabilities will not be fixed."
 msgstr "PHP %s のセキュリティサポートは終了しました。新しい脆弱性は修正されません。"
 
@@ -1704,11 +1741,13 @@ msgstr "サイトの動作を確認したうえで、ホスティングのコン
 
 #. translators: %s: PHP version.
 #: src/Checks/Php/PhpVersionCheck.php:109
+#, php-format
 msgid "PHP %s support ends soon"
 msgstr "PHP %s のサポート終了が近づいています"
 
 #. translators: 1: PHP branch, 2: date, 3: days.
 #: src/Checks/Php/PhpVersionCheck.php:111
+#, php-format
 msgid "Security support for PHP %1$s ends on %2$s (in %3$d days)."
 msgstr "PHP %1$s のセキュリティサポートは %2$s に終了します（残り %3$d 日）。"
 
@@ -1722,6 +1761,7 @@ msgstr "PHP のサポート状況が不明"
 
 #. translators: %s: PHP version.
 #: src/Checks/Php/PhpVersionCheck.php:124
+#, php-format
 msgid "No release data was found for PHP %s."
 msgstr "PHP %s のリリース情報が見つかりませんでした。"
 
@@ -1735,6 +1775,7 @@ msgstr "PHP のパッチリリースが古い"
 
 #. translators: 1: running version, 2: latest version.
 #: src/Checks/Php/PhpVersionCheck.php:138
+#, php-format
 msgid "PHP %1$s is running, but %2$s is available in the same release series. Patch releases contain security fixes."
 msgstr "PHP %1$s が動作していますが、同じリリース系列で %2$s が利用可能です。パッチリリースにはセキュリティ修正が含まれています。"
 
@@ -1744,12 +1785,14 @@ msgstr "ホスティング会社に PHP の更新を依頼するか、コント�
 
 #. translators: 1: number of CVEs, 2: PHP version.
 #: src/Checks/Php/PhpVersionCheck.php:168
+#, php-format
 msgid "%1$d known vulnerability in PHP %2$s"
 msgid_plural "%1$d known vulnerabilities in PHP %2$s"
 msgstr[0] "PHP %2$s の既知の脆弱性 %1$d 件"
 
 #. translators: 1: CVE ID, 2: CVSS score.
 #: src/Checks/Php/PhpVersionCheck.php:170
+#, php-format
 msgid "The National Vulnerability Database lists vulnerabilities for this exact PHP version. The most severe is %1$s (CVSS %2$s)."
 msgstr "米国の脆弱性データベース（NVD）に、この PHP のバージョンに該当する脆弱性が登録されています。最も深刻なものは %1$s（CVSS %2$s）です。"
 
@@ -1757,7 +1800,7 @@ msgstr "米国の脆弱性データベース（NVD）に、この PHP のバー�
 msgid "Update to the latest patch release of a supported PHP version."
 msgstr "サポート中の PHP のバージョンの最新パッチリリースに更新してください。"
 
-#: src/Findings/FindingRepository.php:208
+#: src/Findings/FindingRepository.php:210
 msgid "Baseline approved."
 msgstr "ベースラインを承認しました。"
 
@@ -1796,6 +1839,7 @@ msgstr "メール"
 
 #. translators: %s: site name.
 #: src/Notifications/EmailChannel.php:132
+#, php-format
 msgid "[Test] %s Keep It Peace notification"
 msgstr "【テスト】%s の Keep It Peace 通知"
 
@@ -1825,11 +1869,13 @@ msgstr "【問題なし】"
 
 #. translators: 1: status prefix, 2: site name.
 #: src/Notifications/EmailChannel.php:198
+#, php-format
 msgid "%1$s %2$s weekly security digest"
 msgstr "%1$s %2$s の週間セキュリティダイジェスト"
 
 #. translators: 1: status prefix, 2: site name.
 #: src/Notifications/EmailChannel.php:201
+#, php-format
 msgid "%1$s %2$s security check results"
 msgstr "%1$s %2$s のセキュリティチェック結果"
 
@@ -1839,11 +1885,13 @@ msgstr "サポート終了（セキュリティ更新なし）"
 
 #. translators: %s: version.
 #: src/Notifications/EmailChannel.php:233
+#, php-format
 msgid "update available: %s"
 msgstr "更新あり：%s"
 
 #. translators: %d: number of CVEs.
 #: src/Notifications/EmailChannel.php:237
+#, php-format
 msgid "%d known vulnerability"
 msgid_plural "%d known vulnerabilities"
 msgstr[0] "既知の脆弱性 %d 件"
@@ -1893,11 +1941,12 @@ msgid "Unknown notification channel."
 msgstr "不明な通知チャネルです。"
 
 #. translators: %d: HTTP status code.
-#: src/Remote/HttpClient.php:126
+#: src/Remote/HttpClient.php:127
+#, php-format
 msgid "HTTP status %d"
 msgstr "HTTP ステータス %d"
 
-#: src/Remote/HttpClient.php:129
+#: src/Remote/HttpClient.php:130
 msgid "Invalid JSON response"
 msgstr "無効な JSON レスポンス"
 
@@ -2265,11 +2314,11 @@ msgstr "パスがディレクトリではありません。"
 msgid "The directory is not readable by PHP."
 msgstr "ディレクトリを PHP から読み取れません。"
 
-#: src/Scan/PathValidator.php:116
+#: src/Scan/PathValidator.php:141
 msgid "This is the WordPress folder or one of its parent folders, so WordPress itself would be scanned. Register the folder of the other program instead (e.g. …/public_html/lp)."
 msgstr "WordPress のフォルダー、またはその親フォルダーです。このまま登録すると WordPress 本体がスキャン対象になってしまいます。ほかのプログラムのフォルダー（例：…/public_html/lp）を登録してください。"
 
-#: src/Scan/PathValidator.php:118
+#: src/Scan/PathValidator.php:147
 msgid "This folder is part of WordPress (wp-admin, wp-includes or wp-content such as uploads), which cannot be registered here. Select themes and custom plugins above; uploads are checked automatically."
 msgstr "このフォルダーは WordPress の一部（wp-admin、wp-includes、uploads などの wp-content）のため、ここでは登録できません。テーマと自作プラグインは上で選択してください。uploads は自動でチェックされます。"
 
@@ -2279,6 +2328,7 @@ msgstr "ファイル数の上限に到達"
 
 #. translators: %d: number of files.
 #: src/Scan/Scanner.php:379
+#, php-format
 msgid "Scanning stopped after %d files. Files after that were not checked."
 msgstr "%d 件のファイルでスキャンを停止しました。それ以降のファイルはチェックされていません。"
 
@@ -2292,6 +2342,7 @@ msgstr "完了できなかったチェック"
 
 #. translators: 1: check ID, 2: error message.
 #: src/Scan/Scanner.php:551
+#, php-format
 msgid "The check %1$s stopped with an error: %2$s"
 msgstr "チェック %1$s がエラーで停止しました：%2$s"
 
@@ -2323,6 +2374,7 @@ msgstr "前回のスキャンからの変化"
 #. translators: 1: new count, 2: resolved count.
 #: templates/email/summary-html.php:44
 #: templates/email/summary-text.php:24
+#, php-format
 msgid "%1$d new, %2$d resolved"
 msgstr "新規 %1$d 件、解決済み %2$d 件"
 
@@ -2350,135 +2402,177 @@ msgstr "重要度別の未解決の問題"
 msgid "Details are available only in the dashboard (they are not included in email for security reasons):"
 msgstr "詳細はダッシュボードでのみ確認できます（セキュリティ上の理由からメールには含まれていません）:"
 
-#: src/Admin/BaselinePanel.php
+#: src/Admin/BaselinePanel.php:83
 msgid "The baseline is the list of fingerprints (sha256 hashes) of every file in your scan targets, recorded as the trusted state. Each scan compares the current files with it and reports added, changed and deleted files as \"File integrity\" findings. The first scan of a target records the baseline automatically."
 msgstr "ベースラインとは、スキャン対象のすべてのファイルの指紋（sha256 ハッシュ）を「正しい状態」として記録したものです。スキャンのたびに現在のファイルと比較し、追加・変更・削除されたファイルを「ファイルの整合性」の検出結果として報告します。各対象の初回スキャン時に自動で記録されます。"
 
-#: src/Admin/BaselinePanel.php
+#: src/Admin/BaselinePanel.php:84
 msgid "When you changed files yourself (theme update, deployment, edits):"
 msgstr "自分でファイルを変更したとき（テーマの更新、デプロイ、編集など）："
 
-#: src/Admin/BaselinePanel.php
+#: src/Admin/BaselinePanel.php:86
 msgid "Run a scan so that the latest files are recorded."
 msgstr "スキャンを実行して、最新のファイルの状態を記録します。"
 
-#: src/Admin/BaselinePanel.php
+#: src/Admin/BaselinePanel.php:87
 msgid "Check that the reported files are the ones you changed."
 msgstr "報告されたファイルが、自分で変更したものか確認します。"
 
-#: src/Admin/BaselinePanel.php
+#: src/Admin/BaselinePanel.php:88
 msgid "Approve the current state. The changes are marked as resolved and are no longer reported."
 msgstr "現在の状態を承認します。変更は解決済みになり、以後は報告されません。"
 
-#: src/Admin/BaselinePanel.php
+#: src/Admin/BaselinePanel.php:90
 msgid "Do not approve changes you do not recognize. They may be signs of tampering; check the findings first."
 msgstr "身に覚えのない変更は承認しないでください。改ざんの可能性があります。先に検出結果を確認してください。"
 
-#: src/Admin/BaselinePanel.php
+#: src/Admin/BaselinePanel.php:115
 msgid "Unapproved changes"
 msgstr "未承認の変更"
 
-#: src/Admin/BaselinePanel.php
+#: src/Admin/BaselinePanel.php:172
 msgid "If you changed these files yourself, approve them. If you do not recognize the changes, check them before approving."
 msgstr "自分で変更したファイルであれば承認してください。身に覚えのない変更の場合は、承認する前に内容を確認してください。"
 
-#: src/Admin/BaselinePanel.php
+#: src/Admin/BaselinePanel.php:174
 msgid "Review changes"
 msgstr "変更を確認"
 
-#: src/Admin/BaselinePanel.php
+#: src/Admin/BaselinePanel.php:175
 msgid "Approve these changes"
 msgstr "これらの変更を承認"
 
-#: src/Admin/BaselinePanel.php
+#: src/Admin/BaselinePanel.php:176
 msgid "What is the baseline?"
 msgstr "ベースラインとは？"
 
 #. translators: %s: check name.
-#: src/Admin/FindingsListTable.php
+#: src/Admin/FindingsListTable.php:217
+#, php-format
 msgid "Check: %s"
 msgstr "チェック：%s"
 
-#: src/Admin/FindingsListTable.php
+#. translators: %s: check name.
+#: src/Admin/FindingsListTable.php:217
 msgid "Clear"
 msgstr "解除"
 
-#: src/Admin/SettingsPage.php
+#: src/Admin/SettingsPage.php:225
 msgid "+ Add another directory"
 msgstr "＋ ディレクトリを追加"
 
-#: src/Admin/SettingsPage.php
+#: src/Admin/SettingsPage.php:226
 msgid "You can add several directories at once. Empty rows are ignored when saving."
 msgstr "複数のディレクトリをまとめて追加できます。空の行は保存時に無視されます。"
 
-#: src/Admin/SettingsPage.php
+#: src/Admin/SettingsPage.php:318
 msgid "WordPress root (ABSPATH)"
 msgstr "WordPress のルート（ABSPATH）"
 
-#: src/Admin/SettingsPage.php
+#: src/Admin/SettingsPage.php:322
 msgid "Document root"
 msgstr "ドキュメントルート"
 
-#: src/Admin/SettingsPage.php
+#: src/Admin/SettingsPage.php:338
 msgid "Paths on this server (for reference)"
 msgstr "このサーバーのパス（参照用）"
 
-#: src/Admin/SettingsPage.php
+#: src/Admin/SettingsPage.php:345
 msgid "Click a folder from the server root to the WordPress root to insert it into an empty Path field, then append the rest of the path."
 msgstr "サーバーのルートから WordPress のルートまでのフォルダーをクリックすると、空の「パス」欄に入力されます。続きのパスを追記してください。"
 
-#: src/Admin/SettingsPage.php
+#: src/Admin/SettingsPage.php:555
 msgid "File baseline approval has moved to the General tab."
 msgstr "ファイルのベースラインの承認は「一般」タブに移動しました。"
 
-#: src/Admin/SettingsPage.php
+#: src/Admin/SettingsPage.php:556
 msgid "Go to the General tab"
 msgstr "一般タブを開く"
 
 #. translators: %s: number of files.
-#: src/Admin/BaselinePanel.php
+#: src/Admin/BaselinePanel.php:167
+#, php-format
 msgid "%s file differs from the approved baseline."
 msgid_plural "%s files differ from the approved baseline."
 msgstr[0] "承認済みのベースラインと異なるファイルが %s 件あります。"
 
-#: src/Scan/PathValidator.php
+#: src/Scan/PathValidator.php:143
 msgid "This is a plugin folder. Plugins are not registered here: select custom plugins under \"Plugins to scan\" above."
 msgstr "プラグインのフォルダーです。プラグインはここでは登録せず、上の「スキャンするプラグイン」で自作プラグインを選択してください。"
 
-#: src/Scan/PathValidator.php
+#: src/Scan/PathValidator.php:145
 msgid "This is a theme folder. Themes are not registered here: select them under \"Themes to scan\" above."
 msgstr "テーマのフォルダーです。テーマはここでは登録せず、上の「スキャンするテーマ」で選択してください。"
 
-#: src/Scan/PluginTargetProvider.php
+#: src/Admin/SettingsPage.php:284
+#: src/Scan/PluginTargetProvider.php:135
 msgid "Must-use plugins (mu-plugins)"
 msgstr "マストユースプラグイン（mu-plugins）"
 
-#: src/Admin/Ui.php
+#: src/Admin/Ui.php:76
 msgid "Plugin"
 msgstr "プラグイン"
 
-#: src/Admin/SettingsPage.php
+#: src/Admin/SettingsPage.php:262
 msgid "Plugins to scan"
 msgstr "スキャンするプラグイン"
 
-#: src/Admin/SettingsPage.php
+#: src/Admin/SettingsPage.php:264
 msgid "Select plugins you or your client developed (custom plugins). Plugins distributed on WordPress.org are not scanned because they are maintained and checked for vulnerabilities by their authors and WordPress.org. Nothing is scanned unless you select it."
 msgstr "自社やクライアントが開発したプラグイン（自作プラグイン）を選択してください。WordPress.org で配布されているプラグインは、作者と WordPress.org が保守・脆弱性の管理を行っているため対象外です。選択しない限りスキャンされません。"
 
-#: src/Admin/SettingsPage.php
+#: src/Admin/SettingsPage.php:267
 msgid "No custom plugins were found."
 msgstr "自作プラグインは見つかりませんでした。"
 
-#: src/Admin/SettingsPage.php
+#: src/Admin/SettingsPage.php:289
 msgid "WordPress has not checked plugin updates yet, so plugins from WordPress.org cannot be told apart. Open Dashboard → Updates once and reload this page."
 msgstr "WordPress がまだプラグインの更新を確認していないため、WordPress.org のプラグインを判別できません。一度「ダッシュボード → 更新」を開いてから、このページを再読み込みしてください。"
 
-#: src/Admin/SettingsPage.php
+#: src/Admin/SettingsPage.php:306
 msgid "Single-file plugins placed directly in the plugins folder are not listed."
 msgstr "plugins フォルダー直下に置かれた単一ファイルのプラグインは一覧に表示されません。"
 
 #. translators: %d: number of plugins.
-#: src/Admin/SettingsPage.php
+#: src/Admin/SettingsPage.php:296
+#, php-format
 msgid "%d plugin from WordPress.org (not scanned)"
 msgid_plural "%d plugins from WordPress.org (not scanned)"
 msgstr[0] "WordPress.org のプラグイン %d 件（スキャン対象外）"
+
+#: src/Admin/Admin.php:151
+msgid "Use external vulnerability databases?"
+msgstr "外部の脆弱性データベースを利用しますか？"
+
+#: src/Admin/Admin.php:152
+msgid "Keep It Peace can look up support periods and known vulnerabilities online. It then sends your PHP version, your database type and version, and the names and versions of Composer/npm packages found in scanned folders to endoflife.date, php.net, NVD (NIST) and OSV.dev. Your site URL, file contents and personal data are never sent."
+msgstr "Keep It Peace は、サポート期間と既知の脆弱性をオンラインで調べることができます。その場合、PHP のバージョン、データベースの種類とバージョン、スキャン対象のフォルダにある Composer / npm パッケージの名前とバージョンを、endoflife.date・php.net・NVD（NIST）・OSV.dev に送信します。サイトの URL、ファイルの内容、個人情報は送信しません。"
+
+#: src/Admin/Admin.php:153
+msgid "Until you agree, nothing is sent and support periods are checked with data bundled with the plugin. You can change this at any time in Settings → External services."
+msgstr "同意するまでは何も送信せず、プラグインに同梱されたデータでサポート期間を判定します。この設定は 設定 → 外部サービス でいつでも変更できます。"
+
+#: src/Admin/Admin.php:157
+msgid "Use external databases"
+msgstr "外部データベースを利用する"
+
+#: src/Admin/Admin.php:158
+msgid "Do not use"
+msgstr "使わない"
+
+#: src/Admin/Admin.php:200
+msgid "External vulnerability databases will be used from the next scan."
+msgstr "次回のスキャンから外部の脆弱性データベースを利用します。"
+
+#: src/Admin/Admin.php:201
+msgid "External databases will not be used. You can change this in Settings → External services."
+msgstr "外部データベースは利用しません。設定 → 外部サービス で変更できます。"
+
+#: src/Admin/DashboardPage.php:176
+#: src/Admin/DashboardPage.php:195
+msgid "External databases not used (checked with bundled data)"
+msgstr "外部データベース未使用（同梱データで判定）"
+
+#: src/Admin/SettingsPage.php:527
+msgid "Off by default: nothing is sent to these services until you enable this option. Your site URL, file contents and personal data are never sent. Results are cached. While disabled, a bundled snapshot is used for support periods."
+msgstr "既定では OFF です。この設定を有効にするまで、以下のサービスには何も送信しません。サイトの URL、ファイルの内容、個人情報は送信しません。結果はキャッシュされます。無効の間は、同梱のスナップショットでサポート期間を判定します。"

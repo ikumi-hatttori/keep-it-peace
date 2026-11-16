@@ -45,8 +45,40 @@ function do_action( $hook, ...$args ) {
 function wp_json_encode( $data, $options = 0 ) {
 	return json_encode( $data, $options );
 }
+$GLOBALS['kip_test_options']  = array();
+$GLOBALS['kip_test_requests'] = array();
+
 function get_option( $name, $default = false ) {
-	return $default;
+	return array_key_exists( $name, $GLOBALS['kip_test_options'] ) ? $GLOBALS['kip_test_options'][ $name ] : $default;
+}
+function get_transient( $name ) {
+	return false;
+}
+function set_transient( $name, $value, $expiration = 0 ) {
+	return true;
+}
+function is_wp_error( $thing ) {
+	return $thing instanceof WP_Error;
+}
+// Outgoing requests are recorded so tests can assert that nothing was sent.
+function wp_safe_remote_get( $url, $args = array() ) {
+	$GLOBALS['kip_test_requests'][] = array( 'GET', $url );
+	return new WP_Error( 'test', 'no network in tests' );
+}
+function wp_safe_remote_post( $url, $args = array() ) {
+	$GLOBALS['kip_test_requests'][] = array( 'POST', $url );
+	return new WP_Error( 'test', 'no network in tests' );
+}
+if ( ! class_exists( 'WP_Error' ) ) {
+	class WP_Error { // phpcs:ignore
+		private $message;
+		public function __construct( $code = '', $message = '' ) {
+			$this->message = $message;
+		}
+		public function get_error_message() {
+			return $this->message;
+		}
+	}
 }
 function wp_parse_url( $url, $component = -1 ) {
 	return parse_url( $url, $component );

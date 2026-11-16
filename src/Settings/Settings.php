@@ -66,8 +66,9 @@ class Settings {
 					'format'     => 'html',
 				),
 			),
+			// Third-party APIs are opt-in: nothing is sent until an administrator agrees (see RemoteConsent).
 			'remote'            => array(
-				'enabled'  => true,
+				'enabled'  => false,
 				'services' => array(
 					'endoflife' => true,
 					'phpnet'    => true,
@@ -125,17 +126,33 @@ class Settings {
 	}
 
 	/**
-	 * Whether a remote service may be contacted.
+	 * Whether a third-party service may be contacted: requires the administrator's consent,
+	 * the global switch and the service switch.
 	 *
 	 * @param string $service Service ID (endoflife, phpnet, nvd, osv).
 	 * @return bool
 	 */
 	public function is_remote_enabled( string $service ): bool {
-		if ( ! $this->get( 'remote.enabled', true ) ) {
-			return false;
+		$services = (array) $this->get( 'remote.services', array() );
+		return RemoteConsent::allows(
+			RemoteConsent::status(),
+			(bool) $this->get( 'remote.enabled', false ),
+			! isset( $services[ $service ] ) || (bool) $services[ $service ]
+		);
+	}
+
+	/**
+	 * Whether any third-party service may be contacted (for status displays).
+	 *
+	 * @return bool
+	 */
+	public function uses_remote_data(): bool {
+		foreach ( array_keys( (array) $this->get( 'remote.services', array() ) ) as $service ) {
+			if ( $this->is_remote_enabled( (string) $service ) ) {
+				return true;
+			}
 		}
-		$services = $this->get( 'remote.services', array() );
-		return ! isset( $services[ $service ] ) || (bool) $services[ $service ];
+		return false;
 	}
 
 	/**

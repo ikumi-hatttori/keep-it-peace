@@ -102,7 +102,6 @@ final class Plugin {
 	 */
 	private function register(): void {
 		Installer::maybe_upgrade();
-		add_action( 'init', array( $this, 'load_textdomain' ) );
 		add_action( 'admin_init', array( RuntimeEnvironment::class, 'record' ) );
 		( new Scheduler( $this ) )->register();
 		add_action( 'rest_api_init', array( new RestController( $this ), 'register_routes' ) );
@@ -115,13 +114,6 @@ final class Plugin {
 		}
 	}
 
-	/**
-	 * Loads bundled translations (wp.org language packs take precedence when present).
-	 */
-	public function load_textdomain(): void {
-		// The bundled Japanese translation lives in /languages; WordPress.org language packs still take precedence.
-		load_plugin_textdomain( 'keep-it-peace', false, dirname( plugin_basename( KEEPITPEACE_FILE ) ) . '/languages' ); // phpcs:ignore PluginCheck.CodeAnalysis.DiscouragedFunctions.load_plugin_textdomainFound
-	}
 
 	/**
 	 * Capability required for every screen and action.

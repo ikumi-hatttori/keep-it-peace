@@ -20,6 +20,9 @@
 /.phpunit.result.cache
 /README.md
 /languages/*.po~
+# Translations are delivered as language packs from translate.wordpress.org; only the .pot ships.
+/languages/*.po
+/languages/*.mo
 .DS_Store
 /.wordpress-org
 /README.ja.md

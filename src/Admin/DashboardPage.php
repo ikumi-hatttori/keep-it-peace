@@ -172,6 +172,9 @@ class DashboardPage {
 		$version = $php['version'] ?? PHP_VERSION;
 		$html    = esc_html( $version );
 		if ( ! $php ) {
+			if ( ! $this->plugin->settings()->uses_remote_data() ) {
+				$html .= '<br><span class="description">' . esc_html__( 'External databases not used (checked with bundled data)', 'keep-it-peace' ) . '</span>';
+			}
 			return $html;
 		}
 		if ( ! empty( $php['eol'] ) ) {
@@ -187,6 +190,9 @@ class DashboardPage {
 		if ( isset( $php['cve_count'] ) && null !== $php['cve_count'] ) {
 			/* translators: %d: number of CVEs. */
 			$html .= '<br><span class="description">' . esc_html( sprintf( _n( '%d known vulnerability (NVD)', '%d known vulnerabilities (NVD)', (int) $php['cve_count'], 'keep-it-peace' ), (int) $php['cve_count'] ) ) . '</span>';
+		}
+		if ( ! $this->plugin->settings()->uses_remote_data() || 'bundled' === ( $php['source'] ?? '' ) ) {
+			$html .= '<br><span class="description">' . esc_html__( 'External databases not used (checked with bundled data)', 'keep-it-peace' ) . '</span>';
 		}
 		return $html;
 	}
