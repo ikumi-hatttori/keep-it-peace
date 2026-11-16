@@ -1765,10 +1765,6 @@ msgstr "PHP のサポート状況が不明"
 msgid "No release data was found for PHP %s."
 msgstr "PHP %s のリリース情報が見つかりませんでした。"
 
-#: src/Checks/Php/PhpVersionCheck.php:125
-msgid "Enable the endoflife.date API in the settings or check the PHP website."
-msgstr "設定で endoflife.date API を有効にするか、PHP の公式サイトを確認してください。"
-
 #: src/Checks/Php/PhpVersionCheck.php:136
 msgid "PHP patch release is outdated"
 msgstr "PHP のパッチリリースが古い"
@@ -1949,10 +1945,6 @@ msgstr "HTTP ステータス %d"
 #: src/Remote/HttpClient.php:130
 msgid "Invalid JSON response"
 msgstr "無効な JSON レスポンス"
-
-#: src/Remote/OsvClient.php:73
-msgid "OSV.dev is disabled in the settings."
-msgstr "OSV.dev は設定で無効になっています。"
 
 #: src/Remote/SiteProbe.php:82
 msgid "The URL is not on this site's domain."
@@ -2576,3 +2568,11 @@ msgstr "外部データベース未使用（同梱データで判定）"
 #: src/Admin/SettingsPage.php:527
 msgid "Off by default: nothing is sent to these services until you enable this option. Your site URL, file contents and personal data are never sent. Results are cached. While disabled, a bundled snapshot is used for support periods."
 msgstr "既定では OFF です。この設定を有効にするまで、以下のサービスには何も送信しません。サイトの URL、ファイルの内容、個人情報は送信しません。結果はキャッシュされます。無効の間は、同梱のスナップショットでサポート期間を判定します。"
+
+#: src/Checks/Php/PhpVersionCheck.php:125
+msgid "Allow external databases in Settings → External services, or check the PHP website."
+msgstr "設定 → 外部サービス で外部データベースの利用を許可するか、PHP の公式サイトを確認してください。"
+
+#: src/Remote/OsvClient.php:74
+msgid "external databases are not allowed in Settings → External services"
+msgstr "設定 → 外部サービス で外部データベースの利用が許可されていません"
