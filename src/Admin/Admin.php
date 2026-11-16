@@ -14,6 +14,7 @@ use KeepItPeace\Findings\FindingStatus;
 use KeepItPeace\Plugin;
 use KeepItPeace\Scan\CronHealth;
 use KeepItPeace\Scan\Scheduler;
+use KeepItPeace\Settings\RemoteConsent;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -65,6 +66,7 @@ class Admin {
 		add_action( 'admin_post_keepitpeace_test_notification', array( $this, 'handle_test_notification' ) );
 		add_action( 'admin_post_keepitpeace_dismiss_pro', array( $this, 'handle_dismiss_pro' ) );
 		add_action( 'admin_post_keepitpeace_export', array( $this, 'handle_export' ) );
+		add_action( 'admin_post_keepitpeace_remote_consent', array( $this, 'handle_remote_consent' ) );
 		add_filter(
 			'set_screen_option_keepitpeace_findings_per_page',
 			static function ( $keep, $option, $value ) {
@@ -111,7 +113,8 @@ class Admin {
 	 * @param string $hook Hook suffix.
 	 */
 	public function assets( $hook ): void {
-		if ( ! in_array( $hook, $this->hooks, true ) && 'index.php' !== $hook ) {
+		$is_wp_dashboard = 'index.php' === $hook && current_user_can( Plugin::capability() );
+		if ( ! in_array( $hook, $this->hooks, true ) && ! $is_wp_dashboard ) {
 			return;
 		}
 		wp_enqueue_style( 'keepitpeace-admin', KEEPITPEACE_URL . 'assets/admin.css', array(), KEEPITPEACE_VERSION );
@@ -140,12 +143,35 @@ class Admin {
 	}
 
 	/**
+	 * Asks once whether third-party vulnerability databases may be used (opt-in).
+	 */
+	private function consent_notice(): void {
+		?>
+		<div class="notice notice-info kip-consent">
+			<p><strong><?php esc_html_e( 'Use external vulnerability databases?', 'keep-it-peace' ); ?></strong></p>
+			<p><?php esc_html_e( 'Keep It Peace can look up support periods and known vulnerabilities online. It then sends your PHP version, your database type and version, and the names and versions of Composer/npm packages found in scanned folders to endoflife.date, php.net, NVD (NIST) and OSV.dev. Your site URL, file contents and personal data are never sent.', 'keep-it-peace' ); ?></p>
+			<p><?php esc_html_e( 'Until you agree, nothing is sent and support periods are checked with data bundled with the plugin. You can change this at any time in Settings → External services.', 'keep-it-peace' ); ?></p>
+			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" class="kip-consent-actions">
+				<input type="hidden" name="action" value="keepitpeace_remote_consent">
+				<?php wp_nonce_field( 'keepitpeace_remote_consent' ); ?>
+				<button type="submit" name="choice" value="grant" class="button button-primary"><?php esc_html_e( 'Use external databases', 'keep-it-peace' ); ?></button>
+				<button type="submit" name="choice" value="decline" class="button"><?php esc_html_e( 'Do not use', 'keep-it-peace' ); ?></button>
+			</form>
+		</div>
+		<?php
+	}
+
+	/**
 	 * Notices shown only on our screens.
 	 */
 	public function notices(): void {
 		if ( ! $this->is_our_screen() || ! current_user_can( Plugin::capability() ) ) {
 			return;
 		}
+		if ( RemoteConsent::PENDING === RemoteConsent::status() ) {
+			$this->consent_notice();
+		}
+
 		$health = CronHealth::status( $this->plugin->settings() );
 		if ( ! $health['healthy'] ) {
 			echo '<div class="notice notice-warning"><p><strong>' . esc_html__( 'Scheduled scans may not be running.', 'keep-it-peace' ) . '</strong> ';
@@ -170,15 +196,17 @@ class Admin {
 		$text = isset( $_GET['keepitpeace_text'] ) ? sanitize_text_field( wp_unslash( $_GET['keepitpeace_text'] ) ) : '';
 		// phpcs:enable
 		$messages = array(
-			'saved'        => array( 'success', __( 'Settings saved.', 'keep-it-peace' ) ),
-			'saved_errors' => array( 'warning', __( 'Settings saved, but some values were not accepted:', 'keep-it-peace' ) ),
-			'no_report'    => array( 'error', __( 'There is no completed scan to export yet.', 'keep-it-peace' ) ),
-			'status'       => array( 'success', __( 'Status updated.', 'keep-it-peace' ) ),
-			'bulk'         => array( 'success', __( 'Selected findings were updated.', 'keep-it-peace' ) ),
-			'baseline'     => array( 'success', __( 'The baseline was approved.', 'keep-it-peace' ) ),
-			'test_sent'    => array( 'success', __( 'Test notification sent.', 'keep-it-peace' ) ),
-			'test_failed'  => array( 'error', __( 'Test notification failed.', 'keep-it-peace' ) ),
-			'not_found'    => array( 'error', __( 'Item not found.', 'keep-it-peace' ) ),
+			'saved'            => array( 'success', __( 'Settings saved.', 'keep-it-peace' ) ),
+			'consent_granted'  => array( 'success', __( 'External vulnerability databases will be used from the next scan.', 'keep-it-peace' ) ),
+			'consent_declined' => array( 'success', __( 'External databases will not be used. You can change this in Settings → External services.', 'keep-it-peace' ) ),
+			'saved_errors'     => array( 'warning', __( 'Settings saved, but some values were not accepted:', 'keep-it-peace' ) ),
+			'no_report'        => array( 'error', __( 'There is no completed scan to export yet.', 'keep-it-peace' ) ),
+			'status'           => array( 'success', __( 'Status updated.', 'keep-it-peace' ) ),
+			'bulk'             => array( 'success', __( 'Selected findings were updated.', 'keep-it-peace' ) ),
+			'baseline'         => array( 'success', __( 'The baseline was approved.', 'keep-it-peace' ) ),
+			'test_sent'        => array( 'success', __( 'Test notification sent.', 'keep-it-peace' ) ),
+			'test_failed'      => array( 'error', __( 'Test notification failed.', 'keep-it-peace' ) ),
+			'not_found'        => array( 'error', __( 'Item not found.', 'keep-it-peace' ) ),
 		);
 		if ( ! isset( $messages[ $code ] ) ) {
 			return;
@@ -266,6 +294,10 @@ class Admin {
 		$values    = $sanitizer->sanitize_tab( $tab, $input, $settings->all() );
 		$settings->save( $values );
 		$this->plugin->reset_settings();
+		if ( 'remote' === $tab ) {
+			// Saving this tab is an explicit choice about the third-party services.
+			update_option( RemoteConsent::OPTION, ! empty( $values['remote']['enabled'] ) ? RemoteConsent::GRANTED : RemoteConsent::DECLINED, false );
+		}
 		if ( $old !== $this->plugin->settings()->get( 'schedule' ) ) {
 			Scheduler::schedule( $this->plugin->settings() );
 		}
@@ -337,6 +369,21 @@ class Admin {
 		update_user_meta( get_current_user_id(), 'keepitpeace_hide_pro_notice', 1 );
 		wp_safe_redirect( self::url( self::SETTINGS_SLUG ) );
 		exit;
+	}
+
+	/**
+	 * Records the answer to the external database question.
+	 */
+	public function handle_remote_consent(): void {
+		$this->guard( 'keepitpeace_remote_consent' );
+		$choice = isset( $_POST['choice'] ) ? sanitize_key( wp_unslash( $_POST['choice'] ) ) : '';
+		if ( ! in_array( $choice, array( 'grant', 'decline' ), true ) ) {
+			$this->redirect( self::url( self::SLUG ), 'not_found' );
+		}
+		RemoteConsent::record( 'grant' === $choice );
+		$this->plugin->reset_settings();
+		$back = wp_get_referer();
+		$this->redirect( $back ? $back : self::url( self::SLUG ), 'grant' === $choice ? 'consent_granted' : 'consent_declined' );
 	}
 
 	/**

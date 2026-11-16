@@ -18,6 +18,9 @@ class HostPolicy {
 	/**
 	 * Public suffixes with more than one label that are common enough to matter, and shared
 	 * hosting domains where subdomains belong to different customers. Not a full public suffix list.
+	 *
+	 * These are only compared with host names to decide which URLs the external checks may probe.
+	 * They are not request destinations: nothing is fetched from or sent to these domains.
 	 */
 	const MULTI_LABEL_SUFFIXES = array(
 		// Japan.

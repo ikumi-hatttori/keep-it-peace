@@ -72,7 +72,7 @@ keep-it-peace/
 │   └── sensitive-paths.json     # 公開漏れを調べるパスの既定リスト
 ├── templates/                   # メール（text / html）、管理画面のビュー
 ├── assets/                      # admin.js（手動スキャンの進捗）, admin.css
-├── languages/                   # keep-it-peace.pot, -ja.po/.mo, JS 用 JSON
+├── languages/                   # keep-it-peace.pot（配布用）, -ja.po/.mo（translate.wordpress.org へのインポート用。ZIP には含めない）
 ├── tests/
 │   ├── bootstrap.php            # WP 関数の最小スタブ
 │   ├── Unit/                    # ルール, バージョン判定, 差分, エクスポート

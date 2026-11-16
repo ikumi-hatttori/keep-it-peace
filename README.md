@@ -45,7 +45,7 @@ Also:
 - Scheduled scans (WP-Cron, daily or weekly). Each run has a time limit and the scan resumes on the next cron run
 - Admin screens: dashboard, findings (filters, bulk actions, code view, history), scan history, tabbed settings
 - E-mail notifications (plain text / HTML, send conditions, weekly digest, test e-mail). File paths and code are never included in e-mails
-- Japanese translation bundled (`languages/`)
+- Japanese translation prepared in `languages/` (for import into translate.wordpress.org; the ZIP ships only the `.pot`)
 
 ## WP-CLI
 
@@ -71,6 +71,8 @@ WP-Cron only runs when the site receives a request. For reliable monitoring, run
 On shared hosting, the CLI and the web server may use different PHP versions or php.ini files. The plugin records the web server's PHP information (for example when you open the admin screens) and evaluates it even when the scan runs on the CLI.
 
 ## External services
+
+Off by default (opt-in). Nothing is sent until an administrator agrees with the notice on the Keep It Peace screens or in Settings → External services. Until then, support periods are checked with the bundled snapshot.
 
 | Service | What is sent |
 |---|---|

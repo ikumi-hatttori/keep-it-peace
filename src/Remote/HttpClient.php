@@ -78,13 +78,18 @@ class HttpClient {
 	 * @return array
 	 */
 	private function request( string $service, string $method, string $url, ?array $body, int $ttl ): array {
-		$result  = array(
+		$result = array(
 			'data'     => null,
 			'error'    => null,
 			'cached'   => false,
 			'stale'    => false,
 			'disabled' => false,
 		);
+		// Checked before the cache too: without consent, earlier responses are not used either.
+		if ( ! $this->is_enabled( $service ) ) {
+			$result['disabled'] = true;
+			return $result;
+		}
 		$encoded = null === $body ? '' : (string) wp_json_encode( $body );
 		$key     = 'keepitpeace_rc_' . md5( $method . $url . $encoded );
 		$cached  = get_transient( $key );
@@ -92,10 +97,6 @@ class HttpClient {
 		if ( is_array( $cached ) && isset( $cached['t'] ) && time() - (int) $cached['t'] < $ttl ) {
 			$result['data']   = $cached['d'];
 			$result['cached'] = true;
-			return $result;
-		}
-		if ( ! $this->is_enabled( $service ) ) {
-			$result['disabled'] = true;
 			return $result;
 		}
 

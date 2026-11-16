@@ -15,6 +15,7 @@ use KeepItPeace\Scan\CronHealth;
 use KeepItPeace\Scan\PluginTargetProvider;
 use KeepItPeace\Scan\Scheduler;
 use KeepItPeace\Scan\ThemeTargetProvider;
+use KeepItPeace\Settings\RemoteConsent;
 use KeepItPeace\Settings\Settings;
 
 defined( 'ABSPATH' ) || exit;
@@ -522,8 +523,8 @@ class SettingsPage {
 		<tr>
 			<th scope="row"><?php esc_html_e( 'External APIs', 'keep-it-peace' ); ?></th>
 			<td>
-				<label><input type="checkbox" name="keepitpeace[remote][enabled]" value="1" <?php checked( (bool) $settings->get( 'remote.enabled' ) ); ?>> <?php esc_html_e( 'Allow requests to the services below', 'keep-it-peace' ); ?></label>
-				<p class="description"><?php esc_html_e( 'Your site URL, file contents and personal data are never sent. Results are cached. When disabled, a bundled snapshot is used for support periods.', 'keep-it-peace' ); ?></p>
+				<label><input type="checkbox" name="keepitpeace[remote][enabled]" value="1" <?php checked( (bool) $settings->get( 'remote.enabled' ) && RemoteConsent::GRANTED === RemoteConsent::status() ); ?>> <?php esc_html_e( 'Allow requests to the services below', 'keep-it-peace' ); ?></label>
+				<p class="description"><?php esc_html_e( 'Off by default: nothing is sent to these services until you enable this option. Your site URL, file contents and personal data are never sent. Results are cached. While disabled, a bundled snapshot is used for support periods.', 'keep-it-peace' ); ?></p>
 			</td>
 		</tr>
 		<tr>

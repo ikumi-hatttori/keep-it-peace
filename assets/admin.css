@@ -81,3 +81,10 @@
 .kip-inline-form { display: inline-block; margin: 0; }
 .kip-notice-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .kip-filter-chip { display: inline-block; margin-left: 8px; padding: 2px 8px; background: #f0f6fc; border: 1px solid #c5d9ed; border-radius: 3px; line-height: 26px; }
+
+.kip-consent-actions {
+	margin: 0.5em 0 1em;
+}
+.kip-consent-actions .button {
+	margin-right: 8px;
+}

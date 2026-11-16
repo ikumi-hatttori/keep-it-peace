@@ -36,21 +36,20 @@ After each scan you get an e-mail summary (HTML and plain text) with the number 
 
 = For developers =
 
-Checks, scan targets, notification channels, rules, settings tabs and the JSON export can be extended through documented interfaces, actions and filters. See the [developer documentation on GitHub](https://github.com/ACCOUNT/keep-it-peace/blob/main/docs/developer.md).
-<!-- GITHUB_REPO_PLACEHOLDER: replace ACCOUNT/keep-it-peace in the link above with the real repository, then delete this comment. bin/build-zip.sh refuses to build while this marker remains. -->
+Checks, scan targets, notification channels, rules, settings tabs and the JSON export can be extended through documented interfaces, actions and filters. See the [developer documentation on GitHub](https://github.com/ikumi-hatttori/keep-it-peace/blob/main/docs/developer.md).
 
 == External services ==
 
-Keep It Peace contacts the services below to evaluate your PHP and database versions and your dependencies. Each service can be switched off under Settings → External services, and all of them can be disabled at once. Your site URL, file contents and personal data are never sent; requests use the User-Agent "KeepItPeace/<version>" instead of the WordPress default, which contains the site URL. Responses are cached (1 to 7 days).
+Keep It Peace can use the third-party services below to evaluate your PHP and database versions and your dependencies. **This is off by default.** Nothing is sent to these services until an administrator agrees, either with the notice shown on the Keep It Peace screens ("Use external databases") or by enabling Settings → External services. Activating the plugin does not contact any of them. After agreeing, each service can be switched off individually, and all of them can be disabled again at once. Your site URL, file contents and personal data are never sent; requests use the User-Agent "KeepItPeace/<version>" instead of the WordPress default, which contains the site URL. Responses are cached (1 to 7 days).
 
 * **endoflife.date** – support periods of PHP, MySQL and MariaDB. Sent: the product name (php, mysql or mariadb), during scans. https://endoflife.date/ – data and terms: https://github.com/endoflife-date/endoflife.date
 * **php.net** – the latest patch release of your PHP series. Sent: the release series (for example 8.2), during scans. https://www.php.net/ – privacy policy: https://www.php.net/privacy.php
 * **NVD (National Vulnerability Database, NIST)** – known vulnerabilities of your PHP version. Sent: the PHP version (for example 8.2.10), during scans. https://nvd.nist.gov/ – privacy policy: https://www.nist.gov/privacy-policy
 * **OSV.dev (Google)** – known vulnerabilities of Composer and npm packages. Sent: package names and versions read from composer.lock and package-lock.json, during scans. https://osv.dev/ – terms: https://policies.google.com/terms – privacy policy: https://policies.google.com/privacy
 
-When the external services are disabled, a bundled snapshot of PHP, MySQL and MariaDB support periods is used.
+While the external services are disabled, a bundled snapshot of PHP, MySQL and MariaDB support periods is used, and the dashboard shows that the status was checked with bundled data.
 
-The external checks (SSL certificate, headers, exposed files, directory listings) send requests from your server to your own site only. They are limited to the domain of your site; other hosts must be explicitly allowed with the `keepitpeace_allowed_hosts` filter.
+The external checks (SSL certificate, headers, exposed files, directory listings) are not third-party services: they send requests from your server to your own site only, so they do not depend on this consent. They are limited to the domain of your site; other hosts must be explicitly allowed with the `keepitpeace_allowed_hosts` filter.
 
 == Installation ==
 
@@ -95,7 +94,8 @@ Keep It Peace is complete on its own. A separate Pro add-on (multi-site dashboar
 * Checks: PHP and database support status, php.ini, wp-config.php, PHP files in uploads.
 * Custom themes, custom plugins and directories outside WordPress: file integrity against a baseline, dangerous code patterns, suspicious files, permissions, vulnerable Composer/npm dependencies (OSV.dev).
 * External checks: SSL/TLS, security headers, exposed files, directory listings.
-* E-mail summaries, findings history, JSON export, WP-CLI commands and Japanese translation.
+* E-mail summaries, findings history, JSON export and WP-CLI commands.
+* Third-party vulnerability databases are opt-in: nothing is sent until an administrator agrees.
 
 == Upgrade Notice ==
 
