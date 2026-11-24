@@ -7,6 +7,7 @@
 
 namespace KeepItPeace\Admin;
 
+use KeepItPeace\Baseline\BaselineActions;
 use KeepItPeace\Plugin;
 
 defined( 'ABSPATH' ) || exit;
@@ -135,7 +136,18 @@ class BaselinePanel {
 						}
 						?>
 					</td>
-					<td><?php self::approve_button( $id, __( 'Approve current state', 'keep-it-peace' ), ! isset( $scopes[ $id ] ) ); ?></td>
+					<td>
+						<?php $blocked = BaselineActions::blocked_dirs( $id ); ?>
+						<?php self::approve_button( $id, __( 'Approve current state', 'keep-it-peace' ), ! isset( $scopes[ $id ] ) || (bool) $blocked ); ?>
+						<?php if ( $blocked ) : ?>
+							<p class="description kip-ng">
+								<?php
+								/* translators: %s: directories. */
+								echo esc_html( sprintf( __( 'Cannot be approved: the last scan could not read %s. Fix the permissions and scan again.', 'keep-it-peace' ), implode( ', ', array_slice( $blocked, 0, 5 ) ) . ( count( $blocked ) > 5 ? ', …' : '' ) ) );
+								?>
+							</p>
+						<?php endif; ?>
+					</td>
 				</tr>
 			<?php endforeach; ?>
 			</tbody>

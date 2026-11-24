@@ -81,9 +81,12 @@ final class Api {
 	 * Starts a scan (or returns the running one). The scan runs in slices via WP-Cron.
 	 *
 	 * @param string $trigger Trigger label stored with the scan.
-	 * @return int Scan ID.
+	 * @return int Scan ID, or 0 when the database tables are missing.
 	 */
 	public static function start_scan( string $trigger = 'api' ): int {
+		if ( ! Installer::is_ready() ) {
+			return 0;
+		}
 		$plugin = Plugin::instance();
 		$scan   = $plugin->scanner()->start( sanitize_key( $trigger ), get_current_user_id() );
 		Scheduler::schedule_continuation( 0 );

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-16T09:03:24+00:00\n"
+"POT-Creation-Date: 2026-11-24T01:22:26+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: keep-it-peace\n"
@@ -39,234 +39,270 @@ msgstr ""
 msgid "https://mackarel.jp"
 msgstr ""
 
-#: src/Admin/Admin.php:92
+#: src/Admin/Admin.php:93
 msgid "Dashboard"
 msgstr ""
 
-#: src/Admin/Admin.php:93
+#: src/Admin/Admin.php:94
 #: src/Admin/FindingsPage.php:106
 msgid "Findings"
 msgstr ""
 
-#: src/Admin/Admin.php:96
+#: src/Admin/Admin.php:104
 #: src/Admin/ScansPage.php:84
 msgid "Scan history"
 msgstr ""
 
-#: src/Admin/Admin.php:97
-#: src/Admin/Admin.php:239
+#: src/Admin/Admin.php:105
+#: src/Admin/Admin.php:292
 msgid "Settings"
 msgstr ""
 
+#: src/Admin/Admin.php:131
+msgid "Keep It Peace could not create its database tables."
+msgstr ""
+
 #: src/Admin/Admin.php:132
+msgid "Scans are disabled until the tables exist. Creating them is retried each time you open a Keep It Peace screen. If this keeps failing, ask your host to check the database user's CREATE and ALTER privileges."
+msgstr ""
+
+#. translators: %s: table names.
+#: src/Admin/Admin.php:137
+#, php-format
+msgid "Missing tables: %s"
+msgstr ""
+
+#: src/Admin/Admin.php:180
 msgid "Starting scan…"
 msgstr ""
 
 #. translators: %d: progress percentage.
-#: src/Admin/Admin.php:134
+#: src/Admin/Admin.php:182
 #, php-format
 msgid "Scanning… %d%%"
 msgstr ""
 
-#: src/Admin/Admin.php:135
+#: src/Admin/Admin.php:183
 msgid "Another scan step is running. Waiting…"
 msgstr ""
 
-#: src/Admin/Admin.php:136
+#: src/Admin/Admin.php:184
 msgid "Scan completed. Reloading…"
 msgstr ""
 
-#: src/Admin/Admin.php:137
+#: src/Admin/Admin.php:185
 msgid "The scan failed. Check the scan history for details."
 msgstr ""
 
 #. translators: %s: error message.
-#: src/Admin/Admin.php:139
+#: src/Admin/Admin.php:187
 #, php-format
 msgid "Request failed: %s"
 msgstr ""
 
-#: src/Admin/Admin.php:151
+#: src/Admin/Admin.php:199
 msgid "Use external vulnerability databases?"
 msgstr ""
 
-#: src/Admin/Admin.php:152
+#: src/Admin/Admin.php:200
 msgid "Keep It Peace can look up support periods and known vulnerabilities online. It then sends your PHP version, your database type and version, and the names and versions of Composer/npm packages found in scanned folders to endoflife.date, php.net, NVD (NIST) and OSV.dev. Your site URL, file contents and personal data are never sent."
 msgstr ""
 
-#: src/Admin/Admin.php:153
+#: src/Admin/Admin.php:201
 msgid "Until you agree, nothing is sent and support periods are checked with data bundled with the plugin. You can change this at any time in Settings → External services."
 msgstr ""
 
-#: src/Admin/Admin.php:157
+#: src/Admin/Admin.php:205
 msgid "Use external databases"
 msgstr ""
 
-#: src/Admin/Admin.php:158
+#: src/Admin/Admin.php:206
 msgid "Do not use"
 msgstr ""
 
-#: src/Admin/Admin.php:177
+#: src/Admin/Admin.php:229
 #: src/Admin/DashboardPage.php:253
 msgid "Scheduled scans may not be running."
 msgstr ""
 
-#: src/Admin/Admin.php:178
+#: src/Admin/Admin.php:230
 msgid "No scan has completed for longer than expected. WP-Cron only runs when the site receives visits; set up a server cron job (see Settings → Tools) to run scans reliably."
 msgstr ""
 
-#: src/Admin/Admin.php:199
+#: src/Admin/Admin.php:251
 msgid "Settings saved."
 msgstr ""
 
-#: src/Admin/Admin.php:200
+#: src/Admin/Admin.php:252
+msgid "The baseline was not approved because the last scan could not read some directories of the target. Fix the permissions, run a scan, then approve."
+msgstr ""
+
+#: src/Admin/Admin.php:253
 msgid "External vulnerability databases will be used from the next scan."
 msgstr ""
 
-#: src/Admin/Admin.php:201
+#: src/Admin/Admin.php:254
 msgid "External databases will not be used. You can change this in Settings → External services."
 msgstr ""
 
-#: src/Admin/Admin.php:202
+#: src/Admin/Admin.php:255
 msgid "Settings saved, but some values were not accepted:"
 msgstr ""
 
-#: src/Admin/Admin.php:203
+#: src/Admin/Admin.php:256
 msgid "There is no completed scan to export yet."
 msgstr ""
 
-#: src/Admin/Admin.php:204
+#: src/Admin/Admin.php:257
 msgid "Status updated."
 msgstr ""
 
-#: src/Admin/Admin.php:205
+#: src/Admin/Admin.php:258
 msgid "Selected findings were updated."
 msgstr ""
 
-#: src/Admin/Admin.php:206
+#: src/Admin/Admin.php:259
 msgid "The baseline was approved."
 msgstr ""
 
-#: src/Admin/Admin.php:207
+#: src/Admin/Admin.php:260
 msgid "Test notification sent."
 msgstr ""
 
-#: src/Admin/Admin.php:208
+#: src/Admin/Admin.php:261
 msgid "Test notification failed."
 msgstr ""
 
-#: src/Admin/Admin.php:209
+#: src/Admin/Admin.php:262
 msgid "Item not found."
 msgstr ""
 
-#: src/Admin/Admin.php:261
+#: src/Admin/Admin.php:315
 msgid "You do not have permission to do this."
 msgstr ""
 
+#. translators: %s: target IDs.
+#: src/Admin/Admin.php:412
+#, php-format
+msgid "Not approved: %s."
+msgstr ""
+
 #. translators: %d: number of files.
-#: src/Admin/Admin.php:347
+#: src/Admin/Admin.php:415
 #, php-format
 msgid "%d file recorded."
 msgid_plural "%d files recorded."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Admin/BaselinePanel.php:83
-msgid "The baseline is the list of fingerprints (sha256 hashes) of every file in your scan targets, recorded as the trusted state. Each scan compares the current files with it and reports added, changed and deleted files as \"File integrity\" findings. The first scan of a target records the baseline automatically."
+#. translators: %s: target IDs.
+#: src/Admin/Admin.php:418
+#, php-format
+msgid "Not approved because some directories could not be read: %s."
 msgstr ""
 
 #: src/Admin/BaselinePanel.php:84
+msgid "The baseline is the list of fingerprints (sha256 hashes) of every file in your scan targets, recorded as the trusted state. Each scan compares the current files with it and reports added, changed and deleted files as \"File integrity\" findings. The first scan of a target records the baseline automatically."
+msgstr ""
+
+#: src/Admin/BaselinePanel.php:85
 msgid "When you changed files yourself (theme update, deployment, edits):"
 msgstr ""
 
-#: src/Admin/BaselinePanel.php:86
+#: src/Admin/BaselinePanel.php:87
 msgid "Run a scan so that the latest files are recorded."
 msgstr ""
 
-#: src/Admin/BaselinePanel.php:87
+#: src/Admin/BaselinePanel.php:88
 msgid "Check that the reported files are the ones you changed."
 msgstr ""
 
-#: src/Admin/BaselinePanel.php:88
+#: src/Admin/BaselinePanel.php:89
 msgid "Approve the current state. The changes are marked as resolved and are no longer reported."
 msgstr ""
 
-#: src/Admin/BaselinePanel.php:90
+#: src/Admin/BaselinePanel.php:91
 msgid "Do not approve changes you do not recognize. They may be signs of tampering; check the findings first."
 msgstr ""
 
-#: src/Admin/BaselinePanel.php:105
+#: src/Admin/BaselinePanel.php:106
 msgid "File baseline"
 msgstr ""
 
-#: src/Admin/BaselinePanel.php:109
+#: src/Admin/BaselinePanel.php:110
 msgid "never"
 msgstr ""
 
 #. translators: %s: date.
-#: src/Admin/BaselinePanel.php:111
+#: src/Admin/BaselinePanel.php:112
 #, php-format
 msgid "Approval uses the file state recorded by the last scan (%s). If you deployed after that, run a scan first."
 msgstr ""
 
-#: src/Admin/BaselinePanel.php:115
+#: src/Admin/BaselinePanel.php:116
 msgid "Target"
 msgstr ""
 
-#: src/Admin/BaselinePanel.php:115
+#: src/Admin/BaselinePanel.php:116
 #: src/Admin/Ui.php:81
 msgid "Files"
 msgstr ""
 
-#: src/Admin/BaselinePanel.php:115
+#: src/Admin/BaselinePanel.php:116
 msgid "Unapproved changes"
 msgstr ""
 
-#: src/Admin/BaselinePanel.php:115
+#: src/Admin/BaselinePanel.php:116
 msgid "Approved"
 msgstr ""
 
-#: src/Admin/BaselinePanel.php:132
+#: src/Admin/BaselinePanel.php:133
 msgid "first scan"
 msgstr ""
 
-#: src/Admin/BaselinePanel.php:134
+#: src/Admin/BaselinePanel.php:135
 msgid "Not yet (recorded on the next scan)"
 msgstr ""
 
-#: src/Admin/BaselinePanel.php:138
+#: src/Admin/BaselinePanel.php:141
 msgid "Approve current state"
 msgstr ""
 
-#: src/Admin/BaselinePanel.php:143
+#. translators: %s: directories.
+#: src/Admin/BaselinePanel.php:146
+#, php-format
+msgid "Cannot be approved: the last scan could not read %s. Fix the permissions and scan again."
+msgstr ""
+
+#: src/Admin/BaselinePanel.php:155
 msgid "Approve all targets"
 msgstr ""
 
 #. translators: %s: number of files.
-#: src/Admin/BaselinePanel.php:167
+#: src/Admin/BaselinePanel.php:179
 #, php-format
 msgid "%s file differs from the approved baseline."
 msgid_plural "%s files differ from the approved baseline."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Admin/BaselinePanel.php:172
+#: src/Admin/BaselinePanel.php:184
 msgid "If you changed these files yourself, approve them. If you do not recognize the changes, check them before approving."
 msgstr ""
 
-#: src/Admin/BaselinePanel.php:174
+#: src/Admin/BaselinePanel.php:186
 msgid "Review changes"
 msgstr ""
 
-#: src/Admin/BaselinePanel.php:175
+#: src/Admin/BaselinePanel.php:187
 msgid "Approve these changes"
 msgstr ""
 
-#: src/Admin/BaselinePanel.php:176
+#: src/Admin/BaselinePanel.php:188
 msgid "What is the baseline?"
 msgstr ""
 
-#: src/Admin/BaselinePanel.php:192
+#: src/Admin/BaselinePanel.php:204
 msgid "Approve the current files as the trusted baseline?"
 msgstr ""
 
@@ -1022,61 +1058,61 @@ msgstr ""
 msgid "Reads composer.lock and package-lock.json in themes and registered directories and looks up known vulnerabilities on OSV.dev. Only package names and versions are sent."
 msgstr ""
 
-#: src/Checks/Dependencies/DependencyCheck.php:92
+#: src/Checks/Dependencies/DependencyCheck.php:94
 msgid "Lock file could not be read"
 msgstr ""
 
-#: src/Checks/Dependencies/DependencyCheck.php:92
+#: src/Checks/Dependencies/DependencyCheck.php:94
 msgid "The file is unreadable, too large or not valid JSON, so its packages were not checked."
 msgstr ""
 
 #. translators: %s: error message.
-#: src/Checks/Dependencies/DependencyCheck.php:114
+#: src/Checks/Dependencies/DependencyCheck.php:116
 #, php-format
 msgid "OSV.dev could not be reached: %s. Previous results are kept."
 msgstr ""
 
-#: src/Checks/Dependencies/DependencyCheck.php:116
+#: src/Checks/Dependencies/DependencyCheck.php:118
 msgid "Dependencies could not be checked"
 msgstr ""
 
 #. translators: %d: number of vulnerabilities.
-#: src/Checks/Dependencies/DependencyCheck.php:176
+#: src/Checks/Dependencies/DependencyCheck.php:178
 #, php-format
 msgid "and %d more"
 msgstr ""
 
 #. translators: 1: package, 2: version, 3: command.
-#: src/Checks/Dependencies/DependencyCheck.php:185
+#: src/Checks/Dependencies/DependencyCheck.php:187
 #, php-format
 msgid "Update %1$s to %2$s or later (e.g. %3$s), deploy the result and run the scan again."
 msgstr ""
 
 #. translators: 1: package, 2: command.
-#: src/Checks/Dependencies/DependencyCheck.php:188
+#: src/Checks/Dependencies/DependencyCheck.php:190
 #, php-format
 msgid "Update %1$s to a version without these vulnerabilities (e.g. %2$s), or replace it if no fix exists."
 msgstr ""
 
 #. translators: 1: number, 2: list of vulnerabilities.
-#: src/Checks/Dependencies/DependencyCheck.php:192
+#: src/Checks/Dependencies/DependencyCheck.php:194
 #, php-format
 msgid "%1$d known vulnerability: %2$s"
 msgid_plural "%1$d known vulnerabilities: %2$s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Checks/Dependencies/DependencyCheck.php:197
+#: src/Checks/Dependencies/DependencyCheck.php:199
 msgid "(Development dependency, installed on this server.)"
 msgstr ""
 
 #. translators: 1: package, 2: version.
-#: src/Checks/Dependencies/DependencyCheck.php:208
+#: src/Checks/Dependencies/DependencyCheck.php:210
 #, php-format
 msgid "Vulnerable package: %1$s %2$s"
 msgstr ""
 
-#: src/Checks/Dependencies/DependencyCheck.php:246
+#: src/Checks/Dependencies/DependencyCheck.php:248
 msgid "Run the scan again later. You can disable this check in the settings."
 msgstr ""
 
@@ -1089,6 +1125,7 @@ msgid "Looks for .php, .phtml and other executable files in wp-content/uploads, 
 msgstr ""
 
 #: src/Checks/Environment/UploadsPhpCheck.php:101
+#: src/Checks/Environment/UploadsPhpCheck.php:172
 msgid "Uploads directory could not be read"
 msgstr ""
 
@@ -1096,19 +1133,37 @@ msgstr ""
 msgid "Check the permissions of wp-content/uploads."
 msgstr ""
 
-#: src/Checks/Environment/UploadsPhpCheck.php:151
+#: src/Checks/Environment/UploadsPhpCheck.php:142
+msgid "Uploads check stopped at the file limit"
+msgstr ""
+
+#. translators: %d: number of files.
+#: src/Checks/Environment/UploadsPhpCheck.php:144
+#, php-format
+msgid "Only the first %d files in the uploads directory were checked."
+msgstr ""
+
+#: src/Checks/Environment/UploadsPhpCheck.php:145
+msgid "Raise the file limit in Settings → Checks, or remove old files from the uploads directory."
+msgstr ""
+
+#: src/Checks/Environment/UploadsPhpCheck.php:174
+msgid "Check the permissions of this directory. Files in it were not checked, so earlier results are kept."
+msgstr ""
+
+#: src/Checks/Environment/UploadsPhpCheck.php:196
 msgid "PHP file in uploads"
 msgstr ""
 
-#: src/Checks/Environment/UploadsPhpCheck.php:151
+#: src/Checks/Environment/UploadsPhpCheck.php:196
 msgid "Executable file in uploads"
 msgstr ""
 
-#: src/Checks/Environment/UploadsPhpCheck.php:152
+#: src/Checks/Environment/UploadsPhpCheck.php:197
 msgid "The uploads directory should only contain media. Executable files here are a common sign of a compromised site or of an insecure upload form."
 msgstr ""
 
-#: src/Checks/Environment/UploadsPhpCheck.php:153
+#: src/Checks/Environment/UploadsPhpCheck.php:198
 msgid "Inspect the file and delete it if it is not required. Also block PHP execution in uploads with server configuration."
 msgstr ""
 
@@ -1120,79 +1175,79 @@ msgstr ""
 msgid "Checks WP_DEBUG, WP_DEBUG_DISPLAY, debug.log, wp-config.php permissions and the built-in file editor."
 msgstr ""
 
-#: src/Checks/Environment/WpConfigCheck.php:99
+#: src/Checks/Environment/WpConfigCheck.php:100
 msgid "Debug messages are shown to visitors"
 msgstr ""
 
-#: src/Checks/Environment/WpConfigCheck.php:99
+#: src/Checks/Environment/WpConfigCheck.php:100
 msgid "WP_DEBUG is on and WP_DEBUG_DISPLAY is not off, so PHP notices and errors appear on pages and reveal file paths."
 msgstr ""
 
-#: src/Checks/Environment/WpConfigCheck.php:99
+#: src/Checks/Environment/WpConfigCheck.php:100
 msgid "Set define( 'WP_DEBUG', false ) on production, or at least define( 'WP_DEBUG_DISPLAY', false )."
 msgstr ""
 
-#: src/Checks/Environment/WpConfigCheck.php:101
+#: src/Checks/Environment/WpConfigCheck.php:102
 msgid "WP_DEBUG is enabled"
 msgstr ""
 
-#: src/Checks/Environment/WpConfigCheck.php:101
+#: src/Checks/Environment/WpConfigCheck.php:102
 msgid "Debug mode is on. It is meant for development and can slow the site and fill the log."
 msgstr ""
 
-#: src/Checks/Environment/WpConfigCheck.php:101
+#: src/Checks/Environment/WpConfigCheck.php:102
 msgid "Set define( 'WP_DEBUG', false ) on production."
 msgstr ""
 
-#: src/Checks/Environment/WpConfigCheck.php:114
+#: src/Checks/Environment/WpConfigCheck.php:115
 msgid "debug.log exists"
 msgstr ""
 
-#: src/Checks/Environment/WpConfigCheck.php:116
+#: src/Checks/Environment/WpConfigCheck.php:117
 msgid "A debug log is stored inside wp-content, where it may be downloadable. Logs can contain paths, queries and personal data."
 msgstr ""
 
-#: src/Checks/Environment/WpConfigCheck.php:117
+#: src/Checks/Environment/WpConfigCheck.php:118
 msgid "A debug log file exists."
 msgstr ""
 
-#: src/Checks/Environment/WpConfigCheck.php:118
+#: src/Checks/Environment/WpConfigCheck.php:119
 msgid "Delete the log when it is no longer needed, and set WP_DEBUG_LOG to a path outside the web root."
 msgstr ""
 
-#: src/Checks/Environment/WpConfigCheck.php:131
+#: src/Checks/Environment/WpConfigCheck.php:142
 msgid "Set the permissions to 400 or 440 (600/640 if your host requires write access)."
 msgstr ""
 
 #. translators: %s: permissions such as 666.
-#: src/Checks/Environment/WpConfigCheck.php:134
+#: src/Checks/Environment/WpConfigCheck.php:145
 #, php-format
 msgid "wp-config.php has permissions %s. Anyone on the server can change it."
 msgstr ""
 
-#: src/Checks/Environment/WpConfigCheck.php:135
+#: src/Checks/Environment/WpConfigCheck.php:146
 msgid "wp-config.php is world-writable"
 msgstr ""
 
 #. translators: %s: permissions such as 644.
-#: src/Checks/Environment/WpConfigCheck.php:138
+#: src/Checks/Environment/WpConfigCheck.php:149
 #, php-format
 msgid "wp-config.php has permissions %s. On shared servers other accounts may be able to read your database password."
 msgstr ""
 
-#: src/Checks/Environment/WpConfigCheck.php:139
+#: src/Checks/Environment/WpConfigCheck.php:150
 msgid "wp-config.php is readable by everyone on the server"
 msgstr ""
 
-#: src/Checks/Environment/WpConfigCheck.php:145
+#: src/Checks/Environment/WpConfigCheck.php:156
 msgid "Theme and plugin file editor is enabled"
 msgstr ""
 
-#: src/Checks/Environment/WpConfigCheck.php:145
+#: src/Checks/Environment/WpConfigCheck.php:156
 msgid "Administrators can edit PHP files from the dashboard. A stolen admin account can then run arbitrary code."
 msgstr ""
 
-#: src/Checks/Environment/WpConfigCheck.php:145
+#: src/Checks/Environment/WpConfigCheck.php:156
 msgid "Add define( 'DISALLOW_FILE_EDIT', true ); to wp-config.php."
 msgstr ""
 
@@ -1597,51 +1652,51 @@ msgstr ""
 msgid "Detects files added, changed or deleted since the approved baseline (sha256)."
 msgstr ""
 
-#: src/Checks/Files/IntegrityCheck.php:72
+#: src/Checks/Files/IntegrityCheck.php:74
 msgid "File could not be read"
 msgstr ""
 
-#: src/Checks/Files/IntegrityCheck.php:73
+#: src/Checks/Files/IntegrityCheck.php:75
 msgid "The file exists but PHP cannot read it, so changes cannot be detected."
 msgstr ""
 
-#: src/Checks/Files/IntegrityCheck.php:74
+#: src/Checks/Files/IntegrityCheck.php:76
 msgid "Check the file permissions."
 msgstr ""
 
-#: src/Checks/Files/IntegrityCheck.php:96
+#: src/Checks/Files/IntegrityCheck.php:98
 msgid "New file"
 msgstr ""
 
-#: src/Checks/Files/IntegrityCheck.php:97
+#: src/Checks/Files/IntegrityCheck.php:99
 msgid "This file was added after the baseline was approved."
 msgstr ""
 
-#: src/Checks/Files/IntegrityCheck.php:98
+#: src/Checks/Files/IntegrityCheck.php:100
 msgid "If you deployed this file, approve the current state as the baseline. Otherwise inspect it and remove it if it is not yours."
 msgstr ""
 
-#: src/Checks/Files/IntegrityCheck.php:116
+#: src/Checks/Files/IntegrityCheck.php:118
 msgid "File changed"
 msgstr ""
 
-#: src/Checks/Files/IntegrityCheck.php:117
+#: src/Checks/Files/IntegrityCheck.php:119
 msgid "The contents of this file differ from the approved baseline."
 msgstr ""
 
-#: src/Checks/Files/IntegrityCheck.php:118
+#: src/Checks/Files/IntegrityCheck.php:120
 msgid "If the change was a planned deployment, approve the current state as the baseline. Otherwise compare the file with your source and restore it."
 msgstr ""
 
-#: src/Checks/Files/IntegrityCheck.php:159
+#: src/Checks/Files/IntegrityCheck.php:164
 msgid "File deleted"
 msgstr ""
 
-#: src/Checks/Files/IntegrityCheck.php:160
+#: src/Checks/Files/IntegrityCheck.php:165
 msgid "This file is in the baseline but no longer exists."
 msgstr ""
 
-#: src/Checks/Files/IntegrityCheck.php:161
+#: src/Checks/Files/IntegrityCheck.php:166
 msgid "If you removed it on purpose, approve the current state as the baseline."
 msgstr ""
 
@@ -1769,38 +1824,38 @@ msgid "Checks whether the MySQL or MariaDB version still receives security updat
 msgstr ""
 
 #. translators: 1: MySQL or MariaDB, 2: version.
-#: src/Checks/Php/DatabaseVersionCheck.php:109
+#: src/Checks/Php/DatabaseVersionCheck.php:112
 #, php-format
 msgid "%1$s %2$s is no longer supported"
 msgstr ""
 
 #. translators: %s: date.
-#: src/Checks/Php/DatabaseVersionCheck.php:112
+#: src/Checks/Php/DatabaseVersionCheck.php:115
 #, php-format
 msgid "Security support ended on %s."
 msgstr ""
 
-#: src/Checks/Php/DatabaseVersionCheck.php:113
+#: src/Checks/Php/DatabaseVersionCheck.php:116
 msgid "Security support has ended."
 msgstr ""
 
-#: src/Checks/Php/DatabaseVersionCheck.php:114
+#: src/Checks/Php/DatabaseVersionCheck.php:117
 msgid "Ask your hosting provider to move the database to a supported version."
 msgstr ""
 
 #. translators: 1: MySQL or MariaDB, 2: version.
-#: src/Checks/Php/DatabaseVersionCheck.php:124
+#: src/Checks/Php/DatabaseVersionCheck.php:127
 #, php-format
 msgid "%1$s %2$s support ends soon"
 msgstr ""
 
 #. translators: 1: date, 2: days.
-#: src/Checks/Php/DatabaseVersionCheck.php:126
+#: src/Checks/Php/DatabaseVersionCheck.php:129
 #, php-format
 msgid "Security support ends on %1$s (in %2$d days)."
 msgstr ""
 
-#: src/Checks/Php/DatabaseVersionCheck.php:127
+#: src/Checks/Php/DatabaseVersionCheck.php:130
 msgid "Plan a database upgrade with your hosting provider."
 msgstr ""
 
@@ -1976,7 +2031,7 @@ msgstr ""
 msgid "Update to the latest patch release of a supported PHP version."
 msgstr ""
 
-#: src/Findings/FindingRepository.php:210
+#: src/Findings/FindingRepository.php:215
 msgid "Baseline approved."
 msgstr ""
 
@@ -2143,7 +2198,11 @@ msgstr ""
 msgid "Connection failed."
 msgstr ""
 
-#: src/Rest/RestController.php:162
+#: src/Rest/RestController.php:108
+msgid "The Keep It Peace database tables are missing. Open a Keep It Peace screen for details."
+msgstr ""
+
+#: src/Rest/RestController.php:184
 msgid "Finding not found."
 msgstr ""
 
@@ -2507,47 +2566,47 @@ msgstr ""
 msgid "This folder is part of WordPress (wp-admin, wp-includes or wp-content such as uploads), which cannot be registered here. Select themes and custom plugins above; uploads are checked automatically."
 msgstr ""
 
-#: src/Scan/Scanner.php:377
+#: src/Scan/Scanner.php:391
 msgid "File limit reached"
 msgstr ""
 
 #. translators: %d: number of files.
-#: src/Scan/Scanner.php:379
+#: src/Scan/Scanner.php:393
 #, php-format
 msgid "Scanning stopped after %d files. Files after that were not checked."
 msgstr ""
 
-#: src/Scan/Scanner.php:380
+#: src/Scan/Scanner.php:394
 msgid "Add exclude patterns for generated or vendor directories, or raise the file limit in the settings."
 msgstr ""
 
-#: src/Scan/Scanner.php:549
+#: src/Scan/Scanner.php:580
 msgid "A check could not finish"
 msgstr ""
 
 #. translators: 1: check ID, 2: error message.
-#: src/Scan/Scanner.php:551
+#: src/Scan/Scanner.php:582
 #, php-format
 msgid "The check %1$s stopped with an error: %2$s"
 msgstr ""
 
-#: src/Scan/Scanner.php:552
+#: src/Scan/Scanner.php:583
 msgid "Run the scan again. If the error persists, disable the check and report the problem."
 msgstr ""
 
-#: src/Scan/Scanner.php:575
+#: src/Scan/Scanner.php:606
 msgid "Directory could not be read"
 msgstr ""
 
-#: src/Scan/Scanner.php:577
+#: src/Scan/Scanner.php:608
 msgid "Check the path, permissions and the open_basedir setting. Files in this directory were not checked."
 msgstr ""
 
-#: src/Scan/Scheduler.php:58
+#: src/Scan/Scheduler.php:59
 msgid "Daily"
 msgstr ""
 
-#: src/Scan/Scheduler.php:62
+#: src/Scan/Scheduler.php:63
 msgid "Weekly"
 msgstr ""
 

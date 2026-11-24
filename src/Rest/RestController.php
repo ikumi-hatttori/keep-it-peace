@@ -7,6 +7,7 @@
 
 namespace KeepItPeace\Rest;
 
+use KeepItPeace\Install\Installer;
 use KeepItPeace\Findings\FindingActions;
 use KeepItPeace\Findings\FindingStatus;
 use KeepItPeace\Plugin;
@@ -99,6 +100,15 @@ class RestController {
 	}
 
 	/**
+	 * Error returned while the database tables are missing.
+	 *
+	 * @return \WP_Error
+	 */
+	private static function not_ready(): \WP_Error {
+		return new \WP_Error( 'keepitpeace_not_installed', __( 'The Keep It Peace database tables are missing. Open a Keep It Peace screen for details.', 'keep-it-peace' ), array( 'status' => 503 ) );
+	}
+
+	/**
 	 * Permission callback.
 	 *
 	 * @return bool
@@ -110,9 +120,12 @@ class RestController {
 	/**
 	 * Starts (or joins) a manual scan.
 	 *
-	 * @return \WP_REST_Response
+	 * @return \WP_REST_Response|\WP_Error
 	 */
 	public function start_scan() {
+		if ( ! Installer::is_ready() ) {
+			return self::not_ready();
+		}
 		$scan = $this->plugin->scanner()->start( 'manual', get_current_user_id() );
 		return rest_ensure_response(
 			array(
@@ -126,18 +139,24 @@ class RestController {
 	/**
 	 * Runs one slice.
 	 *
-	 * @return \WP_REST_Response
+	 * @return \WP_REST_Response|\WP_Error
 	 */
 	public function step() {
+		if ( ! Installer::is_ready() ) {
+			return self::not_ready();
+		}
 		return rest_ensure_response( $this->plugin->scanner()->run_slice( Scanner::time_budget( 'manual' ) ) );
 	}
 
 	/**
 	 * Current status.
 	 *
-	 * @return \WP_REST_Response
+	 * @return \WP_REST_Response|\WP_Error
 	 */
 	public function status() {
+		if ( ! Installer::is_ready() ) {
+			return self::not_ready();
+		}
 		$running = $this->plugin->scans()->get_running();
 		$latest  = $this->plugin->scans()->latest_completed();
 		return rest_ensure_response(
@@ -157,6 +176,9 @@ class RestController {
 	 * @return \WP_REST_Response|\WP_Error
 	 */
 	public function set_finding_status( $request ) {
+		if ( ! Installer::is_ready() ) {
+			return self::not_ready();
+		}
 		$result = FindingActions::change_status( $this->plugin, (int) $request['id'], (string) $request['status'], (string) $request['note'] );
 		if ( null === $result ) {
 			return new \WP_Error( 'keepitpeace_not_found', __( 'Finding not found.', 'keep-it-peace' ), array( 'status' => 404 ) );

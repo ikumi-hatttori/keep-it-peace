@@ -92,6 +92,7 @@ class WpConfigCheck extends AbstractCheck {
 	 */
 	public function run( ScanContext $context, array $cursor ): CheckResult {
 		$findings = array();
+		$keep     = array();
 		$debug    = defined( 'WP_DEBUG' ) && WP_DEBUG;
 		$display  = ! defined( 'WP_DEBUG_DISPLAY' ) || WP_DEBUG_DISPLAY;
 
@@ -120,12 +121,22 @@ class WpConfigCheck extends AbstractCheck {
 					'meta'           => array( 'size' => (int) filesize( $log ) ),
 				)
 			);
+		} elseif ( ! PathGuard::is_within_open_basedir( $log ) ) {
+			// A log outside open_basedir cannot be checked; keep an earlier finding about it.
+			$keep[] = 'wp_config.debug_log';
 		}
 
 		$config = self::config_path();
-		if ( null !== $config && 'WIN' !== strtoupper( substr( PHP_OS, 0, 3 ) ) ) {
+		if ( null === $config ) {
+			// Not reachable (e.g. outside open_basedir): permissions cannot be checked this time.
+			$keep[] = 'wp_config.permissions_writable';
+			$keep[] = 'wp_config.permissions_readable';
+		} elseif ( 'WIN' !== strtoupper( substr( PHP_OS, 0, 3 ) ) ) {
 			$perms = fileperms( $config );
-			if ( false !== $perms ) {
+			if ( false === $perms ) {
+				$keep[] = 'wp_config.permissions_writable';
+				$keep[] = 'wp_config.permissions_readable';
+			} else {
 				$perms = $perms & 0777;
 				$octal = sprintf( '%03o', $perms );
 				$fix   = __( 'Set the permissions to 400 or 440 (600/640 if your host requires write access).', 'keep-it-peace' );
@@ -145,13 +156,15 @@ class WpConfigCheck extends AbstractCheck {
 			$findings[] = $this->config_finding( 'wp_config.file_edit', Severity::LOW, 'DISALLOW_FILE_EDIT', __( 'Theme and plugin file editor is enabled', 'keep-it-peace' ), __( 'Administrators can edit PHP files from the dashboard. A stolen admin account can then run arbitrary code.', 'keep-it-peace' ), __( "Add define( 'DISALLOW_FILE_EDIT', true ); to wp-config.php.", 'keep-it-peace' ) );
 		}
 
-		return CheckResult::complete(
+		$result             = CheckResult::complete(
 			$findings,
 			array(
 				'wp_debug'         => $debug,
 				'wp_debug_display' => $debug && $display,
 			)
 		);
+		$result->keep_rules = $keep;
+		return $result;
 	}
 
 	/**

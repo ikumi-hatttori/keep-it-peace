@@ -91,7 +91,7 @@ add_filter( 'keepitpeace_checks', function ( array $checks ) {
 - **Checks run in the order they are registered.** Registering the same ID again replaces the earlier check (this also works for the built-in checks).
 - The `$data` in `CheckResult::complete( $findings, $data )` is stored in the scan's `summary.data[check ID]` and is available to the dashboard, notifications and the export.
 - For **long-running work**, check `$context->has_time()` and, when time is up, return `CheckResult::partial( $findings, $cursor, $progress )`. The next request continues with `run( $context, $cursor )`. `$cursor` is stored as JSON, so use only arrays, strings and numbers.
-- When the check cannot decide (for example an external API failed), call `$context->keep( $this->get_id() )` so that existing findings are not marked as resolved.
+- When the check cannot decide (for example an external API failed), call `$context->keep( $this->get_id() )` so that existing findings are not marked as resolved. To keep the findings of a single file or URL only (for example a file that could not be read or was too large to analyze), call `$context->keep_target( $this->get_id(), $scope, $target )`. Never report "nothing found" for something you could not examine: it resolves earlier findings.
 - If the check throws an exception, only that check stops and an Info finding "A check could not finish" is recorded. The rest of the scan continues.
 
 ### 2.2 Findings (`Finding`)
@@ -150,6 +150,8 @@ class TodoCheck extends AbstractFileCheck {
 | `end_target( $target, $context )` | After the target has been walked (for example, to report deleted files) |
 
 A walk can be split across several requests, so `begin_target` and `end_target` may be called in different requests. If you need state across a target, store it in the database or an option, not in object properties.
+
+Directories that could not be read are reported by the scanner, and the target's findings are not auto-resolved in that scan. In `end_target()`, `$target->unreadable_dirs` lists them ('.' = the target root): files below them were not seen, so do not report them as deleted. Files that cannot be read are passed to `analyze_file()` with `$file->readable === false`; their earlier findings are kept automatically.
 
 Main members of `FileInfo`: `path`, `rel_path`, `basename`, `extension`, `size`, `mtime`, `perms`, `is_php()`, `hash()`, `contents( $max_bytes )`, `head( $length )`. File contents and sha256 are shared between checks.
 
@@ -321,7 +323,7 @@ Api::export_scan( $scan_id = null );     // array|null (null = the latest comple
 Api::export_scan_json( $scan_id = null, JSON_PRETTY_PRINT ); // string|null
 Api::get_latest_scan();                  // Scan|null
 Api::get_findings( array( 'status' => array( 'new' ), 'severity' => 4, 'category' => 'theme', 'per_page' => 50 ) ); // Finding[]
-Api::start_scan( 'myaddon' );            // Scan ID. The scan continues on WP-Cron
+Api::start_scan( 'myaddon' );            // Scan ID (0 while the database tables are missing). The scan continues on WP-Cron
 Api::get_settings();                     // Settings (dot notation, e.g. $settings->get( 'channels.email.recipients' ))
 ```
 

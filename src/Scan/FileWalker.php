@@ -51,17 +51,20 @@ class FileWalker {
 	 *
 	 * @param array    $cursor   Cursor from the previous call (empty to start).
 	 * @param callable $on_file  function( FileInfo $file ): void.
-	 * @param callable $on_error function( string $rel_dir, string $reason ): void.
+	 * @param callable $on_error function( string $rel_dir, string $reason ): void. Called once per directory that could not be listed.
 	 * @param callable $has_time function(): bool.
-	 * @return array{cursor:array,done:bool,limited:bool,count:int}
+	 * @return array{cursor:array,done:bool,limited:bool,count:int,unreadable:string[]} unreadable: directories that could not be
+	 *         listed during the whole traversal ('.' = the root). Files below them were not seen, so callers must not treat
+	 *         them as deleted or resolve findings about them.
 	 */
 	public function walk( array $cursor, callable $on_file, callable $on_error, callable $has_time ): array {
 		if ( empty( $cursor ) ) {
 			$cursor = array(
-				'stack'  => array( '' ),
-				'dir'    => null,
-				'offset' => 0,
-				'count'  => 0,
+				'stack'      => array( '' ),
+				'dir'        => null,
+				'offset'     => 0,
+				'count'      => 0,
+				'unreadable' => array(),
 			);
 		}
 
@@ -79,7 +82,8 @@ class FileWalker {
 
 			$entries = $this->list_directory( $abs_dir, $rel_dir, $on_error );
 			if ( null === $entries ) {
-				$cursor['dir'] = null;
+				$cursor['unreadable'][] = '' === $rel_dir ? '.' : $rel_dir;
+				$cursor['dir']          = null;
 				continue;
 			}
 
@@ -172,10 +176,11 @@ class FileWalker {
 	 */
 	private function result( array $cursor, bool $done, bool $limited ): array {
 		return array(
-			'cursor'  => $cursor,
-			'done'    => $done,
-			'limited' => $limited,
-			'count'   => (int) $cursor['count'],
+			'cursor'     => $cursor,
+			'done'       => $done,
+			'limited'    => $limited,
+			'count'      => (int) $cursor['count'],
+			'unreadable' => array_values( array_unique( array_map( 'strval', (array) ( $cursor['unreadable'] ?? array() ) ) ) ),
 		);
 	}
 }

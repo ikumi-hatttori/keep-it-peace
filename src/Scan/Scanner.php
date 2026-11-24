@@ -12,6 +12,7 @@ use KeepItPeace\Findings\Finding;
 use KeepItPeace\Findings\FindingLifecycle;
 use KeepItPeace\Findings\ScanDiff;
 use KeepItPeace\Findings\Severity;
+use KeepItPeace\Install\Installer;
 use KeepItPeace\Plugin;
 use KeepItPeace\Settings\Settings;
 
@@ -136,6 +137,13 @@ class Scanner {
 	 * @return array{status:string,scan_id:int,progress:int}
 	 */
 	public function run_slice( float $budget ): array {
+		if ( ! Installer::is_ready() ) {
+			return array(
+				'status'   => 'not_ready',
+				'scan_id'  => 0,
+				'progress' => 0,
+			);
+		}
 		$lock = new ScanLock();
 		if ( ! $lock->acquire( (int) ceil( $budget ) + 120 ) ) {
 			$running = $this->plugin->scans()->get_running();
@@ -227,7 +235,7 @@ class Scanner {
 		}
 
 		if ( $context->keep ) {
-			$state['keep'] = array_merge( (array) $state['keep'], $context->keep );
+			$state['keep'] = array_values( array_unique( array_merge( (array) $state['keep'], $context->keep ), SORT_REGULAR ) );
 		}
 		$progress = (int) floor( ( $state['step'] + (float) $state['step_progress'] ) / max( 1, $total ) * 100 );
 
@@ -331,6 +339,7 @@ class Scanner {
 				if ( PathGuard::OK !== $status ) {
 					$this->store( $context->scan, array( $this->unreadable_finding( $target, '', $status ) ) );
 					$state['keep_scopes'][] = $target->id;
+					UnreadableDirs::set( $target->id, array( '.' ) );
 					++$cursor['target'];
 					continue;
 				}
@@ -347,6 +356,10 @@ class Scanner {
 				(array) $cursor['walker'],
 				static function ( FileInfo $file ) use ( $active, $target, $context, $scanner, &$state ) {
 					foreach ( $active as $check ) {
+						if ( ! $file->readable ) {
+							// Nothing can be detected in an unreadable file; keep what was found before.
+							$context->keep_target( $check->get_id(), $target->id, $file->rel_path );
+						}
 						$scanner->store( $context->scan, $scanner->safe_call( $check, 'analyze_file', array( $file, $target, $context ), $state ) );
 					}
 				},
@@ -360,6 +373,7 @@ class Scanner {
 			if ( ! $result['done'] ) {
 				break;
 			}
+			self::apply_unreadable( $target, $result['unreadable'], $state );
 			if ( $result['limited'] ) {
 				$state['keep_scopes'][] = $target->id;
 				$this->store(
@@ -401,6 +415,23 @@ class Scanner {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Applies the unreadable directories of a finished walk. Files below them were not seen, so the
+	 * target is treated like an unreadable root: its findings are not auto-resolved, end_target()
+	 * checks skip those paths, and the baseline cannot be approved until they can be read.
+	 *
+	 * @param ScanTarget $target     Target.
+	 * @param string[]   $unreadable Unreadable directories ('.' = root).
+	 * @param array      $state      Scan state (by reference).
+	 */
+	public static function apply_unreadable( ScanTarget $target, array $unreadable, array &$state ): void {
+		$target->unreadable_dirs = $unreadable;
+		UnreadableDirs::set( $target->id, $unreadable );
+		if ( $unreadable ) {
+			$state['keep_scopes'][] = $target->id;
+		}
 	}
 
 	/**

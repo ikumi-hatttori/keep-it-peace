@@ -118,6 +118,39 @@ class FileIndexRepository {
 	}
 
 	/**
+	 * Marks a file as seen without changing its recorded state (the file exists but could not be read).
+	 *
+	 * @param string $scope   Scope.
+	 * @param string $rel     Relative path.
+	 * @param int    $scan_id Scan.
+	 */
+	public function touch( string $scope, string $rel, int $scan_id ): void {
+		global $wpdb;
+		$wpdb->update( $this->table(), array( 'last_seen_scan_id' => $scan_id ), array( 'path_hash' => self::path_hash( $scope, $rel ) ) );
+	}
+
+	/**
+	 * SQL condition that leaves out paths below directories that could not be read.
+	 *
+	 * @param string[] $exclude_dirs Relative directories.
+	 * @return array{0:string,1:array} SQL fragment and its values.
+	 */
+	private function exclude_clause( array $exclude_dirs ): array {
+		global $wpdb;
+		$sql    = '';
+		$values = array();
+		foreach ( $exclude_dirs as $dir ) {
+			$dir = trim( (string) $dir, '/' );
+			if ( '' === $dir ) {
+				continue;
+			}
+			$sql     .= ' AND rel_path NOT LIKE %s';
+			$values[] = $wpdb->esc_like( $dir ) . '/%';
+		}
+		return array( $sql, $values );
+	}
+
+	/**
 	 * Copies current values to the baseline for one file.
 	 *
 	 * @param string $scope   Scope.
@@ -139,19 +172,23 @@ class FileIndexRepository {
 	/**
 	 * Files of a scope with a baseline that were not seen in the scan (deleted).
 	 *
-	 * @param string $scope   Scope.
-	 * @param int    $scan_id Scan.
-	 * @param int    $limit   Limit.
+	 * @param string   $scope        Scope.
+	 * @param int      $scan_id      Scan.
+	 * @param int      $limit        Limit.
+	 * @param string[] $exclude_dirs Directories that could not be read ('.' = the whole target): their files were not seen.
 	 * @return array Rows with rel_path, baseline_hash.
 	 */
-	public function missing( string $scope, int $scan_id, int $limit ): array {
+	public function missing( string $scope, int $scan_id, int $limit, array $exclude_dirs = array() ): array {
 		global $wpdb;
-		return (array) $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT rel_path, baseline_hash FROM {$this->table()} WHERE scope = %s AND last_seen_scan_id < %d AND baseline_hash IS NOT NULL ORDER BY rel_path LIMIT %d",
-				$scope,
-				$scan_id,
-				$limit
+		if ( in_array( '.', $exclude_dirs, true ) ) {
+			return array();
+		}
+		list( $exclude, $values ) = $this->exclude_clause( $exclude_dirs );
+		// $exclude holds only fixed SQL with %s placeholders; its values are bound by prepare().
+		return (array) $wpdb->get_results( // phpcs:ignore PluginCheck.Security.DirectDB.UnescapedDBParameter
+			$wpdb->prepare( // phpcs:ignore WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber -- Placeholders are generated.
+				"SELECT rel_path, baseline_hash FROM {$this->table()} WHERE scope = %s AND last_seen_scan_id < %d AND baseline_hash IS NOT NULL{$exclude} ORDER BY rel_path LIMIT %d", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Fragment with placeholders.
+				array_merge( array( $scope, $scan_id ), $values, array( $limit ) )
 			)
 		);
 	}
@@ -159,13 +196,22 @@ class FileIndexRepository {
 	/**
 	 * Removes rows of files that disappeared and were never part of the baseline.
 	 *
-	 * @param string $scope   Scope.
-	 * @param int    $scan_id Scan.
+	 * @param string   $scope        Scope.
+	 * @param int      $scan_id      Scan.
+	 * @param string[] $exclude_dirs Directories that could not be read ('.' = the whole target).
 	 */
-	public function purge_unbaselined_missing( string $scope, int $scan_id ): void {
+	public function purge_unbaselined_missing( string $scope, int $scan_id, array $exclude_dirs = array() ): void {
 		global $wpdb;
-		$wpdb->query(
-			$wpdb->prepare( "DELETE FROM {$this->table()} WHERE scope = %s AND last_seen_scan_id < %d AND baseline_hash IS NULL", $scope, $scan_id )
+		if ( in_array( '.', $exclude_dirs, true ) ) {
+			return;
+		}
+		list( $exclude, $values ) = $this->exclude_clause( $exclude_dirs );
+		// $exclude holds only fixed SQL with %s placeholders; its values are bound by prepare().
+		$wpdb->query( // phpcs:ignore PluginCheck.Security.DirectDB.UnescapedDBParameter
+			$wpdb->prepare( // phpcs:ignore WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber -- Placeholders are generated.
+				"DELETE FROM {$this->table()} WHERE scope = %s AND last_seen_scan_id < %d AND baseline_hash IS NULL{$exclude}", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Fragment with placeholders.
+				array_merge( array( $scope, $scan_id ), $values )
+			)
 		);
 	}
 

@@ -88,6 +88,8 @@ class DependencyCheck extends AbstractFileCheck {
 		$contents = $file->contents( self::MAX_LOCKFILE_BYTES );
 		$packages = null === $contents ? null : LockfileParser::parse( $file->basename, $contents );
 		if ( null === $packages ) {
+			// Packages could not be read: keep the vulnerabilities reported for this lock file before.
+			$context->keep_target( $this->get_id(), $target->id, $file->rel_path );
 			return array(
 				$this->notice( $file, $target, 'osv.unreadable', __( 'Lock file could not be read', 'keep-it-peace' ), __( 'The file is unreadable, too large or not valid JSON, so its packages were not checked.', 'keep-it-peace' ) ),
 			);

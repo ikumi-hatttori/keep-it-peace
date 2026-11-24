@@ -10,6 +10,7 @@ namespace KeepItPeace\Cli;
 use KeepItPeace\Export\ReportExporter;
 use KeepItPeace\Findings\FindingStatus;
 use KeepItPeace\Findings\Severity;
+use KeepItPeace\Install\Installer;
 use KeepItPeace\Plugin;
 use KeepItPeace\Scan\Scan;
 
@@ -54,6 +55,7 @@ class Command {
 	 * @param array $assoc_args Options.
 	 */
 	public function scan( $args, $assoc_args ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundBeforeLastUsed -- WP-CLI signature.
+		self::ensure_ready();
 		$plugin  = Plugin::instance();
 		$quiet   = (bool) \WP_CLI::get_config( 'quiet' );
 		$format  = (string) \WP_CLI\Utils\get_flag_value( $assoc_args, 'format', 'table' );
@@ -122,6 +124,7 @@ class Command {
 	 * @param array $assoc_args Options.
 	 */
 	public function status( $args, $assoc_args ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundBeforeLastUsed -- WP-CLI signature.
+		self::ensure_ready();
 		$plugin = Plugin::instance();
 		$latest = $plugin->scans()->latest_completed();
 		$counts = $plugin->findings()->count_open_by_severity();
@@ -195,6 +198,7 @@ class Command {
 	 * @param array $assoc_args Options.
 	 */
 	public function findings( $args, $assoc_args ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundBeforeLastUsed -- WP-CLI signature.
+		self::ensure_ready();
 		$status = (string) \WP_CLI\Utils\get_flag_value( $assoc_args, 'status', 'open' );
 		if ( 'open' === $status ) {
 			$statuses = FindingStatus::open();
@@ -273,6 +277,7 @@ class Command {
 	 * @param array $assoc_args Options.
 	 */
 	public function export( $args, $assoc_args ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundBeforeLastUsed -- WP-CLI signature.
+		self::ensure_ready();
 		$scan_id = \WP_CLI\Utils\get_flag_value( $assoc_args, 'scan', null );
 		$flags   = \WP_CLI\Utils\get_flag_value( $assoc_args, 'pretty', false ) ? JSON_PRETTY_PRINT : 0;
 		$json    = ( new ReportExporter( Plugin::instance() ) )->export_json( null === $scan_id ? null : absint( $scan_id ), $flags );
@@ -335,6 +340,7 @@ class Command {
 	 * @param array $assoc_args Options.
 	 */
 	public function targets( $args, $assoc_args ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundBeforeLastUsed -- WP-CLI signature.
+		self::ensure_ready();
 		$plugin = Plugin::instance();
 		$counts = $plugin->files()->counts();
 		$rows   = array();
@@ -366,5 +372,17 @@ class Command {
 			'by_severity' => $scan->summary['by_severity'] ?? array(),
 			'diff'        => $scan->summary['diff'] ?? array(),
 		);
+	}
+
+	/**
+	 * Stops when the database tables are missing (WP-CLI also retries creating them on load).
+	 */
+	private static function ensure_ready(): void {
+		if ( Installer::is_ready() ) {
+			return;
+		}
+		$error   = Installer::last_error();
+		$details = $error ? ' Missing: ' . implode( ', ', (array) $error['missing'] ) . '. ' . implode( ' ', (array) $error['errors'] ) : '';
+		\WP_CLI::error( 'The Keep It Peace database tables could not be created.' . $details );
 	}
 }

@@ -101,7 +101,9 @@ final class Plugin {
 	 * Registers hooks.
 	 */
 	private function register(): void {
-		Installer::maybe_upgrade();
+		// On init (not plugins_loaded): the installer uses translated strings, and WordPress 6.7+ warns
+		// when translations load earlier. Priority 1 runs before WP-Cron, REST, admin screens and WP-CLI commands.
+		add_action( 'init', array( Installer::class, 'maybe_upgrade' ), 1 );
 		add_action( 'admin_init', array( RuntimeEnvironment::class, 'record' ) );
 		( new Scheduler( $this ) )->register();
 		add_action( 'rest_api_init', array( new RestController( $this ), 'register_routes' ) );

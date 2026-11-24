@@ -62,6 +62,8 @@ class IntegrityCheck extends AbstractFileCheck {
 	public function analyze_file( FileInfo $file, ScanTarget $target, ScanContext $context ): array {
 		$hash = $file->hash();
 		if ( null === $hash ) {
+			// The file still exists: keep its baseline row from being reported as deleted.
+			$context->files->touch( $target->id, $file->rel_path, $context->scan->id );
 			return array(
 				$this->file_finding(
 					$file,
@@ -138,7 +140,10 @@ class IntegrityCheck extends AbstractFileCheck {
 	 */
 	public function end_target( ScanTarget $target, ScanContext $context ): array {
 		$files = $context->files;
-		$files->purge_unbaselined_missing( $target->id, $context->scan->id );
+		// Files below directories that could not be read were not seen: they are neither purged nor
+		// reported as deleted. Deletions elsewhere in the target are still reported.
+		$skip = $target->unreadable_dirs;
+		$files->purge_unbaselined_missing( $target->id, $context->scan->id, $skip );
 
 		if ( ! $files->is_scope_initialized( $target->id ) ) {
 			$files->mark_scope_initialized( $target->id );
@@ -146,7 +151,7 @@ class IntegrityCheck extends AbstractFileCheck {
 		}
 
 		$findings = array();
-		foreach ( $files->missing( $target->id, $context->scan->id, self::MAX_DELETED_FINDINGS ) as $row ) {
+		foreach ( $files->missing( $target->id, $context->scan->id, self::MAX_DELETED_FINDINGS, $skip ) as $row ) {
 			$extension  = strtolower( (string) pathinfo( (string) $row->rel_path, PATHINFO_EXTENSION ) );
 			$findings[] = $this->finding(
 				array(

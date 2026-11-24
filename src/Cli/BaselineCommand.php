@@ -8,6 +8,7 @@
 namespace KeepItPeace\Cli;
 
 use KeepItPeace\Baseline\BaselineActions;
+use KeepItPeace\Install\Installer;
 use KeepItPeace\Plugin;
 
 defined( 'ABSPATH' ) || exit;
@@ -41,6 +42,7 @@ class BaselineCommand {
 	 * @param array $assoc_args Options.
 	 */
 	public function approve( $args, $assoc_args ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundBeforeLastUsed -- WP-CLI signature.
+		self::ensure_ready();
 		$plugin = Plugin::instance();
 		$scopes = array_keys( $plugin->targets()->get_targets( $plugin->settings() ) );
 		$scope  = (string) \WP_CLI\Utils\get_flag_value( $assoc_args, 'scope', '' );
@@ -54,13 +56,34 @@ class BaselineCommand {
 			$scopes = array( $scope );
 		}
 		\WP_CLI::confirm( 'Approve the current files of ' . implode( ', ', $scopes ) . ' as trusted?', $assoc_args );
-		$user  = get_current_user_id();
-		$total = 0;
+		$user     = get_current_user_id();
+		$total    = 0;
+		$approved = 0;
 		foreach ( $scopes as $item ) {
-			$count  = BaselineActions::approve( $plugin, $item, $user );
+			$count = BaselineActions::approve( $plugin, $item, $user );
+			if ( $count < 0 ) {
+				\WP_CLI::warning( sprintf( '%s: not approved, the last scan could not read %s. Fix the permissions and scan again.', $item, implode( ', ', BaselineActions::blocked_dirs( $item ) ) ) );
+				continue;
+			}
+			++$approved;
 			$total += $count;
 			\WP_CLI::log( sprintf( '%s: %d files recorded.', $item, $count ) );
 		}
-		\WP_CLI::success( sprintf( 'Baseline approved (%d files).', $total ) );
+		if ( 0 === $approved ) {
+			\WP_CLI::error( 'Nothing was approved.' );
+		}
+		\WP_CLI::success( sprintf( 'Baseline approved for %d of %d targets (%d files).', $approved, count( $scopes ), $total ) );
+	}
+
+	/**
+	 * Stops when the database tables are missing (WP-CLI also retries creating them on load).
+	 */
+	private static function ensure_ready(): void {
+		if ( Installer::is_ready() ) {
+			return;
+		}
+		$error   = Installer::last_error();
+		$details = $error ? ' Missing: ' . implode( ', ', (array) $error['missing'] ) . '. ' . implode( ' ', (array) $error['errors'] ) : '';
+		\WP_CLI::error( 'The Keep It Peace database tables could not be created.' . $details );
 	}
 }
