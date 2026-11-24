@@ -9,6 +9,7 @@ namespace KeepItPeace\Baseline;
 
 use KeepItPeace\Checks\Files\IntegrityCheck;
 use KeepItPeace\Plugin;
+use KeepItPeace\Scan\UnreadableDirs;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -18,14 +19,29 @@ defined( 'ABSPATH' ) || exit;
 final class BaselineActions {
 
 	/**
+	 * Directories the last scan could not read in a target. While there are any, the target cannot
+	 * be approved: the plugin cannot vouch for files it could not read, and approving would drop
+	 * their baseline rows.
+	 *
+	 * @param string $scope Target ID.
+	 * @return string[]
+	 */
+	public static function blocked_dirs( string $scope ): array {
+		return UnreadableDirs::get( $scope );
+	}
+
+	/**
 	 * Approves a scope.
 	 *
 	 * @param Plugin $plugin  Plugin.
 	 * @param string $scope   Scope (target ID).
 	 * @param int    $user_id User.
-	 * @return int Files in the baseline.
+	 * @return int Files in the baseline, or -1 when approval is blocked (see blocked_dirs()).
 	 */
 	public static function approve( Plugin $plugin, string $scope, int $user_id ): int {
+		if ( self::blocked_dirs( $scope ) ) {
+			return -1;
+		}
 		$files = $plugin->files();
 		$count = $files->approve_scope( $scope, $user_id );
 

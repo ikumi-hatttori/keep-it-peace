@@ -11,6 +11,7 @@ use KeepItPeace\Export\ReportExporter;
 use KeepItPeace\Baseline\BaselineActions;
 use KeepItPeace\Findings\FindingActions;
 use KeepItPeace\Findings\FindingStatus;
+use KeepItPeace\Install\Installer;
 use KeepItPeace\Plugin;
 use KeepItPeace\Scan\CronHealth;
 use KeepItPeace\Scan\Scheduler;
@@ -88,13 +89,60 @@ class Admin {
 		$scans     = new ScansPage( $this->plugin );
 		$settings  = new SettingsPage( $this->plugin );
 
-		$this->hooks[] = add_menu_page( 'Keep It Peace', 'Keep It Peace', $cap, self::SLUG, array( $dashboard, 'render' ), 'dashicons-shield', 80 );
-		$this->hooks[] = add_submenu_page( self::SLUG, __( 'Dashboard', 'keep-it-peace' ), __( 'Dashboard', 'keep-it-peace' ), $cap, self::SLUG, array( $dashboard, 'render' ) );
-		$hook          = add_submenu_page( self::SLUG, __( 'Findings', 'keep-it-peace' ), __( 'Findings', 'keep-it-peace' ), $cap, self::FINDINGS_SLUG, array( $findings, 'render' ) );
+		$this->hooks[] = add_menu_page( 'Keep It Peace', 'Keep It Peace', $cap, self::SLUG, $this->screen( $dashboard ), 'dashicons-shield', 80 );
+		$this->hooks[] = add_submenu_page( self::SLUG, __( 'Dashboard', 'keep-it-peace' ), __( 'Dashboard', 'keep-it-peace' ), $cap, self::SLUG, $this->screen( $dashboard ) );
+		$hook          = add_submenu_page( self::SLUG, __( 'Findings', 'keep-it-peace' ), __( 'Findings', 'keep-it-peace' ), $cap, self::FINDINGS_SLUG, $this->screen( $findings ) );
 		$this->hooks[] = $hook;
-		add_action( 'load-' . $hook, array( $findings, 'load' ) );
-		$this->hooks[] = add_submenu_page( self::SLUG, __( 'Scan history', 'keep-it-peace' ), __( 'Scan history', 'keep-it-peace' ), $cap, self::SCANS_SLUG, array( $scans, 'render' ) );
-		$this->hooks[] = add_submenu_page( self::SLUG, __( 'Settings', 'keep-it-peace' ), __( 'Settings', 'keep-it-peace' ), $cap, self::SETTINGS_SLUG, array( $settings, 'render' ) );
+		add_action(
+			'load-' . $hook,
+			static function () use ( $findings ) {
+				if ( Installer::is_ready() ) {
+					$findings->load();
+				}
+			}
+		);
+		$this->hooks[] = add_submenu_page( self::SLUG, __( 'Scan history', 'keep-it-peace' ), __( 'Scan history', 'keep-it-peace' ), $cap, self::SCANS_SLUG, $this->screen( $scans ) );
+		$this->hooks[] = add_submenu_page( self::SLUG, __( 'Settings', 'keep-it-peace' ), __( 'Settings', 'keep-it-peace' ), $cap, self::SETTINGS_SLUG, $this->screen( $settings ) );
+	}
+
+	/**
+	 * Page callback that renders only the installation notice while the tables are missing.
+	 *
+	 * @param object $page Page object with a render() method.
+	 * @return callable
+	 */
+	private function screen( $page ): callable {
+		return static function () use ( $page ) {
+			if ( ! Installer::is_ready() ) {
+				echo '<div class="wrap kip-wrap"><h1>Keep It Peace</h1></div>';
+				return;
+			}
+			$page->render();
+		};
+	}
+
+	/**
+	 * Explains a failed table installation (shown on our screens only, never during activation).
+	 */
+	private function install_notice(): void {
+		$error = Installer::last_error();
+		?>
+		<div class="notice notice-error kip-install-error">
+			<p><strong><?php esc_html_e( 'Keep It Peace could not create its database tables.', 'keep-it-peace' ); ?></strong></p>
+			<p><?php esc_html_e( 'Scans are disabled until the tables exist. Creating them is retried each time you open a Keep It Peace screen. If this keeps failing, ask your host to check the database user\'s CREATE and ALTER privileges.', 'keep-it-peace' ); ?></p>
+			<?php if ( $error ) : ?>
+				<p>
+					<?php
+					/* translators: %s: table names. */
+					echo esc_html( sprintf( __( 'Missing tables: %s', 'keep-it-peace' ), implode( ', ', (array) $error['missing'] ) ) );
+					?>
+				</p>
+				<?php foreach ( (array) $error['errors'] as $table => $message ) : ?>
+					<p><code><?php echo esc_html( $table . ': ' . $message ); ?></code></p>
+				<?php endforeach; ?>
+			<?php endif; ?>
+		</div>
+		<?php
 	}
 
 	/**
@@ -168,6 +216,10 @@ class Admin {
 		if ( ! $this->is_our_screen() || ! current_user_can( Plugin::capability() ) ) {
 			return;
 		}
+		if ( ! Installer::is_ready() ) {
+			$this->install_notice();
+			return;
+		}
 		if ( RemoteConsent::PENDING === RemoteConsent::status() ) {
 			$this->consent_notice();
 		}
@@ -197,6 +249,7 @@ class Admin {
 		// phpcs:enable
 		$messages = array(
 			'saved'            => array( 'success', __( 'Settings saved.', 'keep-it-peace' ) ),
+			'baseline_blocked' => array( 'error', __( 'The baseline was not approved because the last scan could not read some directories of the target. Fix the permissions, run a scan, then approve.', 'keep-it-peace' ) ),
 			'consent_granted'  => array( 'success', __( 'External vulnerability databases will be used from the next scan.', 'keep-it-peace' ) ),
 			'consent_declined' => array( 'success', __( 'External databases will not be used. You can change this in Settings → External services.', 'keep-it-peace' ) ),
 			'saved_errors'     => array( 'warning', __( 'Settings saved, but some values were not accepted:', 'keep-it-peace' ) ),
@@ -223,7 +276,7 @@ class Admin {
 	 * WP dashboard widget.
 	 */
 	public function dashboard_widget(): void {
-		if ( ! current_user_can( Plugin::capability() ) ) {
+		if ( ! current_user_can( Plugin::capability() ) || ! Installer::is_ready() ) {
 			return;
 		}
 		wp_add_dashboard_widget( 'keepitpeace_summary', 'Keep It Peace', array( new DashboardPage( $this->plugin ), 'render_widget' ) );
@@ -254,13 +307,18 @@ class Admin {
 	/**
 	 * Verifies capability and nonce for admin-post handlers.
 	 *
-	 * @param string $action Nonce action.
+	 * @param string $action      Nonce action.
+	 * @param bool   $uses_tables Whether the handler needs the plugin's tables.
 	 */
-	private function guard( string $action ): void {
+	private function guard( string $action, bool $uses_tables = true ): void {
 		if ( ! current_user_can( Plugin::capability() ) ) {
 			wp_die( esc_html__( 'You do not have permission to do this.', 'keep-it-peace' ), 403 );
 		}
 		check_admin_referer( $action );
+		if ( $uses_tables && ! Installer::is_ready() ) {
+			wp_safe_redirect( self::url( self::SLUG ) );
+			exit;
+		}
 	}
 
 	/**
@@ -285,7 +343,7 @@ class Admin {
 	 * Saves a settings tab.
 	 */
 	public function handle_save_settings(): void {
-		$this->guard( 'keepitpeace_save_settings' );
+		$this->guard( 'keepitpeace_save_settings', false );
 		$tab       = isset( $_POST['tab'] ) ? sanitize_key( wp_unslash( $_POST['tab'] ) ) : 'general';
 		$input     = isset( $_POST['keepitpeace'] ) && is_array( $_POST['keepitpeace'] ) ? wp_unslash( $_POST['keepitpeace'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized per field in SettingsSanitizer.
 		$settings  = $this->plugin->settings();
@@ -339,19 +397,34 @@ class Admin {
 		if ( empty( $scopes ) ) {
 			$this->redirect( $back, 'not_found' );
 		}
-		$total = 0;
+		$total   = 0;
+		$blocked = array();
 		foreach ( $scopes as $item ) {
-			$total += BaselineActions::approve( $this->plugin, $item, get_current_user_id() );
+			$count = BaselineActions::approve( $this->plugin, $item, get_current_user_id() );
+			if ( $count < 0 ) {
+				$blocked[] = $item;
+				continue;
+			}
+			$total += $count;
+		}
+		if ( $blocked && 0 === $total && count( $blocked ) === count( $scopes ) ) {
+			/* translators: %s: target IDs. */
+			$this->redirect( $back, 'baseline_blocked', sprintf( __( 'Not approved: %s.', 'keep-it-peace' ), implode( ', ', $blocked ) ) );
 		}
 		/* translators: %d: number of files. */
-		$this->redirect( $back, 'baseline', sprintf( _n( '%d file recorded.', '%d files recorded.', $total, 'keep-it-peace' ), $total ) );
+		$text = sprintf( _n( '%d file recorded.', '%d files recorded.', $total, 'keep-it-peace' ), $total );
+		if ( $blocked ) {
+			/* translators: %s: target IDs. */
+			$text .= ' ' . sprintf( __( 'Not approved because some directories could not be read: %s.', 'keep-it-peace' ), implode( ', ', $blocked ) );
+		}
+		$this->redirect( $back, 'baseline', $text );
 	}
 
 	/**
 	 * Sends a test notification.
 	 */
 	public function handle_test_notification(): void {
-		$this->guard( 'keepitpeace_test_notification' );
+		$this->guard( 'keepitpeace_test_notification', false );
 		$channel = isset( $_POST['channel'] ) ? sanitize_key( wp_unslash( $_POST['channel'] ) ) : 'email';
 		$result  = $this->plugin->notifier()->send_test( $channel );
 		$url     = self::url( self::SETTINGS_SLUG, array( 'tab' => 'notifications' ) );
@@ -365,7 +438,7 @@ class Admin {
 	 * Hides the Pro notice for the current user.
 	 */
 	public function handle_dismiss_pro(): void {
-		$this->guard( 'keepitpeace_dismiss_pro' );
+		$this->guard( 'keepitpeace_dismiss_pro', false );
 		update_user_meta( get_current_user_id(), 'keepitpeace_hide_pro_notice', 1 );
 		wp_safe_redirect( self::url( self::SETTINGS_SLUG ) );
 		exit;
@@ -375,7 +448,7 @@ class Admin {
 	 * Records the answer to the external database question.
 	 */
 	public function handle_remote_consent(): void {
-		$this->guard( 'keepitpeace_remote_consent' );
+		$this->guard( 'keepitpeace_remote_consent', false );
 		$choice = isset( $_POST['choice'] ) ? sanitize_key( wp_unslash( $_POST['choice'] ) ) : '';
 		if ( ! in_array( $choice, array( 'grant', 'decline' ), true ) ) {
 			$this->redirect( self::url( self::SLUG ), 'not_found' );

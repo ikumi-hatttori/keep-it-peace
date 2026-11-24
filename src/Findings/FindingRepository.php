@@ -131,7 +131,7 @@ class FindingRepository {
 	 *
 	 * @param int      $scan_id   Scan ID.
 	 * @param string[] $check_ids Checks that ran to completion in this scan.
-	 * @param array    $keep        List of [check_id, rule_id] pairs whose findings must be kept ('*' = all rules).
+	 * @param array    $keep        List of [check_id, rule_id] or [check_id, rule_id, scope, target] entries whose findings must be kept ('*' = all rules).
 	 * @param string[] $keep_scopes Target scopes that were not fully scanned.
 	 * @return Finding[] Resolved findings.
 	 */
@@ -179,11 +179,16 @@ class FindingRepository {
 	 * @param array   $keep    Pairs.
 	 * @return bool
 	 */
-	private static function is_kept( Finding $finding, array $keep ): bool {
+	public static function is_kept( Finding $finding, array $keep ): bool {
 		foreach ( $keep as $pair ) {
-			if ( $pair[0] === $finding->check_id && ( '*' === $pair[1] || $pair[1] === $finding->rule_id ) ) {
-				return true;
+			if ( $pair[0] !== $finding->check_id || ( '*' !== $pair[1] && $pair[1] !== $finding->rule_id ) ) {
+				continue;
 			}
+			// Optional scope and target narrow the entry to one file or URL.
+			if ( isset( $pair[2], $pair[3] ) && ( $pair[2] !== $finding->target_scope || $pair[3] !== $finding->target ) ) {
+				continue;
+			}
+			return true;
 		}
 		return false;
 	}

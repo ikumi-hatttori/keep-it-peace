@@ -7,6 +7,7 @@
 
 namespace KeepItPeace\Scan;
 
+use KeepItPeace\Install\Installer;
 use KeepItPeace\Plugin;
 use KeepItPeace\Settings\Settings;
 
@@ -147,6 +148,9 @@ class Scheduler {
 	 * Recurring event: starts a scan.
 	 */
 	public function on_scheduled_scan(): void {
+		if ( ! Installer::is_ready() ) {
+			return;
+		}
 		RuntimeEnvironment::record();
 		$this->plugin->scanner()->start( 'cron' );
 		$this->on_continue();
@@ -156,6 +160,9 @@ class Scheduler {
 	 * Runs one slice and schedules the next one if needed.
 	 */
 	public function on_continue(): void {
+		if ( ! Installer::is_ready() ) {
+			return;
+		}
 		$status = $this->plugin->scanner()->run_slice( Scanner::time_budget( 'cron' ) );
 		if ( in_array( $status['status'], array( Scan::RUNNING, 'busy' ), true ) ) {
 			self::schedule_continuation();

@@ -541,6 +541,10 @@ Api::get_settings(): Settings
 - WP-CLI に `checks` / `targets` を追加。CLI の出力はスクリプトで扱いやすいよう英語のまま
 - Plugin Check の Offloading 検出に掛かるため、共用ドメインの一覧から `herokuapp.com` を外した
 
+**WordPress.org 再審査対応（2026-11-24）**
+- DB バージョン 2：`keepitpeace_files.scope_seen` を `scope(150)` のプレフィックスインデックスにした（列の長さは `target_scope` と揃えて varchar(191) のまま）。テーブルを作成できなかった場合は DB バージョンを記録せず、`keepitpeace_install_error` に記録して Keep It Peace の画面に通知する。スキャン・REST・CLI・管理画面はテーブルがそろうまで動かない
+- 読めなかったディレクトリ・ファイル、上限で打ち切った走査、判定できなかった項目では、既存の検出結果を自動解決しない（`ScanContext::keep_target()`、`keep_scopes`）。読めないディレクトリ配下は削除として報告せず、そのターゲットのベースライン承認はブロックする
+
 ---
 
 ## 6. 決定事項

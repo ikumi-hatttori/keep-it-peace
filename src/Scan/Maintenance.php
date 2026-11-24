@@ -7,6 +7,7 @@
 
 namespace KeepItPeace\Scan;
 
+use KeepItPeace\Install\Installer;
 use KeepItPeace\Plugin;
 
 defined( 'ABSPATH' ) || exit;
@@ -38,6 +39,9 @@ class Maintenance {
 	 * Runs maintenance.
 	 */
 	public function run(): void {
+		if ( ! Installer::is_ready() ) {
+			return;
+		}
 		$this->plugin->scans()->abort_stale( DAY_IN_SECONDS );
 		$this->apply_retention();
 		$this->maybe_send_digest();

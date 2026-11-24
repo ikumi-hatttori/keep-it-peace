@@ -102,6 +102,19 @@ class ScanContext {
 	}
 
 	/**
+	 * Keeps the open findings of a check for one target (e.g. a file that could not be read or
+	 * was too large to analyze), so they are not resolved just because nothing was detected.
+	 *
+	 * @param string $check_id Check ID.
+	 * @param string $scope    Target scope.
+	 * @param string $target   Target (relative file path, URL, ...).
+	 * @param string $rule_id  Rule ID or '*'.
+	 */
+	public function keep_target( string $check_id, string $scope, string $target, string $rule_id = '*' ): void {
+		$this->keep[] = array( $check_id, $rule_id, $scope, $target );
+	}
+
+	/**
 	 * Maximum file size for content analysis, in bytes.
 	 *
 	 * @return int

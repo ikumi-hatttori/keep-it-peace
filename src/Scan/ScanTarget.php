@@ -68,6 +68,13 @@ class ScanTarget {
 	 * @var array
 	 */
 	public $meta = array();
+	/**
+	 * Directories that could not be listed in the current scan ('.' = root). Set by the scanner
+	 * before end_target() is called; files below them were not seen.
+	 *
+	 * @var string[]
+	 */
+	public $unreadable_dirs = array();
 
 	/**
 	 * Constructor.

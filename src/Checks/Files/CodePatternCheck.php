@@ -85,6 +85,8 @@ class CodePatternCheck extends AbstractFileCheck {
 		}
 		$code = $file->contents( $context->max_file_bytes() );
 		if ( null === $code ) {
+			// Too large or unreadable: not analyzed, so earlier findings for this file stay open.
+			$context->keep_target( $this->get_id(), $target->id, $file->rel_path );
 			return array();
 		}
 

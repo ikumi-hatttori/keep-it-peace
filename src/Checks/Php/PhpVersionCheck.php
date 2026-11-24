@@ -184,6 +184,10 @@ class PhpVersionCheck extends AbstractCheck {
 			$keep[] = 'php.eol';
 			$keep[] = 'php.eol_soon';
 		}
+		if ( null === $latest ) {
+			// php.net was not consulted (no consent or request failed): the patch level is unknown.
+			$keep[] = 'php.outdated_patch';
+		}
 
 		$result             = CheckResult::complete( $findings, $status );
 		$result->keep_rules = $keep;

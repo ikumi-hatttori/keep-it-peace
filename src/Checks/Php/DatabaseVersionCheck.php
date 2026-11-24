@@ -86,7 +86,10 @@ class DatabaseVersionCheck extends AbstractCheck {
 		}
 		$parsed = self::parse( $server );
 		if ( '' === $parsed['version'] ) {
-			return CheckResult::complete();
+			// The version could not be determined: keep the earlier result instead of resolving it.
+			$result             = CheckResult::complete();
+			$result->keep_rules = array( '*' );
+			return $result;
 		}
 
 		$cycles  = ( new ReleaseData( $context->http ) )->cycles( $parsed['product'] );

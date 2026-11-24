@@ -121,7 +121,9 @@ class UploadsPhpCheck extends AbstractCheck {
 				}
 				$findings[] = $check->make_finding( $file );
 			},
-			static function () {},
+			static function ( string $rel_dir, string $reason ) use ( &$findings, $check ) {
+				$findings[] = $check->unreadable_finding( '' === $rel_dir ? '.' : $rel_dir, $reason );
+			},
 			array( $context, 'has_time' )
 		);
 
@@ -129,7 +131,50 @@ class UploadsPhpCheck extends AbstractCheck {
 			// Progress is unknown for a directory walk; report a rough estimate.
 			return CheckResult::partial( $findings, $walk['cursor'], min( 0.9, $walk['count'] / 20000 ) );
 		}
-		return CheckResult::complete( $findings, array( 'files_checked' => $walk['count'] ) );
+		if ( $walk['limited'] ) {
+			$findings[] = $this->finding(
+				array(
+					'rule_id'        => 'uploads.file_limit',
+					'severity'       => Severity::INFO,
+					'target_type'    => 'file',
+					'target_scope'   => 'uploads',
+					'target'         => '.',
+					'title'          => __( 'Uploads check stopped at the file limit', 'keep-it-peace' ),
+					/* translators: %d: number of files. */
+					'message'        => sprintf( __( 'Only the first %d files in the uploads directory were checked.', 'keep-it-peace' ), $walk['count'] - 1 ),
+					'recommendation' => __( 'Raise the file limit in Settings → Checks, or remove old files from the uploads directory.', 'keep-it-peace' ),
+				)
+			);
+		}
+		$result = CheckResult::complete( $findings, array( 'files_checked' => $walk['count'] ) );
+		if ( $walk['unreadable'] || $walk['limited'] ) {
+			// Files that were not seen may still be there: keep the existing findings.
+			$result->keep_rules = array( '*' );
+		}
+		return $result;
+	}
+
+	/**
+	 * Info finding for a directory that could not be listed.
+	 *
+	 * @param string $rel_dir Directory relative to uploads.
+	 * @param string $reason  PathGuard status.
+	 * @return \KeepItPeace\Findings\Finding
+	 */
+	public function unreadable_finding( string $rel_dir, string $reason ) {
+		return $this->finding(
+			array(
+				'rule_id'        => 'uploads.unreadable',
+				'severity'       => Severity::INFO,
+				'target_type'    => 'file',
+				'target_scope'   => 'uploads',
+				'target'         => $rel_dir,
+				'title'          => __( 'Uploads directory could not be read', 'keep-it-peace' ),
+				'message'        => PathGuard::describe( $reason ),
+				'recommendation' => __( 'Check the permissions of this directory. Files in it were not checked, so earlier results are kept.', 'keep-it-peace' ),
+				'meta'           => array( 'reason' => $reason ),
+			)
+		);
 	}
 
 	/**

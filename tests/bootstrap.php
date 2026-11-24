@@ -51,6 +51,14 @@ $GLOBALS['kip_test_requests'] = array();
 function get_option( $name, $default = false ) {
 	return array_key_exists( $name, $GLOBALS['kip_test_options'] ) ? $GLOBALS['kip_test_options'][ $name ] : $default;
 }
+function update_option( $name, $value, $autoload = null ) {
+	$GLOBALS['kip_test_options'][ $name ] = $value;
+	return true;
+}
+function delete_option( $name ) {
+	unset( $GLOBALS['kip_test_options'][ $name ] );
+	return true;
+}
 function get_transient( $name ) {
 	return false;
 }

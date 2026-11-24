@@ -38,104 +38,104 @@ msgstr "mackarel Inc."
 msgid "https://mackarel.jp"
 msgstr "https://mackarel.jp"
 
-#: src/Admin/Admin.php:92
+#: src/Admin/Admin.php:93
 msgid "Dashboard"
 msgstr "ダッシュボード"
 
-#: src/Admin/Admin.php:93
+#: src/Admin/Admin.php:94
 #: src/Admin/FindingsPage.php:106
 msgid "Findings"
 msgstr "検出結果"
 
-#: src/Admin/Admin.php:96
+#: src/Admin/Admin.php:104
 #: src/Admin/ScansPage.php:84
 msgid "Scan history"
 msgstr "スキャン履歴"
 
-#: src/Admin/Admin.php:97
-#: src/Admin/Admin.php:239
+#: src/Admin/Admin.php:105
+#: src/Admin/Admin.php:292
 msgid "Settings"
 msgstr "設定"
 
-#: src/Admin/Admin.php:132
+#: src/Admin/Admin.php:180
 msgid "Starting scan…"
 msgstr "スキャンを開始しています…"
 
 #. translators: %d: progress percentage.
-#: src/Admin/Admin.php:134
+#: src/Admin/Admin.php:182
 #, php-format
 msgid "Scanning… %d%%"
 msgstr "スキャン中… %d%%"
 
-#: src/Admin/Admin.php:135
+#: src/Admin/Admin.php:183
 msgid "Another scan step is running. Waiting…"
 msgstr "別のスキャン処理が実行中です。待機しています…"
 
-#: src/Admin/Admin.php:136
+#: src/Admin/Admin.php:184
 msgid "Scan completed. Reloading…"
 msgstr "スキャンが完了しました。再読み込みしています…"
 
-#: src/Admin/Admin.php:137
+#: src/Admin/Admin.php:185
 msgid "The scan failed. Check the scan history for details."
 msgstr "スキャンに失敗しました。詳細はスキャン履歴を確認してください。"
 
 #. translators: %s: error message.
-#: src/Admin/Admin.php:139
+#: src/Admin/Admin.php:187
 #, php-format
 msgid "Request failed: %s"
 msgstr "リクエストに失敗しました：%s"
 
-#: src/Admin/Admin.php:177
+#: src/Admin/Admin.php:229
 #: src/Admin/DashboardPage.php:253
 msgid "Scheduled scans may not be running."
 msgstr "定期スキャンが実行されていない可能性があります。"
 
-#: src/Admin/Admin.php:178
+#: src/Admin/Admin.php:230
 msgid "No scan has completed for longer than expected. WP-Cron only runs when the site receives visits; set up a server cron job (see Settings → Tools) to run scans reliably."
 msgstr "想定より長い期間、スキャンが完了していません。WP-Cron はサイトへのアクセスがあったときにしか実行されません。確実にスキャンを実行するには、サーバーの cron を設定してください（設定 → ツール を参照）。"
 
-#: src/Admin/Admin.php:199
+#: src/Admin/Admin.php:251
 msgid "Settings saved."
 msgstr "設定を保存しました。"
 
-#: src/Admin/Admin.php:202
+#: src/Admin/Admin.php:255
 msgid "Settings saved, but some values were not accepted:"
 msgstr "設定を保存しましたが、一部の値は受け付けられませんでした:"
 
-#: src/Admin/Admin.php:203
+#: src/Admin/Admin.php:256
 msgid "There is no completed scan to export yet."
 msgstr "エクスポートできる完了済みのスキャンはまだありません。"
 
-#: src/Admin/Admin.php:204
+#: src/Admin/Admin.php:257
 msgid "Status updated."
 msgstr "ステータスを更新しました。"
 
-#: src/Admin/Admin.php:205
+#: src/Admin/Admin.php:258
 msgid "Selected findings were updated."
 msgstr "選択した検出結果を更新しました。"
 
-#: src/Admin/Admin.php:206
+#: src/Admin/Admin.php:259
 msgid "The baseline was approved."
 msgstr "ベースラインを承認しました。"
 
-#: src/Admin/Admin.php:207
+#: src/Admin/Admin.php:260
 msgid "Test notification sent."
 msgstr "テスト通知を送信しました。"
 
-#: src/Admin/Admin.php:208
+#: src/Admin/Admin.php:261
 msgid "Test notification failed."
 msgstr "テスト通知の送信に失敗しました。"
 
-#: src/Admin/Admin.php:209
+#: src/Admin/Admin.php:262
 msgid "Item not found."
 msgstr "項目が見つかりません。"
 
-#: src/Admin/Admin.php:261
+#: src/Admin/Admin.php:315
 msgid "You do not have permission to do this."
 msgstr "この操作を行う権限がありません。"
 
 #. translators: %d: number of files.
-#: src/Admin/Admin.php:347
+#: src/Admin/Admin.php:415
 #, php-format
 msgid "%d file recorded."
 msgid_plural "%d files recorded."
@@ -697,46 +697,46 @@ msgstr "以下のサービスへのリクエストを許可する"
 msgid "Services"
 msgstr "サービス"
 
-#: src/Admin/BaselinePanel.php:105
+#: src/Admin/BaselinePanel.php:106
 msgid "File baseline"
 msgstr "ファイルのベースライン"
 
-#: src/Admin/BaselinePanel.php:109
+#: src/Admin/BaselinePanel.php:110
 msgid "never"
 msgstr "未実行"
 
 #. translators: %s: date.
-#: src/Admin/BaselinePanel.php:111
+#: src/Admin/BaselinePanel.php:112
 #, php-format
 msgid "Approval uses the file state recorded by the last scan (%s). If you deployed after that, run a scan first."
 msgstr "承認には前回のスキャン（%s）で記録されたファイルの状態が使われます。その後にデプロイした場合は、先にスキャンを実行してください。"
 
-#: src/Admin/BaselinePanel.php:115
+#: src/Admin/BaselinePanel.php:116
 msgid "Target"
 msgstr "対象"
 
-#: src/Admin/BaselinePanel.php:115
+#: src/Admin/BaselinePanel.php:116
 #: src/Admin/Ui.php:81
 msgid "Files"
 msgstr "ファイル数"
 
-#: src/Admin/BaselinePanel.php:115
+#: src/Admin/BaselinePanel.php:116
 msgid "Approved"
 msgstr "承認日時"
 
-#: src/Admin/BaselinePanel.php:132
+#: src/Admin/BaselinePanel.php:133
 msgid "first scan"
 msgstr "初回スキャン"
 
-#: src/Admin/BaselinePanel.php:134
+#: src/Admin/BaselinePanel.php:135
 msgid "Not yet (recorded on the next scan)"
 msgstr "未記録（次回のスキャンで記録）"
 
-#: src/Admin/BaselinePanel.php:138
+#: src/Admin/BaselinePanel.php:141
 msgid "Approve current state"
 msgstr "現在の状態を承認"
 
-#: src/Admin/BaselinePanel.php:143
+#: src/Admin/BaselinePanel.php:155
 msgid "Approve all targets"
 msgstr "すべての対象を承認"
 
@@ -784,7 +784,7 @@ msgstr "サイト ID"
 msgid "Rule set"
 msgstr "ルールセット"
 
-#: src/Admin/BaselinePanel.php:192
+#: src/Admin/BaselinePanel.php:204
 msgid "Approve the current files as the trusted baseline?"
 msgstr "現在のファイルを信頼できるベースラインとして承認しますか？"
 
@@ -849,60 +849,60 @@ msgstr "脆弱性のある依存パッケージ"
 msgid "Reads composer.lock and package-lock.json in themes and registered directories and looks up known vulnerabilities on OSV.dev. Only package names and versions are sent."
 msgstr "テーマと登録したディレクトリ内の composer.lock と package-lock.json を読み取り、OSV.dev で既知の脆弱性を調べます。送信されるのはパッケージ名とバージョンだけです。"
 
-#: src/Checks/Dependencies/DependencyCheck.php:92
+#: src/Checks/Dependencies/DependencyCheck.php:94
 msgid "Lock file could not be read"
 msgstr "ロックファイルを読み取れません"
 
-#: src/Checks/Dependencies/DependencyCheck.php:92
+#: src/Checks/Dependencies/DependencyCheck.php:94
 msgid "The file is unreadable, too large or not valid JSON, so its packages were not checked."
 msgstr "ファイルが読み取れないか、大きすぎるか、正しい JSON ではないため、パッケージをチェックできませんでした。"
 
 #. translators: %s: error message.
-#: src/Checks/Dependencies/DependencyCheck.php:114
+#: src/Checks/Dependencies/DependencyCheck.php:116
 #, php-format
 msgid "OSV.dev could not be reached: %s. Previous results are kept."
 msgstr "OSV.dev に接続できませんでした：%s。以前の結果はそのまま保持されます。"
 
-#: src/Checks/Dependencies/DependencyCheck.php:116
+#: src/Checks/Dependencies/DependencyCheck.php:118
 msgid "Dependencies could not be checked"
 msgstr "依存パッケージをチェックできませんでした"
 
 #. translators: %d: number of vulnerabilities.
-#: src/Checks/Dependencies/DependencyCheck.php:176
+#: src/Checks/Dependencies/DependencyCheck.php:178
 #, php-format
 msgid "and %d more"
 msgstr "ほか %d 件"
 
 #. translators: 1: package, 2: version, 3: command.
-#: src/Checks/Dependencies/DependencyCheck.php:185
+#: src/Checks/Dependencies/DependencyCheck.php:187
 #, php-format
 msgid "Update %1$s to %2$s or later (e.g. %3$s), deploy the result and run the scan again."
 msgstr "%1$s を %2$s 以降に更新し（例：%3$s）、反映してから再度スキャンしてください。"
 
 #. translators: 1: package, 2: command.
-#: src/Checks/Dependencies/DependencyCheck.php:188
+#: src/Checks/Dependencies/DependencyCheck.php:190
 #, php-format
 msgid "Update %1$s to a version without these vulnerabilities (e.g. %2$s), or replace it if no fix exists."
 msgstr "%1$s をこれらの脆弱性のないバージョンに更新してください（例：%2$s）。修正版がない場合は別のパッケージに置き換えてください。"
 
 #. translators: 1: number, 2: list of vulnerabilities.
-#: src/Checks/Dependencies/DependencyCheck.php:192
+#: src/Checks/Dependencies/DependencyCheck.php:194
 #, php-format
 msgid "%1$d known vulnerability: %2$s"
 msgid_plural "%1$d known vulnerabilities: %2$s"
 msgstr[0] "既知の脆弱性 %1$d 件：%2$s"
 
-#: src/Checks/Dependencies/DependencyCheck.php:197
+#: src/Checks/Dependencies/DependencyCheck.php:199
 msgid "(Development dependency, installed on this server.)"
 msgstr "（開発用の依存パッケージですが、このサーバーにインストールされています。）"
 
 #. translators: 1: package, 2: version.
-#: src/Checks/Dependencies/DependencyCheck.php:208
+#: src/Checks/Dependencies/DependencyCheck.php:210
 #, php-format
 msgid "Vulnerable package: %1$s %2$s"
 msgstr "脆弱性のあるパッケージ：%1$s %2$s"
 
-#: src/Checks/Dependencies/DependencyCheck.php:246
+#: src/Checks/Dependencies/DependencyCheck.php:248
 msgid "Run the scan again later. You can disable this check in the settings."
 msgstr "しばらくしてから再度スキャンしてください。このチェックは設定で無効にできます。"
 
@@ -915,6 +915,7 @@ msgid "Looks for .php, .phtml and other executable files in wp-content/uploads, 
 msgstr "本来メディアだけを置く wp-content/uploads に、.php や .phtml などの実行可能ファイルがないか調べます。"
 
 #: src/Checks/Environment/UploadsPhpCheck.php:101
+#: src/Checks/Environment/UploadsPhpCheck.php:172
 msgid "Uploads directory could not be read"
 msgstr "アップロードフォルダを読み取れません"
 
@@ -922,19 +923,19 @@ msgstr "アップロードフォルダを読み取れません"
 msgid "Check the permissions of wp-content/uploads."
 msgstr "wp-content/uploads のパーミッションを確認してください。"
 
-#: src/Checks/Environment/UploadsPhpCheck.php:151
+#: src/Checks/Environment/UploadsPhpCheck.php:196
 msgid "PHP file in uploads"
 msgstr "アップロードフォルダ内の PHP ファイル"
 
-#: src/Checks/Environment/UploadsPhpCheck.php:151
+#: src/Checks/Environment/UploadsPhpCheck.php:196
 msgid "Executable file in uploads"
 msgstr "アップロードフォルダ内の実行可能ファイル"
 
-#: src/Checks/Environment/UploadsPhpCheck.php:152
+#: src/Checks/Environment/UploadsPhpCheck.php:197
 msgid "The uploads directory should only contain media. Executable files here are a common sign of a compromised site or of an insecure upload form."
 msgstr "アップロードフォルダにはメディアだけを置くべきです。ここに実行可能ファイルがあるのは、サイトが改ざんされているか、安全でないアップロードフォームがある典型的な兆候です。"
 
-#: src/Checks/Environment/UploadsPhpCheck.php:153
+#: src/Checks/Environment/UploadsPhpCheck.php:198
 msgid "Inspect the file and delete it if it is not required. Also block PHP execution in uploads with server configuration."
 msgstr "ファイルの中身を確認し、不要であれば削除してください。また、サーバーの設定でアップロードフォルダでの PHP の実行をブロックしてください。"
 
@@ -946,79 +947,79 @@ msgstr "WordPress の設定"
 msgid "Checks WP_DEBUG, WP_DEBUG_DISPLAY, debug.log, wp-config.php permissions and the built-in file editor."
 msgstr "WP_DEBUG、WP_DEBUG_DISPLAY、debug.log、wp-config.php のパーミッション、組み込みのファイルエディターをチェックします。"
 
-#: src/Checks/Environment/WpConfigCheck.php:99
+#: src/Checks/Environment/WpConfigCheck.php:100
 msgid "Debug messages are shown to visitors"
 msgstr "デバッグメッセージが訪問者に表示される"
 
-#: src/Checks/Environment/WpConfigCheck.php:99
+#: src/Checks/Environment/WpConfigCheck.php:100
 msgid "WP_DEBUG is on and WP_DEBUG_DISPLAY is not off, so PHP notices and errors appear on pages and reveal file paths."
 msgstr "WP_DEBUG がオンで WP_DEBUG_DISPLAY がオフになっていないため、PHP の notice やエラーがページに表示され、ファイルのパスが知られてしまいます。"
 
-#: src/Checks/Environment/WpConfigCheck.php:99
+#: src/Checks/Environment/WpConfigCheck.php:100
 msgid "Set define( 'WP_DEBUG', false ) on production, or at least define( 'WP_DEBUG_DISPLAY', false )."
 msgstr "本番環境では define( 'WP_DEBUG', false ) を設定するか、少なくとも define( 'WP_DEBUG_DISPLAY', false ) を設定してください。"
 
-#: src/Checks/Environment/WpConfigCheck.php:101
+#: src/Checks/Environment/WpConfigCheck.php:102
 msgid "WP_DEBUG is enabled"
 msgstr "WP_DEBUG が有効"
 
-#: src/Checks/Environment/WpConfigCheck.php:101
+#: src/Checks/Environment/WpConfigCheck.php:102
 msgid "Debug mode is on. It is meant for development and can slow the site and fill the log."
 msgstr "デバッグモードがオンになっています。これは開発用の機能で、サイトが遅くなったりログが肥大化したりすることがあります。"
 
-#: src/Checks/Environment/WpConfigCheck.php:101
+#: src/Checks/Environment/WpConfigCheck.php:102
 msgid "Set define( 'WP_DEBUG', false ) on production."
 msgstr "本番環境では define( 'WP_DEBUG', false ) を設定してください。"
 
-#: src/Checks/Environment/WpConfigCheck.php:114
+#: src/Checks/Environment/WpConfigCheck.php:115
 msgid "debug.log exists"
 msgstr "debug.log が存在する"
 
-#: src/Checks/Environment/WpConfigCheck.php:116
+#: src/Checks/Environment/WpConfigCheck.php:117
 msgid "A debug log is stored inside wp-content, where it may be downloadable. Logs can contain paths, queries and personal data."
 msgstr "デバッグログが wp-content 内に保存されており、ダウンロードできる可能性があります。ログにはパス、クエリ、個人情報が含まれることがあります。"
 
-#: src/Checks/Environment/WpConfigCheck.php:117
+#: src/Checks/Environment/WpConfigCheck.php:118
 msgid "A debug log file exists."
 msgstr "デバッグログファイルが存在します。"
 
-#: src/Checks/Environment/WpConfigCheck.php:118
+#: src/Checks/Environment/WpConfigCheck.php:119
 msgid "Delete the log when it is no longer needed, and set WP_DEBUG_LOG to a path outside the web root."
 msgstr "不要になったログは削除し、WP_DEBUG_LOG には Web ルートの外のパスを設定してください。"
 
-#: src/Checks/Environment/WpConfigCheck.php:131
+#: src/Checks/Environment/WpConfigCheck.php:142
 msgid "Set the permissions to 400 or 440 (600/640 if your host requires write access)."
 msgstr "パーミッションを 400 または 440 に設定してください（ホスティング会社が書き込み権限を必要とする場合は 600/640）。"
 
 #. translators: %s: permissions such as 666.
-#: src/Checks/Environment/WpConfigCheck.php:134
+#: src/Checks/Environment/WpConfigCheck.php:145
 #, php-format
 msgid "wp-config.php has permissions %s. Anyone on the server can change it."
 msgstr "wp-config.php のパーミッションは %s です。サーバー上の誰でも変更できます。"
 
-#: src/Checks/Environment/WpConfigCheck.php:135
+#: src/Checks/Environment/WpConfigCheck.php:146
 msgid "wp-config.php is world-writable"
 msgstr "wp-config.php が誰でも書き込める状態"
 
 #. translators: %s: permissions such as 644.
-#: src/Checks/Environment/WpConfigCheck.php:138
+#: src/Checks/Environment/WpConfigCheck.php:149
 #, php-format
 msgid "wp-config.php has permissions %s. On shared servers other accounts may be able to read your database password."
 msgstr "wp-config.php のパーミッションは %s です。共用サーバーでは、他のアカウントからデータベースのパスワードを読まれるおそれがあります。"
 
-#: src/Checks/Environment/WpConfigCheck.php:139
+#: src/Checks/Environment/WpConfigCheck.php:150
 msgid "wp-config.php is readable by everyone on the server"
 msgstr "wp-config.php がサーバー上の誰でも読める状態"
 
-#: src/Checks/Environment/WpConfigCheck.php:145
+#: src/Checks/Environment/WpConfigCheck.php:156
 msgid "Theme and plugin file editor is enabled"
 msgstr "テーマ・プラグインのファイルエディターが有効"
 
-#: src/Checks/Environment/WpConfigCheck.php:145
+#: src/Checks/Environment/WpConfigCheck.php:156
 msgid "Administrators can edit PHP files from the dashboard. A stolen admin account can then run arbitrary code."
 msgstr "管理者がダッシュボードから PHP ファイルを編集できます。管理者アカウントが乗っ取られると、任意のコードを実行されるおそれがあります。"
 
-#: src/Checks/Environment/WpConfigCheck.php:145
+#: src/Checks/Environment/WpConfigCheck.php:156
 msgid "Add define( 'DISALLOW_FILE_EDIT', true ); to wp-config.php."
 msgstr "wp-config.php に define( 'DISALLOW_FILE_EDIT', true ); を追加してください。"
 
@@ -1422,51 +1423,51 @@ msgstr "ファイルの整合性"
 msgid "Detects files added, changed or deleted since the approved baseline (sha256)."
 msgstr "承認したベースライン以降に追加・変更・削除されたファイルを検出します（sha256）。"
 
-#: src/Checks/Files/IntegrityCheck.php:72
+#: src/Checks/Files/IntegrityCheck.php:74
 msgid "File could not be read"
 msgstr "ファイルを読み取れない"
 
-#: src/Checks/Files/IntegrityCheck.php:73
+#: src/Checks/Files/IntegrityCheck.php:75
 msgid "The file exists but PHP cannot read it, so changes cannot be detected."
 msgstr "ファイルは存在しますが PHP から読み取れないため、変更を検出できません。"
 
-#: src/Checks/Files/IntegrityCheck.php:74
+#: src/Checks/Files/IntegrityCheck.php:76
 msgid "Check the file permissions."
 msgstr "ファイルのパーミッションを確認してください。"
 
-#: src/Checks/Files/IntegrityCheck.php:96
+#: src/Checks/Files/IntegrityCheck.php:98
 msgid "New file"
 msgstr "新しいファイル"
 
-#: src/Checks/Files/IntegrityCheck.php:97
+#: src/Checks/Files/IntegrityCheck.php:99
 msgid "This file was added after the baseline was approved."
 msgstr "このファイルはベースラインの承認後に追加されました。"
 
-#: src/Checks/Files/IntegrityCheck.php:98
+#: src/Checks/Files/IntegrityCheck.php:100
 msgid "If you deployed this file, approve the current state as the baseline. Otherwise inspect it and remove it if it is not yours."
 msgstr "このファイルを自分で配置した場合は、現在の状態をベースラインとして承認してください。そうでない場合は中身を確認し、自分のものでなければ削除してください。"
 
-#: src/Checks/Files/IntegrityCheck.php:116
+#: src/Checks/Files/IntegrityCheck.php:118
 msgid "File changed"
 msgstr "ファイルの変更"
 
-#: src/Checks/Files/IntegrityCheck.php:117
+#: src/Checks/Files/IntegrityCheck.php:119
 msgid "The contents of this file differ from the approved baseline."
 msgstr "このファイルの内容が承認したベースラインと異なります。"
 
-#: src/Checks/Files/IntegrityCheck.php:118
+#: src/Checks/Files/IntegrityCheck.php:120
 msgid "If the change was a planned deployment, approve the current state as the baseline. Otherwise compare the file with your source and restore it."
 msgstr "予定していたデプロイによる変更であれば、現在の状態をベースラインとして承認してください。そうでない場合は、元のソースと比較してファイルを復元してください。"
 
-#: src/Checks/Files/IntegrityCheck.php:159
+#: src/Checks/Files/IntegrityCheck.php:164
 msgid "File deleted"
 msgstr "ファイルの削除"
 
-#: src/Checks/Files/IntegrityCheck.php:160
+#: src/Checks/Files/IntegrityCheck.php:165
 msgid "This file is in the baseline but no longer exists."
 msgstr "このファイルはベースラインに含まれていますが、もう存在しません。"
 
-#: src/Checks/Files/IntegrityCheck.php:161
+#: src/Checks/Files/IntegrityCheck.php:166
 msgid "If you removed it on purpose, approve the current state as the baseline."
 msgstr "意図して削除した場合は、現在の状態をベースラインとして承認してください。"
 
@@ -1594,38 +1595,38 @@ msgid "Checks whether the MySQL or MariaDB version still receives security updat
 msgstr "MySQL または MariaDB のバージョンがまだセキュリティアップデートを受けられるかチェックします。"
 
 #. translators: 1: MySQL or MariaDB, 2: version.
-#: src/Checks/Php/DatabaseVersionCheck.php:109
+#: src/Checks/Php/DatabaseVersionCheck.php:112
 #, php-format
 msgid "%1$s %2$s is no longer supported"
 msgstr "%1$s %2$s はサポート終了"
 
 #. translators: %s: date.
-#: src/Checks/Php/DatabaseVersionCheck.php:112
+#: src/Checks/Php/DatabaseVersionCheck.php:115
 #, php-format
 msgid "Security support ended on %s."
 msgstr "セキュリティサポートは %s に終了しました。"
 
-#: src/Checks/Php/DatabaseVersionCheck.php:113
+#: src/Checks/Php/DatabaseVersionCheck.php:116
 msgid "Security support has ended."
 msgstr "セキュリティサポートは終了しています。"
 
-#: src/Checks/Php/DatabaseVersionCheck.php:114
+#: src/Checks/Php/DatabaseVersionCheck.php:117
 msgid "Ask your hosting provider to move the database to a supported version."
 msgstr "サポートされているバージョンへのデータベースの移行をホスティング会社に依頼してください。"
 
 #. translators: 1: MySQL or MariaDB, 2: version.
-#: src/Checks/Php/DatabaseVersionCheck.php:124
+#: src/Checks/Php/DatabaseVersionCheck.php:127
 #, php-format
 msgid "%1$s %2$s support ends soon"
 msgstr "%1$s %2$s のサポート終了が間近"
 
 #. translators: 1: date, 2: days.
-#: src/Checks/Php/DatabaseVersionCheck.php:126
+#: src/Checks/Php/DatabaseVersionCheck.php:129
 #, php-format
 msgid "Security support ends on %1$s (in %2$d days)."
 msgstr "セキュリティサポートは %1$s に終了します（残り %2$d 日）。"
 
-#: src/Checks/Php/DatabaseVersionCheck.php:127
+#: src/Checks/Php/DatabaseVersionCheck.php:130
 msgid "Plan a database upgrade with your hosting provider."
 msgstr "ホスティング会社と相談して、データベースのアップグレードを計画してください。"
 
@@ -1796,7 +1797,7 @@ msgstr "米国の脆弱性データベース（NVD）に、この PHP のバー�
 msgid "Update to the latest patch release of a supported PHP version."
 msgstr "サポート中の PHP のバージョンの最新パッチリリースに更新してください。"
 
-#: src/Findings/FindingRepository.php:210
+#: src/Findings/FindingRepository.php:215
 msgid "Baseline approved."
 msgstr "ベースラインを承認しました。"
 
@@ -1958,7 +1959,7 @@ msgstr "証明書を読み取れませんでした。"
 msgid "Connection failed."
 msgstr "接続に失敗しました。"
 
-#: src/Rest/RestController.php:162
+#: src/Rest/RestController.php:184
 msgid "Finding not found."
 msgstr "検出結果が見つかりません。"
 
@@ -2314,47 +2315,47 @@ msgstr "WordPress のフォルダー、またはその親フォルダーです�
 msgid "This folder is part of WordPress (wp-admin, wp-includes or wp-content such as uploads), which cannot be registered here. Select themes and custom plugins above; uploads are checked automatically."
 msgstr "このフォルダーは WordPress の一部（wp-admin、wp-includes、uploads などの wp-content）のため、ここでは登録できません。テーマと自作プラグインは上で選択してください。uploads は自動でチェックされます。"
 
-#: src/Scan/Scanner.php:377
+#: src/Scan/Scanner.php:391
 msgid "File limit reached"
 msgstr "ファイル数の上限に到達"
 
 #. translators: %d: number of files.
-#: src/Scan/Scanner.php:379
+#: src/Scan/Scanner.php:393
 #, php-format
 msgid "Scanning stopped after %d files. Files after that were not checked."
 msgstr "%d 件のファイルでスキャンを停止しました。それ以降のファイルはチェックされていません。"
 
-#: src/Scan/Scanner.php:380
+#: src/Scan/Scanner.php:394
 msgid "Add exclude patterns for generated or vendor directories, or raise the file limit in the settings."
 msgstr "生成されたディレクトリや vendor ディレクトリの除外パターンを追加するか、設定でファイル数の上限を引き上げてください。"
 
-#: src/Scan/Scanner.php:549
+#: src/Scan/Scanner.php:580
 msgid "A check could not finish"
 msgstr "完了できなかったチェック"
 
 #. translators: 1: check ID, 2: error message.
-#: src/Scan/Scanner.php:551
+#: src/Scan/Scanner.php:582
 #, php-format
 msgid "The check %1$s stopped with an error: %2$s"
 msgstr "チェック %1$s がエラーで停止しました：%2$s"
 
-#: src/Scan/Scanner.php:552
+#: src/Scan/Scanner.php:583
 msgid "Run the scan again. If the error persists, disable the check and report the problem."
 msgstr "もう一度スキャンを実行してください。エラーが続く場合は、そのチェックを無効にして問題を報告してください。"
 
-#: src/Scan/Scanner.php:575
+#: src/Scan/Scanner.php:606
 msgid "Directory could not be read"
 msgstr "ディレクトリを読み取れない"
 
-#: src/Scan/Scanner.php:577
+#: src/Scan/Scanner.php:608
 msgid "Check the path, permissions and the open_basedir setting. Files in this directory were not checked."
 msgstr "パス、パーミッション、open_basedir の設定を確認してください。このディレクトリ内のファイルはチェックされていません。"
 
-#: src/Scan/Scheduler.php:58
+#: src/Scan/Scheduler.php:59
 msgid "Daily"
 msgstr "毎日"
 
-#: src/Scan/Scheduler.php:62
+#: src/Scan/Scheduler.php:63
 msgid "Weekly"
 msgstr "毎週"
 
@@ -2394,47 +2395,47 @@ msgstr "重要度別の未解決の問題"
 msgid "Details are available only in the dashboard (they are not included in email for security reasons):"
 msgstr "詳細はダッシュボードでのみ確認できます（セキュリティ上の理由からメールには含まれていません）:"
 
-#: src/Admin/BaselinePanel.php:83
+#: src/Admin/BaselinePanel.php:84
 msgid "The baseline is the list of fingerprints (sha256 hashes) of every file in your scan targets, recorded as the trusted state. Each scan compares the current files with it and reports added, changed and deleted files as \"File integrity\" findings. The first scan of a target records the baseline automatically."
 msgstr "ベースラインとは、スキャン対象のすべてのファイルの指紋（sha256 ハッシュ）を「正しい状態」として記録したものです。スキャンのたびに現在のファイルと比較し、追加・変更・削除されたファイルを「ファイルの整合性」の検出結果として報告します。各対象の初回スキャン時に自動で記録されます。"
 
-#: src/Admin/BaselinePanel.php:84
+#: src/Admin/BaselinePanel.php:85
 msgid "When you changed files yourself (theme update, deployment, edits):"
 msgstr "自分でファイルを変更したとき（テーマの更新、デプロイ、編集など）："
 
-#: src/Admin/BaselinePanel.php:86
+#: src/Admin/BaselinePanel.php:87
 msgid "Run a scan so that the latest files are recorded."
 msgstr "スキャンを実行して、最新のファイルの状態を記録します。"
 
-#: src/Admin/BaselinePanel.php:87
+#: src/Admin/BaselinePanel.php:88
 msgid "Check that the reported files are the ones you changed."
 msgstr "報告されたファイルが、自分で変更したものか確認します。"
 
-#: src/Admin/BaselinePanel.php:88
+#: src/Admin/BaselinePanel.php:89
 msgid "Approve the current state. The changes are marked as resolved and are no longer reported."
 msgstr "現在の状態を承認します。変更は解決済みになり、以後は報告されません。"
 
-#: src/Admin/BaselinePanel.php:90
+#: src/Admin/BaselinePanel.php:91
 msgid "Do not approve changes you do not recognize. They may be signs of tampering; check the findings first."
 msgstr "身に覚えのない変更は承認しないでください。改ざんの可能性があります。先に検出結果を確認してください。"
 
-#: src/Admin/BaselinePanel.php:115
+#: src/Admin/BaselinePanel.php:116
 msgid "Unapproved changes"
 msgstr "未承認の変更"
 
-#: src/Admin/BaselinePanel.php:172
+#: src/Admin/BaselinePanel.php:184
 msgid "If you changed these files yourself, approve them. If you do not recognize the changes, check them before approving."
 msgstr "自分で変更したファイルであれば承認してください。身に覚えのない変更の場合は、承認する前に内容を確認してください。"
 
-#: src/Admin/BaselinePanel.php:174
+#: src/Admin/BaselinePanel.php:186
 msgid "Review changes"
 msgstr "変更を確認"
 
-#: src/Admin/BaselinePanel.php:175
+#: src/Admin/BaselinePanel.php:187
 msgid "Approve these changes"
 msgstr "これらの変更を承認"
 
-#: src/Admin/BaselinePanel.php:176
+#: src/Admin/BaselinePanel.php:188
 msgid "What is the baseline?"
 msgstr "ベースラインとは？"
 
@@ -2482,7 +2483,7 @@ msgid "Go to the General tab"
 msgstr "一般タブを開く"
 
 #. translators: %s: number of files.
-#: src/Admin/BaselinePanel.php:167
+#: src/Admin/BaselinePanel.php:179
 #, php-format
 msgid "%s file differs from the approved baseline."
 msgid_plural "%s files differ from the approved baseline."
@@ -2532,31 +2533,31 @@ msgid "%d plugin from WordPress.org (not scanned)"
 msgid_plural "%d plugins from WordPress.org (not scanned)"
 msgstr[0] "WordPress.org のプラグイン %d 件（スキャン対象外）"
 
-#: src/Admin/Admin.php:151
+#: src/Admin/Admin.php:199
 msgid "Use external vulnerability databases?"
 msgstr "外部の脆弱性データベースを利用しますか？"
 
-#: src/Admin/Admin.php:152
+#: src/Admin/Admin.php:200
 msgid "Keep It Peace can look up support periods and known vulnerabilities online. It then sends your PHP version, your database type and version, and the names and versions of Composer/npm packages found in scanned folders to endoflife.date, php.net, NVD (NIST) and OSV.dev. Your site URL, file contents and personal data are never sent."
 msgstr "Keep It Peace は、サポート期間と既知の脆弱性をオンラインで調べることができます。その場合、PHP のバージョン、データベースの種類とバージョン、スキャン対象のフォルダにある Composer / npm パッケージの名前とバージョンを、endoflife.date・php.net・NVD（NIST）・OSV.dev に送信します。サイトの URL、ファイルの内容、個人情報は送信しません。"
 
-#: src/Admin/Admin.php:153
+#: src/Admin/Admin.php:201
 msgid "Until you agree, nothing is sent and support periods are checked with data bundled with the plugin. You can change this at any time in Settings → External services."
 msgstr "同意するまでは何も送信せず、プラグインに同梱されたデータでサポート期間を判定します。この設定は 設定 → 外部サービス でいつでも変更できます。"
 
-#: src/Admin/Admin.php:157
+#: src/Admin/Admin.php:205
 msgid "Use external databases"
 msgstr "外部データベースを利用する"
 
-#: src/Admin/Admin.php:158
+#: src/Admin/Admin.php:206
 msgid "Do not use"
 msgstr "使わない"
 
-#: src/Admin/Admin.php:200
+#: src/Admin/Admin.php:253
 msgid "External vulnerability databases will be used from the next scan."
 msgstr "次回のスキャンから外部の脆弱性データベースを利用します。"
 
-#: src/Admin/Admin.php:201
+#: src/Admin/Admin.php:254
 msgid "External databases will not be used. You can change this in Settings → External services."
 msgstr "外部データベースは利用しません。設定 → 外部サービス で変更できます。"
 
@@ -2576,3 +2577,61 @@ msgstr "設定 → 外部サービス で外部データベースの利用を許
 #: src/Remote/OsvClient.php:74
 msgid "external databases are not allowed in Settings → External services"
 msgstr "設定 → 外部サービス で外部データベースの利用が許可されていません"
+
+#: src/Admin/Admin.php:131
+msgid "Keep It Peace could not create its database tables."
+msgstr "Keep It Peace のデータベーステーブルを作成できませんでした。"
+
+#: src/Admin/Admin.php:132
+msgid "Scans are disabled until the tables exist. Creating them is retried each time you open a Keep It Peace screen. If this keeps failing, ask your host to check the database user's CREATE and ALTER privileges."
+msgstr "テーブルが作成されるまで、スキャンは実行されません。Keep It Peace の画面を開くたびに作成を再試行します。失敗が続く場合は、データベースユーザーの CREATE 権限と ALTER 権限を確認するようホスティング会社に依頼してください。"
+
+#. translators: %s: table names.
+#: src/Admin/Admin.php:137
+#, php-format
+msgid "Missing tables: %s"
+msgstr "作成されていないテーブル：%s"
+
+#: src/Admin/Admin.php:252
+msgid "The baseline was not approved because the last scan could not read some directories of the target. Fix the permissions, run a scan, then approve."
+msgstr "前回のスキャンで対象の一部のディレクトリを読み取れなかったため、ベースラインを承認しませんでした。パーミッションを修正してスキャンしてから、承認してください。"
+
+#. translators: %s: target IDs.
+#: src/Admin/Admin.php:412
+#, php-format
+msgid "Not approved: %s."
+msgstr "承認しなかった対象：%s。"
+
+#. translators: %s: target IDs.
+#: src/Admin/Admin.php:418
+#, php-format
+msgid "Not approved because some directories could not be read: %s."
+msgstr "一部のディレクトリを読み取れなかったため承認しなかった対象：%s。"
+
+#. translators: %s: directories.
+#: src/Admin/BaselinePanel.php:146
+#, php-format
+msgid "Cannot be approved: the last scan could not read %s. Fix the permissions and scan again."
+msgstr "承認できません。前回のスキャンで %s を読み取れませんでした。パーミッションを修正して、もう一度スキャンしてください。"
+
+#: src/Checks/Environment/UploadsPhpCheck.php:142
+msgid "Uploads check stopped at the file limit"
+msgstr "アップロードフォルダのチェックがファイル数の上限で停止"
+
+#. translators: %d: number of files.
+#: src/Checks/Environment/UploadsPhpCheck.php:144
+#, php-format
+msgid "Only the first %d files in the uploads directory were checked."
+msgstr "アップロードフォルダのうち、最初の %d 件のファイルだけをチェックしました。"
+
+#: src/Checks/Environment/UploadsPhpCheck.php:145
+msgid "Raise the file limit in Settings → Checks, or remove old files from the uploads directory."
+msgstr "設定 → チェック でファイル数の上限を上げるか、アップロードフォルダから古いファイルを削除してください。"
+
+#: src/Checks/Environment/UploadsPhpCheck.php:174
+msgid "Check the permissions of this directory. Files in it were not checked, so earlier results are kept."
+msgstr "このディレクトリのパーミッションを確認してください。中のファイルはチェックできなかったため、以前の結果はそのまま保持されます。"
+
+#: src/Rest/RestController.php:108
+msgid "The Keep It Peace database tables are missing. Open a Keep It Peace screen for details."
+msgstr "Keep It Peace のデータベーステーブルがありません。詳しくは Keep It Peace の画面を開いて確認してください。"

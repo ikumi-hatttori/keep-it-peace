@@ -91,7 +91,7 @@ add_filter( 'keepitpeace_checks', function ( array $checks ) {
 - **登録順＝実行順**です。同じ ID を登録すると後から登録した方で置き換わります（本体のチェックの差し替えも可能）。
 - `CheckResult::complete( $findings, $data )` の `$data` は、スキャンの `summary.data[チェックID]` に保存されます（ダッシュボード・通知・エクスポートで利用可能）。
 - **時間のかかる処理**は `$context->has_time()` を確認し、時間切れなら `CheckResult::partial( $findings, $cursor, $progress )` を返してください。次のリクエストで `run( $context, $cursor )` として続きから呼ばれます。`$cursor` は JSON にして保存するので、配列・文字列・数値だけにしてください。
-- 外部 API の失敗などで判定できなかったときは `$context->keep( $this->get_id() )` を呼ぶと、既存の検出結果が「解決済み」になりません。
+- 外部 API の失敗などで判定できなかったときは `$context->keep( $this->get_id() )` を呼ぶと、既存の検出結果が「解決済み」になりません。特定のファイルや URL だけを対象にする場合（読み取れなかったファイル、大きすぎて解析できなかったファイルなど）は `$context->keep_target( $this->get_id(), $scope, $target )` を使います。調べられなかったものを「何も見つからなかった」として扱わないでください。以前の検出結果が解決済みになってしまいます。
 - 例外を投げると、そのチェックだけが中断され、Info の検出結果「チェックを完了できませんでした」が記録されます（スキャン全体は続きます）。
 
 ### 2.2 検出結果（`Finding`）
@@ -150,6 +150,8 @@ class TodoCheck extends AbstractFileCheck {
 | `end_target( $target, $context )` | 対象の走査が終わったあと（例：削除されたファイルの検出） |
 
 走査は複数のリクエストに分かれることがあるため、`begin_target` と `end_target` が別のリクエストで呼ばれる場合があります。対象をまたいで状態を持つ場合は、オブジェクトのプロパティではなく DB やオプションに保存してください。
+
+読み取れなかったディレクトリはスキャナーが報告し、そのスキャンではその対象の検出結果を自動で解決しません。`end_target()` では `$target->unreadable_dirs` にそのディレクトリが入っています（'.' は対象のルート）。配下のファイルは確認できていないので、削除されたと報告しないでください。読み取れないファイルは `$file->readable === false` の状態で `analyze_file()` に渡され、以前の検出結果は自動で保持されます。
 
 `FileInfo` の主なメンバー：`path`、`rel_path`、`basename`、`extension`、`size`、`mtime`、`perms`、`is_php()`、`hash()`、`contents( $max_bytes )`、`head( $length )`。ファイルの内容と sha256 はチェック間で共有されます。
 
@@ -321,7 +323,7 @@ Api::export_scan( $scan_id = null );     // array|null（null = 最新の完了�
 Api::export_scan_json( $scan_id = null, JSON_PRETTY_PRINT ); // string|null
 Api::get_latest_scan();                  // Scan|null
 Api::get_findings( array( 'status' => array( 'new' ), 'severity' => 4, 'category' => 'theme', 'per_page' => 50 ) ); // Finding[]
-Api::start_scan( 'myaddon' );            // スキャン ID。続きは WP-Cron で実行
+Api::start_scan( 'myaddon' );            // スキャン ID（テーブルがない間は 0）。続きは WP-Cron で実行
 Api::get_settings();                     // Settings（$settings->get( 'channels.email.recipients' ) のようにドット記法で取得）
 ```
 

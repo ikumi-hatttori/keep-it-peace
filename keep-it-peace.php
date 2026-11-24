@@ -22,7 +22,7 @@ define( 'KEEPITPEACE_VERSION', '1.0.0' );
 define( 'KEEPITPEACE_API_VERSION', '1.0.0' );
 define( 'KEEPITPEACE_EXPORT_SCHEMA_VERSION', '1.0.0' );
 define( 'KEEPITPEACE_RULESET_SCHEMA_VERSION', 1 );
-define( 'KEEPITPEACE_DB_VERSION', 1 );
+define( 'KEEPITPEACE_DB_VERSION', 2 );
 define( 'KEEPITPEACE_FILE', __FILE__ );
 define( 'KEEPITPEACE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'KEEPITPEACE_URL', plugin_dir_url( __FILE__ ) );
